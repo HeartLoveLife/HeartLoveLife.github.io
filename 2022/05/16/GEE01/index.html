@@ -1,0 +1,661 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>（一）Google Earth Engine概述 | 江湖是你画中亦是你</title><meta name="keywords" content="GEE,API"><meta name="author" content="Xiaotangsmiles"><meta name="copyright" content="Xiaotangsmiles"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Google Earth Engine (GEE) 是由谷歌公司开发的众多应用之一。借助谷歌公司超强的服务器运算能力以及与 NASA 的合作关系，GEE 平台将Landsat、MODIS、 Sentinel 等可以公开获取的遥感图像数据存储在谷歌的磁盘阵列中，使得 GEE 用户可以方便的提取、调用和分析海量的遥感大数据资源。 GEE它是一个集科学分析以及地理信息数据可视化的综合性平台。简单的说，G">
+<meta property="og:type" content="article">
+<meta property="og:title" content="（一）Google Earth Engine概述">
+<meta property="og:url" content="https://heartlovelife.github.io/2022/05/16/GEE01/index.html">
+<meta property="og:site_name" content="江湖是你画中亦是你">
+<meta property="og:description" content="Google Earth Engine (GEE) 是由谷歌公司开发的众多应用之一。借助谷歌公司超强的服务器运算能力以及与 NASA 的合作关系，GEE 平台将Landsat、MODIS、 Sentinel 等可以公开获取的遥感图像数据存储在谷歌的磁盘阵列中，使得 GEE 用户可以方便的提取、调用和分析海量的遥感大数据资源。 GEE它是一个集科学分析以及地理信息数据可视化的综合性平台。简单的说，G">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s2.loli.net/2022/05/17/7UCAtTuqoSfpMmy.jpg">
+<meta property="article:published_time" content="2022-05-16T12:19:14.000Z">
+<meta property="article:modified_time" content="2022-05-17T05:21:02.165Z">
+<meta property="article:author" content="Xiaotangsmiles">
+<meta property="article:tag" content="GEE">
+<meta property="article:tag" content="API">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s2.loli.net/2022/05/17/7UCAtTuqoSfpMmy.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://heartlovelife.github.io/2022/05/16/GEE01/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":250},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#1f1f1f","position":"bottom-left"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '（一）Google Earth Engine概述',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-05-17 13:21:02'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const now = new Date()
+          const hour = now.getHours()
+          const isNight = hour <= 6 || hour >= 18
+          if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+          else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.1.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/loading1.gif" data-original="/img/touxiang.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">3</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">4</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-graduation-cap"></i><span> 博文</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 生活</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/photos/"><i class="fa-fw fa fa-camera-retro"></i><span> 相册</span></a></li><li><a class="site-page child" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video-camera"></i><span> 影视</span></a></li><li><a class="site-page child" href="/shuoshuo/"><i class="fa-fw fa fa-comments"></i><span> 分享</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/comment/"><i class="fa-fw fa fa-paper-plane"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于笔者</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://s2.loli.net/2022/05/17/7UCAtTuqoSfpMmy.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">江湖是你画中亦是你</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-graduation-cap"></i><span> 博文</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 生活</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/photos/"><i class="fa-fw fa fa-camera-retro"></i><span> 相册</span></a></li><li><a class="site-page child" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video-camera"></i><span> 影视</span></a></li><li><a class="site-page child" href="/shuoshuo/"><i class="fa-fw fa fa-comments"></i><span> 分享</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/comment/"><i class="fa-fw fa fa-paper-plane"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于笔者</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">（一）Google Earth Engine概述</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-05-16T12:19:14.000Z" title="发表于 2022-05-16 20:19:14">2022-05-16</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-05-17T05:21:02.165Z" title="更新于 2022-05-17 13:21:02">2022-05-17</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/GEE/">GEE</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">3.1k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>12分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="（一）Google Earth Engine概述"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p><code>Google Earth Engine (GEE)</code> 是由谷歌公司开发的众多应用之一。借助谷歌公司超强的服务器运算能力以及与 <code>NASA</code> 的合作关系，<code>GEE</code> 平台将<code>Landsat</code>、<code>MODIS</code>、 <code>Sentinel</code> 等可以公开获取的遥感图像数据存储在谷歌的磁盘阵列中，使得 <code>GEE</code> 用户可以方便的提取、调用和分析海量的遥感大数据资源。</p>
+<p><code>GEE</code>它是一个集科学分析以及地理信息数据可视化的综合性平台。简单的说，<code>GEE</code>是一个“遥感大数据”分析和呈现的平台。作为<strong>地理云计算服务平台</strong>，<code>GEE</code> 将地理数据分析算法封装成函数接口的形式提供给用户，通过互联网可以使用户快速地访问海量的影像数据以及其他空间数据，而不需要下载到本地，在云端实现当前地理空间数据分析的全部流程。通过云计算还可以使共享的计算机软硬件资源和地理大数据，按需求提供给用户使用，使任何用户都可以使用服务商提供的多平台软硬件资源和地理大数据，开展常规个人计算机无法实现的地理计算和数据分析。</p>
+<blockquote>
+<p><code>GEE</code> 在设计之初就是为了服务科研人员而构建的，因此在概念上可以将 <code>GEE</code> 视为一种工具，类似于菜刀之于厨师或者猎枪之于猎手，而不应该将其当作一种复杂的计算机编程平台。</p>
+</blockquote>
+<p><code>GEE</code>包含图形用户界面和应用程序编程接口。<code>GEE</code> 是一个主要依靠编码命令进行空间分析和操作的平台，但 <code>GEE</code> 也有适合界面操作的平台：<code>GEE</code> 的图形用户界面(<code>Graphical User Interface, GUI</code>)。<code>GEE</code> 的 <code>GUI</code> 的优点在于符合人的操作直觉，并且对新用户友好，缺点是功能较少，可以实现的空间分析有限。<code>GEE</code> 的应用程序编程接口(<code>Application Programming Interface, API</code>)是 <code>GEE</code> 的核心功能所在，也是 <code>GEE</code> 用户最为关注的平台，与 <code>GUI</code> 相比，<code>API</code> 可以调用 <code>GEE</code> 平台中的所有数据和功能。可以说，学习 <code>GEE</code> 就是学习 <code>GEE</code> 的 <code>API</code>。</p>
+<p><code>GEE</code> 中存储着海量的遥感数据，熟悉这些数据能够让用户更加便捷的实现空间和地理分析目标。总体上，<code>GEE</code> 的数据可以分为 4 个种类：栅格数据，栅格集数据，矢量数据，矢量集数据。</p>
+<h2 id="⛄栅格数据"><a href="#⛄栅格数据" class="headerlink" title="⛄栅格数据"></a>⛄栅格数据</h2><p><code>GEE</code> 中的栅格数据主要包括来源自遥感卫星的数据和空间插值数据产品。</p>
+<table>
+<thead>
+<tr>
+<th align="center">数据集</th>
+<th align="center">空间分辨率</th>
+<th align="center">时间分辨率</th>
+<th align="center">时间覆盖</th>
+<th align="center">空间覆盖</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><strong>Landsat</strong></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">Landsat 8 OLI&#x2F;TIRS</td>
+<td align="center">30m</td>
+<td align="center">16day</td>
+<td align="center">2013-Now</td>
+<td align="center">Global</td>
+</tr>
+<tr>
+<td align="center">Landsat 7 ETM+</td>
+<td align="center">30m</td>
+<td align="center">16day</td>
+<td align="center">2000-Now</td>
+<td align="center">Global</td>
+</tr>
+<tr>
+<td align="center">Landsat 5 TM</td>
+<td align="center">30m</td>
+<td align="center">16day</td>
+<td align="center">1984-2012</td>
+<td align="center">Global</td>
+</tr>
+<tr>
+<td align="center">Landsat 4–8 surface reflectance</td>
+<td align="center">30m</td>
+<td align="center">16day</td>
+<td align="center">1984-Now</td>
+<td align="center">Global</td>
+</tr>
+<tr>
+<td align="center"><strong>Sentinel</strong></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">Sentinel 1 A&#x2F;B ground range detected</td>
+<td align="center">10m</td>
+<td align="center">6day</td>
+<td align="center">2014-Now</td>
+<td align="center">Global</td>
+</tr>
+<tr>
+<td align="center">Sentinel 2A MSI</td>
+<td align="center">20m</td>
+<td align="center">10day</td>
+<td align="center">2015-Now</td>
+<td align="center">Global</td>
+</tr>
+<tr>
+<td align="center"><strong>MODIS</strong></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">MOD08 atmosphere</td>
+<td align="center">1°</td>
+<td align="center">daily</td>
+<td align="center">2000-Now</td>
+<td align="center">Global</td>
+</tr>
+<tr>
+<td align="center">MOD09 surface reflectance</td>
+<td align="center">500m</td>
+<td align="center">1&#x2F;8day</td>
+<td align="center">2000-Now</td>
+<td align="center">Global</td>
+</tr>
+<tr>
+<td align="center">MOD10 snow cover</td>
+<td align="center">500m</td>
+<td align="center">1day</td>
+<td align="center">2000-Now</td>
+<td align="center">Global</td>
+</tr>
+<tr>
+<td align="center">MOD11 temperature and emissivity</td>
+<td align="center">1000m</td>
+<td align="center">1&#x2F;8day</td>
+<td align="center">2000-Now</td>
+<td align="center">Global</td>
+</tr>
+<tr>
+<td align="center">MCD12 Land cover</td>
+<td align="center">500m</td>
+<td align="center">Annual</td>
+<td align="center">2000-Now</td>
+<td align="center">Global</td>
+</tr>
+<tr>
+<td align="center">MOD13 Vegetation indices</td>
+<td align="center">500&#x2F;250m</td>
+<td align="center">16day</td>
+<td align="center">2000-Now</td>
+<td align="center">Global</td>
+</tr>
+<tr>
+<td align="center">MOD14 Thermal anomalies &amp; fire</td>
+<td align="center">1000m</td>
+<td align="center">8day</td>
+<td align="center">2000-Now</td>
+<td align="center">Global</td>
+</tr>
+<tr>
+<td align="center">MCD15 Leaf area index&#x2F;FPAR</td>
+<td align="center">500m</td>
+<td align="center">4day</td>
+<td align="center">2000-Now</td>
+<td align="center">Global</td>
+</tr>
+<tr>
+<td align="center">MOD17 Gross primary productivity</td>
+<td align="center">500m</td>
+<td align="center">8day</td>
+<td align="center">2000-Now</td>
+<td align="center">Global</td>
+</tr>
+<tr>
+<td align="center">MCD43 BRDF-adjusted reflectance</td>
+<td align="center">1000&#x2F;500m</td>
+<td align="center">8&#x2F;16day</td>
+<td align="center">2000-Now</td>
+<td align="center">Global</td>
+</tr>
+<tr>
+<td align="center">MOD44 veg. cover conversion</td>
+<td align="center">250m</td>
+<td align="center">Annual</td>
+<td align="center">2000-Now</td>
+<td align="center">Global</td>
+</tr>
+<tr>
+<td align="center">MCD45 thermal anomalies and fire</td>
+<td align="center">500m</td>
+<td align="center">30day</td>
+<td align="center">2000-Now</td>
+<td align="center">Global</td>
+</tr>
+<tr>
+<td align="center"><strong>ASTER</strong></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">L1 T radiance</td>
+<td align="center">15&#x2F;30&#x2F;90m</td>
+<td align="center">1day</td>
+<td align="center">2000-Now</td>
+<td align="center">Global</td>
+</tr>
+<tr>
+<td align="center">Global emissivity</td>
+<td align="center">100m</td>
+<td align="center">Once</td>
+<td align="center">2000-2010</td>
+<td align="center">Global</td>
+</tr>
+<tr>
+<td align="center">Other imagery</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">PROBA-V top of canopy reflectance</td>
+<td align="center">100&#x2F;300m</td>
+<td align="center">2day</td>
+<td align="center">2013-Now</td>
+<td align="center">Global</td>
+</tr>
+<tr>
+<td align="center">EO-1 hyperion hyperspectral radiance</td>
+<td align="center">30m</td>
+<td align="center">Targeted</td>
+<td align="center">2001-Now</td>
+<td align="center">Global</td>
+</tr>
+<tr>
+<td align="center">DMSP-OLS nighttime lights</td>
+<td align="center">1km</td>
+<td align="center">Annual</td>
+<td align="center">1992-2013</td>
+<td align="center">Global</td>
+</tr>
+<tr>
+<td align="center">USDA NAIP aerial imagery</td>
+<td align="center">1m</td>
+<td align="center">Sub-annual</td>
+<td align="center">2003-2015</td>
+<td align="center">CONUS</td>
+</tr>
+<tr>
+<td align="center"><strong>地形</strong></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">Shuttle Radar Topography Mission</td>
+<td align="center">30m</td>
+<td align="center">single</td>
+<td align="center">2000</td>
+<td align="center">60°N–54°S</td>
+</tr>
+<tr>
+<td align="center">USGS GMTED2010</td>
+<td align="center">10m</td>
+<td align="center">single</td>
+<td align="center">Multiple</td>
+<td align="center">US</td>
+</tr>
+<tr>
+<td align="center">USGS National Elevation Dataset</td>
+<td align="center">7.5″</td>
+<td align="center">single</td>
+<td align="center">Multiple</td>
+<td align="center">83°N–57°S</td>
+</tr>
+<tr>
+<td align="center">GTOPO30</td>
+<td align="center">30″</td>
+<td align="center">single</td>
+<td align="center">Multiple</td>
+<td align="center">Global</td>
+</tr>
+<tr>
+<td align="center">ETOPO1</td>
+<td align="center">1′</td>
+<td align="center">single</td>
+<td align="center">Multiple</td>
+<td align="center">Global</td>
+</tr>
+</tbody></table>
+<p>注：来源 <code>Google Earth Engine: Planetary-scale geospatial analysis for everyone [J]. Remote Sensing of Environment</code> </p>
+<p><code>GEE</code> 中其他的主要栅格产品包括土地利用数据，气象数据和人口数据等。这些数据与遥感影像数据相比，主要用来反映某些社会因子的空间分布，或者反映地表以上空间的自然特征。</p>
+<table>
+<thead>
+<tr>
+<th align="center">数据集</th>
+<th align="center">空间分辨率</th>
+<th align="center">时间分辨率</th>
+<th align="center">时间覆盖</th>
+<th align="center">空间覆盖</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><strong>土地利用</strong></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">GlobCover</td>
+<td align="center">300m</td>
+<td align="center">Non-periodic</td>
+<td align="center">2009</td>
+<td align="center">90°N–65°S</td>
+</tr>
+<tr>
+<td align="center">USGS National Landcover Database</td>
+<td align="center">30m</td>
+<td align="center">Non-periodic</td>
+<td align="center">1992-2011</td>
+<td align="center">CONUS</td>
+</tr>
+<tr>
+<td align="center">UMD global forest change</td>
+<td align="center">30m</td>
+<td align="center">Annual</td>
+<td align="center">2000-2014</td>
+<td align="center">80°N–57°S</td>
+</tr>
+<tr>
+<td align="center">JRC global surface water</td>
+<td align="center">300m</td>
+<td align="center">Monthly</td>
+<td align="center">1984-2015</td>
+<td align="center">78°N–60°S</td>
+</tr>
+<tr>
+<td align="center">GLCF tree cover</td>
+<td align="center">30m</td>
+<td align="center">5year</td>
+<td align="center">2000-2010</td>
+<td align="center">Global</td>
+</tr>
+<tr>
+<td align="center">USDA NASS cropland data layer</td>
+<td align="center">30m</td>
+<td align="center">Annual</td>
+<td align="center">1997-2015</td>
+<td align="center">CONUS</td>
+</tr>
+<tr>
+<td align="center"><strong>气象</strong></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">Global precipitation measurement</td>
+<td align="center">6′</td>
+<td align="center">3h</td>
+<td align="center">2014-Now</td>
+<td align="center">Global</td>
+</tr>
+<tr>
+<td align="center">TRMM 3B42 precipitation</td>
+<td align="center">15′</td>
+<td align="center">3h</td>
+<td align="center">1985-2015</td>
+<td align="center">50°N–50°S</td>
+</tr>
+<tr>
+<td align="center">CHIRPS precipitation</td>
+<td align="center">3′</td>
+<td align="center">5day</td>
+<td align="center">1981-Now</td>
+<td align="center">50°N–50°S</td>
+</tr>
+<tr>
+<td align="center">NLDAS-2</td>
+<td align="center">7.5′</td>
+<td align="center">1h</td>
+<td align="center">1979-Now</td>
+<td align="center">North America</td>
+</tr>
+<tr>
+<td align="center">GLDAS-2</td>
+<td align="center">15′</td>
+<td align="center">3h</td>
+<td align="center">1948-2010</td>
+<td align="center">Global</td>
+</tr>
+<tr>
+<td align="center">NCEP reanalysis</td>
+<td align="center">2.5°</td>
+<td align="center">6h</td>
+<td align="center">1948-Now</td>
+<td align="center">Global</td>
+</tr>
+<tr>
+<td align="center">ORNL DAYMET weather</td>
+<td align="center">1km</td>
+<td align="center">12 Images</td>
+<td align="center">1980-Now</td>
+<td align="center">North America</td>
+</tr>
+<tr>
+<td align="center">GRIDMET</td>
+<td align="center">4km</td>
+<td align="center">1day</td>
+<td align="center">1979-Now</td>
+<td align="center">CONUS</td>
+</tr>
+<tr>
+<td align="center">NCEP global forecast system</td>
+<td align="center">15′</td>
+<td align="center">6h</td>
+<td align="center">2015-Now</td>
+<td align="center">Global</td>
+</tr>
+<tr>
+<td align="center">NCEP climate forecast system</td>
+<td align="center">12′</td>
+<td align="center">6h</td>
+<td align="center">1979-Now</td>
+<td align="center">Global</td>
+</tr>
+<tr>
+<td align="center">WorldClim</td>
+<td align="center">30″</td>
+<td align="center">12 Images</td>
+<td align="center">1960-1990</td>
+<td align="center">Global</td>
+</tr>
+<tr>
+<td align="center">NEX downscaled climate projections</td>
+<td align="center">1km</td>
+<td align="center">1day</td>
+<td align="center">1950-2099</td>
+<td align="center">North America</td>
+</tr>
+<tr>
+<td align="center"><strong>人口</strong></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">WorldPop</td>
+<td align="center">100m</td>
+<td align="center">5year</td>
+<td align="center">Multiple</td>
+<td align="center">2010–2015</td>
+</tr>
+<tr>
+<td align="center">GPWv4</td>
+<td align="center">30″</td>
+<td align="center">5year</td>
+<td align="center">2000-2020</td>
+<td align="center">85°N–60°S</td>
+</tr>
+</tbody></table>
+<p>注：来源 <code>Google Earth Engine: Planetary-scale geospatial analysis for everyone [J]. Remote Sensing of Environment</code></p>
+<h2 id="⛄矢量数据"><a href="#⛄矢量数据" class="headerlink" title="⛄矢量数据"></a>⛄矢量数据</h2><p>简单来说，矢量数据可以理解为点、线和面类型的数据。在处理空间问题时，常常需要确定某个地理要素的位置(例如某区域商店的位置)，或者某些线状地物的位置(河流、道路等)，以及某些面状物的分布(行政边界等)。在确定矢量空间要素空间特征的基础上，再给这些空间要素贴上标签(名称，面积，权属等)，那么就得到了包含一定信息的矢量数据。我们通常将这种矢量数据成为“特征矢量”(<code>Feature</code>)，将其空间形状称为“地理特征”(<code>Geometry</code>)，将贴上去的标签信息称为“属性”(<code>Property</code>)。我们分别从<code>ArcGIS</code>和<code>GEE</code> 中添加并查看<code>Feature</code>的信息，以此加深对矢量数据的理解。</p>
+<h2 id="⛄数据类型和参数类型"><a href="#⛄数据类型和参数类型" class="headerlink" title="⛄数据类型和参数类型"></a>⛄数据类型和参数类型</h2><h3 id="👀GEE-的数据类型-String-Number"><a href="#👀GEE-的数据类型-String-Number" class="headerlink" title="👀GEE 的数据类型 (String, Number)"></a>👀GEE 的数据类型 (<code>String</code>, <code>Number</code>)</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line">显示：<span class="title function_">print</span>(string)</span><br><span class="line">创建：ee.<span class="title class_">String</span>()</span><br><span class="line">修改：string.<span class="title function_">cat</span>()	string.<span class="title function_">replace</span>()</span><br><span class="line">段落：string.<span class="title function_">split</span>() string.<span class="property">match</span></span><br><span class="line">查询：string.<span class="title function_">slice</span>() string.<span class="title function_">length</span>()</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">创建：ee.<span class="title class_">Number</span>()</span><br><span class="line">修改：number.<span class="title function_">uint8</span>() number.<span class="title class_">Uint8</span>() number.<span class="title function_">int8</span>() number.<span class="title function_">toInt8</span>()……</span><br><span class="line">比较：number.<span class="title function_">eq</span>() number.<span class="title function_">neq</span>()……							</span><br><span class="line">    number.<span class="title function_">and</span>() number.<span class="title function_">or</span>() ee.<span class="property">Algorithms</span>.<span class="title class_">IsEqua</span>()……</span><br><span class="line">运算：number.<span class="title function_">abs</span>() number.<span class="title function_">round</span>() number.<span class="title function_">pow</span>()……</span><br><span class="line">字位：number.<span class="title function_">bitwiseAnd</span>() number.<span class="title function_">bitwiseOr</span>() number.<span class="title function_">bitwise_and</span>()</span><br><span class="line">    number.<span class="title function_">bitwise_or</span>() number.<span class="title function_">leftShift</span>() number.<span class="title function_">right_shift</span>()……</span><br></pre></td></tr></table></figure>
+
+<h3 id="👀GEE-的数据类型-Dictionary，List，Array"><a href="#👀GEE-的数据类型-Dictionary，List，Array" class="headerlink" title="👀GEE 的数据类型(Dictionary，List，Array)"></a>👀GEE 的数据类型(<code>Dictionary</code>，<code>List</code>，<code>Array</code>)</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line">创建：ee.<span class="title class_">Dicionary</span>()</span><br><span class="line">修改：dictionary.<span class="title function_">combine</span>() dinctionary.<span class="title function_">set</span>()</span><br><span class="line">查询：dictionary.<span class="title function_">keys</span>() dictionary.<span class="title function_">get</span>() dictionary.<span class="title function_">values</span>()	</span><br><span class="line">对比：dictionary.<span class="title function_">contains</span>()</span><br><span class="line">尺寸：dictionary.<span class="title function_">size</span>()</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">创建：ee.<span class="title class_">List</span>() list.<span class="title function_">repeat</span>() list.<span class="title function_">sequence</span>()</span><br><span class="line">修改：list.<span class="title function_">set</span>() list.<span class="title function_">replaceAll</span>() list.<span class="title function_">add</span>() list.<span class="title function_">insert</span>() list.<span class="title function_">zip</span>()</span><br><span class="line">	list.<span class="title function_">reverse</span>() list.<span class="title function_">rotate</span>() list.<span class="title function_">sort</span>() list.<span class="title function_">swap</span>() list.<span class="title function_">flatten</span>()</span><br><span class="line">查询：list.<span class="title function_">get</span>() list.<span class="title function_">remove</span>() list.<span class="title function_">removeAll</span>()</span><br><span class="line">比较：list.<span class="title function_">equals</span>() list.<span class="title function_">contains</span>() list.<span class="title function_">containsALL</span>() list. <span class="title function_">indexOf</span>()			          </span><br><span class="line">	list.<span class="title function_">indexOfSubList</span>() list.<span class="title function_">lastIndexOfSubList</span>() list.<span class="title function_">frequency</span>()</span><br><span class="line">其他：list.<span class="title function_">map</span>() list.<span class="title function_">iterate</span>() list.<span class="title function_">length</span>() list.<span class="title function_">size</span>()	</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">创建：ee.<span class="title class_">Array</span>() ee.<span class="property">Array</span>.<span class="title function_">identity</span>() ee.<span class="property">Array</span>.<span class="title function_">repeat</span>()	</span><br><span class="line">修改：array.<span class="title function_">mask</span>()	array.<span class="title function_">transpose</span>() array.<span class="title function_">uint8</span>()	array.<span class="title class_">Uint8</span>()	</span><br><span class="line">数学：array.<span class="title function_">eq</span>() array.<span class="title function_">and</span>() array.<span class="title function_">or</span>() array.<span class="title function_">round</span>()</span><br><span class="line">	array.<span class="title function_">bitwiseAnd</span>() array.<span class="title function_">leftShift</span>() 	</span><br></pre></td></tr></table></figure>
+
+<h3 id="👀GEE-的数据类型-Geometry，Feature，FeatureCollection"><a href="#👀GEE-的数据类型-Geometry，Feature，FeatureCollection" class="headerlink" title="👀GEE 的数据类型(Geometry，Feature，FeatureCollection)"></a>👀GEE 的数据类型(<code>Geometry</code>，<code>Feature</code>，<code>FeatureCollection</code>)</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line">创建：ee.<span class="property">Geometry</span>.<span class="title class_">Point</span>() ee.<span class="property">Geometry</span>.<span class="title class_">Multipoint</span>() 绘图工具 ……</span><br><span class="line">几何：<span class="title class_">Geometry</span>.<span class="title function_">transform</span>() geometry.<span class="title function_">centroid</span>() geometry.<span class="title function_">simplify</span>() 			           </span><br><span class="line">	geometry.<span class="title function_">bounds</span>() geometry.<span class="title function_">buffer</span>() geometry.<span class="title function_">union</span>() ……</span><br><span class="line">查询：geometry.<span class="title function_">geometries</span>() geometry.<span class="title function_">coordinates</span>() geometry.<span class="title function_">length</span>() 			</span><br><span class="line">	geometry.<span class="title function_">area</span>() geometry.<span class="title function_">perimeter</span>() geometry.<span class="title function_">distance</span>() 	</span><br><span class="line">转换：geometry.<span class="title function_">toGeoJSON</span>()</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">创建：ee.<span class="title class_">Feature</span>()	绘图工具</span><br><span class="line">编辑：<span class="title class_">Feature</span>.<span class="title function_">select</span>() <span class="title class_">Feature</span>.<span class="title function_">transform</span>() <span class="title class_">Feature</span>.<span class="property">set</span>/<span class="title function_">setMulti</span>()</span><br><span class="line">几何：<span class="title class_">Feature</span>.<span class="property">centroid</span>/simplify/bounds/convexHull/<span class="title function_">buffer</span>()						</span><br><span class="line">	<span class="title class_">Feature</span>.<span class="property">union</span>/intersection/difference/<span class="title function_">symmetricDifference</span>()</span><br><span class="line">提取：<span class="title class_">Feature</span>.<span class="title function_">geometry</span>() <span class="title class_">Feature</span>.<span class="title function_">get</span>() <span class="title class_">Feature</span>.<span class="property">Length</span>/<span class="title class_">Area</span>/<span class="title class_">Perimeter</span>()	</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">创建：<span class="variable constant_">GEE</span>自带 上传 <span class="title class_">FushionTable</span> ee.<span class="title class_">FeatureCollection</span>() .<span class="title function_">randomPoints</span>() 手绘…</span><br><span class="line">编辑：.<span class="title function_">filterMetadata</span>() .<span class="title function_">limit</span>() .<span class="title function_">filterDate</span>() .<span class="title function_">filterBounds</span>() .<span class="title function_">filter</span>() 	</span><br><span class="line">    .<span class="title function_">select</span>() .<span class="title function_">distinct</span>() .<span class="title function_">union</span>() .<span class="title function_">merge</span>() .<span class="title function_">set</span>() .<span class="title function_">remap</span>() .<span class="title function_">sort</span>()</span><br><span class="line">    .<span class="title function_">makeArray</span>()</span><br><span class="line">转换：.<span class="title function_">geometry</span>() .<span class="title function_">reduceToImage</span>()			</span><br><span class="line">查询：.<span class="title function_">first</span>() .<span class="title function_">toList</span>() .<span class="title function_">aggregate_first</span>() .<span class="title function_">aggregate_array</span>()</span><br><span class="line">统计：.<span class="property">aggregate_stats</span>/_histogram/_count/_count_distinct       </span><br><span class="line">    .<span class="property">aggregate_max</span>/_min/_sum/_mean/_product	          </span><br><span class="line">    .<span class="property">aggregate_sample_var</span>/_total_var/_sample_sd/_total_sd/</span><br><span class="line">其他: .<span class="title function_">map</span>()</span><br></pre></td></tr></table></figure>
+
+<h3 id="👀GEE-的数据类型-Image，ImageCollection"><a href="#👀GEE-的数据类型-Image，ImageCollection" class="headerlink" title="👀GEE 的数据类型 (Image，ImageCollection)"></a>👀GEE 的数据类型 (<code>Image</code>，<code>ImageCollection</code>)</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line">创建: <span class="variable constant_">GEE</span>自带 用户上传 ee.<span class="title function_">image</span>()/<span class="title function_">constant</span>() ee.<span class="property">Image</span>.<span class="title function_">pixelLonLat</span>() </span><br><span class="line">编辑: .<span class="title function_">mask</span>() .<span class="title function_">clip</span>() .<span class="title function_">select</span>() .<span class="title function_">slice</span>() .<span class="title function_">addBands</span>() .<span class="title function_">reproject</span>() .<span class="title function_">rbgtohsv</span>()		         </span><br><span class="line">    .<span class="title function_">hsvtorbg</span>() .<span class="title function_">unit8</span>() .<span class="title function_">cast</span>() .<span class="title function_">set</span>() .<span class="title function_">setMulti</span>() .<span class="title function_">remap</span>() .<span class="title function_">where</span>()	   </span><br><span class="line">    .<span class="title function_">metadata</span>() .<span class="title function_">clamp</span>() .<span class="title function_">unitScale</span>() .<span class="title function_">interpolate</span>() .<span class="title function_">eq</span>()…… .<span class="title function_">abs</span>()…… .<span class="title function_">sin</span>() …… </span><br><span class="line">    .<span class="title function_">bitWiseAnd</span>()…… .<span class="title function_">reduce</span>()	</span><br><span class="line">地形: image.<span class="title function_">derivative</span>() ee.<span class="property">Terrain</span>.<span class="title function_">products</span>() ee.<span class="property">Algorithm</span>.<span class="title class_">Terrain</span>()</span><br><span class="line">     ee.<span class="property">Terrain</span>.<span class="title function_">slope</span>() ee.<span class="property">Terrain</span>.<span class="title function_">aspect</span>() ee.<span class="property">Terrain</span>.<span class="title function_">fillMinima</span>()	  </span><br><span class="line">	 ee.<span class="property">Terrain</span>.<span class="title function_">hillshade</span>() ee.<span class="property">Terrain</span>.<span class="title function_">hillshadow</span>() ee.<span class="property">Algorithm</span>.<span class="title class_">Hillshadow</span>()</span><br><span class="line">纹理: .<span class="title function_">entropy</span>() .<span class="title class_">Texture</span>() .<span class="title function_">zeroCrossing</span>() .<span class="property">ee</span>.<span class="property">Algorithms</span>.<span class="title class_">CannyEdgeDetector</span>()		   </span><br><span class="line">    ee.<span class="property">Algorithms</span>.<span class="title class_">HoughTransform</span>()</span><br><span class="line">邻域: .<span class="title function_">focal_max</span>() .<span class="title function_">focal_min</span>() .<span class="title function_">focal_median</span>() .<span class="title function_">focal_mode</span>() .<span class="title function_">convolve</span>()                </span><br><span class="line">    .<span class="title function_">reduceNeighborhood</span>()</span><br><span class="line">转换: .<span class="property">Image</span>.<span class="title class_">ToVector</span>() <span class="title class_">Image</span>.<span class="title class_">ToArray</span>() <span class="title class_">Image</span>.<span class="title function_">arrayFlatten</span>()	</span><br><span class="line">其他: .<span class="title class_">CrossCorrelation</span>() .<span class="title function_">distance</span>() <span class="title class_">Export</span>.<span class="title function_">image</span>()</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">创建: ee.<span class="title class_">ImageCollection</span>() ee.<span class="property">ImageCollection</span>.<span class="title function_">load</span>()</span><br><span class="line">筛选: .<span class="title function_">limit</span>() .<span class="title function_">filterMetadata</span>() .<span class="title function_">filterDate</span>() .<span class="title function_">filterBounds</span>() .<span class="title function_">filter</span>() .<span class="title function_">select</span>()	     </span><br><span class="line">	.<span class="title function_">distinct</span>() .<span class="title function_">comnibe</span>() .<span class="title function_">unit8</span>()…… .<span class="title function_">set</span>() .<span class="title function_">setMulti</span>()</span><br><span class="line">求值: .<span class="title function_">mosaic</span>() .<span class="property">and</span>/<span class="title function_">or</span>() .<span class="property">sum</span>/product/max/min/mean/mode/median/<span class="title function_">count</span>()	</span><br><span class="line">转换: .<span class="title function_">first</span>() .<span class="title function_">toList</span>() .<span class="title function_">toArray</span>()     </span><br></pre></td></tr></table></figure>
+
+<h3 id="👀GEE-的数据类型-Landsat-Images-ConfusionMarix"><a href="#👀GEE-的数据类型-Landsat-Images-ConfusionMarix" class="headerlink" title="👀GEE 的数据类型 (Landsat Images, ConfusionMarix)"></a>👀GEE 的数据类型 (<code>Landsat Images</code>, <code>ConfusionMarix</code>)</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="title class_">LansatCollection</span>.<span class="title function_">qualityMosaic</span>()</span><br><span class="line"><span class="title class_">LansatCollection</span>.<span class="title function_">unmixing</span>()</span><br><span class="line"><span class="title class_">LansatCollection</span>.<span class="title function_">normalizedDifference</span>()</span><br><span class="line">ee.<span class="property">Algorithms</span>.<span class="property">Landsat</span>.<span class="title function_">simpleCloudScore</span>()</span><br><span class="line">ee.<span class="property">Algorithms</span>.<span class="property">Landsat</span>.<span class="title function_">simpleComposite</span>()</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">创建: ee.<span class="title class_">ConfusionMatrix</span>() </span><br><span class="line">转换: <span class="title class_">ConfusionMatrix</span>.<span class="title function_">array</span>()</span><br><span class="line">精度: .<span class="title function_">kappa</span>() .<span class="title function_">accuracy</span>() .<span class="title function_">producersAccuracy</span>() .<span class="title function_">consumersAccuracy</span>() .<span class="title function_">order</span>()</span><br></pre></td></tr></table></figure>
+
+<h3 id="👀GEE-的参数类型-Date-DateRange"><a href="#👀GEE-的参数类型-Date-DateRange" class="headerlink" title="👀GEE 的参数类型 (Date, DateRange)"></a>👀GEE 的参数类型 (<code>Date</code>, <code>DateRange</code>)</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line">创建：ee.<span class="title class_">Date</span>() ee.<span class="property">Algorithms</span>.<span class="title class_">Date</span>() ee.<span class="property">Date</span>.<span class="title function_">fromYMD</span>() ee.<span class="property">Date</span>.<span class="title function_">parse</span>()</span><br><span class="line">编辑：<span class="title class_">Date</span>.<span class="title function_">advance</span>() <span class="title class_">Date</span>.<span class="title function_">update</span>()</span><br><span class="line">调整：<span class="title class_">Date</span>.<span class="title function_">format</span>() <span class="title class_">Date</span>.<span class="title function_">milis</span>() <span class="title class_">Date</span>.<span class="title function_">getRange</span>()</span><br><span class="line">提取：<span class="title class_">Date</span>.<span class="title function_">get</span>() <span class="title class_">Date</span>.<span class="title function_">gerFraction</span>() <span class="title class_">Date</span>.<span class="title function_">unitRation</span>() <span class="title class_">Date</span>.<span class="title function_">difference</span>()</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">创建: ee.<span class="title class_">DateRange</span>() ee.<span class="property">DateRange</span>.<span class="title function_">unbounded</span>()</span><br><span class="line">联并: <span class="title class_">DateRange</span>.<span class="title class_">Union</span>() <span class="title class_">DateRange</span>.<span class="title function_">intersection</span>()</span><br><span class="line">查询: <span class="title class_">DateRange</span>.<span class="title function_">start</span>() <span class="title class_">DateRange</span>.<span class="title function_">end</span>()</span><br><span class="line">判断: .<span class="title function_">intersencts</span>() .<span class="title function_">contains</span>() .<span class="title function_">inEmpty</span>() .<span class="title function_">isUnbounded</span>()</span><br></pre></td></tr></table></figure>
+
+<h3 id="👀GEE-的参数类型-Filter，Join"><a href="#👀GEE-的参数类型-Filter，Join" class="headerlink" title="👀GEE 的参数类型 (Filter，Join)"></a>👀GEE 的参数类型 (<code>Filter</code>，<code>Join</code>)</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line">创建：ee.<span class="property">Filter</span>.<span class="title function_">eq</span>() ee.<span class="property">Filter</span>.<span class="title function_">neq</span>() ee.<span class="property">Filter</span>.<span class="title function_">ge</span>() ee.<span class="property">Filter</span>.<span class="title function_">gte</span>() ee.<span class="property">Filter</span>.<span class="title function_">le</span>()		 </span><br><span class="line">	ee.<span class="property">Filter</span>.<span class="title function_">lte</span>() ee.<span class="property">Filter</span>.<span class="title function_">maxDifference</span>()</span><br><span class="line">字段：ee.<span class="property">Filter</span>.<span class="title function_">stringContains</span>() ee.<span class="property">Filter</span>.<span class="title class_">StarsWith</span>() ee.<span class="property">Filter</span>.<span class="title class_">EndWith</span>()				 </span><br><span class="line">	ee.<span class="property">Filter</span>.<span class="title class_">Rangecontains</span>() ee.<span class="property">Filter</span>.<span class="title function_">listContains</span>() ee.<span class="property">Filter</span>.<span class="title function_">inList</span>()</span><br><span class="line">时间：ee.<span class="property">Filter</span>.<span class="title function_">calendarRange</span>() ee.<span class="title class_">FilterDateRangeContains</span>()	 </span><br><span class="line">	ee.<span class="property">Filter</span>.<span class="title function_">dayOfYear</span>()</span><br><span class="line">转换：ee.<span class="property">Filter</span>.<span class="title function_">and</span>() ee.<span class="property">Filter</span>.<span class="title function_">or</span>() ee.<span class="property">Filter</span>.<span class="title function_">not</span>() ee.<span class="title class_">Filter</span>()</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">ee.<span class="property">Join</span>.<span class="title function_">simple</span>() ee.<span class="property">Join</span>.<span class="title function_">inverted</span>() ee.<span class="property">Join</span>.<span class="title function_">inner</span>()	</span><br><span class="line">ee.<span class="property">Join</span>.<span class="title function_">saveAll</span>() ee.<span class="property">Join</span>.<span class="title function_">saveBest</span>() ee.<span class="property">Join</span>.<span class="title function_">saveFirst</span>()	</span><br><span class="line"><span class="title class_">Spatial</span> <span class="title class_">Joins</span> (ee.<span class="property">Filter</span>.<span class="property">withinDistance</span>/ee.<span class="property">Filter</span>.<span class="property">intersects</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="👀GEE-的参数类型-Reducer，Kernel，Algorithm"><a href="#👀GEE-的参数类型-Reducer，Kernel，Algorithm" class="headerlink" title="👀GEE 的参数类型 (Reducer，Kernel，Algorithm)"></a>👀GEE 的参数类型 (<code>Reducer</code>，<code>Kernel</code>，<code>Algorithm</code>)</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line">创建: ee.<span class="property">Reducer</span>.<span class="title function_">count</span>() .<span class="title function_">countEvery</span>() .<span class="title function_">first</span>() .<span class="title function_">histogram</span>() .<span class="title function_">allNonZero</span>()			 </span><br><span class="line">    .<span class="title function_">anyNonZero</span>() .<span class="title function_">frequencyHistrogram</span>() .<span class="title function_">toList</span>() .<span class="title function_">toCollection</span>()</span><br><span class="line">数学: <span class="title function_">sum</span>() .<span class="title function_">product</span>() .<span class="title function_">mean</span>() .<span class="title function_">variance</span>() .<span class="title function_">std_dev</span>() .<span class="title function_">sampleVariance</span>()		       </span><br><span class="line">    .<span class="title function_">sampleStdDev</span>() .<span class="title function_">max</span>() .<span class="title function_">min</span>() .<span class="title function_">minMax</span>() .<span class="title function_">median</span>() .<span class="title function_">mode</span>()	         </span><br><span class="line">    .<span class="title function_">intervalMean</span>() .<span class="title function_">percentile</span>() .<span class="title function_">linearFit</span>()</span><br><span class="line">转换: .<span class="title function_">setOutputs</span>() .<span class="title function_">getOutputs</span>() .<span class="title function_">combine</span>() .<span class="title function_">repeat</span>() .<span class="title function_">repeat</span>()			      </span><br><span class="line">     .<span class="title function_">group</span>() .<span class="title function_">unweighted</span>() .<span class="title function_">splitWeights</span>()</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">创建: ee.<span class="property">Kernel</span>.<span class="title function_">roberts</span>() ee.<span class="property">Kernel</span>.<span class="title function_">prewitt</span>() ee.<span class="property">Kernel</span>.<span class="title function_">sobel</span>() 		   </span><br><span class="line">	ee.<span class="property">Kernel</span>.<span class="title function_">compass</span>() ee.<span class="property">Kernel</span>.<span class="title function_">kirsch</span>() ee.<span class="property">Kernel</span>.<span class="title function_">laplacian4</span>()	</span><br><span class="line">	ee.<span class="property">Kernel</span>.<span class="title function_">laplacian8</span>() ee.<span class="property">Kernel</span>.<span class="title function_">euclidean</span>() ee.<span class="property">Kernel</span>.<span class="title function_">gaussian</span>()	</span><br><span class="line">	ee.<span class="property">Kernel</span>.<span class="title function_">manhattan</span>() ee.<span class="property">Kernel</span>.<span class="title function_">chebyshev</span>() ee.<span class="property">Kernel</span>.<span class="title function_">circle</span>()		      </span><br><span class="line">	ee.<span class="property">Kernel</span>.<span class="title function_">octagon</span>() ee.<span class="property">Kernel</span>.<span class="title function_">square</span>() ee.<span class="property">Kernel</span>.<span class="title function_">diamond</span>() ee.<span class="property">Kernel</span>.<span class="title function_">cross</span>()	</span><br><span class="line">	ee.<span class="property">Kernel</span>.<span class="title function_">plus</span>() ee.<span class="property">Kernel</span>.<span class="title function_">fixed</span>()</span><br><span class="line">编辑: <span class="title class_">Kernel</span>.<span class="title function_">rotate</span>() kernel.<span class="title function_">add</span>() <span class="title function_">print</span>(<span class="title class_">Kernel</span>)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="title class_">Algorithm</span>,算法的目的是减少重复运算，我们可将其理解为一个“小程序”，借助这个小程序可以对数据集内的每一个数据都进行同样的操作。下边是算法的语法格式：</span><br><span class="line"><span class="keyword">function</span> 函数名(变量)</span><br><span class="line">   &#123; 操作 &#125;</span><br><span class="line">算法的核心在于操作的编写。编写操作时要注意两点，第一，应该按照目标数据集确定变量名，比如针对栅格数据集的操作变量可以写作 <span class="title class_">Image</span> 或者 img，这样能够提高操作的可读性。第二，操作必须包含 <span class="keyword">return</span> 命令以告诉 <span class="variable constant_">GEE</span> 算法的目的是什么。</span><br></pre></td></tr></table></figure>
+
+<h2 id="⛄GEE平台优势与应用"><a href="#⛄GEE平台优势与应用" class="headerlink" title="⛄GEE平台优势与应用"></a>⛄GEE平台优势与应用</h2><p>随着云计算技术的不断发展，<code>GEE</code> 从2008 年提出构想不断发展至今天，已经成为提供覆盖全球的地理空间数据的集成、处理、可视化和综合分析一站式解决方案的云端共享平台，总结GEE的平台具有如下优势：</p>
+<ul>
+<li><strong>免费向非商业用户提供使用</strong>。<code>GEE</code>面向全球科研人员、学生、教育工作者等提供非商业性质用户提供免费服务。</li>
+<li><strong>算法高集成度以及可定制性</strong>。在算法集成方面，提供了持续更新的智能算法以及可供研究者定制的功能接口，这将激励研究者不断尝试新的算法来实现科学构想，而不只是停留在理论层面，这将进一步促进平台的智能化发展，很多以往难以解决的问题都将开启新的思路。</li>
+<li><strong>后台处理运算能力强</strong>。使用<code>GEE</code>平台，用户可以比较方便地处理全球影像数据，解决了用户受限自己本地机器运算能力不强，以及存储空间不足的问题，能够高校、快速地处理大范围的影像。</li>
+<li><strong>完整的生态开发环境</strong>。目前<code>GEE</code> 已经拥有一个完整而良好的开发生态环境，开发者和平台核心团队人员可以通过论坛，会议等多种形式进行深入甲流，探讨各种问题，除了现有的工具资源，用户还可以利用GEE提供的开发包做二次开发，满足更多的需求，实现更加强大的功能。</li>
+</ul>
+<p><code>GEE</code>被广泛应用于各个领域，涵盖全球森林变化，全球地表水变化、作物产量估算、稻田制图、城市测绘、洪水测绘、火灾恢复和疟疾风险绘图等等不同主题。它还被整合到许多第三方应用中，例如分析物种栖息地范围（<code>Map of Life</code>）、监测气候（<code>Climate Engine</code>）和评估土地利用变化（<code>Collect Earth</code>）等等。</p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ol>
+<li><a target="_blank" rel="noopener" href="https://www.aisoutu.com/a/776592">遥感云计算平台:Google Earth Engine</a></li>
+<li>遥感大数据工具（<code>Google Earth Engine</code>）基础教程，作者：王金柱</li>
+</ol>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://heartlovelife.github.io">Xiaotangsmiles</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://heartlovelife.github.io/2022/05/16/GEE01/">https://heartlovelife.github.io/2022/05/16/GEE01/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://heartlovelife.github.io" target="_blank">江湖是你画中亦是你</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/GEE/">GEE</a><a class="post-meta__tags" href="/tags/API/">API</a></div><div class="post_share"><div class="social-share" data-image="https://s2.loli.net/2022/05/17/7UCAtTuqoSfpMmy.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/gh/overtrue/share.js@master/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i> 打赏</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/wechat.jpg" target="_blank"><img class="post-qr-code-img" src="/img/loading1.gif" data-original="/img/wechat.jpg" alt="wechat(微信)"/></a><div class="post-qr-code-desc">wechat(微信)</div></li><li class="reward-item"><a href="/img/alipay.jpg" target="_blank"><img class="post-qr-code-img" src="/img/loading1.gif" data-original="/img/alipay.jpg" alt="alipay(支付宝)"/></a><div class="post-qr-code-desc">alipay(支付宝)</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2022/05/13/Hexo-tips/"><img class="next-cover" src="/img/loading1.gif" data-original="https://s2.loli.net/2022/05/13/p6xGIrSBdCPYqfO.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Hexo之常见的问题及小技巧Tips</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/loading1.gif" data-original="/img/touxiang.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Xiaotangsmiles</div><div class="author-info__description">我们总以为来日方长，却忘了世事无常</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">3</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">4</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/HeartLoveLife"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/HeartLoveLife" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="https://blog.csdn.net/twg666" target="_blank" title="CSDN"><i class="fa fa-book-open"></i></a><a class="social-icon" href="tencent://AddContact/?fromId=45&amp;fromSubId=1&amp;subcmd=all&amp;uin=491037927&amp;website=www.oicqzone.com" target="_blank" title="QQ"><i class="fab fa-qq"></i></a><a class="social-icon" href="mailto:xiaotangsmiles@163.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E2%9B%84%E6%A0%85%E6%A0%BC%E6%95%B0%E6%8D%AE"><span class="toc-number">1.</span> <span class="toc-text">⛄栅格数据</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E2%9B%84%E7%9F%A2%E9%87%8F%E6%95%B0%E6%8D%AE"><span class="toc-number">2.</span> <span class="toc-text">⛄矢量数据</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E2%9B%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%92%8C%E5%8F%82%E6%95%B0%E7%B1%BB%E5%9E%8B"><span class="toc-number">3.</span> <span class="toc-text">⛄数据类型和参数类型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%91%80GEE-%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B-String-Number"><span class="toc-number">3.1.</span> <span class="toc-text">👀GEE 的数据类型 (String, Number)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%91%80GEE-%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B-Dictionary%EF%BC%8CList%EF%BC%8CArray"><span class="toc-number">3.2.</span> <span class="toc-text">👀GEE 的数据类型(Dictionary，List，Array)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%91%80GEE-%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B-Geometry%EF%BC%8CFeature%EF%BC%8CFeatureCollection"><span class="toc-number">3.3.</span> <span class="toc-text">👀GEE 的数据类型(Geometry，Feature，FeatureCollection)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%91%80GEE-%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B-Image%EF%BC%8CImageCollection"><span class="toc-number">3.4.</span> <span class="toc-text">👀GEE 的数据类型 (Image，ImageCollection)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%91%80GEE-%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B-Landsat-Images-ConfusionMarix"><span class="toc-number">3.5.</span> <span class="toc-text">👀GEE 的数据类型 (Landsat Images, ConfusionMarix)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%91%80GEE-%E7%9A%84%E5%8F%82%E6%95%B0%E7%B1%BB%E5%9E%8B-Date-DateRange"><span class="toc-number">3.6.</span> <span class="toc-text">👀GEE 的参数类型 (Date, DateRange)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%91%80GEE-%E7%9A%84%E5%8F%82%E6%95%B0%E7%B1%BB%E5%9E%8B-Filter%EF%BC%8CJoin"><span class="toc-number">3.7.</span> <span class="toc-text">👀GEE 的参数类型 (Filter，Join)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%91%80GEE-%E7%9A%84%E5%8F%82%E6%95%B0%E7%B1%BB%E5%9E%8B-Reducer%EF%BC%8CKernel%EF%BC%8CAlgorithm"><span class="toc-number">3.8.</span> <span class="toc-text">👀GEE 的参数类型 (Reducer，Kernel，Algorithm)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E2%9B%84GEE%E5%B9%B3%E5%8F%B0%E4%BC%98%E5%8A%BF%E4%B8%8E%E5%BA%94%E7%94%A8"><span class="toc-number">4.</span> <span class="toc-text">⛄GEE平台优势与应用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="toc-number">5.</span> <span class="toc-text">参考资料</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2022/05/16/GEE01/" title="（一）Google Earth Engine概述"><img src="/img/loading1.gif" data-original="https://s2.loli.net/2022/05/17/7UCAtTuqoSfpMmy.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="（一）Google Earth Engine概述"/></a><div class="content"><a class="title" href="/2022/05/16/GEE01/" title="（一）Google Earth Engine概述">（一）Google Earth Engine概述</a><time datetime="2022-05-16T12:19:14.000Z" title="发表于 2022-05-16 20:19:14">2022-05-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/05/13/Hexo-tips/" title="Hexo之常见的问题及小技巧Tips"><img src="/img/loading1.gif" data-original="https://s2.loli.net/2022/05/13/p6xGIrSBdCPYqfO.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Hexo之常见的问题及小技巧Tips"/></a><div class="content"><a class="title" href="/2022/05/13/Hexo-tips/" title="Hexo之常见的问题及小技巧Tips">Hexo之常见的问题及小技巧Tips</a><time datetime="2022-05-13T06:21:53.000Z" title="发表于 2022-05-13 14:21:53">2022-05-13</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/05/12/Blog/" title="博客Blog框架简介"><img src="/img/loading1.gif" data-original="https://s2.loli.net/2022/05/11/ydue3h8TjLUfR2Z.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="博客Blog框架简介"/></a><div class="content"><a class="title" href="/2022/05/12/Blog/" title="博客Blog框架简介">博客Blog框架简介</a><time datetime="2022-05-12T03:19:47.000Z" title="发表于 2022-05-12 11:19:47">2022-05-12</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2021 - 2022 By Xiaotangsmiles</div><div class="framework-info"><span>地址 </span><a href="https://heartlovelife.github.io">HeartLoveLife</a><span class="footer-separator">|</span><span>邮箱 </span><a href="javascript:void(0);">xiaotangsmiles@163.com</a></div><div class="footer_custom_text">Hi, welcome to my <a href="https://heartlovelife.github.io/">blog</a>!</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script src="/js/search/local-search.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',preloader.endLoading())</script><div class="js-pjax"></div><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-nest.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = false;
+POWERMODE.mobile = true;
+document.body.addEventListener('input', POWERMODE);
+</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(n){n.imageLazyLoadSetting.processImages=o;var e=n.imageLazyLoadSetting.isSPA,i=n.imageLazyLoadSetting.preloadRatio||1,r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function o(){e&&(r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")));for(var t,a=0;a<r.length;a++)0<=(t=(t=r[a]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(n.innerHeight*i||document.documentElement.clientHeight*i)&&function(){var t,e,n,i,o=r[a];t=o,e=function(){r=r.filter(function(t){return o!==t})},n=new Image,i=t.getAttribute("data-original"),n.onload=function(){t.src=i,e&&e()},t.src!==i&&(n.src=i)}()}o(),n.addEventListener("scroll",function(){var t,e;t=o,e=n,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(e)},500)})}(this);</script></body></html>
