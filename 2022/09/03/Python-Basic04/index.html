@@ -1,0 +1,474 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>Python基础知识（04） | 江湖是你画中亦是你</title><meta name="keywords" content="Python,Python基础"><meta name="author" content="Xiaotangsmiles"><meta name="copyright" content="Xiaotangsmiles"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="⛄字符串的定义字符串就是一串字符，用途众多，是编程语言中表示文本的数据类型，如”Hello World”。在Python中可以使用一对双引号&quot; &quot;或者一对单引号&#39;&#39;定义一个字符串。虽然可以使用\&quot;或者\&#39;做字符串的转义，但是在实际开发中：  如果字符串内部需要使用&quot;，可以使用&#39;定义字符串 如果字符串内部需要使用&#39;，可以">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python基础知识（04）">
+<meta property="og:url" content="https://heartlovelife.github.io/2022/09/03/Python-Basic04/index.html">
+<meta property="og:site_name" content="江湖是你画中亦是你">
+<meta property="og:description" content="⛄字符串的定义字符串就是一串字符，用途众多，是编程语言中表示文本的数据类型，如”Hello World”。在Python中可以使用一对双引号&quot; &quot;或者一对单引号&#39;&#39;定义一个字符串。虽然可以使用\&quot;或者\&#39;做字符串的转义，但是在实际开发中：  如果字符串内部需要使用&quot;，可以使用&#39;定义字符串 如果字符串内部需要使用&#39;，可以">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s2.loli.net/2022/07/09/qUvOWSl6CzbX5sr.jpg">
+<meta property="article:published_time" content="2022-09-03T09:44:51.000Z">
+<meta property="article:modified_time" content="2022-09-04T03:41:45.830Z">
+<meta property="article:author" content="Xiaotangsmiles">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="Python基础">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s2.loli.net/2022/07/09/qUvOWSl6CzbX5sr.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://heartlovelife.github.io/2022/09/03/Python-Basic04/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":250},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#1f1f1f","position":"bottom-left"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Python基础知识（04）',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-09-04 11:41:45'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const now = new Date()
+          const hour = now.getHours()
+          const isNight = hour <= 6 || hour >= 18
+          if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+          else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.1.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/loading1.gif" data-original="/img/touxiang.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">7</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">6</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><span> 主页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><span> 博文</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 生活</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/photos/"><span> 相册</span></a></li><li><a class="site-page child" href="/music/"><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><span> 影视</span></a></li><li><a class="site-page child" href="/shuoshuo/"><span> 分享</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/comment/"><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><span> 关于笔者</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://s2.loli.net/2022/07/09/qUvOWSl6CzbX5sr.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">江湖是你画中亦是你</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><span> 主页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><span> 博文</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 生活</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/photos/"><span> 相册</span></a></li><li><a class="site-page child" href="/music/"><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><span> 影视</span></a></li><li><a class="site-page child" href="/shuoshuo/"><span> 分享</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/comment/"><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><span> 关于笔者</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Python基础知识（04）</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-09-03T09:44:51.000Z" title="发表于 2022-09-03 17:44:51">2022-09-03</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-09-04T03:41:45.830Z" title="更新于 2022-09-04 11:41:45">2022-09-04</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Python/">Python</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">3.1k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>12分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Python基础知识（04）"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="⛄字符串的定义"><a href="#⛄字符串的定义" class="headerlink" title="⛄字符串的定义"></a>⛄字符串的定义</h2><p>字符串就是一串字符，用途众多，是编程语言中表示文本的数据类型，如”Hello World”。在Python中可以使用一对双引号<code>&quot; &quot;</code>或者一对单引号<code>&#39;&#39;</code>定义一个字符串。虽然可以使用<code>\&quot;</code>或者<code>\&#39;</code>做字符串的转义，但是在实际开发中：</p>
+<ul>
+<li>如果字符串内部需要使用<code>&quot;</code>，可以使用<code>&#39;</code>定义字符串</li>
+<li>如果字符串内部需要使用<code>&#39;</code>，可以使用<code>&quot;</code>定义字符串</li>
+</ul>
+<p>可以使用索引获取一个字符串中指定位置的字符，索引计数从0开始；也可以使用<code>for</code>循环遍历字符串中每一个字符。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">str1 = <span class="string">&quot;My name is &#x27;xiaotang&#x27;&quot;</span></span><br><span class="line">str2 = <span class="string">&#x27;My name is &quot;HeartLoveLife&quot;&#x27;</span></span><br><span class="line"><span class="comment"># len(字符串)获取字符串的长度</span></span><br><span class="line">str1_len = <span class="built_in">len</span>(str1)</span><br><span class="line">str2_len = <span class="built_in">len</span>(str2)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(str1, <span class="string">&quot;;&quot;</span>, str2)</span><br><span class="line"><span class="built_in">print</span>(str1_len, <span class="string">&quot;;&quot;</span>, str2_len)</span><br><span class="line"><span class="comment"># 字符串.count(字符串)统计小字符串在大字符串中出现的次数</span></span><br><span class="line"><span class="built_in">print</span>(str1.count(<span class="string">&quot;n&quot;</span>))</span><br><span class="line"><span class="comment"># 字符串[索引]从字符串中取出单个字符</span></span><br><span class="line"><span class="built_in">print</span>(str1[<span class="number">0</span>])</span><br><span class="line"><span class="comment"># 字符串.index(字符串)获得小字符串第一次出现的索引</span></span><br><span class="line"><span class="built_in">print</span>(str1.index(<span class="string">&quot;n&quot;</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出结果</span></span><br><span class="line">My name <span class="keyword">is</span> <span class="string">&#x27;xiaotang&#x27;</span> ; My name <span class="keyword">is</span> <span class="string">&quot;HeartLoveLife&quot;</span></span><br><span class="line"><span class="number">21</span> ; <span class="number">26</span></span><br><span class="line"><span class="number">2</span></span><br><span class="line">M</span><br><span class="line"><span class="number">3</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="⛄字符串常用操作"><a href="#⛄字符串常用操作" class="headerlink" title="⛄字符串常用操作"></a>⛄字符串常用操作</h2><p>Python内置提供的方法有很多，使得在开发时，能够针对字符串进行更加灵活的操作，应对更多的开发需求。使用Python内置函数dir()返回字符串的属性、方法列表。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">str_list = <span class="built_in">dir</span>(<span class="string">&quot;&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(str_list)</span><br><span class="line"></span><br><span class="line">[<span class="string">&#x27;__add__&#x27;</span>, <span class="string">&#x27;__class__&#x27;</span>, <span class="string">&#x27;__contains__&#x27;</span>, <span class="string">&#x27;__delattr__&#x27;</span>, <span class="string">&#x27;__dir__&#x27;</span>, <span class="string">&#x27;__doc__&#x27;</span>, <span class="string">&#x27;__eq__&#x27;</span>, <span class="string">&#x27;__format__&#x27;</span>, <span class="string">&#x27;__ge__&#x27;</span>, <span class="string">&#x27;__getattribute__&#x27;</span>, <span class="string">&#x27;__getitem__&#x27;</span>, <span class="string">&#x27;__getnewargs__&#x27;</span>, <span class="string">&#x27;__gt__&#x27;</span>, <span class="string">&#x27;__hash__&#x27;</span>, <span class="string">&#x27;__init__&#x27;</span>, <span class="string">&#x27;__init_subclass__&#x27;</span>, <span class="string">&#x27;__iter__&#x27;</span>, <span class="string">&#x27;__le__&#x27;</span>, <span class="string">&#x27;__len__&#x27;</span>, <span class="string">&#x27;__lt__&#x27;</span>, <span class="string">&#x27;__mod__&#x27;</span>, <span class="string">&#x27;__mul__&#x27;</span>, <span class="string">&#x27;__ne__&#x27;</span>, <span class="string">&#x27;__new__&#x27;</span>, <span class="string">&#x27;__reduce__&#x27;</span>, <span class="string">&#x27;__reduce_ex__&#x27;</span>, <span class="string">&#x27;__repr__&#x27;</span>, <span class="string">&#x27;__rmod__&#x27;</span>, <span class="string">&#x27;__rmul__&#x27;</span>, <span class="string">&#x27;__setattr__&#x27;</span>, <span class="string">&#x27;__sizeof__&#x27;</span>, <span class="string">&#x27;__str__&#x27;</span>, <span class="string">&#x27;__subclasshook__&#x27;</span>, <span class="string">&#x27;capitalize&#x27;</span>, <span class="string">&#x27;casefold&#x27;</span>, <span class="string">&#x27;center&#x27;</span>, <span class="string">&#x27;count&#x27;</span>, <span class="string">&#x27;encode&#x27;</span>, <span class="string">&#x27;endswith&#x27;</span>, <span class="string">&#x27;expandtabs&#x27;</span>, <span class="string">&#x27;find&#x27;</span>, <span class="string">&#x27;format&#x27;</span>, <span class="string">&#x27;format_map&#x27;</span>, <span class="string">&#x27;index&#x27;</span>, <span class="string">&#x27;isalnum&#x27;</span>, <span class="string">&#x27;isalpha&#x27;</span>, <span class="string">&#x27;isascii&#x27;</span>, <span class="string">&#x27;isdecimal&#x27;</span>, <span class="string">&#x27;isdigit&#x27;</span>, <span class="string">&#x27;isidentifier&#x27;</span>, <span class="string">&#x27;islower&#x27;</span>, <span class="string">&#x27;isnumeric&#x27;</span>, <span class="string">&#x27;isprintable&#x27;</span>, <span class="string">&#x27;isspace&#x27;</span>, <span class="string">&#x27;istitle&#x27;</span>, <span class="string">&#x27;isupper&#x27;</span>, <span class="string">&#x27;join&#x27;</span>, <span class="string">&#x27;ljust&#x27;</span>, <span class="string">&#x27;lower&#x27;</span>, <span class="string">&#x27;lstrip&#x27;</span>, <span class="string">&#x27;maketrans&#x27;</span>, <span class="string">&#x27;partition&#x27;</span>, <span class="string">&#x27;replace&#x27;</span>, <span class="string">&#x27;rfind&#x27;</span>, <span class="string">&#x27;rindex&#x27;</span>, <span class="string">&#x27;rjust&#x27;</span>, <span class="string">&#x27;rpartition&#x27;</span>, <span class="string">&#x27;rsplit&#x27;</span>, <span class="string">&#x27;rstrip&#x27;</span>, <span class="string">&#x27;split&#x27;</span>, <span class="string">&#x27;splitlines&#x27;</span>, <span class="string">&#x27;startswith&#x27;</span>, <span class="string">&#x27;strip&#x27;</span>, <span class="string">&#x27;swapcase&#x27;</span>, <span class="string">&#x27;title&#x27;</span>, <span class="string">&#x27;translate&#x27;</span>, <span class="string">&#x27;upper&#x27;</span>, <span class="string">&#x27;zfill&#x27;</span>]</span><br></pre></td></tr></table></figure>
+
+<h3 id="👀-判断类型"><a href="#👀-判断类型" class="headerlink" title="👀 判断类型"></a>👀 判断类型</h3><table>
+<thead>
+<tr>
+<th align="left">方法</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">string.isspace()</td>
+<td align="left">如果string中只包含空格，则返回True</td>
+</tr>
+<tr>
+<td align="left">string.isalnum()</td>
+<td align="left">如果string至少有一个字符并且所有字符都是字母或数字则返回True</td>
+</tr>
+<tr>
+<td align="left">string.isalpha()</td>
+<td align="left">如果string至少有一个字符并且所有字符都是字母则返回True</td>
+</tr>
+<tr>
+<td align="left">string.isdecimal()</td>
+<td align="left">如果 string只包含数字则返回True，<code>全角数字</code></td>
+</tr>
+<tr>
+<td align="left">string.isdigit()</td>
+<td align="left">如果 string只包含数字则返回True，<code>全角数字</code></td>
+</tr>
+<tr>
+<td align="left">string.isnumeric()</td>
+<td align="left">如果 string只包含数字则返回True，<code>全角数字</code>，<code>汉字数字</code></td>
+</tr>
+<tr>
+<td align="left">string.istitle()</td>
+<td align="left">如果 string是标题化的（每个单词的首字母大写）则返回True</td>
+</tr>
+<tr>
+<td align="left">string.islower()</td>
+<td align="left">如果string中包含至少一个区分大小写的字符，并且所有这些（区分大小写的）字符都是小写，则返回True</td>
+</tr>
+<tr>
+<td align="left">string.isupper()</td>
+<td align="left">如果 string中包含至少一个区分大小写的字符，并且所有这些（区分大小写的）字符都是大写，则返回True</td>
+</tr>
+</tbody></table>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">str_space = <span class="string">&quot;   &quot;</span> </span><br><span class="line"><span class="built_in">print</span>(str_space.isspace())</span><br><span class="line"></span><br><span class="line">str1 = <span class="string">&quot;a_&quot;</span></span><br><span class="line">str2 = <span class="string">&quot;a9527&quot;</span></span><br><span class="line"><span class="built_in">print</span>(str1.isalnum(), str2.isalnum())</span><br><span class="line"></span><br><span class="line">str3 = <span class="string">&quot;a9527&quot;</span></span><br><span class="line">str4 = <span class="string">&quot;abc&quot;</span></span><br><span class="line"><span class="built_in">print</span>(str3.isalpha(), str4.isalpha())</span><br><span class="line"></span><br><span class="line">str5 = <span class="string">&quot;9527&quot;</span></span><br><span class="line">str6 = <span class="string">&quot;1&quot;</span></span><br><span class="line">str7 = <span class="string">&quot;一&quot;</span></span><br><span class="line"><span class="built_in">print</span>(str5.isdecimal(), str6.isdigit(), str7.isnumeric())</span><br><span class="line"></span><br><span class="line">str8 = <span class="string">&quot;Xiaotang&quot;</span></span><br><span class="line"><span class="built_in">print</span>(str8.istitle())</span><br><span class="line"></span><br><span class="line">str9 = <span class="string">&quot;xiaotang&quot;</span></span><br><span class="line">str10 = <span class="string">&quot;XIAOTANG&quot;</span></span><br><span class="line"><span class="built_in">print</span>(str9.islower(), str10.isupper())</span><br><span class="line"></span><br><span class="line"><span class="comment"># 结果</span></span><br><span class="line"><span class="literal">True</span></span><br><span class="line"><span class="literal">False</span> <span class="literal">True</span></span><br><span class="line"><span class="literal">False</span> <span class="literal">True</span></span><br><span class="line"><span class="literal">True</span> <span class="literal">True</span> <span class="literal">True</span></span><br><span class="line"><span class="literal">True</span></span><br><span class="line"><span class="literal">True</span> <span class="literal">True</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="👀-查找和替换"><a href="#👀-查找和替换" class="headerlink" title="👀 查找和替换"></a>👀 查找和替换</h3><table>
+<thead>
+<tr>
+<th align="left">方法</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">string.startswith(str)</td>
+<td align="left">检查字符串是否是以str开头，是则返回True</td>
+</tr>
+<tr>
+<td align="left">string.endswith(str)</td>
+<td align="left">检查字符串是否是以str结束，是则返回True</td>
+</tr>
+<tr>
+<td align="left">string.find(str,start&#x3D;0,end&#x3D;len(string))</td>
+<td align="left">检测str是否包含在string中，如果start和end指定范围，则检查是否包含在指定范围内，如果是返回开始的索引值，否则返回-1</td>
+</tr>
+<tr>
+<td align="left">string.rfind(str,start&#x3D;0,end&#x3D;len(string))</td>
+<td align="left">类似于find()，不过是从右边开始查找</td>
+</tr>
+<tr>
+<td align="left">string.index(str,start&#x3D;0,end&#x3D;len(string))</td>
+<td align="left">跟find()方法类似，不过如果str不在string会报错</td>
+</tr>
+<tr>
+<td align="left">string.rindex(str,start&#x3D;0,end&#x3D;len(string))</td>
+<td align="left">类似于index()，不过是从右边开始</td>
+</tr>
+<tr>
+<td align="left">string.replace(old_str,new_str,num&#x3D;string.count(old))</td>
+<td align="left">把string中的old_str替换成new_str，如果num指定，则替换不超过num次</td>
+</tr>
+</tbody></table>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">str1 = <span class="string">&quot;his name is xiaotang, see you&quot;</span></span><br><span class="line"><span class="built_in">print</span>(str1.startswith(<span class="string">&quot;his&quot;</span>), str1.endswith(<span class="string">&quot;you&quot;</span>))</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(str1.find(<span class="string">&quot;is&quot;</span>, <span class="number">0</span>, <span class="number">5</span>), str1.rfind(<span class="string">&quot;is&quot;</span>), str1.find(<span class="string">&quot;iss&quot;</span>))</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(str1.index(<span class="string">&quot;is&quot;</span>), str1.rindex(<span class="string">&quot;is&quot;</span>))</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(str1.replace(<span class="string">&quot;xiaotang&quot;</span>, <span class="string">&quot;heartlovelife&quot;</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 结果</span></span><br><span class="line"><span class="literal">True</span> <span class="literal">True</span></span><br><span class="line"><span class="number">1</span> <span class="number">9</span> -<span class="number">1</span></span><br><span class="line"><span class="number">1</span> <span class="number">9</span></span><br><span class="line">his name <span class="keyword">is</span> heartlovelife, see you</span><br></pre></td></tr></table></figure>
+
+<h3 id="👀-大小写转换"><a href="#👀-大小写转换" class="headerlink" title="👀 大小写转换"></a>👀 大小写转换</h3><table>
+<thead>
+<tr>
+<th align="left">方法</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">string.capitalize()</td>
+<td align="left">把字符串的第一个字符大写</td>
+</tr>
+<tr>
+<td align="left">string.title()</td>
+<td align="left">把字符串的每个单词首字母大写</td>
+</tr>
+<tr>
+<td align="left">string.lower()</td>
+<td align="left">转换string中所有大写字符为小写</td>
+</tr>
+<tr>
+<td align="left">string.upper()</td>
+<td align="left">转换string中的小写字母为大写</td>
+</tr>
+<tr>
+<td align="left">string.swapcase()</td>
+<td align="left">翻转string中的大小写</td>
+</tr>
+</tbody></table>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">str1 = <span class="string">&quot;xiao tang heLLo heLLo&quot;</span></span><br><span class="line"><span class="built_in">print</span>(str1.capitalize())</span><br><span class="line"><span class="built_in">print</span>(str1.title())</span><br><span class="line"><span class="built_in">print</span>(str1.lower())</span><br><span class="line"><span class="built_in">print</span>(str1.upper())</span><br><span class="line"><span class="built_in">print</span>(str1.swapcase())</span><br><span class="line"></span><br><span class="line"><span class="comment"># 结果</span></span><br><span class="line">Xiao tang hello hello</span><br><span class="line">Xiao Tang Hello Hello</span><br><span class="line">xiao tang hello hello</span><br><span class="line">XIAO TANG HELLO HELLO</span><br><span class="line">XIAO TANG HEllO HEllO</span><br></pre></td></tr></table></figure>
+
+<h3 id="👀-文本对齐"><a href="#👀-文本对齐" class="headerlink" title="👀 文本对齐"></a>👀 文本对齐</h3><table>
+<thead>
+<tr>
+<th align="left">方法</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">string.ljust(width，[填充字符])</td>
+<td>返回一个原字符串左对齐，并使用填充字符（默认空格）填充至长度width的新字符串</td>
+</tr>
+<tr>
+<td align="left">string.rjust(width，[填充字符])</td>
+<td>返回一个原字符串右对齐，并使用填充字符（默认空格）填充至长度width的新字符串</td>
+</tr>
+<tr>
+<td align="left">string.center(width，[填充字符])</td>
+<td>返回一个原字符串居中，并使用填充字符（默认空格）填充至长度width的新字符串</td>
+</tr>
+</tbody></table>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">str1 = <span class="string">&quot;-xiaotang hello hello-&quot;</span></span><br><span class="line"><span class="built_in">print</span>(str1.ljust(<span class="number">50</span>,<span class="string">&quot;a&quot;</span>))</span><br><span class="line"><span class="built_in">print</span>(str1.rjust(<span class="number">50</span>,<span class="string">&quot;b&quot;</span>))</span><br><span class="line"><span class="built_in">print</span>(str1.center(<span class="number">50</span>,<span class="string">&quot;a&quot;</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 结果</span></span><br><span class="line">-xiaotang hello hello-aaaaaaaaaaaaaaaaaaaaaaaaaaaa</span><br><span class="line">bbbbbbbbbbbbbbbbbbbbbbbbbbbb-xiaotang hello hello-</span><br><span class="line">aaaaaaaaaaaaaa-xiaotang hello hello-aaaaaaaaaaaaaa</span><br></pre></td></tr></table></figure>
+
+<h3 id="👀去除空白字符"><a href="#👀去除空白字符" class="headerlink" title="👀去除空白字符"></a>👀去除空白字符</h3><table>
+<thead>
+<tr>
+<th align="left">方法</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">string.lstrip()</td>
+<td align="left">截掉string左边（开始）的空白字符</td>
+</tr>
+<tr>
+<td align="left">string.rstrip()</td>
+<td align="left">截掉string右边（末尾）的空白字符</td>
+</tr>
+<tr>
+<td align="left">string.strip()</td>
+<td align="left">截掉 string左右两边的空白字符</td>
+</tr>
+</tbody></table>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">str1 = <span class="string">&quot;   xiaotangxiaotang   &quot;</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;=&quot;</span>*<span class="number">5</span>, str1.lstrip(), <span class="string">&quot;=&quot;</span>*<span class="number">5</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;=&quot;</span>*<span class="number">5</span>, str1.rstrip(), <span class="string">&quot;=&quot;</span>*<span class="number">5</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;=&quot;</span>*<span class="number">5</span>, str1.strip(), <span class="string">&quot;=&quot;</span>*<span class="number">5</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 结果</span></span><br><span class="line">===== xiaotangxiaotang    =====</span><br><span class="line">=====    xiaotangxiaotang =====</span><br><span class="line">===== xiaotangxiaotang =====</span><br></pre></td></tr></table></figure>
+
+<h3 id="👀拆分和连接"><a href="#👀拆分和连接" class="headerlink" title="👀拆分和连接"></a>👀拆分和连接</h3><table>
+<thead>
+<tr>
+<th align="left">方法</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">string.partition(str)</td>
+<td>把字符串string分成一个3元素的元组（str前面，str，str 后面）</td>
+</tr>
+<tr>
+<td align="left">string.rpartition(str)</td>
+<td>类似于partition()方法，不过是从右边开始查找</td>
+</tr>
+<tr>
+<td align="left">string.split(str&#x3D;””,num)</td>
+<td>以str为分隔符拆分string，返回列表；如果num有指定值，则仅分隔num+1个子字符串，str默认包含’r’，’t’，’n’和空格</td>
+</tr>
+<tr>
+<td align="left">string.splitlines()</td>
+<td>按照行（’r’，’n’，’rn’）分隔，返回一个包含各行作为元素的列表</td>
+</tr>
+<tr>
+<td align="left">string.join(seq)</td>
+<td>以string作为分隔符，将seq（要连接的元素序列）中所有的元素合并为一个新的字符串</td>
+</tr>
+</tbody></table>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">str1 = <span class="string">&quot;xiaotang=or=xiaoming=or=xiaolizi&quot;</span></span><br><span class="line">str2 = <span class="string">&quot;xiaotang=or=xiaoming=or=xiaolizi\nxiaotang&quot;</span></span><br><span class="line">str3 = (<span class="string">&quot;I&quot;</span>,<span class="string">&quot;love&quot;</span>,<span class="string">&quot;you&quot;</span>)</span><br><span class="line">str4 = [<span class="string">&quot;I&quot;</span>,<span class="string">&quot;love&quot;</span>,<span class="string">&quot;you&quot;</span>]</span><br><span class="line"><span class="built_in">print</span>(str1.partition(<span class="string">&quot;or&quot;</span>))</span><br><span class="line"><span class="built_in">print</span>(str1.rpartition(<span class="string">&quot;or&quot;</span>))</span><br><span class="line"><span class="built_in">print</span>(str1.split(<span class="string">&quot;=&quot;</span>))</span><br><span class="line"><span class="built_in">print</span>(str2.splitlines())</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;@&quot;</span>.join(str3))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;#&quot;</span>.join(str4))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 结果</span></span><br><span class="line">(<span class="string">&#x27;xiaotang=&#x27;</span>, <span class="string">&#x27;or&#x27;</span>, <span class="string">&#x27;=xiaoming=or=xiaolizi&#x27;</span>)</span><br><span class="line">(<span class="string">&#x27;xiaotang=or=xiaoming=&#x27;</span>, <span class="string">&#x27;or&#x27;</span>, <span class="string">&#x27;=xiaolizi&#x27;</span>)</span><br><span class="line">[<span class="string">&#x27;xiaotang&#x27;</span>, <span class="string">&#x27;or&#x27;</span>, <span class="string">&#x27;xiaoming&#x27;</span>, <span class="string">&#x27;or&#x27;</span>, <span class="string">&#x27;xiaolizi&#x27;</span>]</span><br><span class="line">[<span class="string">&#x27;xiaotang=or=xiaoming=or=xiaolizi&#x27;</span>, <span class="string">&#x27;xiaotang&#x27;</span>]</span><br><span class="line">I@love@you</span><br><span class="line">I<span class="comment">#love#you</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="👀字符串的切片"><a href="#👀字符串的切片" class="headerlink" title="👀字符串的切片"></a>👀字符串的切片</h3><p><strong>切片</strong>方法适用于<strong>字符串</strong>、<strong>列表</strong>、<strong>元组</strong></p>
+<ul>
+<li><strong>切片</strong>使用<strong>索引值</strong>来限定范围，从一个大的字符串中切出小的字符串</li>
+<li><strong>列表</strong>和<strong>元组</strong>都是有序的集合，都能够<strong>通过索引值</strong>获取对应的数据</li>
+<li><strong>字典</strong>是一个无序的集合，是使用<strong>键值对</strong>保存数据</li>
+</ul>
+<p>注意事项：</p>
+<ul>
+<li>指定的区间属于左闭右开型<code>[开始索引，结束索引]</code>相当于从起始位开始，到结束位的前一位结束（<strong>不包含结束位本身</strong>）</li>
+<li>从头开始，<strong>开始索引</strong>数字可以省略，冒号不能省略</li>
+<li>到末尾结束，<strong>结束索引</strong>数字可以省略，冒号不能省略</li>
+<li>步长默认为1，如果连续切片，数字和冒号都可以省略</li>
+<li>不仅支持<strong>顺序索引</strong>，还支持<strong>倒序索引</strong>；所谓倒序索引就是从右向左计算索引，最右边的索引值是**-1**，依次递减。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">str</span> = <span class="string">&quot;xiaotang9527helloworld&quot;</span></span><br><span class="line"><span class="comment"># 截取3~6位置的字符串,相当于索引为[2:5],因为不包含末尾,所以为[2,6]</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">str</span>[<span class="number">2</span>:<span class="number">6</span>])</span><br><span class="line"><span class="comment"># 截取3~末尾的字符串</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">str</span>[<span class="number">2</span>:])</span><br><span class="line"><span class="comment"># 截取从开始~6位置的字符串,6位置相当于索引为5,因为不包含末尾,所以为[:6]</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">str</span>[:<span class="number">6</span>])</span><br><span class="line"><span class="comment"># 取完整的字符串</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">str</span>[:])</span><br><span class="line"><span class="comment"># 从开始位置,每隔一个字符截取字符串</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">str</span>[::<span class="number">2</span>])</span><br><span class="line"><span class="comment"># 倒序切片</span></span><br><span class="line"><span class="comment"># -1表示倒数第一个字符</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">str</span>[-<span class="number">1</span>])</span><br><span class="line"><span class="comment"># 截取3-末尾的字符串(不包含最后一个字符)</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">str</span>[<span class="number">2</span>:-<span class="number">1</span>])</span><br><span class="line"><span class="comment"># 截取字符串末尾两个字符</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">str</span>[-<span class="number">2</span>:])</span><br><span class="line"><span class="comment"># 字符串的逆序</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">str</span>[::-<span class="number">1</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 结果</span></span><br><span class="line">aota</span><br><span class="line">aotang9527helloworld</span><br><span class="line">xiaota</span><br><span class="line">xiaotang9527helloworld</span><br><span class="line">xatn92hlool</span><br><span class="line">d</span><br><span class="line">aotang9527helloworl</span><br><span class="line">ld</span><br><span class="line">dlrowolleh7259gnatoaix</span><br></pre></td></tr></table></figure>
+
+<h2 id="⛄公共方法及特殊用法"><a href="#⛄公共方法及特殊用法" class="headerlink" title="⛄公共方法及特殊用法"></a>⛄公共方法及特殊用法</h2><h3 id="👀内置函数"><a href="#👀内置函数" class="headerlink" title="👀内置函数"></a>👀内置函数</h3><table>
+<thead>
+<tr>
+<th>函数</th>
+<th>描述</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>len(item)</td>
+<td>计算容器中元素个数</td>
+<td></td>
+</tr>
+<tr>
+<td>del(item)</td>
+<td>删除变量</td>
+<td>del有两种方式</td>
+</tr>
+<tr>
+<td>max(item)</td>
+<td>返回容器中元素最大值</td>
+<td>如果是字典，只针对key比较</td>
+</tr>
+<tr>
+<td>min(item)</td>
+<td>返回容器中元素最小值</td>
+<td>如果是字典，只针对key比较</td>
+</tr>
+<tr>
+<td>cmp(item1,item2)</td>
+<td>比较两个值，-1小于&#x2F;0相等&#x2F;1大于</td>
+<td>Python3.x取消了cmp函数</td>
+</tr>
+</tbody></table>
+<h3 id="👀运算符特殊用法"><a href="#👀运算符特殊用法" class="headerlink" title="👀运算符特殊用法"></a>👀运算符特殊用法</h3><table>
+<thead>
+<tr>
+<th>运算符</th>
+<th>表达式</th>
+<th>结果</th>
+<th>描述</th>
+<th>支持数据类型</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>+</td>
+<td>[1,2] + [3,4]</td>
+<td>[1,2,3,4]</td>
+<td>合并</td>
+<td>字符串、列表、元组</td>
+</tr>
+<tr>
+<td>*</td>
+<td>[“a”] * 2</td>
+<td>[“a”,”a”]</td>
+<td>重复</td>
+<td>字符串、列表、元组</td>
+</tr>
+<tr>
+<td>in</td>
+<td>2 in (1,2,3)</td>
+<td>True</td>
+<td>元素是否存在</td>
+<td>字符串、列表、元组、字典</td>
+</tr>
+<tr>
+<td>not in</td>
+<td>5 not in(1,2,3)</td>
+<td>True</td>
+<td>元素是否不存在</td>
+<td>字符串、列表、元组、字典</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p><code>in</code> 在对字典操作时，判断的是字典的键；<code>in</code>和<code>not in</code>被称为成员运算符，用于测试序列中是否包含指定的成员。</p>
+</blockquote>
+<h3 id="👀完成的for循环语法·"><a href="#👀完成的for循环语法·" class="headerlink" title="👀完成的for循环语法·"></a>👀完成的for循环语法·</h3><p>在Python中完整的<code>for</code>循环语法如下：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> 变量 <span class="keyword">in</span> 集合:</span><br><span class="line">	循环体代码</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">	没有通过<span class="keyword">break</span>退出循环，循环结束后，会执行的代码</span><br></pre></td></tr></table></figure>
+
+<p>应用场景</p>
+<ol>
+<li>在迭代遍历嵌套的数据类型时，例如一个列表包含了多个字典</li>
+<li>需求：判断某一个字典中，是否存在指定的值</li>
+</ol>
+<ul>
+<li>如果存在，提示并且退出循环</li>
+<li>如果不存在，在循环整体结束后，希望得到一个统一的提示</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 第一种</span></span><br><span class="line">stu = [</span><br><span class="line">       &#123;<span class="string">&quot;name&quot;</span>: <span class="string">&quot;xiaotang&quot;</span>,</span><br><span class="line">        <span class="string">&quot;age&quot;</span>: <span class="string">&quot;25&quot;</span>,</span><br><span class="line">        <span class="string">&quot;gender&quot;</span>: <span class="literal">True</span>,</span><br><span class="line">        <span class="string">&quot;height&quot;</span>: <span class="number">180</span>,</span><br><span class="line">        <span class="string">&quot;weight&quot;</span>: <span class="number">66</span>&#125;,</span><br><span class="line">       &#123;<span class="string">&quot;name&quot;</span>: <span class="string">&quot;xiaoming&quot;</span>,</span><br><span class="line">        <span class="string">&quot;age&quot;</span>: <span class="string">&quot;26&quot;</span>,</span><br><span class="line">        <span class="string">&quot;gender&quot;</span>: <span class="literal">True</span>,</span><br><span class="line">        <span class="string">&quot;height&quot;</span>: <span class="number">179</span>,</span><br><span class="line">        <span class="string">&quot;weight&quot;</span>: <span class="number">65</span>&#125;</span><br><span class="line">       ]</span><br><span class="line">find_name = <span class="string">&quot;xiaotang&quot;</span></span><br><span class="line"><span class="keyword">for</span> stu_dict <span class="keyword">in</span> stu:</span><br><span class="line">    <span class="built_in">print</span>(stu_dict)</span><br><span class="line">    <span class="comment"># 判断当前遍历的字典中姓名是否为find_name</span></span><br><span class="line">    <span class="keyword">if</span> stu_dict[<span class="string">&quot;name&quot;</span>] == find_name:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;找到阿汤了&quot;</span>)</span><br><span class="line">        <span class="comment"># 如果找到,直接退出循环,不需对后续的数据进行比较</span></span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;怎么搞的，没有找到！！&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;循环结束&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 结果</span></span><br><span class="line">&#123;<span class="string">&#x27;name&#x27;</span>: <span class="string">&#x27;xiaotang&#x27;</span>, <span class="string">&#x27;age&#x27;</span>: <span class="string">&#x27;25&#x27;</span>, <span class="string">&#x27;gender&#x27;</span>: <span class="literal">True</span>, <span class="string">&#x27;height&#x27;</span>: <span class="number">180</span>, <span class="string">&#x27;weight&#x27;</span>: <span class="number">66</span>&#125;</span><br><span class="line">找到阿汤了</span><br><span class="line">循环结束</span><br><span class="line"></span><br><span class="line"><span class="comment"># 第二种</span></span><br><span class="line">stu = [</span><br><span class="line">       &#123;<span class="string">&quot;name&quot;</span>: <span class="string">&quot;xiaotang&quot;</span>,</span><br><span class="line">        <span class="string">&quot;age&quot;</span>: <span class="string">&quot;25&quot;</span>,</span><br><span class="line">        <span class="string">&quot;gender&quot;</span>: <span class="literal">True</span>,</span><br><span class="line">        <span class="string">&quot;height&quot;</span>: <span class="number">180</span>,</span><br><span class="line">        <span class="string">&quot;weight&quot;</span>: <span class="number">66</span>&#125;,</span><br><span class="line">       &#123;<span class="string">&quot;name&quot;</span>: <span class="string">&quot;xiaoming&quot;</span>,</span><br><span class="line">        <span class="string">&quot;age&quot;</span>: <span class="string">&quot;26&quot;</span>,</span><br><span class="line">        <span class="string">&quot;gender&quot;</span>: <span class="literal">True</span>,</span><br><span class="line">        <span class="string">&quot;height&quot;</span>: <span class="number">179</span>,</span><br><span class="line">        <span class="string">&quot;weight&quot;</span>: <span class="number">65</span>&#125;</span><br><span class="line">       ]</span><br><span class="line">find_name = <span class="string">&quot;xiaotang1&quot;</span></span><br><span class="line"><span class="keyword">for</span> stu_dict <span class="keyword">in</span> stu:</span><br><span class="line">    <span class="built_in">print</span>(stu_dict)</span><br><span class="line">    <span class="comment"># 判断当前遍历的字典中姓名是否为find_name</span></span><br><span class="line">    <span class="keyword">if</span> stu_dict[<span class="string">&quot;name&quot;</span>] == find_name:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;找到阿汤了&quot;</span>)</span><br><span class="line">        <span class="comment"># 如果找到,直接退出循环,不需对后续的数据进行比较</span></span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;怎么搞的，没有找到！！&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;循环结束&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 结果</span></span><br><span class="line">&#123;<span class="string">&#x27;name&#x27;</span>: <span class="string">&#x27;xiaotang&#x27;</span>, <span class="string">&#x27;age&#x27;</span>: <span class="string">&#x27;25&#x27;</span>, <span class="string">&#x27;gender&#x27;</span>: <span class="literal">True</span>, <span class="string">&#x27;height&#x27;</span>: <span class="number">180</span>, <span class="string">&#x27;weight&#x27;</span>: <span class="number">66</span>&#125;</span><br><span class="line">&#123;<span class="string">&#x27;name&#x27;</span>: <span class="string">&#x27;xiaoming&#x27;</span>, <span class="string">&#x27;age&#x27;</span>: <span class="string">&#x27;26&#x27;</span>, <span class="string">&#x27;gender&#x27;</span>: <span class="literal">True</span>, <span class="string">&#x27;height&#x27;</span>: <span class="number">179</span>, <span class="string">&#x27;weight&#x27;</span>: <span class="number">65</span>&#125;</span><br><span class="line">怎么搞的，没有找到！！</span><br><span class="line">循环结束</span><br></pre></td></tr></table></figure></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://heartlovelife.github.io">Xiaotangsmiles</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://heartlovelife.github.io/2022/09/03/Python-Basic04/">https://heartlovelife.github.io/2022/09/03/Python-Basic04/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://heartlovelife.github.io" target="_blank">江湖是你画中亦是你</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Python/">Python</a><a class="post-meta__tags" href="/tags/Python%E5%9F%BA%E7%A1%80/">Python基础</a></div><div class="post_share"><div class="social-share" data-image="https://s2.loli.net/2022/07/09/qUvOWSl6CzbX5sr.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/gh/overtrue/share.js@master/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i> 打赏</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/wechat.jpg" target="_blank"><img class="post-qr-code-img" src="/img/loading1.gif" data-original="/img/wechat.jpg" alt="wechat(微信)"/></a><div class="post-qr-code-desc">wechat(微信)</div></li><li class="reward-item"><a href="/img/alipay.jpg" target="_blank"><img class="post-qr-code-img" src="/img/loading1.gif" data-original="/img/alipay.jpg" alt="alipay(支付宝)"/></a><div class="post-qr-code-desc">alipay(支付宝)</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2022/08/07/Python-Basic03/"><img class="next-cover" src="/img/loading1.gif" data-original="https://s2.loli.net/2022/07/09/Yi6SHEUkaCPcN1F.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Python基础知识（03）</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2022/07/09/Python-Basic01/" title="Python基础知识（01）"><img class="cover" src="/img/loading1.gif" data-original="https://s2.loli.net/2022/07/09/Yi6SHEUkaCPcN1F.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-07-09</div><div class="title">Python基础知识（01）</div></div></a></div><div><a href="/2022/07/12/Python-Basic02/" title="Python基础知识（02）"><img class="cover" src="/img/loading1.gif" data-original="https://s2.loli.net/2022/07/09/qUvOWSl6CzbX5sr.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-07-12</div><div class="title">Python基础知识（02）</div></div></a></div><div><a href="/2022/08/07/Python-Basic03/" title="Python基础知识（03）"><img class="cover" src="/img/loading1.gif" data-original="https://s2.loli.net/2022/07/09/Yi6SHEUkaCPcN1F.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-08-07</div><div class="title">Python基础知识（03）</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/loading1.gif" data-original="/img/touxiang.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Xiaotangsmiles</div><div class="author-info__description">我们总以为来日方长，却忘了世事无常</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">7</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">6</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/HeartLoveLife"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/HeartLoveLife" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="https://blog.csdn.net/twg666" target="_blank" title="CSDN"><i class="fa fa-book-open"></i></a><a class="social-icon" href="tencent://AddContact/?fromId=45&amp;fromSubId=1&amp;subcmd=all&amp;uin=491037927&amp;website=www.oicqzone.com" target="_blank" title="QQ"><i class="fab fa-qq"></i></a><a class="social-icon" href="mailto:xiaotangsmiles@163.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E2%9B%84%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="toc-number">1.</span> <span class="toc-text">⛄字符串的定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E2%9B%84%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C"><span class="toc-number">2.</span> <span class="toc-text">⛄字符串常用操作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%91%80-%E5%88%A4%E6%96%AD%E7%B1%BB%E5%9E%8B"><span class="toc-number">2.1.</span> <span class="toc-text">👀 判断类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%91%80-%E6%9F%A5%E6%89%BE%E5%92%8C%E6%9B%BF%E6%8D%A2"><span class="toc-number">2.2.</span> <span class="toc-text">👀 查找和替换</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%91%80-%E5%A4%A7%E5%B0%8F%E5%86%99%E8%BD%AC%E6%8D%A2"><span class="toc-number">2.3.</span> <span class="toc-text">👀 大小写转换</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%91%80-%E6%96%87%E6%9C%AC%E5%AF%B9%E9%BD%90"><span class="toc-number">2.4.</span> <span class="toc-text">👀 文本对齐</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%91%80%E5%8E%BB%E9%99%A4%E7%A9%BA%E7%99%BD%E5%AD%97%E7%AC%A6"><span class="toc-number">2.5.</span> <span class="toc-text">👀去除空白字符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%91%80%E6%8B%86%E5%88%86%E5%92%8C%E8%BF%9E%E6%8E%A5"><span class="toc-number">2.6.</span> <span class="toc-text">👀拆分和连接</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%91%80%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E5%88%87%E7%89%87"><span class="toc-number">2.7.</span> <span class="toc-text">👀字符串的切片</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E2%9B%84%E5%85%AC%E5%85%B1%E6%96%B9%E6%B3%95%E5%8F%8A%E7%89%B9%E6%AE%8A%E7%94%A8%E6%B3%95"><span class="toc-number">3.</span> <span class="toc-text">⛄公共方法及特殊用法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%91%80%E5%86%85%E7%BD%AE%E5%87%BD%E6%95%B0"><span class="toc-number">3.1.</span> <span class="toc-text">👀内置函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%91%80%E8%BF%90%E7%AE%97%E7%AC%A6%E7%89%B9%E6%AE%8A%E7%94%A8%E6%B3%95"><span class="toc-number">3.2.</span> <span class="toc-text">👀运算符特殊用法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%91%80%E5%AE%8C%E6%88%90%E7%9A%84for%E5%BE%AA%E7%8E%AF%E8%AF%AD%E6%B3%95%C2%B7"><span class="toc-number">3.3.</span> <span class="toc-text">👀完成的for循环语法·</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2022/09/03/Python-Basic04/" title="Python基础知识（04）"><img src="/img/loading1.gif" data-original="https://s2.loli.net/2022/07/09/qUvOWSl6CzbX5sr.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Python基础知识（04）"/></a><div class="content"><a class="title" href="/2022/09/03/Python-Basic04/" title="Python基础知识（04）">Python基础知识（04）</a><time datetime="2022-09-03T09:44:51.000Z" title="发表于 2022-09-03 17:44:51">2022-09-03</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/08/07/Python-Basic03/" title="Python基础知识（03）"><img src="/img/loading1.gif" data-original="https://s2.loli.net/2022/07/09/Yi6SHEUkaCPcN1F.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Python基础知识（03）"/></a><div class="content"><a class="title" href="/2022/08/07/Python-Basic03/" title="Python基础知识（03）">Python基础知识（03）</a><time datetime="2022-08-07T03:30:05.000Z" title="发表于 2022-08-07 11:30:05">2022-08-07</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/07/12/Python-Basic02/" title="Python基础知识（02）"><img src="/img/loading1.gif" data-original="https://s2.loli.net/2022/07/09/qUvOWSl6CzbX5sr.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Python基础知识（02）"/></a><div class="content"><a class="title" href="/2022/07/12/Python-Basic02/" title="Python基础知识（02）">Python基础知识（02）</a><time datetime="2022-07-12T12:48:38.000Z" title="发表于 2022-07-12 20:48:38">2022-07-12</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/07/09/Python-Basic01/" title="Python基础知识（01）"><img src="/img/loading1.gif" data-original="https://s2.loli.net/2022/07/09/Yi6SHEUkaCPcN1F.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Python基础知识（01）"/></a><div class="content"><a class="title" href="/2022/07/09/Python-Basic01/" title="Python基础知识（01）">Python基础知识（01）</a><time datetime="2022-07-09T03:26:03.000Z" title="发表于 2022-07-09 11:26:03">2022-07-09</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/05/16/GEE01/" title="（一）Google Earth Engine概述"><img src="/img/loading1.gif" data-original="https://s2.loli.net/2022/05/17/7UCAtTuqoSfpMmy.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="（一）Google Earth Engine概述"/></a><div class="content"><a class="title" href="/2022/05/16/GEE01/" title="（一）Google Earth Engine概述">（一）Google Earth Engine概述</a><time datetime="2022-05-16T12:19:14.000Z" title="发表于 2022-05-16 20:19:14">2022-05-16</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2021 - 2022 By Xiaotangsmiles</div><div class="framework-info"><span>地址 </span><a href="https://heartlovelife.github.io">HeartLoveLife</a><span class="footer-separator">|</span><span>邮箱 </span><a href="javascript:void(0);">xiaotangsmiles@163.com</a></div><div class="footer_custom_text">Hi, welcome to my <a href="https://heartlovelife.github.io/">blog</a>!</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script src="/js/search/local-search.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',preloader.endLoading())</script><div class="js-pjax"></div><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-nest.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = false;
+POWERMODE.mobile = true;
+document.body.addEventListener('input', POWERMODE);
+</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(n){n.imageLazyLoadSetting.processImages=o;var e=n.imageLazyLoadSetting.isSPA,i=n.imageLazyLoadSetting.preloadRatio||1,r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function o(){e&&(r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")));for(var t,a=0;a<r.length;a++)0<=(t=(t=r[a]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(n.innerHeight*i||document.documentElement.clientHeight*i)&&function(){var t,e,n,i,o=r[a];t=o,e=function(){r=r.filter(function(t){return o!==t})},n=new Image,i=t.getAttribute("data-original"),n.onload=function(){t.src=i,e&&e()},t.src!==i&&(n.src=i)}()}o(),n.addEventListener("scroll",function(){var t,e;t=o,e=n,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(e)},500)})}(this);</script></body></html>
