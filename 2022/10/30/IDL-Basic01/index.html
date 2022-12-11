@@ -1,0 +1,891 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>IDL语法基础（01） | 江湖是你画中亦是你</title><meta name="keywords" content="ENVI,IDL"><meta name="author" content="Xiaotangsmiles"><meta name="copyright" content="Xiaotangsmiles"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="⛄IDL简介交互式数据语言——IDL（Interactive Data Language）是进行应用程序开发、科学数据分析与可视化表达的理想工具。IDL是基于矩阵运算的计算机语言，它语法简单，自带大量的功能函数，用很少的几行代码就能实现其它语言很难实现的功能。利用IDL可以快速地进行科学数据读写、三维数据可视化、数值运算和三维图形建模等。IDL可以应用在地球科学（包括气象、水文、海洋、土壤和地质等">
+<meta property="og:type" content="article">
+<meta property="og:title" content="IDL语法基础（01）">
+<meta property="og:url" content="https://heartlovelife.github.io/2022/10/30/IDL-Basic01/index.html">
+<meta property="og:site_name" content="江湖是你画中亦是你">
+<meta property="og:description" content="⛄IDL简介交互式数据语言——IDL（Interactive Data Language）是进行应用程序开发、科学数据分析与可视化表达的理想工具。IDL是基于矩阵运算的计算机语言，它语法简单，自带大量的功能函数，用很少的几行代码就能实现其它语言很难实现的功能。利用IDL可以快速地进行科学数据读写、三维数据可视化、数值运算和三维图形建模等。IDL可以应用在地球科学（包括气象、水文、海洋、土壤和地质等">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s2.loli.net/2022/12/11/C3AdepLFogSNkZJ.jpg">
+<meta property="article:published_time" content="2022-10-30T08:26:17.000Z">
+<meta property="article:modified_time" content="2022-12-11T10:50:54.910Z">
+<meta property="article:author" content="Xiaotangsmiles">
+<meta property="article:tag" content="ENVI">
+<meta property="article:tag" content="IDL">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s2.loli.net/2022/12/11/C3AdepLFogSNkZJ.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://heartlovelife.github.io/2022/10/30/IDL-Basic01/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":250},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#1f1f1f","position":"bottom-left"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'IDL语法基础（01）',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-12-11 18:50:54'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const now = new Date()
+          const hour = now.getHours()
+          const isNight = hour <= 6 || hour >= 18
+          if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+          else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.1.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/loading1.gif" data-original="/img/touxiang.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">13</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">11</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><span> 主页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><span> 博文</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 生活</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/photos/"><span> 相册</span></a></li><li><a class="site-page child" href="/music/"><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><span> 影视</span></a></li><li><a class="site-page child" href="/shuoshuo/"><span> 分享</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/comment/"><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><span> 关于笔者</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://s2.loli.net/2022/12/11/C3AdepLFogSNkZJ.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">江湖是你画中亦是你</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><span> 主页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><span> 博文</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 生活</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/photos/"><span> 相册</span></a></li><li><a class="site-page child" href="/music/"><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><span> 影视</span></a></li><li><a class="site-page child" href="/shuoshuo/"><span> 分享</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/comment/"><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><span> 关于笔者</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">IDL语法基础（01）</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-10-30T08:26:17.000Z" title="发表于 2022-10-30 16:26:17">2022-10-30</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-12-11T10:50:54.910Z" title="更新于 2022-12-11 18:50:54">2022-12-11</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/IDL/">IDL</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">7.1k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>25分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="IDL语法基础（01）"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="⛄IDL简介"><a href="#⛄IDL简介" class="headerlink" title="⛄IDL简介"></a>⛄<code>IDL</code>简介</h2><p>交互式数据语言——<code>IDL</code>（<code>Interactive Data Language</code>）是进行应用程序开发、科学数据分析与可视化表达的理想工具。<code>IDL</code>是基于矩阵运算的计算机语言，它语法简单，自带大量的功能函数，用很少的几行代码就能实现其它语言很难实现的功能。利用IDL可以快速地进行科学数据读写、三维数据可视化、数值运算和三维图形建模等。<code>IDL</code>可以应用在地球科学（包括气象、水文、海洋、土壤和地质等），医学影像、图像处理、<code>GIS</code>系统、软件开发、测试、天文、航空航天、信息处理、数学统计与分析以及环境工程等领域。<code>IDL</code>的优势：</p>
+<ul>
+<li>数据访问 —— 灵活的数据输入、输出方式。在科学研究中，将会使用大量不同格式的数据。IDL 基本上支持各种数据格式，并提供了大量的数据读写工具，免除数据读写的烦恼，可以将更多的精力投入到数据分析。</li>
+<li>数据分析 —— 强大的图像处理、信号处理和数据统计分析能力。<code>IDL</code> 集成了完善的数据分析、数据统计、图像处理和信号处理软件包。项目应用 <code>IDL</code> 可以节省大量时间。使用传统的 <code>C</code> 或者 <code>FORTRAN</code> 语言需要数天或数周的项目，使用 <code>IDL</code> 可以在数小时内完成。</li>
+<li>数据可视化 —— 先进的图形技术和强大的可视化能力。从简单的二维绘图、三维绘图、体数据可视化、图像显示、动画显示等，到利用 <code>OpenGL</code>硬件加速功能进行交互式的三维图形浏览，以及支持多处理器快速进行体数据渲染，使用 <code>IDL</code>可以轻松获得丰富的可视化效果。从直接图形法到对象图形法，再到快速可视化函数，<code>IDL</code> 提供了丰富的可视化过程和函数供用户调用，使用少量代码即可实现复杂的可视化结果。</li>
+<li>软件开发 —— 跨平台支持、全新且统一的开发环境、有效的数据管理手段。</li>
+<li>集成 —— 灵活的外部语言接口。<code>IDL</code> 是一个灵活的、可扩展的用于可视化、分析和开发的工具，能够轻松的与其他的软件工具集成。<code>IDL</code> 能够将其他编程语言的代码和函数导入，也可以将 <code>IDL</code> 实现的功能集成到其他语言编写的应用程序中去。</li>
+<li>程序共享 —— 灵活多样的程序发布方式和轻松的成果共享。</li>
+</ul>
+<p><code>IDL</code>的帮助提供了详细的使用说明和函数功能描述，学会使用帮助是快速入门和解决问题的最佳途径。帮助的启动方式有以下三种：</p>
+<ul>
+<li>点击主菜单[帮助]下的[选中项目帮助]和[帮助内容]功能菜单；</li>
+<li>工作台编辑代码时按 <code>F1</code> 或选择一个函数后按 <code>F1</code>，则启动帮助；</li>
+<li>命令行中输入<code>?</code>回车后启动帮助。</li>
+</ul>
+<blockquote>
+<p>注意事项：</p>
+<p>（1）<code>IDL</code>不区分大小写；</p>
+<p>（2）分号”;”表示注释内容的开始；</p>
+<p>（3）符号”<code>$</code>“，续行符；符号”<code>&amp;</code>“，续命令符；</p>
+<p>（4）创建<code>IDL</code>变量不需要事先声明，直接赋值，并且变量随时可以进行数据类型和维数的动态改变；</p>
+<p>（5）科学计数法：<code>a = 6.63e-34，b = 2.998e8</code></p>
+<p>（6）<code>help</code>命令可以帮助用户跟踪变量类型和大小。对于标量，显示变量的名称、类型和值；对于数组型变量，显示变量名称、类型和大小。</p>
+</blockquote>
+<h2 id="⛄IDL语法基础"><a href="#⛄IDL语法基础" class="headerlink" title="⛄IDL语法基础"></a>⛄<code>IDL</code>语法基础</h2><h3 id="👀数据类型"><a href="#👀数据类型" class="headerlink" title="👀数据类型"></a>👀数据类型</h3><p><code>IDL</code>中有17种基本数据类型。基本数据类型的名称、类型代码、字节大小、创建方式和范围，以及类型转换等。</p>
+<table>
+<thead>
+<tr>
+<th>数据类型</th>
+<th align="center">代码</th>
+<th align="center">字节数</th>
+<th align="center">范围</th>
+<th>创建变量</th>
+<th>类型转换</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>字节型</td>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center"><code>0~255</code></td>
+<td><code>Var=0B</code></td>
+<td><code>byte()</code></td>
+</tr>
+<tr>
+<td>16位有符号整型</td>
+<td align="center">2</td>
+<td align="center">2</td>
+<td align="center"><code>-32768~32767</code></td>
+<td><code>Var=0</code></td>
+<td><code>fix()</code></td>
+</tr>
+<tr>
+<td>32位有符号长整型</td>
+<td align="center">3</td>
+<td align="center">4</td>
+<td align="center"><code>-2^31~2^31-1</code></td>
+<td><code>Var=0L</code></td>
+<td><code>long()</code></td>
+</tr>
+<tr>
+<td>64位有符号整型</td>
+<td align="center">14</td>
+<td align="center">8</td>
+<td align="center"><code>-2^63~2^63-1</code></td>
+<td><code>Var=0LL</code></td>
+<td><code>long64()</code></td>
+</tr>
+<tr>
+<td>16位无符号整型</td>
+<td align="center">12</td>
+<td align="center">2</td>
+<td align="center"><code>0~65535</code></td>
+<td><code>Var=0U</code></td>
+<td><code>uint()</code></td>
+</tr>
+<tr>
+<td>32位无符号长整型</td>
+<td align="center">13</td>
+<td align="center">4</td>
+<td align="center"><code>0~2^32-1</code></td>
+<td><code>Var=0UL</code></td>
+<td><code>ulong()</code></td>
+</tr>
+<tr>
+<td>64位无符号整型</td>
+<td align="center">15</td>
+<td align="center">8</td>
+<td align="center"><code>0~2^64-1</code></td>
+<td><code>Var==0ULL</code></td>
+<td><code>ulong64()</code></td>
+</tr>
+<tr>
+<td>浮点型</td>
+<td align="center">4</td>
+<td align="center">4</td>
+<td align="center"><code>-10^38~2^38</code></td>
+<td><code>Var=0.0</code></td>
+<td><code>float()</code></td>
+</tr>
+<tr>
+<td>双精度浮点型</td>
+<td align="center">5</td>
+<td align="center">8</td>
+<td align="center"><code>-10^308~2^308</code></td>
+<td><code>Var=0.0D</code></td>
+<td><code>double()</code></td>
+</tr>
+<tr>
+<td>复数</td>
+<td align="center">6</td>
+<td align="center">8</td>
+<td align="center"><code>-10^38~2^38</code></td>
+<td><code>Var=Complex(0.0,0.0)</code></td>
+<td><code>complex()</code></td>
+</tr>
+<tr>
+<td>双精度复数</td>
+<td align="center">9</td>
+<td align="center">16</td>
+<td align="center"><code>-10^308~2^308</code></td>
+<td><code>Var=Dcomplex(0.0D,0.0D)</code></td>
+<td><code>dcomplex()</code></td>
+</tr>
+<tr>
+<td>字符串</td>
+<td align="center">7</td>
+<td align="center">0~32767</td>
+<td align="center"><code>None</code></td>
+<td><code>Var=&#39; &#39;或Var=&quot; &quot;</code></td>
+<td><code>string()</code></td>
+</tr>
+<tr>
+<td>结构体</td>
+<td align="center">8</td>
+<td align="center">复合类型</td>
+<td align="center"><code>None</code></td>
+<td><code>St1=&#123;&#125;</code></td>
+<td></td>
+</tr>
+<tr>
+<td>指针</td>
+<td align="center">10</td>
+<td align="center">4</td>
+<td align="center"><code>None</code></td>
+<td><code>Var=Ptr_New()</code></td>
+<td></td>
+</tr>
+<tr>
+<td>对象</td>
+<td align="center">11</td>
+<td align="center">4</td>
+<td align="center"><code>None</code></td>
+<td><code>Var=Obj_New()</code></td>
+<td></td>
+</tr>
+<tr>
+<td>链表</td>
+<td align="center">11</td>
+<td align="center">复合类型</td>
+<td align="center"><code>None</code></td>
+<td><code>Ls=List()</code></td>
+<td></td>
+</tr>
+<tr>
+<td>哈希表</td>
+<td align="center">11</td>
+<td align="center">复合类型</td>
+<td align="center"><code>None</code></td>
+<td><code>Hs=Hash()</code></td>
+<td></td>
+</tr>
+</tbody></table>
+<p>变量的类型代码通过<code>Size(var, /type)</code>来获得，如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">IDL&gt; a=10</span><br><span class="line">IDL&gt; print,size(a,/type)</span><br><span class="line">           2</span><br><span class="line">IDL&gt; b=10.0</span><br><span class="line">IDL&gt; print,size(b,/type)</span><br><span class="line">           4</span><br><span class="line">IDL&gt; c=10L</span><br><span class="line">IDL&gt; print,size(c,/type)</span><br><span class="line">           3</span><br></pre></td></tr></table></figure>
+
+<h3 id="👀常量和变量"><a href="#👀常量和变量" class="headerlink" title="👀常量和变量"></a>👀常量和变量</h3><p>常量。常量是不能修改的固定值，分为整型常量、浮点型常量、复数型常量和字符型常量等类型。</p>
+<p>变量。<code>IDL</code> 中的变量分为局部变量和系统变量。在 <code>IDL</code> 程序中，二者的区别在于生命周期不一样，局部变量仅仅在所在的函数或过程中有效，而系统变量则在始终有效或某个程序的周期中有效。</p>
+<p>（1）命名规则</p>
+<p>变量名称的最大长度不超过 255 个字符，变量的首位只能是字母和下划线，中后部只能是字母、数字、下划线<code>_</code>和连接符<code>$</code>。如下正确：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">abc_3$d	ok_24_bit IDL_type variable _day_month_year</span><br><span class="line">如下错误：</span><br><span class="line">abc.cha one%file 4_lists $file</span><br></pre></td></tr></table></figure>
+
+<p>变量相关函数 <code>IDL_VALIDNAME</code>。该函数用来检测字符串是否可以作为 <code>IDL</code> 下的变量，并能够将无效字符转换为“<code>_</code>”并返回变量。调用格式为 <code>IDL_VALIDNAME ( String [, /CONVERT_ALL] [, /CONVERT_SPACES])</code></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">IDL&gt; print,IDL_VALIDNAME(&#x27;idl&#x27;)</span><br><span class="line">idl</span><br><span class="line">IDL&gt; print,IDL_VALIDNAME(&#x27;i d l&#x27;, /CONVERT_SPACES)</span><br><span class="line">i_d_l</span><br><span class="line">IDL&gt; print,IDL_VALIDNAME(&#x27;16ENVIIDL&#x27;, /CONVERT_ALL)</span><br><span class="line">_16ENVIIDL</span><br></pre></td></tr></table></figure>
+
+<p>判断变量是否已经被定义，可以使用<code>N_Elements</code>函数，示例代码如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">IDL&gt; a=1</span><br><span class="line">IDL&gt; ;变量已经定义        </span><br><span class="line">IDL&gt; print,N_Elements(a)</span><br><span class="line">           1</span><br><span class="line">IDL&gt; ;变量没有定义</span><br><span class="line">IDL&gt; print,N_Elements(aa)</span><br><span class="line">           0</span><br></pre></td></tr></table></figure>
+
+<p>（2）变量类型转换</p>
+<p>变量可以通过类型转换函数进行强制类型转换。</p>
+<table>
+<thead>
+<tr>
+<th>类型转换</th>
+<th>函数名称</th>
+<th>操作</th>
+<th>结果</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>字节型</td>
+<td><code>BYTE</code></td>
+<td>BYTE(1.2)</td>
+<td>1B</td>
+</tr>
+<tr>
+<td>整型</td>
+<td><code>FIX</code></td>
+<td>FIX(2.5)</td>
+<td>2</td>
+</tr>
+<tr>
+<td>无符号整型</td>
+<td><code>UINT</code></td>
+<td>UINT([5.5,-3])</td>
+<td>5 65533</td>
+</tr>
+<tr>
+<td>长整型</td>
+<td><code>LONG</code></td>
+<td>LONG(65538.5)</td>
+<td>65538</td>
+</tr>
+<tr>
+<td>无符号长整型</td>
+<td><code>ULONG</code></td>
+<td>ULONG([5.5,-3])</td>
+<td>5 4294967293</td>
+</tr>
+<tr>
+<td>64 位长整型</td>
+<td><code>LONG64</code></td>
+<td>LONG64([5.5,-3])</td>
+<td>5 -3</td>
+</tr>
+<tr>
+<td>无符号 64 位长整型</td>
+<td><code>ULONG64</code></td>
+<td>ULONG64([5.5,-3])</td>
+<td>5 18446744073709551613</td>
+</tr>
+<tr>
+<td>浮点型</td>
+<td><code>FLOAT</code></td>
+<td>FLOAT([5.5,-3])</td>
+<td>5.50000 -3.00000</td>
+</tr>
+<tr>
+<td>双精度类型</td>
+<td><code>DOUBLE</code></td>
+<td>DOUBLE([5.5,-3])</td>
+<td>5.5000000 -3.0000000</td>
+</tr>
+<tr>
+<td>复数类型</td>
+<td><code>COMPLEX</code></td>
+<td>COMPLEX(1, 2)</td>
+<td>(1.00000, 2.00000)</td>
+</tr>
+<tr>
+<td>双精度复数类型</td>
+<td><code>DCOMPLEX</code></td>
+<td>DCOMPLEX(1, 2)</td>
+<td>(1.0000000, 2.0000000)</td>
+</tr>
+</tbody></table>
+<p>在进行数据的转换中需要注意转换后的数据的界限问题。如下面操作：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">IDL&gt; ;整型转换为浮点</span><br><span class="line">IDL&gt; print,float(1)</span><br><span class="line">      1.00000</span><br><span class="line"></span><br><span class="line">IDL&gt; ;浮点数取整</span><br><span class="line">IDL&gt; print,fix(1.3+1.8)</span><br><span class="line">       3</span><br><span class="line"> </span><br><span class="line">IDL&gt; ;fix还可以指定输出类型</span><br><span class="line">IDL&gt; help,fix(1.3,type=5)</span><br><span class="line">&lt;Expression&gt;    DOUBLE    =        1.3000000</span><br><span class="line"></span><br><span class="line">IDL&gt; ;出现这个错误是因为整型变量是16Bit的，最大值为32767，此种情况下用长整型强制转换函数long(a)。</span><br><span class="line">IDL&gt; a=33000</span><br><span class="line">IDL&gt; print,fix(a)</span><br><span class="line">  -32536</span><br><span class="line"></span><br><span class="line">IDL&gt; ;注意整型变量的运算，如除法运算</span><br><span class="line">IDL&gt; ;结果是1，原因在于参与运算的两个数字为整数，运算结果依然是整数。</span><br><span class="line">IDL&gt; result = 8/5</span><br><span class="line">IDL&gt; print,result</span><br><span class="line">IDL&gt; ;在运算时需要增加强制类型转换，将整形类型转换为浮点类型。</span><br><span class="line">IDL&gt; result = 8/float(5)</span><br><span class="line">IDL&gt; print,result</span><br><span class="line">      1.60000</span><br><span class="line">IDL&gt; result = 8*1.0/5</span><br><span class="line">IDL&gt; print,result</span><br><span class="line">      1.60000</span><br></pre></td></tr></table></figure>
+
+<p>浮点类型和双精度类型的取整操作函数如下：</p>
+<table>
+<thead>
+<tr>
+<th>函数名称</th>
+<th>功能</th>
+<th>操作</th>
+<th>结果</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>floor</code></td>
+<td>向下取整</td>
+<td>floor(2.4)<br />floor(2.5)</td>
+<td>2<br />2</td>
+</tr>
+<tr>
+<td><code>ceil</code></td>
+<td>向上取整</td>
+<td>floor(2.4)<br />floor(2.5)</td>
+<td>3<br />3</td>
+</tr>
+<tr>
+<td><code>round</code></td>
+<td>四舍五入</td>
+<td>floor(2.4)<br />floor(2.5)</td>
+<td>2<br />3</td>
+</tr>
+</tbody></table>
+<p>（3）变量类型的动态性</p>
+<p>在使用的过程中，可以随时修改变量类型，即变量类型具备动态性。该特性使得<code>IDL</code>在数学运算中将低精度类型提升为高精度类型，确保计算结果具备足够的精度。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">IDL&gt; num=6</span><br><span class="line">IDL&gt; help,num</span><br><span class="line">NUM             INT       =        6</span><br><span class="line">IDL&gt; num=num*1.1</span><br><span class="line">IDL&gt; help,num</span><br><span class="line">NUM             FLOAT     =       6.60000</span><br></pre></td></tr></table></figure>
+
+<p>（4）系统变量</p>
+<p>系统变量分为预定义系统变量和自定义系统变量。预定义系统变量是<code>IDL</code>中预先定义的系统变量，一般情况下不允许修改，包括常数变量、图形变量、系统配置和错误处理；自定义系统变量是用户创建的系统变量。</p>
+<h3 id="👀数组"><a href="#👀数组" class="headerlink" title="👀数组"></a>👀数组</h3><p>程序设计中，为了处理方便， 把具有相同类型的若干变量按有序的形式组织起来。这些按序排列的同类数据元素的集合称为数组。<code>IDL</code> 是面向矩阵的第四代语言，对数组的维数为0～8 维，在数组的处理时非常的灵活、高效。</p>
+<blockquote>
+<p>注意，IDL 中数组下标的顺序先是列标，后是行标。</p>
+</blockquote>
+<h4 id="👁创建数组"><a href="#👁创建数组" class="headerlink" title="👁创建数组"></a>👁创建数组</h4><p>（1）赋值创建</p>
+<p>通过方括号<code>[]</code>赋值创建数组。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">IDL&gt; arr = [1,2,3]</span><br><span class="line">IDL&gt; help,arr</span><br><span class="line">ARR             INT       = Array[3]</span><br><span class="line">IDL&gt; arr = [[1,2,3],[4,5,6]]</span><br><span class="line">IDL&gt; help,arr</span><br><span class="line">ARR             INT       = Array[3, 2]</span><br><span class="line">IDL&gt; arr</span><br><span class="line">       1       2       3</span><br><span class="line">       4       5       6</span><br></pre></td></tr></table></figure>
+
+<p>（2）函数创建</p>
+<p>利用数组创建函数可创建不同类型或维数的数组。</p>
+<p><strong>通用函数</strong>，可以用 <code>IDL</code> 的通用函数进行全零数组或索引数组的创建。</p>
+<table>
+<thead>
+<tr>
+<th>数据类型</th>
+<th>创建全0数组</th>
+<th>创建索引数组</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>字节型</td>
+<td><code>bytArr()</code></td>
+<td><code>bindgen()</code></td>
+</tr>
+<tr>
+<td>16位有符号整型</td>
+<td><code>intarr()</code></td>
+<td><code>indgen()</code></td>
+</tr>
+<tr>
+<td>32位有符号长整型</td>
+<td><code>lonarr()</code></td>
+<td><code>lindgen()</code></td>
+</tr>
+<tr>
+<td>64位有符号整型</td>
+<td><code>lon64arr()</code></td>
+<td><code>l64indgen()</code></td>
+</tr>
+<tr>
+<td>16位无符号整型</td>
+<td><code>uintarr()</code></td>
+<td><code>uindgen()</code></td>
+</tr>
+<tr>
+<td>32位无符号长整型</td>
+<td><code>ulongarr()</code></td>
+<td><code>ulindgen()</code></td>
+</tr>
+<tr>
+<td>64位无符号整型</td>
+<td><code>ulon64arr()</code></td>
+<td><code>ul64indgen()</code></td>
+</tr>
+<tr>
+<td>浮点型</td>
+<td><code>fltarr()</code></td>
+<td><code>findgen()</code></td>
+</tr>
+<tr>
+<td>双精度浮点型</td>
+<td><code>dblarr()</code></td>
+<td><code>dindgen()</code></td>
+</tr>
+<tr>
+<td>复数</td>
+<td><code>complexarr()</code></td>
+<td><code>cindgen()</code></td>
+</tr>
+<tr>
+<td>双精度复数</td>
+<td><code>dcomplexarr()</code></td>
+<td><code>dcindgen()</code></td>
+</tr>
+<tr>
+<td>字符串</td>
+<td><code>strarr()</code></td>
+<td><code>sindgen()</code></td>
+</tr>
+<tr>
+<td>指针</td>
+<td><code>ptrarr()</code></td>
+<td></td>
+</tr>
+<tr>
+<td>对象</td>
+<td><code>objarr()</code></td>
+<td></td>
+</tr>
+</tbody></table>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">IDL&gt; num = findgen(20)</span><br><span class="line">IDL&gt; num</span><br><span class="line">      0.00000000       1.0000000       2.0000000       3.0000000       4.0000000       		  5.0000000		   6.0000000       7.0000000       8.0000000       9.0000000       		  10.000000       11.000000		   12.000000       13.000000       14.000000               15.000000       16.000000       17.000000		18.000000       19.000000</span><br></pre></td></tr></table></figure>
+
+<p><strong>常规函数</strong>，<code>MAKE_ARRAY()</code>函数：是在程序运行过程中创建特定的数组。</p>
+<p>调用格式为： <code>Result = MAKE_ARRAY ( [D1 [, ..., D8]] [, /INDEX] [, DIMENSION = vector] [, /NOZERO] [, SIZE=vector] [, TYPE=type_code] [, VALUE=value] )</code></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">IDL&gt; a = Make_array(4,5,/Integer,Value=6)</span><br><span class="line">IDL&gt; a</span><br><span class="line">       6       6       6       6</span><br><span class="line">       6       6       6       6</span><br><span class="line">       6       6       6       6</span><br><span class="line">       6       6       6       6</span><br><span class="line">       6       6       6       6</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>创建特殊数组：<code>RANDOMU()</code>函数返回一个或多个均匀分布的浮点型数组，值在[0,1]之间。<code>RANDOMN()</code>函数返回一个或多个正态分布的浮点型数组，这些数的平均为零，标准偏差为 1 。</p>
+</blockquote>
+<h4 id="👁数组存储"><a href="#👁数组存储" class="headerlink" title="👁数组存储"></a>👁数组存储</h4><p><code>IDL</code>中的矢量和数组均是以先行后列顺序存储的(<code>IDL</code>最初是设计用来处理行扫描的卫星数据)，下标值的起始值是 0。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">IDL&gt; array = indgen(4,3)</span><br><span class="line">IDL&gt; array</span><br><span class="line">       0       1       2       3</span><br><span class="line">       4       5       6       7</span><br><span class="line">       8       9      10      11</span><br></pre></td></tr></table></figure>
+
+<h4 id="👁数组访问"><a href="#👁数组访问" class="headerlink" title="👁数组访问"></a>👁数组访问</h4><p>（1）下标方式</p>
+<p>可以使用下标来存取该数组中的每一个元素。按照“<code>数组名[下标]</code>”或“<code>数组名（下标）</code>”对数组中元素进行存取，数组下标起始值为0。因为函数的调用方式为“<code>函数名（参数）</code>”，为避免混淆，数组下标使用时一般使用<code>[]</code>。其中-1为最后一个元素的下标，可根据下标值依次获取元素。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">IDL&gt; arr = indgen(9)</span><br><span class="line">IDL&gt; arr</span><br><span class="line">       0       1       2       3       4       5       6       7       8</span><br><span class="line">IDL&gt; arr(3)</span><br><span class="line">       3</span><br><span class="line">IDL&gt; arr[3]</span><br><span class="line">       3</span><br><span class="line">IDL&gt; arr[-1]</span><br><span class="line">       8</span><br><span class="line">IDL&gt; arr[-5:-1]</span><br><span class="line">       4       5       6       7       8</span><br></pre></td></tr></table></figure>
+
+<p>（2）向量方式</p>
+<p>下标可以通过向量方式表示。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">IDL&gt; arr = indgen(9)+5</span><br><span class="line">IDL&gt; arr</span><br><span class="line">       5       6       7       8       9      10      11      12      13</span><br><span class="line">IDL&gt; index = [0,2,4,6,8]</span><br><span class="line">IDL&gt; arr[index]</span><br><span class="line">       5       7       9      11      13</span><br><span class="line">;对30行20列的索引数组取出第6~10列中第12~15行的数据，可以通过“:”方式</span><br><span class="line">IDL&gt; arr1 = indgen(20,30)</span><br><span class="line">IDL&gt; select_arr1 = arr1[5:9,11:14]</span><br><span class="line">IDL&gt; select_arr1</span><br><span class="line">     225     226     227     228     229</span><br><span class="line">     245     246     247     248     249</span><br><span class="line">     265     266     267     268     269</span><br><span class="line">     285     286     287     288     289 </span><br><span class="line">;对30行20列的索引数组取出第10行的数据，可以通过“*”方式</span><br><span class="line">IDL&gt; vec_10 = arr1[*,9]</span><br><span class="line">IDL&gt; vec_10</span><br><span class="line">     180     181     182     183     184     185     186     187     188     189     190	 191	 192     193     194     195     196     197     198     199</span><br></pre></td></tr></table></figure>
+
+<h4 id="👁数组运算"><a href="#👁数组运算" class="headerlink" title="👁数组运算"></a>👁数组运算</h4><p>（1）求大、求小和求余</p>
+<p>数组的求大(<code>&lt;</code>)、求小(<code>&gt;</code>)和求余(<code>mod</code>)操作返回的是同维数组的计算结果。数组求大（&lt;<code>value</code>）是将数组中小于<code>value</code>的元素赋为<code>value</code>；求小（&gt;<code>value</code>）是将数组中大于<code>value</code>的值赋为<code>value</code>；数组求余（<code>mod</code>)是计算数组中各元素的余数。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">IDL&gt; a = indgen(8)+3</span><br><span class="line">IDL&gt; a</span><br><span class="line">       3       4       5       6       7       8       9      10</span><br><span class="line">IDL&gt; a&gt;6</span><br><span class="line">       6       6       6       6       7       8       9      10</span><br><span class="line">IDL&gt; a</span><br><span class="line">       3       4       5       6       7       8       9      10</span><br><span class="line">IDL&gt; a&lt;6</span><br><span class="line">       3       4       5       6       6       6       6       6</span><br></pre></td></tr></table></figure>
+
+<p>（2）数组与数运算<br>数组与数的运算遵循的基本规律是，数组中的每个元素与数进行运算。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">IDL&gt; a = indgen(8)</span><br><span class="line">IDL&gt; a</span><br><span class="line">       0       1       2       3       4       5       6       7</span><br><span class="line">IDL&gt; a = indgen(8)+5</span><br><span class="line">IDL&gt; a</span><br><span class="line">       5       6       7       8       9      10      11      12</span><br></pre></td></tr></table></figure>
+
+<p>（3）数组与数组运算<br>数组与数组的运算，结果的元素个数与运算的最小数组个数一致，多维数组需要转换为一维数组来运算。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">IDL&gt; arr = [2,4,6,8]</span><br><span class="line">IDL&gt; arr1  = [4.5]</span><br><span class="line">IDL&gt; arr + arr1</span><br><span class="line">       6.5000000</span><br><span class="line">IDL&gt; arr1  = [5,6]</span><br><span class="line">IDL&gt; arr + arr1</span><br><span class="line">       7      10</span><br><span class="line">IDL&gt; arr2 = [[1,3,5],[2,4,6]]</span><br><span class="line">IDL&gt; arr3 = [[1,2],[3,4]]</span><br><span class="line">IDL&gt; arr2 + arr3</span><br><span class="line">       2       5</span><br><span class="line">       8       6</span><br></pre></td></tr></table></figure>
+
+<p>（4）数组合并</p>
+<p>数组与数组的合并需要两个数组的行数或列数相同。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">IDL&gt; a = indgen(2,5)</span><br><span class="line">IDL&gt; b = indgen(4,5)</span><br><span class="line">IDL&gt; ;行数相同，可直接使用[]</span><br><span class="line">IDL&gt; c = [a,b]</span><br><span class="line">IDL&gt; c</span><br><span class="line">       0       1       0       1       2       3</span><br><span class="line">       2       3       4       5       6       7</span><br><span class="line">       4       5       8       9      10      11</span><br><span class="line">       6       7      12      13      14      15</span><br><span class="line">       8       9      16      17      18      19</span><br><span class="line">IDL&gt; ;列数相同，需要使用[[],[]]</span><br><span class="line">IDL&gt; d = indgen(2,3)</span><br><span class="line">IDL&gt; e = [[a],[d]]</span><br><span class="line">IDL&gt; e</span><br><span class="line">       0       1</span><br><span class="line">       2       3</span><br><span class="line">       4       5</span><br><span class="line">       6       7</span><br><span class="line">       8       9</span><br><span class="line">       0       1</span><br><span class="line">       2       3</span><br><span class="line">       4       5</span><br></pre></td></tr></table></figure>
+
+<h4 id="👁相关函数"><a href="#👁相关函数" class="headerlink" title="👁相关函数"></a>👁相关函数</h4><p>（1）数组信息 <code>Size()</code></p>
+<p><code>Size()</code>函数能够返回数组的结构信息，调用格式为 <code>Result = SIZE(变量, [/KeyWords])</code>。输入变量可以是常量、数组、字符串、结构体、指针和对象等任何数据类型。不设置关键字时，函数返回变量的基本信息：变量维数、每一维的数值元素个数（维数），变量类型代码、元素总个数。设置关键字<code>N_Dimensions</code>、<code>N_Elements</code>、<code>Dimensions</code>、<code>Tname</code>和<code>Type</code>，则依次返回数组的维数、元素个数、每一维的维数、类型名称和类型代码信息。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">IDL&gt; data = indgen(4,5)</span><br><span class="line">IDL&gt; size(data)</span><br><span class="line">           2           4           5           2          20</span><br><span class="line">IDL&gt; size(data,/N_dimensions)</span><br><span class="line">           2</span><br><span class="line">IDL&gt; size(data,/N_elements)</span><br><span class="line">          20</span><br><span class="line">IDL&gt; size(data,/Dimensions)</span><br><span class="line">           4           5</span><br><span class="line">IDL&gt; size(data,/Tname)</span><br><span class="line">INT</span><br></pre></td></tr></table></figure>
+
+<p>（2）条件查找</p>
+<p><code>WHERE()</code>函数返回满足指定条件（即数组表达式）数组元素的下标所组成的一维数组。调用格式为：</p>
+<p> <code>Result =WHERE(数组表达式 [, count] [, COMPLEMENT=变量 1] [, /L64] [, NCOMPLEMENT=变量 2])</code>。</p>
+<p>关键字：count 返回的是符合指定条件的个数；变量 1 是不满足条件的数组的下标信息；变量 2 是不满足条件的数组的个数；</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">IDL&gt; a = indgen(10)+3</span><br><span class="line">IDL&gt; a</span><br><span class="line">       3       4       5       6       7       8       9      10      11      12</span><br><span class="line">IDL&gt; B = WHERE(a GT 6, count, COMPLEMENT=B_C, NCOMPLEMENT=count_c)</span><br><span class="line">IDL&gt; count</span><br><span class="line">           6</span><br><span class="line">IDL&gt; B</span><br><span class="line">           4           5           6           7           8           9</span><br><span class="line">IDL&gt; count_c</span><br><span class="line">           4</span><br><span class="line">IDL&gt; B_C</span><br><span class="line">           0           1           2           3</span><br></pre></td></tr></table></figure>
+
+<p>（3）大小调整</p>
+<p><code>Reform()</code>函数可以使数组在元素个数不修改的前提下，改变数组的维数，方便了数组的动态使用。调用格式：</p>
+<blockquote>
+<p><code>Result = REFORM(Array, D1 [, ..., D8] [, 关键字] )</code></p>
+</blockquote>
+<p><code>Rebin()</code>函数可以修改数组的维数大小，将维数调整为 <code>D1 [, ..., D8]</code>指定的维数，且大小必须原数据的大小的整数倍，默认抽样算法是双线性内插。调用格式：</p>
+<blockquote>
+<p><code>Result = REBIN(数组, D1 [, ..., D8] [, /SAMPLE] )</code><br><code>SAMPLE</code>：设置该关键字则使用最近临值抽样法。</p>
+</blockquote>
+<p><code>Congrid()</code>函数可以调整数组为同维任意大小的数组，默认在处理一维或二维数组时默认是最近邻重采样方式，处理三维数组时默认是双线性内插值。在数据缩小操作时，<code>Rebin</code> 做了插值处理，而 <code>Congrid</code> 仅仅是重新采样。调用格式为：</p>
+<blockquote>
+<p><code>Result = Congrid(数组, X,Y,Z [,关键字] )</code><br><code>INTERP</code>：抽样采用线性内插法；<br><code>CUBIC</code>：采用卷积内插法。</p>
+</blockquote>
+<p><code>EXPAND</code> 用来对二维数组进行大小修改，采用双线性内插算法。调用格式：</p>
+<blockquote>
+<p><code>EXPAND, A, Nx, Ny, Result[, FILLVAL=value] [, MAXVAL=value]</code> </p>
+<p>其中 <code>A</code> 为源数组，<code>Nx</code>、<code>Ny</code> 为修改后的维数，<code>Result</code> 为修改后的数组，<code>FILLVAL</code> 是填充数据，默认为-1；<code>MAXVAL</code> 是数据的最大值，大于该值的赋为 <code>FILLVAL</code>。</p>
+</blockquote>
+<p><code>INTERPOLATE()</code>函数可以调整数组为同维任意大小的数组，并能够任意定位插值点。调用格式：</p>
+<blockquote>
+<p><code>INTERPOLATE(数组, X[, Y [, Z]] [, 关键字] )</code></p>
+<p>其中，<code>X [, Y [, Z]]</code>为待调整数组下标索引，可以是单个变量或数组，若<code>X</code>为0.5，则表示计算下标[0]和下标[1]中间位置的数值；<br><code>GRID</code> 关键字：采用网格插值方式生成插值点，否则按线性方式生成；<br><code>Missing</code> 关键字：插值点坐标超出数组自身坐标范围时赋予该值。</p>
+</blockquote>
+<p>（4）数组反转</p>
+<p><code>Reverse()</code>函数可以对数组进行反转。调用格式：</p>
+<blockquote>
+<p><code>result = Reverse(数组, index[, 关键字] )</code><br><code>index</code> 是反转的数组的维数索引，它不能大于数组的维数。</p>
+</blockquote>
+<p>（5）数组转置 Transpose()<br><code>Transpose ()</code>函数可以对数组进行反转。调用格式：</p>
+<blockquote>
+<p><code>result = Transpose(数组, [P])</code><br>关键字：<code>P</code> 是调整后的维数数组列表，如不设置则完全反转。</p>
+</blockquote>
+<p>（6）数组旋转</p>
+<p>①<code>Rotate()</code>函数</p>
+<p><code>Rotate()</code>函数可以以 <code>90°</code>整倍数的角度对数组进行旋转操作。调用格式：</p>
+<blockquote>
+<p><code>result = Rotate (数组, direction )</code><br><code>Direction</code>：该关键字为整数，范围 <code>0-7</code>，分别代表的图像旋转方式。</p>
+</blockquote>
+<p>②<code>Rot()</code>函数</p>
+<p><code>Rot()</code>函数可以以任意的角度对数组进行旋转操作并能进行放大、缩小操作。调用格式：</p>
+<blockquote>
+<p><code>result = Rot(数组, Angle, [Mag, X0, Y0],[关键字])</code><br><code>Angle</code>：该关键字数组旋转地角度，单位为度(°)。<br><code>Mag</code>：为放大的倍数；<br><code>X0</code>：为旋转中心的 <code>X</code> 坐标，默认为列中心；<br><code>Y0</code>：为旋转中心的 <code>Y</code> 坐标，默认为行中心；<br><code>PIVOT</code>：该关键字控制旋转后<code>(X0,Y0)</code>点是否仍然在原图像中的位置，不设置则<code>(X0,Y0)</code>点在图像的中心位置。</p>
+</blockquote>
+<p>（7）数组平移</p>
+<p><code>Shift()</code>函数是按指定的平移量 <code>S1、…、Sn</code>，分别对数组的第 <code>1、…、n</code> 维进行平移后生成新数组。其中 <code>Si</code> 为正表示向前平移；<code>Si</code> 为负表示向后平移。调用格式：</p>
+<blockquote>
+<p><code>result = Shift(数组，S1、…、Sn)</code></p>
+</blockquote>
+<p>（8）数组排序<br><code>Sort()</code>函数返回排序后的<strong>数组索引</strong>。调用格式：</p>
+<blockquote>
+<p><code>result = Sort(数组[, /L64])</code></p>
+</blockquote>
+<p>（9）数组唯一调整 （求不同值）<br><code>Uniq()</code>函数返回数组中<strong>相邻元素不同值</strong>的<strong>索引</strong>。该函数<strong>只能发现相邻值</strong>，若不相邻，则会认为是两个值。如果先对数组进行排序，则可求出数组中包含的不同值。调用格式为：</p>
+<blockquote>
+<p><code>result = UNIQ(数组 [, Index] )</code></p>
+</blockquote>
+<p>（10）判断数组</p>
+<p><code>Array_Equal()</code>函数进行数组相同的判断。调用格式：</p>
+<blockquote>
+<p><code>result = Array_Equal(数组, /关键字)</code><br><code>result</code>：返回 0 或 1。<br><code>NO_TYPECONV</code>：添加该关键字，用于将两数组转换为同一类型，判断数据类型是否相同；为1时，数组可直接比较，不转换数据类型。</p>
+</blockquote>
+<p>（11）元素个数</p>
+<p><code>N_Elements()</code>函数返回数组元素的个数。调用格式：</p>
+<blockquote>
+<p><code>result = N_Elements(数组)</code></p>
+</blockquote>
+<p>（12）求最值</p>
+<p><code>Max()</code>函数返回满足数组元素的最大值。调用格式：</p>
+<blockquote>
+<p><code>result = Max(数组 [,关键字], min =变量 1)。</code><br><code>result</code>：返回的是数组的最大值；<br><code>变量 1</code>：返回的是数组的最小值；</p>
+</blockquote>
+<p><code>Min()</code>函数返回满足数组元素的最小值。调用格式：</p>
+<blockquote>
+<p><code>result = Min(数组 [,关键字], max =变量 1)。</code><br><code>result</code>：返回的是数组的最小值；<br><code>变量 1</code>：返回的是数组的最大值；</p>
+</blockquote>
+<p>（13）求和</p>
+<p>Total()函数返回满足数组元素和，并可以通过关键字进行求和选项的控制。调用格式：</p>
+<blockquote>
+<p><code>result = Total(数组, Dimension, [,关键字])。</code><br><code>result</code>：返回的是数组元素求和结果；<br><code>Dimension</code>：数组求和元素的行列控制；<br><code>CUMULATIVE</code>：设置该关键字后，返回结果与原数组一致，第 <code>i</code> 个元素的值为 <code>0-i</code> 值的和；<br><code>Double</code>：返回双精度类型结果；<br><code>Integer</code>：返回整型数据结果；<br><code>PRESERVE_TYPE</code>：返回结果类型与原数组类型一致，设置该关键字的时，&#x2F;double 等关键字无效。</p>
+</blockquote>
+<p>（14）乘积计算<br><code>Product()</code>函数计算数组中所有或部分元素的乘积。调用格式：</p>
+<blockquote>
+<p><code>result = Product(数组, Dimension, [,关键字])。</code><br>关键字控制与 total 函数的关键字基本一致。</p>
+</blockquote>
+<p>（15）其它运算</p>
+<p><code>Factorial()</code>函数计算满足数组元素阶乘。调用格式：</p>
+<blockquote>
+<p><code>result = Factorial(数组, [,关键字])。</code><br>关键字-<code>Stirling</code>：返回结果为Stirling近似值。</p>
+</blockquote>
+<p><code>Mean()</code>函数计算数组元素的平均值。调用格式为：</p>
+<blockquote>
+<p><code>result = Mean(数组, [,关键字])。</code></p>
+</blockquote>
+<p><code>Variance()</code>函数计算数组元素的方差。调用格式：</p>
+<blockquote>
+<p><code>result = Variance(数组, [,关键字])。</code></p>
+</blockquote>
+<p><code>Stddev()</code>函数计算数组元素的方差。调用格式：</p>
+<blockquote>
+<p><code>result = Variance(数组, [,关键字])。</code></p>
+</blockquote>
+<p><code>Moment()</code>函数计算数组元素的平均值、方差、倾斜度及频率曲线峰态。调用格式：</p>
+<blockquote>
+<p><code>result = Moment(数组, [,关键字])。</code></p>
+</blockquote>
+<h4 id="👁矩阵运算"><a href="#👁矩阵运算" class="headerlink" title="👁矩阵运算"></a>👁矩阵运算</h4><p>矩阵间的运算，遵循以下两个法则（注意与线性代数矩阵运算的区别和联系）：</p>
+<p><code>A#B</code> 表示 A 的列乘以 B 的行，要求A的行数必须跟B的列数一致。</p>
+<p><code>A##B</code> 表示 A 的行乘以 B 的列，要求A的列数必须跟B的行数一致。</p>
+<h3 id="👀字符串"><a href="#👀字符串" class="headerlink" title="👀字符串"></a>👀字符串</h3><p>字符串和字符串数组的创建可以通过直接赋值或函数来实现。在IDL中字符串用双引号<code>&quot; &quot;</code>或单引号<code>&#39;&#39;</code>括起来表示。但以<code>&quot;</code>为首的字符串的首字符不能为数字，因为以<code>&quot;</code>开头的数字串代表一个8进制。</p>
+<p>字符串连接直接用加号<code>&quot;+&quot;</code>。字符串操作在文件读取、命令行输入以及窗口参数输入时经常被用到。字符串操作都是通过字符串处理函数来实现的。</p>
+<table>
+<thead>
+<tr>
+<th>函数名</th>
+<th>函数描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>STRCMP(str1, str2, N, /FOLD_CASE)</code></td>
+<td>对两个字符串进行比较，如果 N 存在，只对前 N 个进行比较，<code>/FOLD_CASE</code> 表示模糊比较</td>
+</tr>
+<tr>
+<td><code>STRCOMPRESS(str1)</code></td>
+<td>删除字符串 <code>str1</code> 中的空格</td>
+</tr>
+<tr>
+<td><code>STREGEX()</code></td>
+<td>正则表达式</td>
+</tr>
+<tr>
+<td><code>STRJOIN()</code></td>
+<td>字符串相连接</td>
+</tr>
+<tr>
+<td><code>STRLEN(）</code></td>
+<td>返回字符串的长度</td>
+</tr>
+<tr>
+<td><code>STRLOWCASE(）</code></td>
+<td>将所有的大写字母改写成小写字母</td>
+</tr>
+<tr>
+<td><code>STRMATCH(Str1,str2)</code></td>
+<td>字符串 <code>Str1</code> 中是否存在 <code>Str2</code>，可以使用通配符</td>
+</tr>
+<tr>
+<td><code>STRMID(Str1,po1,Len,REVERSE_OFFSET)</code></td>
+<td>从字符串 <code>po1</code> 开始取出 <code>Len</code> 个字符。字符串的第一个字符的位置为 0</td>
+</tr>
+<tr>
+<td><code>STRPOS(Exp_Str1,Sea_Str2,Pos,&lt;br /&gt;REVERSE_OFFSET,/REVERSE_SEARCH] )</code></td>
+<td>从一个字符串中查找与另外一个字符串完全匹配的起始点所在的位置。<code>Pos</code>是查找点的起始位置，默认值 为0、1（如果指定<code>/REVERSE_SEARCH]</code>）；指定时，则表示从开始的Pos起，或者从末尾开始的<code>Pos</code> 起（如果指定 <code>REVERSE_OFFSET</code> ）</td>
+</tr>
+<tr>
+<td><code>STRPUT,Des_Var_str,Sou_str,Pos</code></td>
+<td>将字符串<code>Sou_str</code>插入到字符串<code>Des_Var_str</code>之中，<code>POS</code>插入点的位置，默认值为 0，依次将字符串Sou_str覆盖插入到<code>Des_Var_str</code>中。<code>Sou_str</code> 不为字符串，则按默认格式自动转化从 <code>POS</code> 处开始插入<code>Des_Var_str</code>，如果插入值的位置超过了 <code>Des_Var</code> 的最大长度，则自然截断</td>
+</tr>
+<tr>
+<td><code>STRSPLIT(Str1)</code></td>
+<td>根据特定要求拆分字符串<code>str1</code>；</td>
+</tr>
+<tr>
+<td><code>STRTRIM(str,Flag)</code></td>
+<td>移去字符串中的空格。<code>Flag</code>：0(移去右边空格），1(移去左边空格），2（移去两边的空格）</td>
+</tr>
+<tr>
+<td><code>STRUPCASE(）</code></td>
+<td>将所有的小写字母改写成大写字母</td>
+</tr>
+</tbody></table>
+<h3 id="👀其它数据类型"><a href="#👀其它数据类型" class="headerlink" title="👀其它数据类型"></a>👀其它数据类型</h3><p><strong>结构体</strong>：创建结构体时用大括号<code>&#123;&#125;</code>，同时需要赋予结构体名称。</p>
+<blockquote>
+<p>注意：通过<code>&quot;help, struct1, /structure&quot;</code>语句可以查看结构体<code>struct1</code>的基本信息。通过结构体<code>&quot;变量名.成员名&quot;</code>或<code>&quot;变量名.(index)&quot;</code>的方式访问。</p>
+</blockquote>
+<p><strong>指针</strong>：指针用指针函数<code>Ptr_New()</code>来创建，通过<code>&quot;*&quot;</code>+指针变量名来访问。</p>
+<blockquote>
+<p>指针赋值与变量赋值不一样，指针赋值是使两个指针指向同一个堆向量，修改任意一个会影响另一个。</p>
+</blockquote>
+<p><strong>对象</strong>：对象是数据（属性）和程序（方法）封装在一起的实体。<code>IDL</code>中用<code>Obj_New</code>函数或<code>ObjArr</code>函数来创建对象。<code>ObjArr()</code>函数用来创建对象数组；<code>Obj_New()</code>函数用来创建某一特定类的对象。</p>
+<blockquote>
+<p>调用对象、销毁对象、处理函数</p>
+</blockquote>
+<p><strong>链表</strong>：链表（<code>list</code>)是一个复合数据类型，它可以包含变量、数组、结构体、指针、对象、链表和哈希表等数据类型。链表中的元素是有次序的，可以通过索引来进行编辑操作。</p>
+<blockquote>
+<p>链表是由<code>list()</code>函数来创建。链表访问与数组访问一样，通过下标索引来实现。创建链表、访问链表、增加链表、删除链表、链表反转、转为数组、链表连接、链表比较、销毁链表</p>
+</blockquote>
+<p><strong>哈希表</strong>：哈希表（<code>Hash</code>)是一个高效的复合数据类型，可以包含变量、数组、结构体、指针、对象、链表和哈希表等数据类型。哈希表的特点是关键字（<code>keys</code>）与值对应，通过链表函数或关键字快速访问处理。</p>
+<blockquote>
+<p>哈希表创建通过创建函数<code>Hash()</code>创建；元素访问是根据关键字；哈希表元素添加与数组元素的添加类似；其他操作：关键字输出、关键字查询、删除哈希表、转换为结构体、哈希表组合、哈希表比较、销毁哈希表。</p>
+</blockquote>
+<h3 id="👀运算符"><a href="#👀运算符" class="headerlink" title="👀运算符"></a>👀运算符</h3><ul>
+<li>数学运算符</li>
+</ul>
+<blockquote>
+<p>加（<code>+</code>）、减（<code>-</code>）、增运算（<code>++</code>）、减运算（<code>--</code>）、乘（<code>*</code>）、除（<code>/</code>）、幂（<code>^</code>）、取余（<code>mod</code>）、取小（<code>&lt;</code>）、取大（<code>&gt;</code>）</p>
+</blockquote>
+<ul>
+<li>逻辑运算符</li>
+</ul>
+<blockquote>
+<p>逻辑与（<code>&amp;&amp;</code>）、逻辑或（<code>||</code>）、逻辑非（<code>~</code>）</p>
+</blockquote>
+<ul>
+<li>位运算符</li>
+</ul>
+<blockquote>
+<p>位加符（<code>AND</code>）、位取反符（<code>NOT</code>）、位或符（<code>OR</code>）、位异或符（<code>XOR</code>）</p>
+</blockquote>
+<ul>
+<li>关系运算符</li>
+</ul>
+<blockquote>
+<p>等于（<code>EQ</code>）、不等于（<code>NE</code>）、大于等于（<code>GE</code>）、大于（<code>GT</code>）、小于等于（<code>LE</code>）、小于（<code>LT</code>）。返回值是真（<code>1</code>）假（<code>0</code>）</p>
+</blockquote>
+<ul>
+<li>数组（矩阵）运算符</li>
+</ul>
+<blockquote>
+<p>数组乘（<code>#</code>）是第一个数组的列元素乘以第二个数组的行元素并求和。</p>
+<p>矩阵乘（<code>##</code>）与数组乘类似，区别是行乘以列。</p>
+</blockquote>
+<ul>
+<li>其它运算符</li>
+</ul>
+<blockquote>
+<p>圆括号<code>()</code>用来对表达式进行组合或一系列表达式控制优先级。</p>
+<p>方括号<code>[]</code>用来数组连接或对数组进行元素调用。</p>
+<p>条件运算符是<code>？:</code>，<code>value = expr1 ? expr2 : expr3</code> 如果 <code>expr1</code> 是 <code>true</code>，那么 <code>value</code> 等于 <code>expr2</code> ，否则 <code>value</code> &#x3D;等于<code>expr3</code>。</p>
+<p>对象方法调用符<code>.</code>或<code>-&gt;</code>两种，对象可以通过这两种符号来调用相关的方法。</p>
+<p>指针调用符为<code>*</code>，引用格式为<code>*指针变量名</code>。</p>
+</blockquote>
+<ul>
+<li>运算符优先级</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="center">优先级</th>
+<th align="left">操作符</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">一级（最高）</td>
+<td align="left"><code>()</code> (公式表达式)<br /><code>[]</code> (数组连接)</td>
+</tr>
+<tr>
+<td align="center">二级</td>
+<td align="left"><code>.</code> (结构体域表达式)<br /><code>[]</code> (数组元素调用)<br /><code>()</code> (函数引用)</td>
+</tr>
+<tr>
+<td align="center">三级</td>
+<td align="left"><code>*</code> (指针调用)<br /><code>^</code> (幂函数)<br /><code>++</code> (增函数)<br /><code>--</code> (减函数)</td>
+</tr>
+<tr>
+<td align="center">四级</td>
+<td align="left"><code>*</code> (乘)<br /><code>#</code> 和 <code>##</code> (矩阵乘)<br /><code>/</code>(除)<br /><code>MOD</code> (取余数)</td>
+</tr>
+<tr>
+<td align="center">五级</td>
+<td align="left"><code>+</code> (加)<br /><code>-</code> (减和取反)<br /><code>&lt;</code> (求小)<br /><code>&gt;</code> (求大)<br /><code>NOT</code> (位取反)<br /><code>~</code> (逻辑取反)</td>
+</tr>
+<tr>
+<td align="center">六级</td>
+<td align="left"><code>EQ</code> (等于) <br/><code>NE</code> (不等于)<br /><code>LE</code> (小于等于) <br/><code>LT</code> (小于) <br/><code>GE</code> (大于等于) <br/><code>GT</code> (大于)</td>
+</tr>
+<tr>
+<td align="center">七级</td>
+<td align="left"><code>AND</code> (位与) <br/><code>OR</code> (位或) <br/><code>XOR</code> (位异或)</td>
+</tr>
+<tr>
+<td align="center">八级</td>
+<td align="left"><code>&amp;&amp;</code> (逻辑与)</td>
+</tr>
+<tr>
+<td align="center">九级</td>
+<td align="left"><code>?:</code> (条件表达式)</td>
+</tr>
+</tbody></table>
+<h3 id="👀其他符号"><a href="#👀其他符号" class="headerlink" title="👀其他符号"></a>👀其他符号</h3><p><code>$</code>续行符：续行符主要应用在一条语句过长或参数过多时进行格式化显示；</p>
+<p><code>&amp;</code>同行符：使用了同行符相当于两行代码写在一行之中；</p>
+<p><code>;</code>注释符：此符号之后的该行所有代码都将看做是注释，不参与编译运行。</p>
+<p>笔者不才，请多交流！！！</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://heartlovelife.github.io">Xiaotangsmiles</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://heartlovelife.github.io/2022/10/30/IDL-Basic01/">https://heartlovelife.github.io/2022/10/30/IDL-Basic01/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://heartlovelife.github.io" target="_blank">江湖是你画中亦是你</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/ENVI/">ENVI</a><a class="post-meta__tags" href="/tags/IDL/">IDL</a></div><div class="post_share"><div class="social-share" data-image="https://s2.loli.net/2022/12/11/C3AdepLFogSNkZJ.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/gh/overtrue/share.js@master/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i> 打赏</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/wechat.jpg" target="_blank"><img class="post-qr-code-img" src="/img/loading1.gif" data-original="/img/wechat.jpg" alt="wechat(微信)"/></a><div class="post-qr-code-desc">wechat(微信)</div></li><li class="reward-item"><a href="/img/alipay.jpg" target="_blank"><img class="post-qr-code-img" src="/img/loading1.gif" data-original="/img/alipay.jpg" alt="alipay(支付宝)"/></a><div class="post-qr-code-desc">alipay(支付宝)</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2022/09/25/Ex-Model-File/"><img class="next-cover" src="/img/loading1.gif" data-original="https://s2.loli.net/2022/09/25/uhL4TpOZeQr5Yqo.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Python异常处理-模块Model/Package-文件处理</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/loading1.gif" data-original="/img/touxiang.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Xiaotangsmiles</div><div class="author-info__description">我们总以为来日方长，却忘了世事无常</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">13</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">11</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/HeartLoveLife"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/HeartLoveLife" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="https://blog.csdn.net/twg666" target="_blank" title="CSDN"><i class="fa fa-book-open"></i></a><a class="social-icon" href="tencent://AddContact/?fromId=45&amp;fromSubId=1&amp;subcmd=all&amp;uin=491037927&amp;website=www.oicqzone.com" target="_blank" title="QQ"><i class="fab fa-qq"></i></a><a class="social-icon" href="mailto:xiaotangsmiles@163.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E2%9B%84IDL%E7%AE%80%E4%BB%8B"><span class="toc-number">1.</span> <span class="toc-text">⛄IDL简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E2%9B%84IDL%E8%AF%AD%E6%B3%95%E5%9F%BA%E7%A1%80"><span class="toc-number">2.</span> <span class="toc-text">⛄IDL语法基础</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%91%80%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-number">2.1.</span> <span class="toc-text">👀数据类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%91%80%E5%B8%B8%E9%87%8F%E5%92%8C%E5%8F%98%E9%87%8F"><span class="toc-number">2.2.</span> <span class="toc-text">👀常量和变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%91%80%E6%95%B0%E7%BB%84"><span class="toc-number">2.3.</span> <span class="toc-text">👀数组</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%F0%9F%91%81%E5%88%9B%E5%BB%BA%E6%95%B0%E7%BB%84"><span class="toc-number">2.3.1.</span> <span class="toc-text">👁创建数组</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%F0%9F%91%81%E6%95%B0%E7%BB%84%E5%AD%98%E5%82%A8"><span class="toc-number">2.3.2.</span> <span class="toc-text">👁数组存储</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%F0%9F%91%81%E6%95%B0%E7%BB%84%E8%AE%BF%E9%97%AE"><span class="toc-number">2.3.3.</span> <span class="toc-text">👁数组访问</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%F0%9F%91%81%E6%95%B0%E7%BB%84%E8%BF%90%E7%AE%97"><span class="toc-number">2.3.4.</span> <span class="toc-text">👁数组运算</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%F0%9F%91%81%E7%9B%B8%E5%85%B3%E5%87%BD%E6%95%B0"><span class="toc-number">2.3.5.</span> <span class="toc-text">👁相关函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%F0%9F%91%81%E7%9F%A9%E9%98%B5%E8%BF%90%E7%AE%97"><span class="toc-number">2.3.6.</span> <span class="toc-text">👁矩阵运算</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%91%80%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="toc-number">2.4.</span> <span class="toc-text">👀字符串</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%91%80%E5%85%B6%E5%AE%83%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-number">2.5.</span> <span class="toc-text">👀其它数据类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%91%80%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-number">2.6.</span> <span class="toc-text">👀运算符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%91%80%E5%85%B6%E4%BB%96%E7%AC%A6%E5%8F%B7"><span class="toc-number">2.7.</span> <span class="toc-text">👀其他符号</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2022/10/30/IDL-Basic01/" title="IDL语法基础（01）"><img src="/img/loading1.gif" data-original="https://s2.loli.net/2022/12/11/C3AdepLFogSNkZJ.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="IDL语法基础（01）"/></a><div class="content"><a class="title" href="/2022/10/30/IDL-Basic01/" title="IDL语法基础（01）">IDL语法基础（01）</a><time datetime="2022-10-30T08:26:17.000Z" title="发表于 2022-10-30 16:26:17">2022-10-30</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/09/25/Ex-Model-File/" title="Python异常处理-模块Model/Package-文件处理"><img src="/img/loading1.gif" data-original="https://s2.loli.net/2022/09/25/uhL4TpOZeQr5Yqo.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Python异常处理-模块Model/Package-文件处理"/></a><div class="content"><a class="title" href="/2022/09/25/Ex-Model-File/" title="Python异常处理-模块Model/Package-文件处理">Python异常处理-模块Model/Package-文件处理</a><time datetime="2022-09-25T03:17:24.000Z" title="发表于 2022-09-25 11:17:24">2022-09-25</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/09/18/Python-OOP/" title="Python面向对象详解"><img src="/img/loading1.gif" data-original="https://s2.loli.net/2022/09/24/wtZsiq1j5SvKBx4.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Python面向对象详解"/></a><div class="content"><a class="title" href="/2022/09/18/Python-OOP/" title="Python面向对象详解">Python面向对象详解</a><time datetime="2022-09-18T05:51:58.000Z" title="发表于 2022-09-18 13:51:58">2022-09-18</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/09/17/Python-Add05/" title="Python小知识点"><img src="/img/loading1.gif" data-original="https://s2.loli.net/2022/07/09/Yi6SHEUkaCPcN1F.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Python小知识点"/></a><div class="content"><a class="title" href="/2022/09/17/Python-Add05/" title="Python小知识点">Python小知识点</a><time datetime="2022-09-17T03:41:38.000Z" title="发表于 2022-09-17 11:41:38">2022-09-17</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/09/11/re/" title="Python中的正则表达式详解"><img src="/img/loading1.gif" data-original="https://s2.loli.net/2022/12/10/dYZWaCEIK9jl38z.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Python中的正则表达式详解"/></a><div class="content"><a class="title" href="/2022/09/11/re/" title="Python中的正则表达式详解">Python中的正则表达式详解</a><time datetime="2022-09-11T07:30:38.000Z" title="发表于 2022-09-11 15:30:38">2022-09-11</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2021 - 2022 By Xiaotangsmiles</div><div class="framework-info"><span>地址 </span><a href="https://heartlovelife.github.io">HeartLoveLife</a><span class="footer-separator">|</span><span>邮箱 </span><a href="javascript:void(0);">xiaotangsmiles@163.com</a></div><div class="footer_custom_text">Hi, welcome to my <a href="https://heartlovelife.github.io/">blog</a>!</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script src="/js/search/local-search.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',preloader.endLoading())</script><div class="js-pjax"></div><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-nest.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = false;
+POWERMODE.mobile = true;
+document.body.addEventListener('input', POWERMODE);
+</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(n){n.imageLazyLoadSetting.processImages=o;var e=n.imageLazyLoadSetting.isSPA,i=n.imageLazyLoadSetting.preloadRatio||1,r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function o(){e&&(r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")));for(var t,a=0;a<r.length;a++)0<=(t=(t=r[a]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(n.innerHeight*i||document.documentElement.clientHeight*i)&&function(){var t,e,n,i,o=r[a];t=o,e=function(){r=r.filter(function(t){return o!==t})},n=new Image,i=t.getAttribute("data-original"),n.onload=function(){t.src=i,e&&e()},t.src!==i&&(n.src=i)}()}o(),n.addEventListener("scroll",function(){var t,e;t=o,e=n,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(e)},500)})}(this);</script></body></html>
