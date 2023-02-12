@@ -1,0 +1,1516 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>Matlab语法基础（01） | 江湖是你画中亦是你</title><meta name="keywords" content="Matlab,科学计算"><meta name="author" content="Xiaotangsmiles"><meta name="copyright" content="Xiaotangsmiles"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="MathWorks公司创立于 1984 年，是领先的为工程师和科学家提供数学计算软件的供应商，旗下产品包括MATLAB产品家族、Simulink产品家族及 PolySpace产品家族。 MATLAB是矩阵实验室（Matrix Laboratory）的简称，是一种用于算法开发、数据可视化、数据分析及数值计算的高级技术计算语言和交互式环境。MATLAB的应用范围非常广，包括信号和图像处理、通信、控制系">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Matlab语法基础（01）">
+<meta property="og:url" content="https://heartlovelife.github.io/2022/12/17/Matlab-Basic01/index.html">
+<meta property="og:site_name" content="江湖是你画中亦是你">
+<meta property="og:description" content="MathWorks公司创立于 1984 年，是领先的为工程师和科学家提供数学计算软件的供应商，旗下产品包括MATLAB产品家族、Simulink产品家族及 PolySpace产品家族。 MATLAB是矩阵实验室（Matrix Laboratory）的简称，是一种用于算法开发、数据可视化、数据分析及数值计算的高级技术计算语言和交互式环境。MATLAB的应用范围非常广，包括信号和图像处理、通信、控制系">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s2.loli.net/2022/12/17/2RZMExnlA8C6vHS.jpg">
+<meta property="article:published_time" content="2022-12-17T05:42:49.000Z">
+<meta property="article:modified_time" content="2023-02-12T11:20:46.570Z">
+<meta property="article:author" content="Xiaotangsmiles">
+<meta property="article:tag" content="Matlab">
+<meta property="article:tag" content="科学计算">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s2.loli.net/2022/12/17/2RZMExnlA8C6vHS.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://heartlovelife.github.io/2022/12/17/Matlab-Basic01/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":250},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#1f1f1f","position":"bottom-left"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Matlab语法基础（01）',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-02-12 19:20:46'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const now = new Date()
+          const hour = now.getHours()
+          const isNight = hour <= 6 || hour >= 18
+          if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+          else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.1.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/loading1.gif" data-original="/img/touxiang.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">14</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">13</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">7</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><span> 主页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><span> 博文</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 生活</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/photos/"><span> 相册</span></a></li><li><a class="site-page child" href="/music/"><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><span> 影视</span></a></li><li><a class="site-page child" href="/shuoshuo/"><span> 分享</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/comment/"><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><span> 关于笔者</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://s2.loli.net/2022/12/17/2RZMExnlA8C6vHS.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">江湖是你画中亦是你</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><span> 主页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><span> 博文</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 生活</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/photos/"><span> 相册</span></a></li><li><a class="site-page child" href="/music/"><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><span> 影视</span></a></li><li><a class="site-page child" href="/shuoshuo/"><span> 分享</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/comment/"><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><span> 关于笔者</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Matlab语法基础（01）</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-12-17T05:42:49.000Z" title="发表于 2022-12-17 13:42:49">2022-12-17</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-02-12T11:20:46.570Z" title="更新于 2023-02-12 19:20:46">2023-02-12</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Matlab/">Matlab</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">18k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>62分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Matlab语法基础（01）"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p><code>MathWorks</code>公司创立于 1984 年，是领先的为工程师和科学家提供数学计算软件的供应商，旗下产品包括<code>MATLAB</code>产品家族、<code>Simulink</code>产品家族及 <code>PolySpace</code>产品家族。</p>
+<p><code>MATLAB</code>是矩阵实验室（<code>Matrix Laboratory</code>）的简称，是一种用于算法开发、数据可视化、数据分析及数值计算的高级技术计算语言和交互式环境。<code>MATLAB</code>的应用范围非常广，包括信号和图像处理、通信、控制系统设计、测试和测量、财务建模和分析，以及计算生物学等众多应用领域。附加的工具箱（单独提供的专用 <code>MATLAB</code> 函数集）扩展了<code>MATLAB</code>的使用环境，以解决这些应用领域内特定类型的问题。</p>
+<p><code>Simulink</code>是一个用于对动态系统进行多域建模和模型设计的平台。它提供了一个交互式图形环境，以及一个自定义模块库，并可针对特定应用加以扩展，可应用于控制系统设计、信号处理和通信及图像处理等众多领域。</p>
+<p><code>PolySpace</code>提供代码验证，可确保消除源代码中的溢出、除零、数组访问越界及其他运行错误。此类产品可以证明源代码中不存在某些运行错误，使工程师能够选择并跟踪嵌入式软件质量的指标和阈值，帮助软件团队更好地定义质量目标，并更快地实施。该软件已经在汽车、航空、国防及工业自动化和机械行业中得到广泛应用。</p>
+<p>目前，经常使用的<code>MATLAB</code>软件集成了<code>MATLAB</code>和<code>Simulink</code>两大模块；而<code>PolySpace</code> 是独立于<code>MATLAB</code> 软件之外的，需要单独安装。</p>
+<table>
+<thead>
+<tr>
+<th>数学软件</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>Mathematica</code></td>
+<td><code>Mathematica</code>是一个综合的数学软件环境，具有数值计算、符号推导、数据可视化和编程等多种功能，在符号计算领域有很高的知名度。<code>Mathematica</code>软件分为两大部分：<code>Kemel</code>和<code>FrontEnd</code>。<code>Kemel</code>是软件的计算中心，而<code>FrontEnd</code>负责与用户的交流，两者有一定的独立性。<code>Mathematica</code>的表达式含义十分丰富，几乎包含了一切要处理的对象。</td>
+</tr>
+<tr>
+<td><code>Maple</code></td>
+<td><code>Maple</code>是世界上较优秀的几款数学软件之一。它以友善的使用环境、强大的符号处理、精确的数值计算、灵活的图形显示、高效的编程功能为越来越多的教师、学生和科研人员所喜爱，并成为数学处理的首选工具。由于<code>Maple</code>软件原是为符号计算而设计的，因此在数值计算与绘图方面的运算速度要比<code>MATLAB</code>慢。<code>Maple</code>的帮助系统是用英语写的，这给英文差的人们带来了不便。</td>
+</tr>
+</tbody></table>
+<p><code>MATLAB</code>作为和<code>Mathematica</code>、<code>Maple</code>并列的三大数学软件之一，强项就是其强大的矩阵计算及仿真能力。每次 <code>MathWorks</code>公司发布<code>MATLAB</code>的同时，也会发布仿真工具<code>Simulink</code>。<code>MATLAB</code>以其良好的开放性和运行的可靠性，已经成为国际控制界公认的标准计算软件，<code>MATLAB</code>在数值计算方面独占鳌头。</p>
+<ul>
+<li>计算功能强大；</li>
+<li>绘图方便：它包括强力的二维及三维图形函数、图像处理和动画显示等函数；</li>
+<li>功能强大的工具箱（应用程序）：功能性工具箱和学科性工具；</li>
+<li>帮助功能完整。</li>
+</ul>
+<blockquote>
+<p><strong>clc</strong>：清除命令窗口的内容，对工作环境中的全部变量无影响；</p>
+<p><strong>close</strong>：关闭当前的Figure窗口；</p>
+<p><strong>close all</strong>：关闭所有的Figure窗口；</p>
+<p><strong>clear</strong>：清除工作空间的所有变量；</p>
+<p><strong>clear all</strong>：清除工作空间所有变量、函数、MEX文件；</p>
+<p><strong>disp</strong>：用来展示变量的内容，可以是字符串、元胞、矩阵、结构体；</p>
+<p><strong>调用帮助</strong>：help ~；或demos；或doc；</p>
+<p><strong>whos函数</strong>：用来列出当前工作区中的变量名及它们的详细信息，如 size（大小）、bytes（字节）及class（数据类型）等；</p>
+<p><strong>数组&#x2F;矩阵索引</strong>：从1开始；</p>
+<p><strong>命令行小细节</strong>：当命令后面有分号（半角符号格式）时，按Enter键后，命令行窗口中不显示运算结果；如果无分号，则在命令行窗口中显示运算结果。当希望先输入多条语句，然后再同时执行它们时，则在输入下一条命令时，要在按住Shift键的同时按Enter键进行换行输入。</p>
+</blockquote>
+<h2 id="⛄数据类型"><a href="#⛄数据类型" class="headerlink" title="⛄数据类型"></a>⛄数据类型</h2><p><code>MATLAB</code>中的数据类型主要包括数值类型、逻辑类型、字符串、函数句柄、结构体和单元数组类型。这 6 种基本的数据类型都是按照数组形式存储和操作的。</p>
+<h3 id="👀数值类型"><a href="#👀数值类型" class="headerlink" title="👀数值类型"></a>👀数值类型</h3><p>基本的数值类型主要有整数、单精度浮点数和双精度浮点数。<code>MATLAB</code>中数值类型的数据包括有符号和无符号整数、单精度浮点数和双精度浮点数。在未加说明与特殊定义时，<code>MATLAB</code>对所有数值按照<strong>双精度浮点数</strong>类型进行存储和操作，相对于双精度浮点数格式，整数型与单精度浮点型的优点在于节省变量占用的内存空间，当然首先要在满足精度要求的前提下。</p>
+<h4 id="👁整数类型"><a href="#👁整数类型" class="headerlink" title="👁整数类型"></a>👁整数类型</h4><p><code>MATLAB</code>中提供了8种内置的整数类型，这8种类型的存储占用位数、能表示的数值范围和转换函数均不相同。不同的整数类型所占用的位数不同，因此能够表示的数值范围也不同。在实际应用中，应根据实际需要合理选择合适的整数类型。</p>
+<table>
+<thead>
+<tr>
+<th align="center">整数类型</th>
+<th align="center">数值范围</th>
+<th align="center">转换函数</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">有符号 8 位整数</td>
+<td align="center">-2^7^~2^7^-1</td>
+<td align="center">int8</td>
+</tr>
+<tr>
+<td align="center">无符号 8 位整数</td>
+<td align="center">0~2^8^-1</td>
+<td align="center">uint8</td>
+</tr>
+<tr>
+<td align="center">有符号 16 位整数</td>
+<td align="center">-2^15^~2^15^-1</td>
+<td align="center">int16</td>
+</tr>
+<tr>
+<td align="center">无符号 16 位整数</td>
+<td align="center">0~2^16^-1</td>
+<td align="center">uint16</td>
+</tr>
+<tr>
+<td align="center">有符号 32 位整数</td>
+<td align="center">-2^31^~2^31^-1</td>
+<td align="center">int32</td>
+</tr>
+<tr>
+<td align="center">无符号 32 位整数</td>
+<td align="center">0~2^32^-1</td>
+<td align="center">uint32</td>
+</tr>
+<tr>
+<td align="center">有符号 64 位整数</td>
+<td align="center">-2^63^~2^63^-1</td>
+<td align="center">int64</td>
+</tr>
+<tr>
+<td align="center">无符号 64 位整数</td>
+<td align="center">0~2^64^-1</td>
+<td align="center">uint64</td>
+</tr>
+</tbody></table>
+<p>由于 <code>MATLAB</code>中数值的默认存储类型是<strong>双精度浮点类型</strong>，因此将变量设置为整数类型时，需要使用相应的转换函数，将双精度浮点数转换为指定的整数类型。<code>MATLAB</code>中还包含了几类不同运算法则的取整函数，也可以把浮点数转换成整数。在不超出数值范围的情况下，任意两个整数类型之间也可以通过转换函数进行相互转换。同时，由于不同的整数类型能够表示的数值范围不同，因此当运算结果超出相应的整数类型能够表示的范围时，就会出现一处错误，运算结果被置为该整数类型能够表示的最大值或最小值。</p>
+<table>
+<thead>
+<tr>
+<th align="center">函数</th>
+<th align="center">运算法则</th>
+<th align="center">示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><code>floor</code>(x)</td>
+<td align="center">向下取整</td>
+<td align="center">floor(1.2)&#x3D;1；floor(2.5)&#x3D;2；floor(－2.5)&#x3D; －3</td>
+</tr>
+<tr>
+<td align="center"><code>ceil</code>(x)</td>
+<td align="center">向上取整</td>
+<td align="center">ceil(1.2)&#x3D;2；ceil(2.5)&#x3D;3；ceil(－2.5)&#x3D;－2</td>
+</tr>
+<tr>
+<td align="center"><code>round</code>(x)</td>
+<td align="center">四舍五入</td>
+<td align="center">round(1.2)&#x3D;1；round(2.5)&#x3D;3；round(－2.5)&#x3D;－3</td>
+</tr>
+<tr>
+<td align="center"><code>fix</code>(x)</td>
+<td align="center">向0取整</td>
+<td align="center">fix(1.2)&#x3D;1；fix(2.5)&#x3D;2；fix(－2.5)&#x3D;－2</td>
+</tr>
+</tbody></table>
+<h4 id="👁浮点数类型"><a href="#👁浮点数类型" class="headerlink" title="👁浮点数类型"></a>👁浮点数类型</h4><p><code>MATLAB</code>中提供了单精度浮点数类型和双精度浮点数类型，其存储位宽、能够表示的数值范围、数值精度各方面均不相同，单精度浮点类型的占用位数少，因此占用内存小，但能够表示的数值范围和数值的精度都比双精度浮点类型小。</p>
+<table>
+<thead>
+<tr>
+<th align="center">浮点类型</th>
+<th align="center">存储位宽</th>
+<th>数值范围</th>
+<th align="center">转换函数</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">单精度</td>
+<td align="center">32</td>
+<td>－3.40282e+038 ~－1.17549e-038 <br/>1.17549e-038 ~ 3.40282e+038</td>
+<td align="center">single</td>
+</tr>
+<tr>
+<td align="center">双精度</td>
+<td align="center">64</td>
+<td>－1.79769e+308 ~－2.22507e-308 <br/>2.22507e－308 ~ 1.79769e+308</td>
+<td align="center">double</td>
+</tr>
+</tbody></table>
+<p>双精度浮点数参与运算时，返回值的类型依赖于参与运算的其他数据类型。参与运算的其他数据为逻辑型、字符型时，返回结果为双精度浮点型；参与运算的其他数据为整数型时，返回结果为相应的整数类型；参与运算的其他数据为单精度浮点型时，返回结果为相应的单精度浮点型。</p>
+<blockquote>
+<p>在 <code>MATLAB</code>中，单精度浮点类型不能与整数类型进行算术运算。</p>
+</blockquote>
+<h4 id="👁复数"><a href="#👁复数" class="headerlink" title="👁复数"></a>👁复数</h4><p>复数包括实部和虚部两部分。<code>MATLAB</code>中默认使用字符<code>i</code>或<code>j</code>作为虚部标志。创建复数时，可以直接按照复数形式进行输入或者利用 <code>complex</code>函数。</p>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>说明</th>
+<th>函数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>real</code>(z)</td>
+<td>返回复数 z 的实部</td>
+<td><code>imag</code>(z)</td>
+<td>返回复数 z 的虚部</td>
+</tr>
+<tr>
+<td><code>abs</code>(z)</td>
+<td>返回复数 z 的模</td>
+<td><code>angle</code>(z)</td>
+<td>返回复数 z 的辐角</td>
+</tr>
+<tr>
+<td><code>conj</code>(z)</td>
+<td>返回复数 z 的共轭复数</td>
+<td><code>complex</code>(a,b)</td>
+<td>以 a 为实部、b 为虚部创建复数</td>
+</tr>
+</tbody></table>
+<h4 id="👁无穷量（Inf）和非数值量（NaN）"><a href="#👁无穷量（Inf）和非数值量（NaN）" class="headerlink" title="👁无穷量（Inf）和非数值量（NaN）"></a>👁无穷量（<code>Inf</code>）和非数值量（<code>NaN</code>）</h4><p><code>MATLAB</code>中使用<code>Inf</code>和<code>-Inf</code>分别代表正无穷量和负无穷量，<code>NaN</code>表示非数值量。正负无穷量的产生一般是由于运算溢出，产生了超出双精度浮点数数值范围的结果，非数值量则是由于<code>0/0</code>或<code>Inf/Inf</code>类型的非正常运算而产生的，这两个<code>NaN</code>彼此是不相等的。</p>
+<h3 id="👀逻辑类型"><a href="#👀逻辑类型" class="headerlink" title="👀逻辑类型"></a>👀逻辑类型</h3><p>逻辑类型的数据是指布尔类型的数据及数据之间的逻辑关系。作为所有关系和逻辑表达式的输入，<code>MATLAB</code>把任何非零数值当作真，把零当作假。所有关系和逻辑表达式的输出：对于真，输出为1；对于假，输出为0。逻辑类型数据进行运算时需要用到关系操作符和逻辑运算符。</p>
+<table>
+<thead>
+<tr>
+<th align="center">关系操作符</th>
+<th align="center">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">&lt;</td>
+<td align="center">小于</td>
+</tr>
+<tr>
+<td align="center">&lt;&#x3D;</td>
+<td align="center">小于或等于</td>
+</tr>
+<tr>
+<td align="center">&gt;</td>
+<td align="center">大于</td>
+</tr>
+<tr>
+<td align="center">&gt;&#x3D;</td>
+<td align="center">大于或等于</td>
+</tr>
+<tr>
+<td align="center">&#x3D;&#x3D;</td>
+<td align="center">等于</td>
+</tr>
+<tr>
+<td align="center">~&#x3D;</td>
+<td align="center">不等于</td>
+</tr>
+</tbody></table>
+<p><code>MATLAB</code>关系操作符能用来比较两个同样大小的数组，或用来比较一个数组和一个标量。在后一种情况中，标量和数组中的每一个元素相比较，结果与数组大小一样。</p>
+<table>
+<thead>
+<tr>
+<th align="center">逻辑运算符</th>
+<th align="center">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">&amp;</td>
+<td align="center">与</td>
+</tr>
+<tr>
+<td align="center">|</td>
+<td align="center">或</td>
+</tr>
+<tr>
+<td align="center">~</td>
+<td align="center">非</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p><code>xor</code>(x , y )指令的功能为异或运算，x和y同为零（假）或非零（真）时返回0，否则返回1。<br><code>any</code>(x)指令的功能为判断是否为零向量或零矩阵（即向量或矩阵中的元素全部为零），如果是零向量或零矩阵，则返回1，否则返回0。</p>
+</blockquote>
+<p><code>MATLAB</code> 还提供了大量的函数，在运算过程中用来测试特殊值或条件是否存在，并返回相应的表示结果的逻辑值。</p>
+<table>
+<thead>
+<tr>
+<th>函数名称</th>
+<th>函数功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>finite</code></td>
+<td>元素有限，返回真值</td>
+</tr>
+<tr>
+<td><code>Isempty</code></td>
+<td>参量为空，返回真值</td>
+</tr>
+<tr>
+<td><code>isglobal</code></td>
+<td>参量是一个全局变量，返回真值</td>
+</tr>
+<tr>
+<td><code>ishold</code></td>
+<td>当前绘图保持状态是“ON”，返回真值</td>
+</tr>
+<tr>
+<td><code>isieee</code></td>
+<td>计算机执行 IEEE 算术运算，返回真值</td>
+</tr>
+<tr>
+<td><code>isinf</code></td>
+<td>元素无穷大，返回真值</td>
+</tr>
+<tr>
+<td><code>isletter</code></td>
+<td>元素为字母，返回真值</td>
+</tr>
+<tr>
+<td><code>isnan</code></td>
+<td>元素为不定值，返回真值</td>
+</tr>
+<tr>
+<td><code>isreal</code></td>
+<td>参量无虚部，返回真值</td>
+</tr>
+<tr>
+<td><code>isspace</code></td>
+<td>元素为空格字符，返回真值</td>
+</tr>
+<tr>
+<td><code>isstr</code></td>
+<td>参量为一个字符串，返回真值</td>
+</tr>
+<tr>
+<td><code>isstudent</code></td>
+<td>MATLAB 为学生版，返回真值</td>
+</tr>
+<tr>
+<td><code>isunix</code></td>
+<td>计算机为 UNIX 系统，返回真值</td>
+</tr>
+</tbody></table>
+<h3 id="👀字符和字符串"><a href="#👀字符和字符串" class="headerlink" title="👀字符和字符串"></a>👀字符和字符串</h3><p>一个字符串是存储在一个行向量中的文本，这个行向量中的每一个元素代表一个字符。实际上，元素中存放的是字符的内部代码，即<code>ASCII</code>码。由于字符串是以向量的形式来存储的，因此可以通过它的下标对字符串中的任何一个元素进行访问。字符矩阵也可以通过下标索引进行访问，但是矩阵的每行字符数必须相同。</p>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">String =</span><br><span class="line">    <span class="string">&#x27;Every good boy does fun.&#x27;</span></span><br><span class="line">&gt;&gt; <span class="built_in">size</span>(String)</span><br><span class="line"></span><br><span class="line"><span class="built_in">ans</span> =</span><br><span class="line">     <span class="number">1</span>    <span class="number">24</span></span><br><span class="line">&gt;&gt; whos </span><br><span class="line">  Name        Size            Bytes  Class     Attributes</span><br><span class="line"></span><br><span class="line">  String      <span class="number">1</span>x24               <span class="number">48</span>  char                </span><br><span class="line">  <span class="built_in">ans</span>         <span class="number">1</span>x2                <span class="number">16</span>  double   </span><br></pre></td></tr></table></figure>
+
+<p>一个字符串是由<strong>单引号</strong>括起来的简单文本。在字符串里的每个字符是数组里的一个元素，字符串的存储要求每个字符8字节，如同<code>MATLAB</code>的其他变量。</p>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">&gt;&gt; String =<span class="string">&#x27;Every good boy does fun.&#x27;</span></span><br><span class="line">String =</span><br><span class="line">    <span class="string">&#x27;Every good boy does fun.&#x27;</span></span><br><span class="line">&gt;&gt; a = String(<span class="number">7</span>:<span class="number">10</span>) </span><br><span class="line">a =</span><br><span class="line">    <span class="string">&#x27;good&#x27;</span></span><br><span class="line">&gt;&gt; b = String(<span class="number">10</span>:<span class="number">-1</span>:<span class="number">7</span>) </span><br><span class="line">b =</span><br><span class="line">    <span class="string">&#x27;doog&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>字符串内的单引号是由两个连续的单引号来表示的。字符串的连接可以直接将字符串数组连接来实现。</p>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">&gt;&gt; String =<span class="string">&#x27;It&#x27;&#x27;s not the manual!&#x27;</span></span><br><span class="line">String =</span><br><span class="line">    <span class="string">&#x27;It&#x27;</span>s not the manual!<span class="string">&#x27;</span></span><br><span class="line"><span class="string">&gt;&gt; U =&#x27;</span>Hello,<span class="string">&#x27;; </span></span><br><span class="line"><span class="string">&gt;&gt; V =&#x27;</span> world!<span class="string">&#x27;; </span></span><br><span class="line"><span class="string">&gt;&gt; W = [U V] </span></span><br><span class="line"><span class="string">W =</span></span><br><span class="line"><span class="string">    &#x27;</span>Hello, world!<span class="string">&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="👀函数句柄"><a href="#👀函数句柄" class="headerlink" title="👀函数句柄"></a>👀函数句柄</h3><p>在<code>MATLAB</code>平台中，对函数的调用方法分为直接调用法和间接调用法。</p>
+<ul>
+<li>直接调用函数，被调用的函数通常被称为子函数。但是子函数只能被与其<code>M</code>文件同名的主函数或在<code>M</code>文件中的其他函数所调用，同时在一个文件中只能有一个主函数。</li>
+<li>而使用函数句柄对函数进行调用则避免了上述问题。函数句柄实际上提供了一种间接调用函数的方法。创建函数句柄需要用到操作符<code>@</code>。对<code>MATLAB</code>库函数中提供的各种<code>M</code>文件中的函数和使用者自主编写的程序中的内部函数，都可以创建函数句柄，从而可以通过函数句柄来实现对这些函数的间接调用。</li>
+</ul>
+<p>创建函数句柄的一般句法格式为：</p>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">Function_Handle = @Function_Filename; </span><br><span class="line"><span class="comment">% Function_Filename是函数所对应的M文件的名称或MATLAB内部函数的名称。</span></span><br><span class="line"><span class="comment">% @是句柄创建操作符。</span></span><br><span class="line"><span class="comment">% Function_Handle变量保存了这一函数句柄，并在后续的运算中作为数据流进行传递。</span></span><br></pre></td></tr></table></figure>
+
+<p>例如，<code>F_Handle=@cos</code>就创建了<code>MATLAB</code>内部函数<code>cos</code>的句柄，并将其保存在<code>F_Handle</code>变量中，后续的运算过程中就可以通过<code>F_Handle(x)</code>来实现<code>cos(x)</code>的功能。</p>
+<h3 id="👀结构体类型"><a href="#👀结构体类型" class="headerlink" title="👀结构体类型"></a>👀结构体类型</h3><p><code>MATLAB</code>中的结构体与<code>C</code>语言中的结构体类似，一个结构体可以通过字段存储多个不同类型的数据。因此，结构体相当于一个数据容器，把多个相关联的不同类型的数据封装在一个结构体对象中。</p>
+<p>一个结构体中可以具有多个字段，每个字段又可以存储不同类型的数据，通过这种方式就把多个不同类型的数据组织在一个结构体对象中。创建结构体对象的方法有两种，可以直接通过赋值语句给结构体的字段赋值，也可以使用结构体创建函数<code>struct</code>。</p>
+<p>（1）直接赋值创建</p>
+<p>通过字段赋值创建结构体。在对结构体的字段进行赋值时，赋值表达式的变量名使用“<code>结构体名称.字段名称</code>”的形式书写，对同一个结构体可以进行多个字段的赋值。</p>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">Student.Name=<span class="string">&#x27;Sam&#x27;</span>; </span><br><span class="line">Student.Grade=<span class="number">6</span>; </span><br><span class="line">Student.Subject=&#123;<span class="string">&#x27;Chinese&#x27;</span>,<span class="string">&#x27;Math&#x27;</span>,<span class="string">&#x27;English&#x27;</span>&#125;; </span><br><span class="line">Student.Result=&#123;<span class="number">99</span>,<span class="number">99</span>,<span class="number">99</span>&#125;; </span><br><span class="line"></span><br><span class="line"><span class="comment">% 输出结果</span></span><br><span class="line">&gt;&gt; Student</span><br><span class="line">Student = </span><br><span class="line">  包含以下字段的 struct:</span><br><span class="line">       Name: <span class="string">&#x27;Sam&#x27;</span></span><br><span class="line">      Grade: <span class="number">6</span></span><br><span class="line">    Subject: &#123;<span class="string">&#x27;Chinese&#x27;</span>  <span class="string">&#x27;Math&#x27;</span>  <span class="string">&#x27;English&#x27;</span>&#125;</span><br><span class="line">     Result: &#123;[<span class="number">99</span>]  [<span class="number">99</span>]  [<span class="number">99</span>]&#125;</span><br><span class="line"><span class="comment">% Student 是一个 1×1 的结构体数组</span></span><br><span class="line">&gt;&gt; whos</span><br><span class="line">  Name         Size		Bytes  Class     Attributes</span><br><span class="line"></span><br><span class="line">  Student      <span class="number">1</span>x1			<span class="number">1450</span>  		   struct  </span><br></pre></td></tr></table></figure>
+
+<p>（2）函数<code>struct</code>创建</p>
+<p><code>struct</code>函数的句法形式为：<code>StrArray = struct(&#39;field1&#39;, var1, &#39;field2&#39;, var2,…,&#39;fieldn&#39;, varn)</code> </p>
+<blockquote>
+<p>在进行字段赋值操作时，没有明确赋值的字段，<code>MATLAB</code>默认赋值为空数组。通过<strong>圆括号</strong>索引进行字段赋值，还可以创建<strong>任意尺寸的结构体数组</strong>。需要注意的是，同一个结构体数组中的所有结构体对象具有<strong>相同</strong>的字段组合。</p>
+</blockquote>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">Schedule(<span class="number">2</span>)=struct(<span class="string">&#x27;Day&#x27;</span>,<span class="string">&#x27;Thursday&#x27;</span>,<span class="string">&#x27;Time&#x27;</span>,<span class="string">&#x27;15:00&#x27;</span>,<span class="string">&#x27;Number&#x27;</span>,<span class="number">18</span>) </span><br><span class="line">ScheduleArray=<span class="built_in">repmat</span>(struct(<span class="string">&#x27;Day&#x27;</span>,<span class="string">&#x27;Thursday&#x27;</span>,<span class="string">&#x27;Time&#x27;</span>,<span class="string">&#x27;15:00&#x27;</span>,<span class="string">&#x27;Number&#x27;</span>,<span class="number">18</span>),<span class="number">1</span>,<span class="number">2</span>) </span><br><span class="line">newArray=struct(<span class="string">&#x27;Day&#x27;</span>,&#123;<span class="string">&#x27;Thursday&#x27;</span>,<span class="string">&#x27;Friday&#x27;</span>&#125;,<span class="string">&#x27;Time&#x27;</span>,&#123;<span class="string">&#x27;15:00&#x27;</span>,<span class="string">&#x27;9:00&#x27;</span>&#125;, <span class="string">&#x27;Number&#x27;</span>,&#123;<span class="number">18</span>,<span class="number">6</span>&#125;) </span><br><span class="line"></span><br><span class="line"><span class="comment">% 输出结果</span></span><br><span class="line">Schedule = </span><br><span class="line">  包含以下字段的 <span class="number">1</span>×<span class="number">2</span> struct 数组:</span><br><span class="line">    Day</span><br><span class="line">    Time</span><br><span class="line">    Number</span><br><span class="line">ScheduleArray = </span><br><span class="line">  包含以下字段的 <span class="number">1</span>×<span class="number">2</span> struct 数组:</span><br><span class="line">    Day</span><br><span class="line">    Time</span><br><span class="line">    Number</span><br><span class="line">newArray = </span><br><span class="line">  包含以下字段的 <span class="number">1</span>×<span class="number">2</span> struct 数组:</span><br><span class="line">    Day</span><br><span class="line">    Time</span><br><span class="line">    Number</span><br><span class="line"><span class="comment">% 获取结构体某个元素</span></span><br><span class="line"><span class="comment">% 结构体第一个元素没有赋值，因此所有字段均为空数组</span></span><br><span class="line">&gt;&gt; Schedule(<span class="number">1</span>) </span><br><span class="line"><span class="built_in">ans</span> = </span><br><span class="line">  包含以下字段的 struct:</span><br><span class="line">       Day: []</span><br><span class="line">      Time: []</span><br><span class="line">    Number: []</span><br><span class="line"><span class="comment">% 1×2 的结构体数组ScheduleArray的两个元素完全相同</span></span><br><span class="line">&gt;&gt; ScheduleArray(<span class="number">1</span>) </span><br><span class="line"><span class="built_in">ans</span> = </span><br><span class="line">  包含以下字段的 struct:</span><br><span class="line">       Day: <span class="string">&#x27;Thursday&#x27;</span></span><br><span class="line">      Time: <span class="string">&#x27;15:00&#x27;</span></span><br><span class="line">    Number: <span class="number">18</span></span><br><span class="line">&gt;&gt; ScheduleArray(<span class="number">2</span>) </span><br><span class="line"><span class="built_in">ans</span> = </span><br><span class="line">  包含以下字段的 struct:</span><br><span class="line"></span><br><span class="line">       Day: <span class="string">&#x27;Thursday&#x27;</span></span><br><span class="line">      Time: <span class="string">&#x27;15:00&#x27;</span></span><br><span class="line">    Number: <span class="number">18</span></span><br><span class="line"><span class="comment">% newArray结构体中包含的结构体对象具有相同的字段组合</span></span><br><span class="line">&gt;&gt; newArray(<span class="number">1</span>) </span><br><span class="line"><span class="built_in">ans</span> = </span><br><span class="line">  包含以下字段的 struct:</span><br><span class="line">       Day: <span class="string">&#x27;Thursday&#x27;</span></span><br><span class="line">      Time: <span class="string">&#x27;15:00&#x27;</span></span><br><span class="line">    Number: <span class="number">18</span></span><br><span class="line">&gt;&gt; newArray(<span class="number">2</span>) </span><br><span class="line"><span class="built_in">ans</span> = </span><br><span class="line">  包含以下字段的 struct:</span><br><span class="line">       Day: <span class="string">&#x27;Friday&#x27;</span></span><br><span class="line">      Time: <span class="string">&#x27;9:00&#x27;</span></span><br><span class="line">    Number: <span class="number">6</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="👀数组类型"><a href="#👀数组类型" class="headerlink" title="👀数组类型"></a>👀数组类型</h3><p>在<code>MATLAB</code>中进行运算的所有数据类型，都是按照数组及矩阵的形式进行存储和运算的，而二者在<code>MATLAB</code>中的基本运算性质不同，阵列强调元素对元素的运算，而矩阵则采用线性代数的运算方式。数组的属性及数组之间的逻辑关系，是编写程序时非常重要的两个方面。在<code>MATLAB</code>平台上，数组的定义是广义的，数组的元素可以是<strong>任意</strong>的数据类型，例如可以是数值、字符串、指针等。</p>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">Array = [<span class="number">1</span> <span class="number">2</span> <span class="number">3</span> <span class="number">4</span> <span class="number">5</span> <span class="number">6</span>]</span><br><span class="line"><span class="comment">% 在MATLAB中可以使用冒号“:”来代表一系列数值，有时也使用它来定义数组。</span></span><br><span class="line"><span class="comment">% 创建从i开始、步长为1、到k结束的数字序列</span></span><br><span class="line"><span class="comment">% 如果i&gt;k，MATLAB则返回一个空矩阵。数字i和k不必是整数，该序列的最后一个数小于或等于k。</span></span><br><span class="line">Array = <span class="built_in">i</span>:k </span><br><span class="line"><span class="comment">% 创建从i开始、步长为j、到k结束的数字序列</span></span><br><span class="line"><span class="comment">% 如果j=0，则返回一个空矩阵。数字i、j和k不必是整数，该序列的最后一个数小于或等于k。</span></span><br><span class="line">Array = <span class="built_in">i</span>:<span class="built_in">j</span>:k</span><br><span class="line"></span><br><span class="line"><span class="comment">% 预定义函数也可以用来创建线性序列和逻辑序列</span></span><br><span class="line"><span class="comment">% 在区间[a,b]上创建一个有n个元素的向量，这n个数把整个区间线性分隔。</span></span><br><span class="line"><span class="comment">% 当数组的元素个数为0时，就称数组为空。空数组是特殊的数组，它不含有任何元素。空数组主要用于逻辑运算、数组声明、数组的清空等。</span></span><br><span class="line">Array = <span class="built_in">linspace</span>(a,b,n) </span><br><span class="line"></span><br><span class="line"><span class="comment">% 创建空数组</span></span><br><span class="line">Array_Empty=[] </span><br></pre></td></tr></table></figure>
+
+<h3 id="👀单元数组类型"><a href="#👀单元数组类型" class="headerlink" title="👀单元数组类型"></a>👀单元数组类型</h3><p>单元（<code>Cell</code>）数组是一种无所不包的广义矩阵。组成单元数组的每一个元素称为一个单元。每一个单元可以包括一个任意数组，如数值数组、字符串数组、结构体数组或另外一个单元数组，因而每一个单元可以具有不同的尺寸和内存占用空间。<code>MATLAB</code>中使用单元数组的目的在于，它可以把不同类型的数据归并到一个数组中。</p>
+<blockquote>
+<p>和一般的数值数组一样，单元数组的维数不受限制，可以是一维、二维或多维。</p>
+</blockquote>
+<h4 id="👁单元数组的创建"><a href="#👁单元数组的创建" class="headerlink" title="👁单元数组的创建"></a>👁单元数组的创建</h4><p>单元数组的创建有两种方法：使用<strong>赋值语句创建</strong>单元数组和利用<code>cell</code><strong>函数创建</strong>数组。</p>
+<p>（1）赋值语句创建单元数组 </p>
+<p>与一般数组有所不同的是，单元数组使用花括号“<code>&#123;&#125;</code>”来创建，使用逗号“<code>,</code>”或空格来分隔每一个单元，使用分号“<code>;</code>”来分行。</p>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">&gt;&gt; C = &#123;<span class="string">&#x27;x&#x27;</span>,[<span class="number">1</span>;<span class="number">3</span>;<span class="number">6</span>];<span class="number">10</span>,<span class="built_in">pi</span>&#125; </span><br><span class="line">C =</span><br><span class="line">  <span class="number">2</span>×<span class="number">2</span> cell 数组</span><br><span class="line">    &#123;<span class="string">&#x27;x&#x27;</span> &#125;    &#123;<span class="number">3</span>×<span class="number">1</span> double&#125;</span><br><span class="line">    &#123;[<span class="number">10</span>]&#125;    &#123;[  <span class="number">3.1416</span>]&#125;</span><br><span class="line">&gt;&gt; whos</span><br><span class="line">  Name      Size    Bytes  Class    Attributes</span><br><span class="line">  C         <span class="number">2</span>x2          <span class="number">490</span>           cell     </span><br></pre></td></tr></table></figure>
+
+<p>（2）<code>cell</code>函数创建单元数组</p>
+<p><code>cell</code>函数的调用格式如下：</p>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line"><span class="comment">% cell函数创建一个 m×n 的空单元数组，其每一个单元均为空矩阵。</span></span><br><span class="line">cellName = cell(m，n)</span><br></pre></td></tr></table></figure>
+
+<p>同一般的数值数组一样，单元数组的内存空间也是动态分配的。因此，使用<code>cell</code>函数创建空单元数组的主要目的是为该单元数组预先分配连续的存储空间，以节约内存占用，提高执行效率。</p>
+<h4 id="👁单元数组的寻访"><a href="#👁单元数组的寻访" class="headerlink" title="👁单元数组的寻访"></a>👁单元数组的寻访</h4><p>在单元数组中，单元和单元中的内容是两个不同范畴的东西，因此，寻访单元和单元中的内容是两个不同的操作。<code>MATLAB</code>为两种操作设计了相对应的操作对象：单元外标识（<code>Cell Indexing</code>）和单元内编址（<code>Content Addressing</code>）。</p>
+<p>对于单元数组<code>C</code>，<code>C(m,n)</code>指的是单元数组中第<code>m</code>行第<code>n</code>列的<strong>单元</strong>，而 <code>C&#123;m,n&#125;</code>指的是单元数组中第<code>m</code>行第<code>n</code>列<strong>单元中的内容</strong>。</p>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">&gt;&gt; C = &#123;<span class="number">3</span>,[<span class="number">4</span> <span class="number">7</span>;<span class="number">6</span> <span class="number">6</span>;<span class="number">80</span> <span class="number">9</span>],<span class="string">&#x27;string&#x27;</span>;<span class="built_in">sin</span>(<span class="built_in">pi</span>/<span class="number">8</span>),<span class="number">3</span>&gt;<span class="number">10</span>,<span class="string">&#x27;code&#x27;</span>&#125;</span><br><span class="line">C =</span><br><span class="line">  <span class="number">2</span>×<span class="number">3</span> cell 数组</span><br><span class="line">    &#123;[     <span class="number">3</span>]&#125;    &#123;<span class="number">3</span>×<span class="number">2</span> double&#125;    &#123;<span class="string">&#x27;string&#x27;</span>&#125;</span><br><span class="line">    &#123;[<span class="number">0.3827</span>]&#125;    &#123;[       <span class="number">0</span>]&#125;    &#123;<span class="string">&#x27;code&#x27;</span>  &#125;</span><br><span class="line"></span><br><span class="line">&gt;&gt; unitVal_1 = C(<span class="number">2</span>,<span class="number">2</span>) </span><br><span class="line">unitVal_1 =</span><br><span class="line">  <span class="number">1</span>×<span class="number">1</span> cell 数组</span><br><span class="line">    &#123;[<span class="number">0</span>]&#125;</span><br><span class="line">&gt;&gt; class(unitVal_1) </span><br><span class="line"><span class="built_in">ans</span> =</span><br><span class="line">    <span class="string">&#x27;cell&#x27;</span></span><br><span class="line">&gt;&gt; unitVal_2 = C&#123;<span class="number">2</span>,<span class="number">2</span>&#125; </span><br><span class="line">unitVal_2 =</span><br><span class="line">  logical</span><br><span class="line">   <span class="number">0</span></span><br><span class="line">&gt;&gt; class(unitVal_2) </span><br><span class="line"><span class="built_in">ans</span> =</span><br><span class="line">    <span class="string">&#x27;logical&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="👁单元数组的操作"><a href="#👁单元数组的操作" class="headerlink" title="👁单元数组的操作"></a>👁单元数组的操作</h4><p>单元数组的操作包括合并、删除单元数组中的指定单元、改变单元数组的形状等。</p>
+<p>（1）单元数组的合并</p>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">a&#123;<span class="number">1</span>,<span class="number">1</span>&#125;=<span class="string">&#x27;cellclass&#x27;</span>; </span><br><span class="line">a&#123;<span class="number">1</span>,<span class="number">2</span>&#125;=[<span class="number">1</span> <span class="number">2</span> <span class="number">2</span>];</span><br><span class="line">a&#123;<span class="number">2</span>,<span class="number">1</span>&#125;=[<span class="string">&#x27;a&#x27;</span>,<span class="string">&#x27;b&#x27;</span>,<span class="string">&#x27;c&#x27;</span>]; </span><br><span class="line">a&#123;<span class="number">2</span>,<span class="number">2</span>&#125;=[<span class="number">9</span> <span class="number">5</span> <span class="number">6</span>];</span><br><span class="line">a</span><br><span class="line">b = &#123;<span class="string">&#x27;Jan&#x27;</span>&#125; </span><br><span class="line">c = &#123;a b&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">% 输出结果</span></span><br><span class="line">a = </span><br><span class="line"> <span class="string">&#x27;cellclass&#x27;</span> [<span class="number">1</span>x3 double] </span><br><span class="line"> <span class="string">&#x27;abc&#x27;</span> [<span class="number">1</span>x3 double] </span><br><span class="line">b = <span class="string">&#x27;Jan&#x27;</span> </span><br><span class="line">c = &#123;<span class="number">2</span>x2 cell&#125; &#123;<span class="number">1</span>x1 cell&#125; </span><br></pre></td></tr></table></figure>
+
+<p>（2）单元数组中指定单元的删除</p>
+<p>如果要删除单元数组中指定的某个单元，只需要将空矩阵赋给该单元，即：</p>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">C&#123;m,n&#125; = [] </span><br></pre></td></tr></table></figure>
+
+<p>（3）单元数组的形状修改</p>
+<p>使用<code>reshape</code>函数改变单元数组的形状。<code>reshape</code>函数的调用格式为：</p>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line"><span class="comment">% reshape函数将单元数组C改变成一个具有M行N列的新单元数组。</span></span><br><span class="line">trimC = <span class="built_in">reshape</span>（C, M, N）</span><br></pre></td></tr></table></figure>
+
+<h3 id="👀map容器类型"><a href="#👀map容器类型" class="headerlink" title="👀map容器类型"></a>👀map容器类型</h3><p><code>map</code>的本意是映射，是可以将一个量映射到另一个量。比如将一个字符串映射为一个数值，那个字符串就是 <code>map</code>的键（<code>key</code>），那个值就是<code>map</code>的数据（<code>value</code>）。因此，可以将map容器理解为一种快速查找数据结构的键。</p>
+<blockquote>
+<p>对一个<code>map</code>元素进行寻访的索引称为“<code>键</code>”。一个“<code>键</code>”可以是以下任何一种数据类型：</p>
+<ul>
+<li>1×N 字符串；</li>
+<li>单精度或双精度实数标量；</li>
+<li>有符号或无符号标量整数。</li>
+</ul>
+</blockquote>
+<p>这些键和其对应的数据存储在<code>map</code>中。一个<code>map</code>的每一个条目都包括唯一的键和相对应的数据。<code>map</code>中存储的数据可以是任何类型，包括数值类型、字符或字符串类型、结构体类型、单元类型或其他<code>map</code>。一个<code>map</code>是<code>MATLAB</code>类的一个对象。<code>map</code>类的所有对象具有3种属性。用户不能直接对这些属性进行修改，但可以通过作用于<code>map</code>类的函数进行修改。</p>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>说明</th>
+<th>默认值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>Count</code></td>
+<td>无符号 64 位整数，表示 map 对象中存储的 key&#x2F;value 对的总数</td>
+<td>0</td>
+</tr>
+<tr>
+<td><code>KeyType</code></td>
+<td>字符串，表示 map 对象中包括的 key 的类型</td>
+<td>char</td>
+</tr>
+<tr>
+<td><code>ValueType</code></td>
+<td>字符串，表示 map 对象中包括的数据类型</td>
+<td>any</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p><code>map</code>属性的查看方法为<code>map名＋小数点“.”＋map的属性名</code>。例如，为了查看<code>mapW</code>对象包括的数据类型，需要使用 <code>mapW.ValueType</code>。</p>
+</blockquote>
+<h4 id="👁创建map对象"><a href="#👁创建map对象" class="headerlink" title="👁创建map对象"></a>👁创建<code>map</code>对象</h4><p><code>map</code>是一个<code>map</code>类中的对象，由<code>MATLAB</code>中名为“容器”的一个包来定义，通过构造函数来创建，其创建方法如下：</p>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">mapObj = containers.Map(&#123;key1,key2,…&#125;,&#123;val1,val2,…&#125;) </span><br><span class="line"><span class="comment">% 当键和值是字符串时，需要对上述语法稍作变更，即：</span></span><br><span class="line">mapObj = containers.Map(&#123;<span class="string">&#x27;key1&#x27;</span>,<span class="string">&#x27;key2&#x27;</span>,…&#125;,&#123;val1,val2,…&#125;) </span><br></pre></td></tr></table></figure>
+
+<p><code>map</code>对象的创建可以分为两个步骤：首先创建一个空<code>map</code>对象；然后使用<code>keys</code>和<code>values</code>方法对其内容进行补充。空<code>map</code>对象的创建方法如下：</p>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">&gt;&gt; newMap = containers.Map() </span><br><span class="line">&gt;&gt; newMap</span><br><span class="line">newMap = </span><br><span class="line"> Map (带属性): </span><br><span class="line"> Count: <span class="number">0</span> </span><br><span class="line"> KeyType: char </span><br><span class="line"> ValueType: any </span><br></pre></td></tr></table></figure>
+
+<h4 id="👁查看-x2F-读取-map-对象"><a href="#👁查看-x2F-读取-map-对象" class="headerlink" title="👁查看&#x2F;读取 map 对象"></a>👁查看&#x2F;读取 <code>map</code> 对象</h4><p>（1）查看<code>map</code>对象</p>
+<p><code>map</code>对象中的每个条目包括两个部分：一个唯一的键及其对应的值。可以通过使用<code>keys</code>函数查看<code>map</code>对象中包含的所有键；通过<code>values</code>函数查看所有的值。</p>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">&gt;&gt; schedulemap = containers.Map(&#123;<span class="string">&#x27;Monday&#x27;</span>,<span class="string">&#x27;Tuesday&#x27;</span>,<span class="string">&#x27;Wednesday&#x27;</span>,<span class="string">&#x27;Thursday&#x27;</span>,<span class="string">&#x27;Friday&#x27;</span>&#125;, &#123;<span class="string">&#x27;Maths&#x27;</span>,<span class="string">&#x27;Chinese&#x27;</span>,<span class="string">&#x27;History&#x27;</span>,<span class="string">&#x27;Geography&#x27;</span>,<span class="string">&#x27;Biology&#x27;</span>&#125;) </span><br><span class="line">schedulemap = </span><br><span class="line">  Map - 属性:</span><br><span class="line">        Count: <span class="number">5</span></span><br><span class="line">      KeyType: char</span><br><span class="line">    ValueType: char</span><br><span class="line">&gt;&gt; keys(schedulemap) </span><br><span class="line"><span class="built_in">ans</span> =</span><br><span class="line">  <span class="number">1</span>×<span class="number">5</span> cell 数组</span><br><span class="line">    &#123;<span class="string">&#x27;Friday&#x27;</span>&#125;    &#123;<span class="string">&#x27;Monday&#x27;</span>&#125;    &#123;<span class="string">&#x27;Thursday&#x27;</span>&#125;    &#123;<span class="string">&#x27;Tuesday&#x27;</span>&#125;    &#123;<span class="string">&#x27;Wednesday&#x27;</span>&#125;</span><br><span class="line">&gt;&gt; values(schedulemap) </span><br><span class="line"><span class="built_in">ans</span> =</span><br><span class="line">  <span class="number">1</span>×<span class="number">5</span> cell 数组</span><br><span class="line">    &#123;<span class="string">&#x27;Biology&#x27;</span>&#125;    &#123;<span class="string">&#x27;Maths&#x27;</span>&#125;    &#123;<span class="string">&#x27;Geography&#x27;</span>&#125;    &#123;<span class="string">&#x27;Chinese&#x27;</span>&#125;    &#123;<span class="string">&#x27;History&#x27;</span>&#125;</span><br></pre></td></tr></table></figure>
+
+<p>（2）读取<code>map</code>对象</p>
+<p>在创建好一个<code>map</code>对象后，用户可以对其进行数据的寻访。寻访指定键（<code>keyName</code>）所对应的值（<code>valueName</code>）使用的格式如下：</p>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">valueName = mapName（keyName）</span><br><span class="line"><span class="comment">% 当键名是一个字符串时，需使用单引号将键名括起来。</span></span><br><span class="line"></span><br><span class="line">&gt;&gt; course = schedulemap(<span class="string">&#x27;Wednesday&#x27;</span>) </span><br><span class="line">course =</span><br><span class="line">    <span class="string">&#x27;History&#x27;</span></span><br><span class="line"><span class="comment">% 如果需要对多个键进行访问，可以使用 values 函数，如：</span></span><br><span class="line">&gt;&gt; values(schedulemap,&#123;<span class="string">&#x27;Monday&#x27;</span>,<span class="string">&#x27;Thursday&#x27;</span>&#125;) </span><br><span class="line"><span class="built_in">ans</span> =</span><br><span class="line">  <span class="number">1</span>×<span class="number">2</span> cell 数组</span><br><span class="line">    &#123;<span class="string">&#x27;Maths&#x27;</span>&#125;    &#123;<span class="string">&#x27;Geography&#x27;</span>&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>在对多个键进行访问时，不能像在其他数据类型中那样使用冒号“<code>:</code>”，这将导致错误产生。例如输入：<br><code>schedulemap(&#39;Monday&#39;:&#39;Thursday&#39;) </code><br>结果弹出如下错误信息：<br>警告: 冒号操作数必须为实数标量。</p>
+</blockquote>
+<h4 id="👁编辑map对象"><a href="#👁编辑map对象" class="headerlink" title="👁编辑map对象"></a>👁编辑<code>map</code>对象</h4><p>（1）从<code>map</code>对象中删除<code>keys/values</code>对</p>
+<p>用户可以使用<code>remove</code>函数从<code>map</code>对象中删除<code>keys/values</code>对，该函数的调用格式为：</p>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line"><span class="comment">% mapName和keyName分别为map对象名称及需要删除的键名。</span></span><br><span class="line"><span class="comment">% 执行该命令后，MATLAB 系统删除指定的键名及其相对应的值。</span></span><br><span class="line">remove(<span class="string">&#x27;mapName&#x27;</span>, <span class="string">&#x27;keyName&#x27;</span>) </span><br><span class="line"></span><br><span class="line"><span class="comment">% 删除schedulemap中的“星期四”及其对应的科目。</span></span><br><span class="line">&gt;&gt; remove(schedulemap,<span class="string">&#x27;Thursday&#x27;</span>) </span><br><span class="line"><span class="built_in">ans</span> = </span><br><span class="line">  Map - 属性:</span><br><span class="line">        Count: <span class="number">4</span></span><br><span class="line">      KeyType: char</span><br><span class="line">    ValueType: char</span><br><span class="line">&gt;&gt; keys(schedulemap) </span><br><span class="line"><span class="built_in">ans</span> =</span><br><span class="line">  <span class="number">1</span>×<span class="number">4</span> cell 数组</span><br><span class="line">    &#123;<span class="string">&#x27;Friday&#x27;</span>&#125;    &#123;<span class="string">&#x27;Monday&#x27;</span>&#125;    &#123;<span class="string">&#x27;Tuesday&#x27;</span>&#125;    &#123;<span class="string">&#x27;Wednesday&#x27;</span>&#125;</span><br><span class="line">&gt;&gt; values(schedulemap) </span><br><span class="line"><span class="built_in">ans</span> =</span><br><span class="line">  <span class="number">1</span>×<span class="number">4</span> cell 数组</span><br><span class="line">    &#123;<span class="string">&#x27;Biology&#x27;</span>&#125;    &#123;<span class="string">&#x27;Maths&#x27;</span>&#125;    &#123;<span class="string">&#x27;Chinese&#x27;</span>&#125;    &#123;<span class="string">&#x27;History&#x27;</span>&#125;</span><br></pre></td></tr></table></figure>
+
+<p>（2）添加<code>keys/values</code>对象</p>
+<p>当用户向一个<code>map</code>对象中写入新元素的值时，需要提供键名，而且该键的类型必须和<code>map</code>中的其他键一致。该操作的调用格式为：</p>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">existingMapObj(newKeyName)= newValue </span><br><span class="line"></span><br><span class="line"><span class="comment">% 为schedulemap添加“星期六”及其对应的科目“public elective course”</span></span><br><span class="line">&gt;&gt; schedulemap(<span class="string">&#x27;Saturday&#x27;</span>) = <span class="string">&#x27;public elective course&#x27;</span> </span><br><span class="line">schedulemap = </span><br><span class="line">  Map - 属性:</span><br><span class="line">        Count: <span class="number">5</span></span><br><span class="line">      KeyType: char</span><br><span class="line">    ValueType: char</span><br><span class="line">&gt;&gt; keys(schedulemap) </span><br><span class="line"><span class="built_in">ans</span> =</span><br><span class="line">  <span class="number">1</span>×<span class="number">5</span> cell 数组</span><br><span class="line">    &#123;<span class="string">&#x27;Friday&#x27;</span>&#125;    &#123;<span class="string">&#x27;Monday&#x27;</span>&#125;    &#123;<span class="string">&#x27;Saturday&#x27;</span>&#125;    &#123;<span class="string">&#x27;Tuesday&#x27;</span>&#125;    &#123;<span class="string">&#x27;Wednesday&#x27;</span>&#125;</span><br><span class="line">&gt;&gt; values(schedulemap) </span><br><span class="line"><span class="built_in">ans</span> =</span><br><span class="line">  <span class="number">1</span>×<span class="number">5</span> cell 数组</span><br><span class="line">    &#123;<span class="string">&#x27;Biology&#x27;</span>&#125;    &#123;<span class="string">&#x27;Maths&#x27;</span>&#125;    &#123;<span class="string">&#x27;public elective…&#x27;</span>&#125;    &#123;<span class="string">&#x27;Chinese&#x27;</span>&#125;    &#123;<span class="string">&#x27;History&#x27;</span>&#125;</span><br></pre></td></tr></table></figure>
+
+<p>（3）修改<code>keys</code></p>
+<p>如果需要在保持值不变的情况下对键名进行更改，首先要删除键名和对应的值，然后再添加一个有正确键名的新条目。</p>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line"><span class="comment">% 修改“星期六”及其对应的科目“公共选修课”为“星期天”及其对应的科目“MBA”</span></span><br><span class="line">&gt;&gt; remove(schedulemap,<span class="string">&#x27;Saturday&#x27;</span>);</span><br><span class="line">&gt;&gt; schedulemap(<span class="string">&#x27;Sunday&#x27;</span>) = <span class="string">&#x27;MBA&#x27;</span>; </span><br><span class="line">&gt;&gt; keys(schedulemap) </span><br><span class="line"></span><br><span class="line"><span class="built_in">ans</span> =</span><br><span class="line">  <span class="number">1</span>×<span class="number">5</span> cell 数组</span><br><span class="line">    &#123;<span class="string">&#x27;Friday&#x27;</span>&#125;    &#123;<span class="string">&#x27;Monday&#x27;</span>&#125;    &#123;<span class="string">&#x27;Sunday&#x27;</span>&#125;    &#123;<span class="string">&#x27;Tuesday&#x27;</span>&#125;    &#123;<span class="string">&#x27;Wednesday&#x27;</span>&#125;</span><br><span class="line">&gt;&gt; values(schedulemap) </span><br><span class="line"><span class="built_in">ans</span> =</span><br><span class="line">  <span class="number">1</span>×<span class="number">5</span> cell 数组</span><br><span class="line">    &#123;<span class="string">&#x27;Biology&#x27;</span>&#125;    &#123;<span class="string">&#x27;Maths&#x27;</span>&#125;    &#123;<span class="string">&#x27;MBA&#x27;</span>&#125;    &#123;<span class="string">&#x27;Chinese&#x27;</span>&#125;    &#123;<span class="string">&#x27;History&#x27;</span>&#125;</span><br></pre></td></tr></table></figure>
+
+<p>（4）修改<code>values</code></p>
+<p>通过赋值操作，覆盖原有的值，即可对<code>map</code>对象中的值进行修改。</p>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line"><span class="comment">% 修改“星期一”的科目为“英语”</span></span><br><span class="line">&gt;&gt; schedulemap(<span class="string">&#x27;Monday&#x27;</span>)</span><br><span class="line"><span class="built_in">ans</span> =</span><br><span class="line">    <span class="string">&#x27;Maths&#x27;</span></span><br><span class="line">&gt;&gt; schedulemap(<span class="string">&#x27;Monday&#x27;</span>) = <span class="string">&#x27;english&#x27;</span>; </span><br><span class="line">&gt;&gt; keys(schedulemap) </span><br><span class="line"><span class="built_in">ans</span> =</span><br><span class="line">  <span class="number">1</span>×<span class="number">5</span> cell 数组</span><br><span class="line">    &#123;<span class="string">&#x27;Friday&#x27;</span>&#125;    &#123;<span class="string">&#x27;Monday&#x27;</span>&#125;    &#123;<span class="string">&#x27;Sunday&#x27;</span>&#125;    &#123;<span class="string">&#x27;Tuesday&#x27;</span>&#125;    &#123;<span class="string">&#x27;Wednesday&#x27;</span>&#125;</span><br><span class="line">&gt;&gt; values(schedulemap) </span><br><span class="line"><span class="built_in">ans</span> =</span><br><span class="line">  <span class="number">1</span>×<span class="number">5</span> cell 数组</span><br><span class="line">    &#123;<span class="string">&#x27;Biology&#x27;</span>&#125;    &#123;<span class="string">&#x27;english&#x27;</span>&#125;    &#123;<span class="string">&#x27;MBA&#x27;</span>&#125;    &#123;<span class="string">&#x27;Chinese&#x27;</span>&#125;    &#123;<span class="string">&#x27;History&#x27;</span>&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="⛄基本矩阵操作"><a href="#⛄基本矩阵操作" class="headerlink" title="⛄基本矩阵操作"></a>⛄基本矩阵操作</h2><p>对矩阵的基本操作，主要有矩阵的构建、矩阵维度与矩阵大小的改变、矩阵的索引、矩阵属性信息的获取、矩阵结构的改变等。对于这些操作，<code>MATLAB</code>中都有固定指令或相应的库函数与之相对应。</p>
+<p>矩阵最早来自于方程组的系数及常数所构成的方阵，这一概念由19世纪英国数学家凯利首先提出。数组是在程序设计中，为了处理方便，把具有相同类型的若干变量按有序的形式组织起来的一种形式。这些按序排列的同类数据元素的集合称为数组。</p>
+<p>在<code>MATLAB</code>中，一个数组可以分解为多个数组元素，这些数组元素可以是基本数据类型或构造类型。因此按数组元素的类型不同，数组又可分为数值数组、字符数组、单元数组、结构数组等各种类别。</p>
+<p>由此可见，矩阵和数组在<code>MATLAB</code>中存在很多方面的区别，主要有以下几个方面：</p>
+<ul>
+<li>矩阵是数学上的概念，而数组是计算机程序设计领域的概念。</li>
+<li>作为一种变换或者映射算符的体现，矩阵运算有着明确而严格的数学规则。而数组运算是 MATLAB 软件定义的规则，其目的是为了使数据管理方便，操作简单，命令形式自然，执行计算有效。</li>
+</ul>
+<p>两者间的联系主要体现在：在<code>MATLAB</code>中，矩阵是以数组的形式存在的。因此，一维数组相当于向量，二维数组相当于矩阵，所以矩阵是数组的子集。</p>
+<h3 id="👀矩阵的构造"><a href="#👀矩阵的构造" class="headerlink" title="👀矩阵的构造"></a>👀矩阵的构造</h3><p>矩阵的构建方式有两种，一种与单元数组相似，可以对变量直接进行赋值；另一种是<code>MATLAB</code>中提供构建特殊矩阵的指令。特殊矩阵的构建函数：</p>
+<p><strong>1矩阵</strong>：<code>ones()</code>；</p>
+<p><strong>0矩阵</strong>：<code>zeros()</code>；</p>
+<p><strong>单位矩阵</strong>：<code>eyes()</code>；</p>
+<p><strong>行&#x2F;列和相等的矩阵</strong>：<code>magic()</code>；</p>
+<p><strong>随机矩阵</strong>：<code>rand()</code>和<code>randn()</code>；</p>
+<p><strong>其它矩阵（对角线、上三角形、下三角形）</strong>：<code>diag()</code>、<code>triu()</code>、<code>tril()</code>。</p>
+<p>（1）建立简单矩阵</p>
+<p>简单矩阵采用矩阵构造符号——方括号“<code>[]</code>”，将矩阵元素置于方括号内，同行元素之间用<code>空格</code>或<code>逗号</code>隔开，行与行之间用分号“<code>;</code>”隔开，格式如下：</p>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">matrixName = [element11,element12,element13;element21,element22,element23] </span><br><span class="line">matrixName = [element11 element12 element13;element21 element22 element23] </span><br></pre></td></tr></table></figure>
+
+<p>（2）建立特殊矩阵</p>
+<p>特殊矩阵是指非零元素或零元素的分布有一定规律的矩阵，常见的有对称矩阵、三角矩阵和对角矩阵等。</p>
+<p>（3）向量、标量和空矩阵</p>
+<p>通常情况下，矩阵包含m行和n列，即m×n。当m和n取一些特殊值时，得到的矩阵具有一些特殊的性质。</p>
+<p><strong>向量</strong>：当m&#x3D;1或n&#x3D;1，即1×n或m×1时，建立的矩阵称为向量。</p>
+<p><strong>标量</strong>：当m&#x3D;n&#x3D;1时，建立的矩阵称为标量。任意以1×1的矩阵形式表示的<strong>单个实数</strong>、<strong>复数</strong>都是标量。单个实数或者复数在<code>MATLAB</code>中都是以矩阵的形式存储的；在<code>MATLAB</code>中，单个数据或由单个数据构造的矩阵都是标量。</p>
+<p><strong>空矩阵</strong>：当m&#x3D;n&#x3D;0，或者m&#x3D;0，或者n&#x3D;0，即0×0、0×n、m×0 时，创建的矩阵称为空矩阵。空矩阵可以通过赋值语句建立。<strong>空矩阵</strong>和<strong>0矩阵</strong>的本质区别在于：空矩阵内没有任何元素，因此不占用任何存储空间；而 0 矩阵表示该矩阵中的所有元素全部为0，需要占用一定的存储空间。</p>
+<h3 id="👀矩阵大小及结构的改变"><a href="#👀矩阵大小及结构的改变" class="headerlink" title="👀矩阵大小及结构的改变"></a>👀矩阵大小及结构的改变</h3><p>根据运算时的不同情况和需要，矩阵大小和结构的改变，主要的方式有旋转矩阵、改变矩阵维度、删除矩阵元素等。</p>
+<table>
+<thead>
+<tr>
+<th>函数名称</th>
+<th>函数功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>fliplr(A)</code></td>
+<td>矩阵每一行均进行逆序排列</td>
+</tr>
+<tr>
+<td><code>flipud(A)</code></td>
+<td>矩阵每一列均进行逆序排列</td>
+</tr>
+<tr>
+<td><code>flipdim(A,dim)</code></td>
+<td>生成一个在dim维矩阵A内的元素交换位置的多维矩阵</td>
+</tr>
+<tr>
+<td><code>rot90(A)</code></td>
+<td>生成一个由矩阵A逆时针旋转90°而得到的新矩阵</td>
+</tr>
+<tr>
+<td><code>rot90(A,k)</code></td>
+<td>生成一个由矩阵A逆时针旋转k×90°而得到的新矩阵</td>
+</tr>
+<tr>
+<td><code>reshape(A,m,n)</code></td>
+<td>生成一个m×n×…×p维的矩阵，其元素以线性索引的顺序从矩阵A中取得<br/>如果矩阵A中没有m×n×…×p个元素，将返回一个错误信息</td>
+</tr>
+<tr>
+<td><code>repmat(A,[m n…p])</code></td>
+<td>创建一个和矩阵A有相同元素的m×n×…×p块的多维矩阵</td>
+</tr>
+<tr>
+<td><code>shiftdim(A,n)</code></td>
+<td>矩阵的列移动n步。n为正数，矩阵向左移；n为负数，矩阵向右移</td>
+</tr>
+<tr>
+<td><code>squeeze(A)</code></td>
+<td>返回没有空维的矩阵A</td>
+</tr>
+<tr>
+<td><code>cat(dim,A,B)</code></td>
+<td>将矩阵A和B组合成一个dim维的多维矩阵</td>
+</tr>
+<tr>
+<td><code>permute(A,order)</code></td>
+<td>根据向量order来改变矩阵A中的维数顺序</td>
+</tr>
+<tr>
+<td><code>ipermute(A,order)</code></td>
+<td>进行命令permute的逆变换</td>
+</tr>
+<tr>
+<td><code>sort(A)</code></td>
+<td>对一维或二维矩阵进行升序排序，并返回排序后的矩阵；<br/>当A为二维矩阵时，对矩阵的每一列分别进行排序</td>
+</tr>
+<tr>
+<td><code>sort(A,dim)</code></td>
+<td>对矩阵按指定的方向进行升序排序，并返回排序后的矩阵。<br />当dim&#x3D;1时，对矩阵的每一列排序；dim&#x3D;2时，对矩阵的每一行排序</td>
+</tr>
+<tr>
+<td><code>sort(A,dim,mode)</code></td>
+<td>mode为’ascend’时，进行升序排序；mode为’descend’时，进行降序排序</td>
+</tr>
+<tr>
+<td><code>[B,IX] = sort(A,…)</code></td>
+<td>IX为排序后备元素在原矩阵中的行位置或列位置的索引</td>
+</tr>
+</tbody></table>
+<h3 id="👀矩阵下标引用"><a href="#👀矩阵下标引用" class="headerlink" title="👀矩阵下标引用"></a>👀矩阵下标引用</h3><p>在<code>MATLAB</code>中，普通二维数组元素的数字索引分为<strong>双下标索引</strong>和<strong>单下标索引</strong>。<strong>双下标索引</strong>是通过一个二元数组对来对应元素在矩阵中的行列位置，例如A(2,3)表示矩阵A中第2行第3列的元素。<strong>单下标索引</strong>的方式是采用列元素优先的原则，对m行n列的矩阵按列排序进行重组，成为一维数组，再取新的一维数组中的元素位置对应的值作为元素在原矩阵中的单下标，例如对于4×4的矩阵，A(7)表示矩阵A中第3行第2列的元素，而 A(13)表示矩阵A中第1行第4列的元素。</p>
+<p>（1）矩阵下标访问单个矩阵元素</p>
+<table>
+<thead>
+<tr>
+<th>索引表达式</th>
+<th>函数功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>A(1)</code></td>
+<td>将二维矩阵<code>A</code>重组为一维数组，返回数组中第一个元素</td>
+</tr>
+<tr>
+<td><code>A(:,j)</code></td>
+<td>返回二维矩阵<code>A</code>中第<code>j</code>列列向量</td>
+</tr>
+<tr>
+<td><code>A(i,:)</code></td>
+<td>返回二维矩阵<code>A</code>中第<code>i</code>行行向量</td>
+</tr>
+<tr>
+<td><code>A(:,j:k)</code></td>
+<td>返回由二维矩阵<code>A</code>中的第<code>j</code>列到第<code>k</code>列列向量组成的子矩阵</td>
+</tr>
+<tr>
+<td><code>A(i:k,:)</code></td>
+<td>返回由二维矩阵<code>A</code>中的第<code>i</code>行到第<code>k</code>行行向量组成的子矩阵</td>
+</tr>
+<tr>
+<td><code>A(i:k,j:l)</code></td>
+<td>返回由二维矩阵<code>A</code>中的第<code>i</code>行到第<code>k</code>行行向量<br />和第<code>j</code>列到第<code>l</code>列列向量的交集组成的子矩阵</td>
+</tr>
+<tr>
+<td><code>A(:)</code></td>
+<td>将矩阵<code>A</code>中的每列合并成一个长的列向量</td>
+</tr>
+<tr>
+<td><code>A(j:k)</code></td>
+<td>返回一个行向量，其元素为<code>A(:)</code>中的第<code>j</code>个元素到第<code>k</code>个元素</td>
+</tr>
+<tr>
+<td><code>A([j1 j2 …])</code></td>
+<td>返回一个行向量，其元素为<code>A(:)</code>中的第<code>j1</code>、<code>j2</code>元素</td>
+</tr>
+<tr>
+<td><code>A(:,[j1 j2…])</code></td>
+<td>返回矩阵<code>A</code>的第<code>j1</code>列、第<code>j2</code>列等的列向量</td>
+</tr>
+<tr>
+<td><code>A([i1 i2 …],:)</code></td>
+<td>返回矩阵<code>A</code>的第<code>i1</code>行、第<code>i2</code>行等的行向量</td>
+</tr>
+<tr>
+<td><code>A([i1 i2…],[j1 j2…])</code></td>
+<td>返回矩阵第<code>i1</code>行、第<code>i2</code>行等和第<code>j1</code>列、第<code>j2</code>列等的元素</td>
+</tr>
+</tbody></table>
+<p>（2）线性应用矩阵元素</p>
+<p>矩阵中某一元素的单下标索引值和双下标索引值之间，可以通过<code>MATLAB</code>内部函数进行转换。</p>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line"><span class="comment">% 将双下标索引值转换为单下标索引值</span></span><br><span class="line"><span class="comment">% siz是一个包含两个元素的数组，代表了转换矩阵的行列数，一般可以直接用size(A)表示;</span></span><br><span class="line"><span class="comment">% i与j分别是双下表索引中的行、列值，IND是转换后的单下标索引值。</span></span><br><span class="line">IND = <span class="built_in">sub2ind</span>(siz, <span class="built_in">i</span>, <span class="built_in">j</span>) </span><br><span class="line"><span class="comment">% 将单下标索引值转换为双下标索引值，各变量意义同上</span></span><br><span class="line">[I J] = <span class="built_in">ind2sub</span>(siz, ind) </span><br></pre></td></tr></table></figure>
+
+<p>（3）访问多个矩阵元素</p>
+<p>在下标表达式里，可以用冒号来表示矩阵的多个元素。例如，<code>A(1:k,j)</code>表示矩阵第<code>j</code>列的前<code>k</code>个元素。在 <code>MATLAB</code>中提供了一个关键字<code>end</code>，用于表示该维中的最后一个元素。</p>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">A=<span class="built_in">magic</span>(<span class="number">4</span>)，</span><br><span class="line"><span class="comment">% 利用冒号，第4列元素的和可以用更为简洁的式子</span></span><br><span class="line">sum(A(<span class="number">1</span>:<span class="number">4</span>,<span class="number">4</span>)) </span><br><span class="line"><span class="comment">% 冒号本身可以表示一列或者一行的所有元素，上式还可写为：</span></span><br><span class="line">sum(A(:,<span class="number">4</span>)) </span><br><span class="line"><span class="comment">% 关键字end，用于表示该维中的最后一个元素，上式还可写为：</span></span><br><span class="line">sum(A(:,<span class="keyword">end</span>)) </span><br><span class="line"></span><br><span class="line"><span class="comment">% 还可以用冒号来表示非相邻的多个元素</span></span><br><span class="line">B=<span class="number">1</span>:<span class="number">10</span> </span><br><span class="line">C=B(<span class="number">1</span>:<span class="number">3</span>:<span class="number">10</span>) </span><br></pre></td></tr></table></figure>
+
+<h3 id="👀矩阵信息的获取"><a href="#👀矩阵信息的获取" class="headerlink" title="👀矩阵信息的获取"></a>👀矩阵信息的获取</h3><p>矩阵的信息主要包括矩阵结构、矩阵大小、矩阵维度、矩阵的数据类型及内存占用等。</p>
+<p>（1）矩阵结构</p>
+<p>矩阵的结构是指矩阵子元素的排列方式。这类函数的返回值是逻辑类型的数据。返回值为“<code>1</code>”表示该矩阵是某一特定类型的矩阵；返回值为“<code>0</code>”表示该矩阵不是该特定类型的矩阵。</p>
+<table>
+<thead>
+<tr>
+<th>函数名称</th>
+<th>函数功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>isempty(A)</code></td>
+<td>检测矩阵是否为空</td>
+</tr>
+<tr>
+<td><code>isscalar(A)</code></td>
+<td>检测矩阵是否是单元素的标量矩阵</td>
+</tr>
+<tr>
+<td><code>isvector(A)</code></td>
+<td>检测矩阵是否是只具有一行或一列元素的一维向量</td>
+</tr>
+<tr>
+<td><code>issparse(A)</code></td>
+<td>检测数组是否是稀疏矩阵</td>
+</tr>
+</tbody></table>
+<p>（2）矩阵大小</p>
+<p>矩阵的形状信息反映了矩阵的大小，通常又包括以下几个方面的内容：</p>
+<ul>
+<li>矩阵的维数。</li>
+<li>矩阵各维（例如最长维、用户指定的维）的长度。</li>
+<li>矩阵元素的个数。</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>函 数</th>
+<th></th>
+<th>描 述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>ndims</code></td>
+<td>n&#x3D;ndims(X)</td>
+<td>获取矩阵的维数</td>
+</tr>
+<tr>
+<td><code>size</code></td>
+<td>[m,n]&#x3D;size(X)</td>
+<td>获取矩阵在各维上的长度</td>
+</tr>
+<tr>
+<td><code>length</code></td>
+<td>n&#x3D;length(X)</td>
+<td>获取矩阵最长维的长度</td>
+</tr>
+<tr>
+<td><code>numel</code></td>
+<td>n&#x3D;numel(X)</td>
+<td>获取矩阵元素的个数</td>
+</tr>
+</tbody></table>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">A = <span class="built_in">eye</span>(<span class="number">5</span>,<span class="number">3</span>) </span><br><span class="line">[m,n] = <span class="built_in">size</span>(A) </span><br><span class="line">m = <span class="number">5</span> </span><br><span class="line">n = <span class="number">3</span> </span><br><span class="line">d = <span class="built_in">size</span>(A) </span><br><span class="line">d = <span class="number">5</span> <span class="number">3</span> </span><br><span class="line">e1 = <span class="built_in">size</span>(A,<span class="number">1</span>) </span><br><span class="line">e1 = <span class="number">5</span> </span><br><span class="line">e2 = <span class="built_in">size</span>(A,<span class="number">2</span>) </span><br><span class="line">e2 = <span class="number">3</span> </span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><code>size</code>函数的应用可知：①<code>size</code>函数的返回值可以是分开显示的单个实数变量，也可以是一个行向量；②在<code>size</code>函数的输入参数中增加维度参数可以获取指定维度的长度，其中“<code>1</code>”表示行，“<code>2</code>”表示列。</p>
+</blockquote>
+<p>（3）矩阵维度</p>
+<p>对于空矩阵、标量矩阵、一维矩阵和二维矩阵，<code>MATLAB</code>都将其作为普通二维数组对待。特别需要注意的是，用[]产生的空矩阵是作为二维矩阵的，但是在高维矩阵中也有空矩阵的概念，此时空矩阵则具有多个维度。</p>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">A = []; B = <span class="number">5</span>; C = <span class="number">1</span>:<span class="number">3</span>; D = <span class="built_in">magic</span>(<span class="number">2</span>); E(:,:,<span class="number">2</span>) = [<span class="number">1</span> <span class="number">2</span>; <span class="number">3</span> <span class="number">4</span>]; </span><br><span class="line">Ndims = [<span class="built_in">ndims</span>(A) <span class="built_in">ndims</span>(B) <span class="built_in">ndims</span>(C) <span class="built_in">ndims</span>(D) <span class="built_in">ndims</span>(E)] </span><br><span class="line"><span class="comment">% 输出结果</span></span><br><span class="line">Ndims = <span class="number">2</span> <span class="number">2</span> <span class="number">2</span> <span class="number">2</span> <span class="number">3</span> </span><br></pre></td></tr></table></figure>
+
+<p>（4）矩阵的数据类型</p>
+<p>矩阵作为<code>MATLAB</code>的内部数据存储和运算结构，其元素可以是各种各样的数据类型，对应不同数据类型的元素，可以是数值、字符串、元胞、结构体等。这类函数的返回值也是逻辑类型的数据。返回值为“<code>1</code>”表示是某一特定的数据类型；返回值为“<code>0</code>”表示不是该特定的数据类型。</p>
+<table>
+<thead>
+<tr>
+<th>函数名称</th>
+<th>函数功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>isnumeric</code></td>
+<td>检测矩阵元素是否为数值型变量</td>
+</tr>
+<tr>
+<td><code>isreal</code></td>
+<td>检测矩阵元素是否为实数数值型变量</td>
+</tr>
+<tr>
+<td><code>isfloat</code></td>
+<td>检测矩阵元素是否为浮点数值型变量</td>
+</tr>
+<tr>
+<td><code>isinteger</code></td>
+<td>检测矩阵元素是否为整数型变量</td>
+</tr>
+<tr>
+<td><code>islogical</code></td>
+<td>检测矩阵元素是否为逻辑型变量</td>
+</tr>
+<tr>
+<td><code>ischar</code></td>
+<td>检测矩阵元素是否为字符型变量</td>
+</tr>
+<tr>
+<td><code>isstruct</code></td>
+<td>检测矩阵元素是否为结构体型变量</td>
+</tr>
+<tr>
+<td><code>iscell</code></td>
+<td>检测矩阵元素是否为元胞型变量</td>
+</tr>
+<tr>
+<td><code>iscellstr</code></td>
+<td>检测矩阵元素是否为结构体的元胞型变量</td>
+</tr>
+</tbody></table>
+<p>（5）矩阵占用的内存</p>
+<p>了解矩阵的内存占用情况，对于优化<code>MATLAB</code>代码性能是十分重要的。使用者可以通过<code>whos</code>命令查看当前工作区中指定变量的所有信息，包括变量名、矩阵大小、内存占用和数据类型等。</p>
+<h3 id="👀矩阵的保存和加载"><a href="#👀矩阵的保存和加载" class="headerlink" title="👀矩阵的保存和加载"></a>👀矩阵的保存和加载</h3><p>矩阵在MATLAB中的存储方式、矩阵元素的寻址方法、矩阵元素的赋值及扩展。<code>MATLAB</code>就是将矩阵元素按<code>列优先</code>排列的原则依次放置在相应的格子内。因此，可以看成是一个长列向量。<code>MATLAB</code>采用了两种元素寻址方式：①矩阵下标寻址；②线性寻址。</p>
+<h4 id="👁矩阵元素的寻址"><a href="#👁矩阵元素的寻址" class="headerlink" title="👁矩阵元素的寻址"></a>👁矩阵元素的寻址</h4><p>（1）矩阵下标寻址方法</p>
+<p>在<code>MATLAB</code>中，使用<code>A(i,j)</code>来表示一个矩阵<code>A</code>从左上角数起的第i行、第j列上的元素，这就是矩阵下标寻址方法。这种方法和线性代数中矩阵元素的引用方法一致，通俗易懂。</p>
+<p><strong>单元素的寻访</strong>：当使用双下标访问一个二维矩阵中的某个元素时，必须同时指定该元素所在的行号和列号，访问格式为：<code>A(numRow,numColumn)</code> ，其中，<code>numRow</code>和<code>numColumn</code>分别代表行号和列号。</p>
+<p><strong>矩阵元素区域的寻访</strong>：访问矩阵的多个元素，可以是某一行、某一列或者其中的部分元素，也可以是矩阵中的某一块区域。在<code>MATLAB</code>中，元素区域的访问需要用到冒号“<code>:</code>”来表示矩阵中的多个元素，具体的访问格式如下：</p>
+<ul>
+<li><code>A(1:m,n)</code>：表示访问第n列的第一个元素至第m个元素。</li>
+<li><code>A(m,:)</code>：表示访问第m行的所有元素。</li>
+<li><code>A(i:j,m:n)</code> ：表示访问从第i 行至第j行、从第m列至第n列的矩阵区域。</li>
+<li><code>A(i:inc1:j,m:inc2:n)</code> ：表示访问从第i行至第j行，行间隔为inc1行；从第m列至第n列，列间隔为inc2的非相邻的多个矩阵元素。</li>
+</ul>
+<p>（2）线性寻址</p>
+<p>线性寻址的原理来自于<code>MATLAB</code>将矩阵元素存储在内存空间的存储方法。与矩阵下标寻址相比，只需要单一下标即可实现矩阵中任意位置元素的寻访。线性寻址的下标是通过矩阵的双下标换算得到的。</p>
+<p>一般，设A是一个m×n的矩阵，位于第i行、第j列上的元素A(i,j)的单一下标为<code>A((j-1)·m+i)</code>。</p>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">A = <span class="built_in">hilb</span>(<span class="number">3</span>) </span><br><span class="line">A(<span class="number">2</span>,<span class="number">3</span>) <span class="comment">% 采用矩阵下标寻址的方法访问第 2 行第 3 列的元素</span></span><br><span class="line">A(<span class="number">8</span>) </span><br><span class="line"></span><br><span class="line"><span class="comment">% 输出结果</span></span><br><span class="line">A = </span><br><span class="line"> 	<span class="number">1.0000</span> <span class="number">0.5000</span> <span class="number">0.3333</span> </span><br><span class="line"> 	<span class="number">0.5000</span> <span class="number">0.3333</span> <span class="number">0.2500</span> </span><br><span class="line">	<span class="number">0.3333</span> <span class="number">0.2500</span> <span class="number">0.2000</span> </span><br><span class="line"><span class="built_in">ans</span> = <span class="number">0.2500</span> </span><br><span class="line"><span class="built_in">ans</span> = <span class="number">0.2500</span> </span><br></pre></td></tr></table></figure>
+
+<h4 id="👁矩阵元素的赋值及扩展"><a href="#👁矩阵元素的赋值及扩展" class="headerlink" title="👁矩阵元素的赋值及扩展"></a>👁矩阵元素的赋值及扩展</h4><p>（1）矩阵元素的赋值</p>
+<p><code>MATLAB</code>使用赋值语句对矩阵元素进行赋值，基本语法如下：</p>
+<ul>
+<li><code>A(i,j) = value</code>：等号左侧为矩阵中的某个元素；等号右侧为值。</li>
+<li><code>A = []</code>：删除矩阵中的所有元素。</li>
+</ul>
+<p>（2）矩阵元素的扩展与删除</p>
+<p>增加或删除矩阵元素最常用的办法是使用赋值语句。此外，<code>MATLAB</code>提供了多个函数进行矩阵合并操作，从而实现将多个矩阵合并成一个矩阵。</p>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>调用格式</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>cat</code></td>
+<td><code>cat(DIM,A,B)</code></td>
+<td>在DIM指定的维度上合并矩阵 A 和 B。<br />DIM&#x3D;1表示按行（竖直方向）合并；DIM&#x3D;2表示按列（水平方向）合并</td>
+</tr>
+<tr>
+<td><code>horzcat</code></td>
+<td><code>horzcat(A,B)</code></td>
+<td>在水平方向上合并矩阵A和B</td>
+</tr>
+<tr>
+<td><code>vertcat</code></td>
+<td><code>vertcat(A,B)</code></td>
+<td>在竖直方向上合并矩阵A和B</td>
+</tr>
+<tr>
+<td><code>repmat</code></td>
+<td><code>B=repmat(A,M,N)</code></td>
+<td>通过复制M×N个矩阵A来构造新的矩阵B</td>
+</tr>
+<tr>
+<td><code>blkdiag</code></td>
+<td><code>Y=blkdiag(A,B,...)</code></td>
+<td>用已知的A、B等多个矩阵构造块对角化矩阵Y</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>cat及其相关的函数在将两个矩阵按某个维度进行合并操作时，原始的两个矩阵要在某一个维度上具有相同的长度，否则 MATLAB 在进行计算时就会发生错误。</p>
+</blockquote>
+<h2 id="⛄运算符"><a href="#⛄运算符" class="headerlink" title="⛄运算符"></a>⛄运算符</h2><p><code>MATLAB</code>中的运算符分为算术运算符、关系运算符和逻辑运算符。这三种运算符可以分别使用，也可以在同一运算式中出现。当在同一运算式中同时出现两种或两种以上运算符时，运算的优先级排列如下：算术运算符优先级最高，其次是关系运算符，最低级别是逻辑运算符。</p>
+<h3 id="👀算术运算符"><a href="#👀算术运算符" class="headerlink" title="👀算术运算符"></a>👀算术运算符</h3><p><code>MATLAB</code>中的算术运算符有加、减、乘、除、点乘、点除等。</p>
+<table>
+<thead>
+<tr>
+<th>算术运算符</th>
+<th>运算法则</th>
+<th>算术运算符</th>
+<th>运算法则</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>A+B</code></td>
+<td>A与B相加<br/>（A、B为数值或矩阵）</td>
+<td><code>A-B</code></td>
+<td>A与B相减<br/>（A、B为数值或矩阵）</td>
+</tr>
+<tr>
+<td><code>A * B</code></td>
+<td>A与B相乘<br/>（A、B为数值或矩阵）</td>
+<td><code>A.* B</code></td>
+<td>A与B相应元素相乘<br/>（A、B为相同维度的矩阵）</td>
+</tr>
+<tr>
+<td><code>A / B</code></td>
+<td>A与B相除<br/>（A、B为数值或矩阵）</td>
+<td><code>A./ B</code></td>
+<td>A与B相应元素相除<br/>（A、B为相同维度的矩阵）</td>
+</tr>
+<tr>
+<td><code>A ^ B</code></td>
+<td>A的B次幂<br/>（A、B为数值或矩阵）</td>
+<td><code>A.^ B</code></td>
+<td>A的每个元素的B次幂<br/>（A 为矩阵，B为数值）</td>
+</tr>
+</tbody></table>
+<p><code>MATLAB</code>平台上还提供了大量的运算函数：<code>exp(x)</code>、<code>log(x)</code>、<code>log10(x)</code>、<code>sqrt(x)</code>、<code>sin(x)</code>、<code>cos(x)</code>、<code>tan(x)</code>、<code>asin(x)</code>、<code>acos(x)</code>、<code>atan(x)</code>、<code>mod(a,b)</code>、<code>min(a,b)</code>、<code>max(a,b)</code>、<code>mean(x)</code>、<code>median(x)</code>、<code>sum(x)</code>、<code>prod(x)</code>、<code>cumsum(x)</code>、<code>cumprod(x)</code>、<code>sign(x)</code>、<code>rem(x,y)</code>、<code>diff(x)</code>、<code>sort(x)</code>、<code>fft(x)</code>、<code>rank(x)</code> 。</p>
+<h3 id="👀关系运算符"><a href="#👀关系运算符" class="headerlink" title="👀关系运算符"></a>👀关系运算符</h3><p><code>MATLAB</code>中的关系运算符有6个。关系运算符可以用来对两个数值、两个数组、两个矩阵或两个字符串等数据类型进行比较，同样也可以进行不同类型两个数据之间的比较。比较的方式根据所比较的两个数据类型的不同而不同。例如对矩阵和一个标量进行比较时，需将矩阵中的每个元素与标量进行比较。关系运算符通过比较对应的元素，产生一个仅包含1和0的数值或矩阵。</p>
+<ul>
+<li>返回值为 1，比较结果是真。</li>
+<li>返回值为 0，比较结果是假。</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="center">关系运算符</th>
+<th align="center">关系说明</th>
+<th align="center">关系运算符</th>
+<th align="center">关系说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">&lt;</td>
+<td align="center">小于</td>
+<td align="center">&lt;&#x3D;</td>
+<td align="center">小于等于</td>
+</tr>
+<tr>
+<td align="center">&gt;</td>
+<td align="center">大于</td>
+<td align="center">&gt;&#x3D;</td>
+<td align="center">大于等于</td>
+</tr>
+<tr>
+<td align="center">&#x3D;&#x3D;</td>
+<td align="center">等于</td>
+<td align="center">~&#x3D;</td>
+<td align="center">不等于</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>“<code>=</code>”和“<code>==</code>”的区别：“<code>==</code>”的运算法则是比较两个变量，当它们相等时返回 1，当它们不相等时返回 0；而“<code>=</code>”则是被用来将运算的结果赋给一个变量。</p>
+</blockquote>
+<h3 id="👀逻辑运算符"><a href="#👀逻辑运算符" class="headerlink" title="👀逻辑运算符"></a>👀逻辑运算符</h3><p>逻辑运算符提供了一种组合或否定关系表达式。</p>
+<table>
+<thead>
+<tr>
+<th align="center">逻辑运算符</th>
+<th align="center">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">&amp;</td>
+<td align="center">与</td>
+</tr>
+<tr>
+<td align="center">|</td>
+<td align="center">或</td>
+</tr>
+<tr>
+<td align="center">~</td>
+<td align="center">非</td>
+</tr>
+</tbody></table>
+<p>与关系运算符一样，逻辑运算符也可以进行矩阵与数值之间的比较，比较的方式为将矩阵的每一个元素都与数值进行比较，比较结果为一个相同维数的矩阵，新生成矩阵的每一个元素都代表着原来矩阵中相同位置上的元素与该数值的逻辑运算结果。使用逻辑运算符比较两个相同维数的矩阵时，是按元素来进行比较的，其比较结果是一个包含1和0的矩阵。元素0表示逻辑为假，元素1表示逻辑为真。</p>
+<p>除了上面的逻辑运算符，<code>MATLAB</code>还提供了各种逻辑函数：</p>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>运算法则</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>xor(x,y)</code></td>
+<td>异或运算。x与y不同时，返回1；x与y相同时，返回0</td>
+</tr>
+<tr>
+<td><code>any(x)</code></td>
+<td>如果在一个向量x中，有任何元素是非零，返回1；否则返回0 <br/>如果矩阵x中的每一列有非零元素，返回1；否则返回0</td>
+</tr>
+<tr>
+<td><code>all(x)</code></td>
+<td>如果在一个向量x中，所有元素非零，返回1；否则返回0 <br/>矩阵x中的每一列所有元素非零，返回1；否则返回0</td>
+</tr>
+</tbody></table>
+<h2 id="⛄字符串处理函数"><a href="#⛄字符串处理函数" class="headerlink" title="⛄字符串处理函数"></a>⛄字符串处理函数</h2><p><code>MATLAB</code>提供了大量的字符串函数：</p>
+<table>
+<thead>
+<tr>
+<th>字符串函数</th>
+<th>函数功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>eval(string)</code></td>
+<td>作为一个MATLAB命令求字符串的值</td>
+</tr>
+<tr>
+<td><code>blanks(n)</code></td>
+<td>返回一个n个零或空格的字符串</td>
+</tr>
+<tr>
+<td><code>deblank</code></td>
+<td>去掉字符串中后拖的空格</td>
+</tr>
+<tr>
+<td><code>feval</code></td>
+<td>求由字符串给定的函数值</td>
+</tr>
+<tr>
+<td><code>findstr</code></td>
+<td>从一个字符串内找出字符串</td>
+</tr>
+<tr>
+<td><code>isletter</code></td>
+<td>字母存在时返回真值</td>
+</tr>
+<tr>
+<td><code>isspace</code></td>
+<td>空格字符存在时返回真值</td>
+</tr>
+<tr>
+<td><code>Isstr</code></td>
+<td>输入一个字符串，返回真值</td>
+</tr>
+<tr>
+<td><code>iasterr</code></td>
+<td>返回上一个产生 MATLAB 错误的字符串</td>
+</tr>
+<tr>
+<td><code>strcmp</code></td>
+<td>字符串相同，返回真值</td>
+</tr>
+<tr>
+<td><code>strrep</code></td>
+<td>用一个字符串替换另一个字符串</td>
+</tr>
+<tr>
+<td><code>strtok</code></td>
+<td>在一个字符串里找出第一个标记</td>
+</tr>
+</tbody></table>
+<h3 id="👀字符串的构造"><a href="#👀字符串的构造" class="headerlink" title="👀字符串的构造"></a>👀字符串的构造</h3><p>字符串或字符串数组的构造可以通过直接给变量赋值来实现，具体表达式中字符串的内容需要写在<strong>单引号</strong>内。如果字符串的内容包含单引号，那么以两个重复的单引号来表示。</p>
+<p>构造多行字符串时，若字符串内容写在<code>[]</code>内，那么多行字符串的长度必须相同；若字符串内容写在<code>&#123;&#125;</code>内，则这多行字符串的长度可以不同。</p>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">&gt;&gt; Str_mat = [<span class="string">&#x27;July&#x27;</span>;<span class="string">&#x27;August&#x27;</span>;<span class="string">&#x27;September&#x27;</span>;] </span><br><span class="line">要串联的数组的维度不一致。</span><br><span class="line">&gt;&gt; Str_mat2 = &#123;<span class="string">&#x27;July&#x27;</span>;<span class="string">&#x27;August&#x27;</span>;<span class="string">&#x27;September&#x27;</span>;&#125; </span><br><span class="line">Str_mat2 =</span><br><span class="line">  <span class="number">3</span>×<span class="number">1</span> cell 数组</span><br><span class="line">    &#123;<span class="string">&#x27;July&#x27;</span>     &#125;</span><br><span class="line">    &#123;<span class="string">&#x27;August&#x27;</span>   &#125;</span><br><span class="line">    &#123;<span class="string">&#x27;September&#x27;</span>&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>MATLAB</code>中还提供了<code>strvcat</code>和<code>char</code>函数用于纵向连接多个字符串。<code>strvcat</code>函数连接多行字符串时，每行字符串的长度不要求相等，所有非最长字符串的右边会自动补偿空格，使得每行字符串的长度相同。<code>char</code>函数与<code>strvcat</code>函数类似，不过当多行字符串中有空字符串时，<code>strvcat</code>函数会自动进行忽略，而<code>char</code>函数会把空字符串也用空格补偿后再进行连接。</p>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">A=<span class="string">&#x27;top&#x27;</span>; B=<span class="string">&#x27;&#x27;</span>; C=<span class="string">&#x27;Bottom&#x27;</span>; </span><br><span class="line">sABC=strvcat(A,B,C),cABC=char(A,B,C),<span class="built_in">size</span>=[<span class="built_in">size</span>(sABC);<span class="built_in">size</span>(cABC)] </span><br><span class="line"></span><br><span class="line"><span class="comment">% 输出结果</span></span><br><span class="line">sABC = </span><br><span class="line">	top </span><br><span class="line">	Bottom </span><br><span class="line">cABC = </span><br><span class="line">	top </span><br><span class="line">	</span><br><span class="line">	Bottom </span><br><span class="line"><span class="built_in">size</span> = </span><br><span class="line"> 	<span class="number">2</span> <span class="number">6</span> </span><br><span class="line"> 	<span class="number">3</span> <span class="number">6</span> </span><br></pre></td></tr></table></figure>
+
+<h3 id="👀字符串比较函数"><a href="#👀字符串比较函数" class="headerlink" title="👀字符串比较函数"></a>👀字符串比较函数</h3><p>两个字符串之间的关系可以通过关系运算符来比较，也可以使用<code>strcmp</code>函数来比较两个字符串是否相同。</p>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">&gt;&gt; A = (<span class="string">&#x27; Hello &#x27;</span> == <span class="string">&#x27; Word &#x27;</span>) </span><br><span class="line">矩阵维度必须一致。</span><br><span class="line">&gt;&gt; A = (<span class="string">&#x27; Hello &#x27;</span> == <span class="string">&#x27; World &#x27;</span>)</span><br><span class="line">A =</span><br><span class="line">  <span class="number">1</span>×<span class="number">7</span> logical 数组</span><br><span class="line">   <span class="number">1</span>   <span class="number">0</span>   <span class="number">0</span>   <span class="number">0</span>   <span class="number">1</span>   <span class="number">0</span>   <span class="number">1</span></span><br><span class="line">&gt;&gt; C = strcmp(<span class="string">&#x27; Hello &#x27;</span>, <span class="string">&#x27; World &#x27;</span>)</span><br><span class="line">C =</span><br><span class="line">  logical</span><br><span class="line">   <span class="number">0</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>使用<strong>关系运算符</strong>进行比较时，会对字符串的每个字符进行比较，返回值是一个与字符串长度相同大小的数组，因此被比较的两个字符串的长度必须相同；而<strong>strcmp函数</strong>则根据两个字符串相同与否，返回值为数值0或 1。</p>
+</blockquote>
+<h3 id="👀字符串查找和替换函数"><a href="#👀字符串查找和替换函数" class="headerlink" title="👀字符串查找和替换函数"></a>👀字符串查找和替换函数</h3><p>字符串的查找与搜索可以通过<code>findstr</code>函数来实现。<code>findstr</code>函数对字母的大小写是敏感的。另外，<code>findstr</code>函数对字符串矩阵不起作用，因此对字符串矩阵的搜索只能通过循环索引矩阵内的元素进行搜索。</p>
+<p>字符串的替换可以通过对字符串数组中相应的元素直接赋值来实现，也可以使用<code>strrep</code>函数来实现。直接赋值方法并不能使两个不同长度的字符串相互替换，而<code>strrep</code>函数可以替换两个任意长度的字符串。与<code>findstr</code>函数类似，<code>strrep</code>函数也对字符串矩阵不起作用。</p>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">&gt;&gt; String =<span class="string">&#x27;Peter Piper picked a peck of pickled peppers.&#x27;</span></span><br><span class="line">String =</span><br><span class="line">    <span class="string">&#x27;Peter Piper picked a peck of pickled peppers.&#x27;</span></span><br><span class="line">&gt;&gt; findstr(String,<span class="string">&#x27;pick&#x27;</span>)</span><br><span class="line"><span class="built_in">ans</span> =</span><br><span class="line">    <span class="number">13</span>    <span class="number">30</span></span><br><span class="line">&gt;&gt; String = strrep(String, <span class="string">&#x27;Peter Piper&#x27;</span>, <span class="string">&#x27;Sabrina Crame&#x27;</span>) </span><br><span class="line">String =</span><br><span class="line">    <span class="string">&#x27;Sabrina Crame picked a peck of pickled peppers.&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="👀数值转换"><a href="#👀数值转换" class="headerlink" title="👀数值转换"></a>👀数值转换</h3><p><code>MATLAB</code>还提供了大量字符串与各种数据类型之间的转换函数：</p>
+<table>
+<thead>
+<tr>
+<th>函数名称</th>
+<th>函数功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>abs</code></td>
+<td>字符转换成 ASCII</td>
+</tr>
+<tr>
+<td><code>dec2hex</code></td>
+<td>十进制数转换成十六进制字符串</td>
+</tr>
+<tr>
+<td><code>fprintf</code></td>
+<td>把格式化的文本写到文件中或显示屏上</td>
+</tr>
+<tr>
+<td><code>hex2dec</code></td>
+<td>十六进制字符串转换成十进制数</td>
+</tr>
+<tr>
+<td><code>hex2num</code></td>
+<td>十六进制字符串转换成 IEEE 浮点数</td>
+</tr>
+<tr>
+<td><code>int2str</code></td>
+<td>整数转换成字符串</td>
+</tr>
+<tr>
+<td><code>lower</code></td>
+<td>字符串转换成小写</td>
+</tr>
+<tr>
+<td><code>num2str</code></td>
+<td>数字转换成字符串</td>
+</tr>
+<tr>
+<td><code>setstr</code></td>
+<td>ASCII 转换成字符串</td>
+</tr>
+<tr>
+<td><code>sprintf</code></td>
+<td>用格式控制数字转换成字符串</td>
+</tr>
+<tr>
+<td><code>sscanf</code></td>
+<td>用格式控制字符串转换成数字</td>
+</tr>
+<tr>
+<td><code>str2mat</code></td>
+<td>字符串转换成一个文本矩阵</td>
+</tr>
+<tr>
+<td><code>str2num</code></td>
+<td>字符串转换成数字</td>
+</tr>
+<tr>
+<td><code>upper</code></td>
+<td>字符串转换成大写</td>
+</tr>
+</tbody></table>
+<h2 id="⛄数组与矩阵"><a href="#⛄数组与矩阵" class="headerlink" title="⛄数组与矩阵"></a>⛄数组与矩阵</h2><h3 id="👀数组运算"><a href="#👀数组运算" class="headerlink" title="👀数组运算"></a>👀数组运算</h3><p>数组运算是<code>MATLAB</code>计算的基础。由于<code>MATLAB</code>面向对象的特性，这种数值数组成为<code>MATLAB</code>最重要的一种内建数据类型，而数组运算就是定义这种数据结构的方法。</p>
+<h4 id="👁数组的创建和操作"><a href="#👁数组的创建和操作" class="headerlink" title="👁数组的创建和操作"></a>👁数组的创建和操作</h4><p>在<code>MATLAB</code>中一般使用方括号“<code>[ ]</code>”、逗号“<code>,</code>”、空格号和分号“<code>;</code>”来创建数组，数组中同一行的元素使用<strong>逗号或空格</strong>进行分隔，不同行之间用<strong>分号</strong>进行分隔。</p>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line"><span class="comment">% 空数组</span></span><br><span class="line">A=[]</span><br><span class="line"><span class="comment">% 行向量</span></span><br><span class="line">B=[<span class="number">6</span> <span class="number">5</span> <span class="number">4</span> <span class="number">3</span> <span class="number">2</span> <span class="number">1</span>]</span><br><span class="line">C=[<span class="number">6</span>,<span class="number">5</span>,<span class="number">4</span>,<span class="number">3</span>,<span class="number">2</span>,<span class="number">1</span>]</span><br><span class="line"><span class="comment">% 列向量</span></span><br><span class="line">D=[<span class="number">6</span>;<span class="number">5</span>;<span class="number">4</span>;<span class="number">3</span>;<span class="number">2</span>;<span class="number">1</span>]</span><br><span class="line"><span class="comment">% 转置</span></span><br><span class="line">E=B&#x27;</span><br><span class="line"></span><br><span class="line">F=[<span class="number">6</span> <span class="number">5</span> <span class="number">4</span> <span class="number">3</span> <span class="number">2</span> <span class="number">1</span>]</span><br><span class="line"><span class="comment">% 访问数组第 3 个到最后一个元素</span></span><br><span class="line">a3=F(<span class="number">3</span>:<span class="keyword">end</span>)</span><br><span class="line"><span class="comment">% 数组元素反序输出</span></span><br><span class="line">a4=F(<span class="keyword">end</span>:<span class="number">-1</span>:<span class="number">1</span>) </span><br><span class="line"><span class="comment">% 访问数组第1个及第6个元素</span></span><br><span class="line">a5=F([<span class="number">1</span> <span class="number">6</span>])</span><br></pre></td></tr></table></figure>
+
+<p>（1）通过冒号创建一维数组</p>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line"><span class="comment">% A是创建一维数组的第一个变量，step是每次递增或递减的数值，直到最后一个元素和B的差的绝对值小于等于step的绝对值为止。</span></span><br><span class="line">X=A:step:B</span><br><span class="line"></span><br><span class="line">A=<span class="number">2</span>:<span class="number">6</span> </span><br><span class="line">B=<span class="number">2.1</span>:<span class="number">1.5</span>:<span class="number">6</span> </span><br><span class="line">C=<span class="number">2.1</span>:<span class="number">-1.5</span>:<span class="number">-6</span> </span><br><span class="line">D=<span class="number">2.1</span>:<span class="number">-1.5</span>:<span class="number">6</span> </span><br><span class="line"><span class="comment">% 输出结果</span></span><br><span class="line">A = <span class="number">2</span> <span class="number">3</span> <span class="number">4</span> <span class="number">5</span> <span class="number">6</span> </span><br><span class="line">B = <span class="number">2.1000</span> <span class="number">3.6000</span> <span class="number">5.1000</span> </span><br><span class="line">C = <span class="number">2.1000</span> <span class="number">0.6000</span> <span class="number">-0.9000</span> <span class="number">-2.4000</span> <span class="number">-3.9000</span> <span class="number">-5.4000</span> </span><br><span class="line">D = Empty matrix: <span class="number">1</span>-by<span class="number">-0</span> </span><br></pre></td></tr></table></figure>
+
+<p>（2）通过函数创建一维数组</p>
+<p><code>logspace()</code>函数创建一维数组；<code>linspace()</code>函数创建一维数组</p>
+<h4 id="👁数组的常见运算"><a href="#👁数组的常见运算" class="headerlink" title="👁数组的常见运算"></a>👁数组的常见运算</h4><p>（1）数组的算术运算</p>
+<p>数组的运算是从数组的单个元素出发，针对每个元素进行的运算。在<code>MATLAB</code>中，一维数组的基本运算包括加、减、乘、左除、右除和乘方。</p>
+<p>数组的加减运算：通过格式A+B或A-B可实现数组的加减运算。但是运算规则要求数组A和B的<strong>维数相同</strong>。</p>
+<p>数组的乘除运算：通过格式“<code>.*</code>”或“<code>./</code>”可实现数组的乘除运算。但是运算规则要求数组A和B的<strong>维数相同</strong>。</p>
+<blockquote>
+<p>乘法：数组A和B的维数相同，运算为数组对应元素相乘，计算结果与A和B是相同维数的数组。<br>除法：数组A和B的维数相同，运算为数组对应元素相除，计算结果与A和B是相同维数的数组。<br>右除和左除的关系：A.&#x2F;B&#x3D;B.\A，其中A是被除数，B是除数。</p>
+</blockquote>
+<p>乘方格式“<code>.^</code>”实现数组的乘方运算。数组的乘方运算包括：数组间的乘方运算、数组与某个具体数值的乘方运算，以及常数与数组的乘方运算。</p>
+<p>函数<code>dot()</code>可实现数组的点积运算，但是运算规则要求数组A和B的维数相同，其调用格式如下</p>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">C = <span class="built_in">dot</span>(A,B)</span><br><span class="line">C = <span class="built_in">dot</span>(A,B,dim)</span><br><span class="line"></span><br><span class="line">clear all</span><br><span class="line">A=[<span class="number">1</span> <span class="number">5</span> <span class="number">6</span> <span class="number">8</span> <span class="number">9</span> <span class="number">6</span>]</span><br><span class="line">B=[<span class="number">9</span> <span class="number">5</span> <span class="number">6</span> <span class="number">2</span> <span class="number">4</span> <span class="number">0</span>]</span><br><span class="line"><span class="comment">% 数组的点积</span></span><br><span class="line">C=<span class="built_in">dot</span>(A,B)</span><br><span class="line"><span class="comment">% 数组元素的乘积之和</span></span><br><span class="line">D=sum(A.*B)</span><br><span class="line"></span><br><span class="line"><span class="comment">% 输出结果</span></span><br><span class="line">A = <span class="number">1</span> <span class="number">5</span> <span class="number">6</span> <span class="number">8</span> <span class="number">9</span> <span class="number">6</span> </span><br><span class="line">B = <span class="number">9</span> <span class="number">5</span> <span class="number">6</span> <span class="number">2</span> <span class="number">4</span> <span class="number">0</span> </span><br><span class="line">C = <span class="number">122</span> </span><br><span class="line">D = <span class="number">122</span> </span><br></pre></td></tr></table></figure>
+
+<p>（2）数组的关系运算</p>
+<p>在<code>MATLAB</code>中提供了6种数组关系运算符，即<code>&lt;</code>（小于）、<code>&lt;=</code>（小于等于）、<code>&gt;</code>（大于）、<code>&gt;=</code>（大于等于）、<code>==</code>（恒等于）、<code>~=</code>（不等于）。关系运算的运算法则如下：</p>
+<ul>
+<li>当两个比较量是标量时，直接比较两个数的大小。若关系成立，则返回的结果为1，否则为0。</li>
+<li>当两个比较量是维数相等的数组时，逐一比较两个数组相同位置的元素，并给出比较结果。最终的关系运算结果是一个与参与比较的数组维数相同的数组，其组成元素为0或1。</li>
+</ul>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">clear all</span><br><span class="line">A=[<span class="number">1</span> <span class="number">5</span> <span class="number">6</span> <span class="number">8</span> <span class="number">9</span> <span class="number">6</span>]</span><br><span class="line">B=[<span class="number">9</span> <span class="number">5</span> <span class="number">6</span> <span class="number">2</span> <span class="number">4</span> <span class="number">0</span>]</span><br><span class="line"><span class="comment">% 数组与常数比较，小于</span></span><br><span class="line">C=A&lt;<span class="number">6</span></span><br><span class="line"><span class="comment">% 数组与常数比较，大于等于</span></span><br><span class="line">D=A&gt;=<span class="number">6</span></span><br><span class="line"></span><br><span class="line"><span class="comment">% 输出结果</span></span><br><span class="line">A = <span class="number">1</span> <span class="number">5</span> <span class="number">6</span> <span class="number">8</span> <span class="number">9</span> <span class="number">6</span> </span><br><span class="line">B = <span class="number">9</span> <span class="number">5</span> <span class="number">6</span> <span class="number">2</span> <span class="number">4</span> <span class="number">0</span> </span><br><span class="line">C = <span class="number">1</span> <span class="number">1</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> </span><br><span class="line">D = <span class="number">0</span> <span class="number">0</span> <span class="number">1</span> <span class="number">1</span> <span class="number">1</span> <span class="number">1</span> </span><br></pre></td></tr></table></figure>
+
+<p>（3）数组的逻辑运算</p>
+<p>在<code>MATLAB</code>中数组提供了3种数组逻辑运算符，即<code>&amp;</code>（与）、<code>|</code>（或）和<code>~</code>（非）。逻辑运算的运算法则如下：</p>
+<ul>
+<li>如果是非零元素则为真，用1表示；如果是零元素则为假，用0表示。</li>
+<li>当两个比较量是维数相等的数组时，逐一比较两个数组相同位置的元素，并给出比较结果。最终的关系运算结果是一个与参与比较的数组维数相同的数组，其组成元素为0或1。</li>
+<li>与运算（a&amp;b）时，a、b全为非零，则为真，运算结果为1；或运算（a|b）时，只要a、b有一个为非零，则运算结果为1；非运算（~a）时，若a为0，运算结果为1，a为非零，运算结果为0。</li>
+</ul>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">clear all</span><br><span class="line">A=[<span class="number">1</span> <span class="number">5</span> <span class="number">6</span> <span class="number">8</span> <span class="number">9</span> <span class="number">6</span>]</span><br><span class="line">B=[<span class="number">9</span> <span class="number">5</span> <span class="number">6</span> <span class="number">2</span> <span class="number">4</span> <span class="number">0</span>]</span><br><span class="line"><span class="comment">% 与、或、非</span></span><br><span class="line">C=A&amp;B</span><br><span class="line">D=A|B</span><br><span class="line">E=~B</span><br><span class="line"></span><br><span class="line"><span class="comment">% 输出结果</span></span><br><span class="line">A = <span class="number">1</span> <span class="number">5</span> <span class="number">6</span> <span class="number">8</span> <span class="number">9</span> <span class="number">6</span> </span><br><span class="line">B = <span class="number">9</span> <span class="number">5</span> <span class="number">6</span> <span class="number">2</span> <span class="number">4</span> <span class="number">0</span> </span><br><span class="line">C = <span class="number">1</span> <span class="number">1</span> <span class="number">1</span> <span class="number">1</span> <span class="number">1</span> <span class="number">0</span> </span><br><span class="line">D = <span class="number">1</span> <span class="number">1</span> <span class="number">1</span> <span class="number">1</span> <span class="number">1</span> <span class="number">1</span> </span><br><span class="line">E = <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">1</span> </span><br></pre></td></tr></table></figure>
+
+<h3 id="👀矩阵操作"><a href="#👀矩阵操作" class="headerlink" title="👀矩阵操作"></a>👀矩阵操作</h3><h4 id="👁创建矩阵"><a href="#👁创建矩阵" class="headerlink" title="👁创建矩阵"></a>👁创建矩阵</h4><p>零矩阵、单位矩阵和全1矩阵等特殊矩阵，<code>MATLAB</code>中提供了函数生成试验矩阵。还有一些其他特殊矩阵的指令集。</p>
+<p>希尔伯特（Hilbert）矩阵，它是一个条件数差的矩阵，所以将它用来作为试验矩阵。</p>
+<blockquote>
+<p><code>hilb(n)</code>、<code>invhilb(n)</code></p>
+</blockquote>
+<p>托普利兹（Toeplitz）矩阵，它由两个向量定义，一个行向量和一个列向量。对称的托普利兹矩阵由单一向量来定义。</p>
+<blockquote>
+<p><code>toeplitz(k,r)</code>、<code>toeplitz(c)</code></p>
+</blockquote>
+<p>0～1间均匀分布的随机矩阵，产生 0～1 间均匀分布的随机矩阵。</p>
+<blockquote>
+<p><code>rand(n)</code>、<code>rand(m,n)</code>、<code>rand(m,n,p,...)</code>、<code>rand(size(A))</code></p>
+</blockquote>
+<p>标准正态分布随机矩阵，产生均值为 0、方差为 1 的随机矩阵。</p>
+<blockquote>
+<p><code>randn(n)</code>、<code>randn(m,n)</code>、<code>randn(m,n,p,...)</code>、<code>randn([m,n,p,...])</code>、<code>randn(size(A))</code></p>
+</blockquote>
+<p>魔方矩阵，每行、列和两条对角线上的元素和相等。</p>
+<blockquote>
+<p><code>magic(n)</code></p>
+</blockquote>
+<p>帕斯卡矩阵。</p>
+<blockquote>
+<p><code>pascal(n)</code>、<code>pascal(n,1)</code>、<code>pascal(n,2)</code></p>
+</blockquote>
+<p>范德蒙（Vandermonde）矩阵。</p>
+<blockquote>
+<p><code>vander(v)</code>，生成范德蒙矩阵，矩阵的列是向量v的幂，输入向量可以使行向量或列向量。</p>
+</blockquote>
+<h4 id="👁改变矩阵大小"><a href="#👁改变矩阵大小" class="headerlink" title="👁改变矩阵大小"></a>👁改变矩阵大小</h4><p>（1）矩阵的合并</p>
+<p>矩阵的合并就是把两个或者两个以上的矩阵数据连接起来得到一个新的矩阵。</p>
+<blockquote>
+<p>矩阵构造符<code>[]</code>不仅可用于构造矩阵，同时还可以作为一个矩阵合并操作符。表达式<code>C=[A B]</code>在水平方向合并矩阵A和B，而表达式<code>C=[A;B]</code>在竖直方向合并矩阵A和B。</p>
+<p>除了使用矩阵合并符“<code>[]</code>”来合并矩阵，还可以使用<strong>矩阵合并函数</strong>来合并矩阵。</p>
+</blockquote>
+<p>可以用矩阵合并符来构造任意大小的矩阵。不过需要注意的是，在矩阵合并的过程中一定要保持矩阵的形状是方形，否则矩阵合并将无法进行。</p>
+<p>（2）矩阵行列的删除</p>
+<p>要删除矩阵的某一行或者某一列，只要把该行或者该列赋予一个空矩阵“<code>[]</code>”即可。</p>
+<h4 id="👁重构矩阵"><a href="#👁重构矩阵" class="headerlink" title="👁重构矩阵"></a>👁重构矩阵</h4><p>矩阵重构的两个比较重要的运算是转置和共轭转置，在<code>MATLAB</code>中，用在函数后面加撇号“<code>&#39;</code>”来表示。在线性代数的专业书籍中，这种运算经常用<code>*</code>和<code>H</code>表示。</p>
+<p>如果A是一个实数矩阵，那么它被转置时，第1行变成第1列，第2行变成第2列……以此类推，一个m×n矩阵变为一个n×m矩阵。如果矩阵是方阵，那么这个矩阵在主对角线上反映出来。如果矩阵A的元素a<del>ij</del>是复数，那么所有元素也是共轭的。如果仅希望转置，在撇号“<code>&#39;</code>”之前输入一点，即成为“<code>.&#39;</code>”，A.’表示转置，其结果与conj(A’)相同。如果A是实数矩阵，那么A’与A.’相同。</p>
+<h3 id="👀矩阵元素的运算"><a href="#👀矩阵元素的运算" class="headerlink" title="👀矩阵元素的运算"></a>👀矩阵元素的运算</h3><p>矩阵的加、减、乘、除、比较运算和逻辑运算等代数运算是<code>MATLAB</code>数值计算最基础的部分。</p>
+<p><strong>矩阵的加减运算</strong>。进行矩阵加法、减法运算的前提是参与运算的两个矩阵或多个矩阵必须具有相同的行数和列数，即A、B、C等多个矩阵均为m×n矩阵；或者其中有一个或多个矩阵为标量。</p>
+<p><strong>矩阵的乘法运算</strong>。<code>MATLAB</code>中矩阵的乘法运算包括两种：数与矩阵的乘法；矩阵与矩阵的乘法。</p>
+<ul>
+<li>数与矩阵的乘法：由于单个数在<code>MATLAB</code>中是以标量来存储的，因此数与矩阵的乘法也可以称为标量与矩<br>阵的乘法。</li>
+<li>矩阵与矩阵的乘法：两个矩阵的乘法必须满足被乘矩阵的列数与乘矩阵的行数相等。</li>
+</ul>
+<p><strong>矩阵的除法运算</strong>。矩阵的除法是乘法的逆运算，分为左除和右除两种，分别用运算符号“<code>\</code>”和“<code>/</code>”表示。</p>
+<ul>
+<li>A\B表示矩阵A的逆乘以B，A&#x2F;B表示矩阵A乘以矩阵B的逆。除非矩阵A和矩阵B相同，否则A&#x2F;B和A\B是不等价的。</li>
+<li>对于一般的二维矩阵A和B，当进行A\B运算时，要求A的行数与B的行数相等；当进行A&#x2F;B运算时，要求A的列数与B的列数相等。</li>
+</ul>
+<p><strong>矩阵的幂运算</strong>。当矩阵A为<code>方阵</code>时，可进行矩阵的幂运算，使用运算符号“<code>^</code>”表示幂运算。</p>
+<p><strong>矩阵元素的查找</strong>。函数<code>find()</code>的作用是进行矩阵元素的查找，它通常与关系函数和逻辑运算相结合。其调用格式如下：</p>
+<ul>
+<li><code>ind = find(X)</code>：该函数查找矩阵X中的非零元素，函数返回这些元素的单下标。</li>
+<li><code>[row,col] = find(X, ...)</code>：该函数查找矩阵X中的非零元素，函数返回这些元素的双下标i和j。</li>
+</ul>
+<p><strong>矩阵元素的排序</strong>。函数<code>sort()</code>的作用是按照升序排序，排序后的矩阵和原矩阵的维数相同。其调用格式如下：</p>
+<ul>
+<li><code>B = sort(A)</code>：该函数对矩阵A进行升序排列。A可为矩阵或向量。</li>
+<li><code>B = sort(A,dim)</code>：该函数对矩阵 A 进行升序排列，并将结果返回在给定的维数dim上按照升序排列。当dim&#x3D;1时，按照列进行排序；当dim&#x3D;2时，按照行进行排序。</li>
+<li><code>B = sort(...,mode)</code>：该函数对矩阵 A 进行排序，mode可指定排序的方式。ascend指定按升序排列，为默认值；descend指定按降序排列。</li>
+</ul>
+<p><strong>矩阵元素的求和</strong>。函数<code>sum()</code>和<code>cumsum()</code>的作用是对矩阵的元素求和。函数<code>cumsum()</code>的调用格式与<code>sum()</code>类似，不同的是其返回值为矩阵。其调用格式如下：</p>
+<ul>
+<li><code>B = sum(A)</code>：该函数对矩阵A的元素求和，返回由矩阵A各列元素的和组成的向量。通过<code>sum(sum())</code>可求出矩阵所有元素的和。</li>
+<li><code>B = sum(A,dim)</code>：该函数返回在给定的维数dim上元素的和。当dim&#x3D;1时，计算矩阵A各列元素的和；当dim&#x3D;2时，计算矩阵A各行元素的和。</li>
+<li><code>B = cumsum(A)</code>。</li>
+<li><code>B = cumsum(A,dim)</code>。</li>
+</ul>
+<p><strong>矩阵元素的求积</strong>。函数<code>prod()</code>和<code>cumprod()</code>的作用是对矩阵的元素求积。函数<code>cumprod()</code>的调用格式与<code>prod()</code>类似，不同的是其返回值为矩阵。其调用格式如下：</p>
+<ul>
+<li><code>B = prod(A)</code>：该函数对矩阵A的元素求积，返回由矩阵A各列元素的积组成的向量。</li>
+<li><code>B = prod(A,dim)</code>：该函数返回在给定的维数dim上元素的积。当dim&#x3D;1时，计算矩阵A各列元素的积；当dim&#x3D;2时，计算矩阵A各行元素的积。</li>
+<li><code>B = cumprod(A)</code>。</li>
+<li><code>B = cumprod(A,dim)</code>。</li>
+</ul>
+<p><strong>矩阵元素的差分</strong>。函数<code>diff()</code>的作用是计算矩阵的差分。其调用格式如下：</p>
+<ul>
+<li><code>Y = diff(X)</code>：计算矩阵各列元素的差分。</li>
+<li><code>Y = diff(X,n)</code>：计算矩阵各列元素的n阶差分。</li>
+<li><code>Y = diff(X,n,dim)</code>：计算矩阵在给定的维数dim上元素的n阶差分。当dim&#x3D;1时，计算矩阵各列元素的差分；当dim&#x3D;2时，计算矩阵各行元素的差分。当参数n≥size(x,dim)时，函数的返回值是空矩阵。</li>
+</ul>
+<h3 id="👀矩阵运算"><a href="#👀矩阵运算" class="headerlink" title="👀矩阵运算"></a>👀矩阵运算</h3><p>矩阵运算是线性代数中极其重要的部分，包括矩阵分析、特征值求解和奇异值等。</p>
+<p>（1）矩阵分析</p>
+<table>
+<thead>
+<tr>
+<th>函数名</th>
+<th>功能描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>norm</code></td>
+<td>求矩阵或者向量的范数</td>
+</tr>
+<tr>
+<td><code>normest</code></td>
+<td>估计矩阵的 2 阶范数</td>
+</tr>
+<tr>
+<td><code>rank</code></td>
+<td>矩阵的秩，即求对角元素的和</td>
+</tr>
+<tr>
+<td><code>det</code></td>
+<td>矩阵的行列式</td>
+</tr>
+<tr>
+<td><code>trace</code></td>
+<td>矩阵的迹</td>
+</tr>
+<tr>
+<td><code>null</code></td>
+<td>0 空间</td>
+</tr>
+<tr>
+<td><code>orth</code></td>
+<td>正交化空间</td>
+</tr>
+<tr>
+<td><code>rref</code></td>
+<td>约化行阶梯形式</td>
+</tr>
+<tr>
+<td><code>subspace</code></td>
+<td>求两个矩阵空间的角度</td>
+</tr>
+</tbody></table>
+<p>（2）矩阵分解</p>
+<p>矩阵分解是把一个矩阵分解成几个“较简单”的矩阵连乘的形式。</p>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>功能描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>chol</code></td>
+<td>Cholesky分解</td>
+</tr>
+<tr>
+<td><code>cholinc</code></td>
+<td>稀疏矩阵的不完全Cholesky分解</td>
+</tr>
+<tr>
+<td><code>lu</code></td>
+<td>矩阵LU分解（高斯消去法分解）</td>
+</tr>
+<tr>
+<td><code>luinc</code></td>
+<td>稀疏矩阵的不完全LU分解</td>
+</tr>
+<tr>
+<td><code>qr</code></td>
+<td>正交三角分解</td>
+</tr>
+<tr>
+<td><code>svd</code></td>
+<td>奇异值分解</td>
+</tr>
+<tr>
+<td><code>gsvd</code></td>
+<td>一般奇异值分解</td>
+</tr>
+<tr>
+<td><code>schur</code></td>
+<td>舒尔分解</td>
+</tr>
+</tbody></table>
+<p>（3）特征值和特征向量</p>
+<p><code>MATLAB</code>中的命令计算特征值和特征向量十分方便，可以得到不同的子结果和分解，这在线性代数学习中十分有意义。</p>
+<h3 id="👀稀疏矩阵"><a href="#👀稀疏矩阵" class="headerlink" title="👀稀疏矩阵"></a>👀稀疏矩阵</h3><p>在许多问题中提到了含有大量0元素的矩阵，这样的矩阵称为稀疏矩阵。为了节省存储空间和计算时间，<code>MATLAB</code>考虑到矩阵的稀疏性，在对它进行运算时有特殊的命令。稀疏矩阵大部分的元素是0，因此只需存储非零元素的下标和元素值，这种特殊的存储方式可以节省大量的存储空间和不必要的运算。</p>
+<h4 id="👁稀疏矩阵的存储方式"><a href="#👁稀疏矩阵的存储方式" class="headerlink" title="👁稀疏矩阵的存储方式"></a>👁稀疏矩阵的存储方式</h4><p>对于稀疏矩阵，<code>MATLAB</code>仅存储矩阵所有的非零元素的值及其位置（行号和列号）。显然，这对于具有大量0元素的稀疏矩阵来说是十分有效的。</p>
+<h4 id="👁稀疏矩阵的生成"><a href="#👁稀疏矩阵的生成" class="headerlink" title="👁稀疏矩阵的生成"></a>👁稀疏矩阵的生成</h4><p><code>MATLAB</code>提供了多种创建稀疏矩阵的方法。</p>
+<ul>
+<li>利用<code>sparse</code>函数从满矩阵转换得到稀疏矩阵。</li>
+<li>利用一些特定函数创建包括单位稀疏矩阵在内的特殊稀疏矩阵。</li>
+</ul>
+<p>（1）利用<code>sparse</code>函数建立一般的稀疏矩阵</p>
+<table>
+<thead>
+<tr>
+<th>函数名称</th>
+<th>表示意义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>sparse(A)</code></td>
+<td>由非零元素和下标建立稀疏矩阵A。如果A已是一个稀疏矩阵，则返回A本身</td>
+</tr>
+<tr>
+<td><code>sparse(m,n)</code></td>
+<td>生成一个m×n的所有元素都是0的稀疏矩阵</td>
+</tr>
+<tr>
+<td><code>sparse(u,v,a)</code></td>
+<td>生成大小为max(u)×max(v)的稀疏矩阵。其中u和v是整数向量，a为实数或复数向量</td>
+</tr>
+<tr>
+<td><code>sparse(u,v,a,m,n)</code></td>
+<td>生成一个m×n的稀疏矩阵，(ui,vi)对应值 ai。向量u，v和a长度必须相同</td>
+</tr>
+<tr>
+<td><code>spconvert(D)</code></td>
+<td>生成一个稀疏矩阵。D共有3列，第1列为行下标，第2列为列下标，最后一列为元素值</td>
+</tr>
+<tr>
+<td><code>full(S)</code></td>
+<td>将稀疏矩阵S转换成一个满矩阵</td>
+</tr>
+</tbody></table>
+<p><code>MATLAB</code>提供了<code>full()</code>函数把稀疏矩阵转换为满矩阵。<code>full()</code>函数的调用格式如下：</p>
+<ul>
+<li><code>A = full(S)</code>：S为稀疏矩阵。</li>
+</ul>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">A = [<span class="number">1</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span>;<span class="number">0</span> <span class="number">5</span> <span class="number">0</span> <span class="number">0</span>;<span class="number">2</span> <span class="number">0</span> <span class="number">0</span> <span class="number">7</span>] </span><br><span class="line">S = sparse(A)</span><br><span class="line">B = full(S) </span><br><span class="line"><span class="comment">% 输出结果</span></span><br><span class="line">S = </span><br><span class="line">     (<span class="number">1</span>,<span class="number">1</span>) <span class="number">1</span> </span><br><span class="line">     (<span class="number">3</span>,<span class="number">1</span>) <span class="number">2</span> </span><br><span class="line">     (<span class="number">2</span>,<span class="number">2</span>) <span class="number">5</span> </span><br><span class="line">     (<span class="number">3</span>,<span class="number">4</span>) <span class="number">7</span> </span><br><span class="line">B = </span><br><span class="line">     <span class="number">1</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> </span><br><span class="line">     <span class="number">0</span> <span class="number">5</span> <span class="number">0</span> <span class="number">0</span> </span><br><span class="line">     <span class="number">2</span> <span class="number">0</span> <span class="number">0</span> <span class="number">7</span> </span><br></pre></td></tr></table></figure>
+
+<p>查看稀疏矩阵中非零的信息示例：</p>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">clear all </span><br><span class="line">a=[<span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">1</span>;<span class="number">0</span> <span class="number">0</span> <span class="number">8</span> <span class="number">0</span>;<span class="number">4</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span>;<span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span>]; </span><br><span class="line">S=sparse(a); <span class="comment">% 创建稀疏矩阵</span></span><br><span class="line">whos; </span><br><span class="line">n1=nnz(S) <span class="comment">% 查看非零元素的个数</span></span><br><span class="line">n2=nonzeros(S) <span class="comment">% 非零元素的值</span></span><br><span class="line">n3=nzmax(S) <span class="comment">% 查看稀疏矩阵的存储空间</span></span><br><span class="line"><span class="comment">% spy()函数对稀疏矩阵中非零元素的分布进行图形化显示，</span></span><br><span class="line">spy(S) </span><br><span class="line"><span class="comment">% 采用nnz(S)/prod(size(S))计算稀疏矩阵的非零元素密度</span></span><br><span class="line">n4=nnz(S)/prod(<span class="built_in">size</span>(S)) </span><br><span class="line"><span class="comment">% 输出结果</span></span><br><span class="line">Name      Size            Bytes  Class     Attributes</span><br><span class="line"> S         <span class="number">4</span>x4                <span class="number">88</span>  double    sparse    </span><br><span class="line"> a         <span class="number">4</span>x4               <span class="number">128</span>  double </span><br><span class="line">n1 = <span class="number">3</span> </span><br><span class="line">n2 = </span><br><span class="line">     <span class="number">4</span> </span><br><span class="line">     <span class="number">8</span> </span><br><span class="line">     <span class="number">1</span> </span><br><span class="line">n3 = <span class="number">3</span> </span><br><span class="line">n4 = <span class="number">0.1875</span> </span><br></pre></td></tr></table></figure>
+
+<p>（2）利用特定函数建立稀疏矩阵</p>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>调用格式</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>speye</code></td>
+<td><code>S = speye(m,n)</code></td>
+<td>创建单位稀疏矩阵</td>
+</tr>
+<tr>
+<td><code>spones</code></td>
+<td><code>S = spones(X)</code></td>
+<td>创建非零元素为1的稀疏矩阵</td>
+</tr>
+<tr>
+<td><code>sprand</code></td>
+<td><code>S = sprand(X)</code></td>
+<td>创建非零元素为均匀分布的随机数的稀疏矩阵</td>
+</tr>
+<tr>
+<td><code>sprandn</code></td>
+<td><code>S = sprandn(X)</code></td>
+<td>创建非零元素为高斯分布的随机数的稀疏矩阵</td>
+</tr>
+<tr>
+<td><code>sprandsym</code></td>
+<td><code>S = sprandsym(X)</code></td>
+<td>创建非零元素为高斯分布的随机数的对称稀疏矩阵</td>
+</tr>
+<tr>
+<td><code>spdiags</code></td>
+<td><code>S = spdiags(X)</code></td>
+<td>创建对角稀疏矩阵</td>
+</tr>
+<tr>
+<td><code>spalloc</code></td>
+<td><code>S = spalloc(X)</code></td>
+<td>为稀疏矩阵分配空间</td>
+</tr>
+</tbody></table>
+<h4 id="👁稀疏矩阵的运算"><a href="#👁稀疏矩阵的运算" class="headerlink" title="👁稀疏矩阵的运算"></a>👁稀疏矩阵的运算</h4><ul>
+<li>满矩阵的四则运算对稀疏矩阵同样有效，但是返回结果有可能是稀疏矩阵或者满矩阵。</li>
+<li>对于单个稀疏矩阵的输入，大部分函数输出的结果都是稀疏矩阵，有部分函数输出的结果是满矩阵。对于多个矩阵的输入，如果其中至少有一个矩阵是满矩阵，那么大部分函数的输出结果是满矩阵。</li>
+<li>对于矩阵的加、减、乘、除运算，只要其中有一个是满矩阵，则输出的结果都是满矩阵。</li>
+<li>稀疏矩阵的数乘为稀疏矩阵；稀疏矩阵的幂为稀疏矩阵。</li>
+</ul>
+<p>笔者不才，请多交流！！！</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://heartlovelife.github.io">Xiaotangsmiles</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://heartlovelife.github.io/2022/12/17/Matlab-Basic01/">https://heartlovelife.github.io/2022/12/17/Matlab-Basic01/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://heartlovelife.github.io" target="_blank">江湖是你画中亦是你</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Matlab/">Matlab</a><a class="post-meta__tags" href="/tags/%E7%A7%91%E5%AD%A6%E8%AE%A1%E7%AE%97/">科学计算</a></div><div class="post_share"><div class="social-share" data-image="https://s2.loli.net/2022/12/17/2RZMExnlA8C6vHS.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/gh/overtrue/share.js@master/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i> 打赏</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/wechat.jpg" target="_blank"><img class="post-qr-code-img" src="/img/loading1.gif" data-original="/img/wechat.jpg" alt="wechat(微信)"/></a><div class="post-qr-code-desc">wechat(微信)</div></li><li class="reward-item"><a href="/img/alipay.jpg" target="_blank"><img class="post-qr-code-img" src="/img/loading1.gif" data-original="/img/alipay.jpg" alt="alipay(支付宝)"/></a><div class="post-qr-code-desc">alipay(支付宝)</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2022/10/30/IDL-Basic01/"><img class="next-cover" src="/img/loading1.gif" data-original="https://s2.loli.net/2022/12/11/C3AdepLFogSNkZJ.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">IDL语法基础（01）</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/loading1.gif" data-original="/img/touxiang.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Xiaotangsmiles</div><div class="author-info__description">我们总以为来日方长，却忘了世事无常</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">14</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">13</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">7</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/HeartLoveLife"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/HeartLoveLife" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="https://blog.csdn.net/twg666" target="_blank" title="CSDN"><i class="fa fa-book-open"></i></a><a class="social-icon" href="tencent://AddContact/?fromId=45&amp;fromSubId=1&amp;subcmd=all&amp;uin=491037927&amp;website=www.oicqzone.com" target="_blank" title="QQ"><i class="fab fa-qq"></i></a><a class="social-icon" href="mailto:xiaotangsmiles@163.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E2%9B%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-number">1.</span> <span class="toc-text">⛄数据类型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%91%80%E6%95%B0%E5%80%BC%E7%B1%BB%E5%9E%8B"><span class="toc-number">1.1.</span> <span class="toc-text">👀数值类型</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%F0%9F%91%81%E6%95%B4%E6%95%B0%E7%B1%BB%E5%9E%8B"><span class="toc-number">1.1.1.</span> <span class="toc-text">👁整数类型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%F0%9F%91%81%E6%B5%AE%E7%82%B9%E6%95%B0%E7%B1%BB%E5%9E%8B"><span class="toc-number">1.1.2.</span> <span class="toc-text">👁浮点数类型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%F0%9F%91%81%E5%A4%8D%E6%95%B0"><span class="toc-number">1.1.3.</span> <span class="toc-text">👁复数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%F0%9F%91%81%E6%97%A0%E7%A9%B7%E9%87%8F%EF%BC%88Inf%EF%BC%89%E5%92%8C%E9%9D%9E%E6%95%B0%E5%80%BC%E9%87%8F%EF%BC%88NaN%EF%BC%89"><span class="toc-number">1.1.4.</span> <span class="toc-text">👁无穷量（Inf）和非数值量（NaN）</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%91%80%E9%80%BB%E8%BE%91%E7%B1%BB%E5%9E%8B"><span class="toc-number">1.2.</span> <span class="toc-text">👀逻辑类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%91%80%E5%AD%97%E7%AC%A6%E5%92%8C%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="toc-number">1.3.</span> <span class="toc-text">👀字符和字符串</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%91%80%E5%87%BD%E6%95%B0%E5%8F%A5%E6%9F%84"><span class="toc-number">1.4.</span> <span class="toc-text">👀函数句柄</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%91%80%E7%BB%93%E6%9E%84%E4%BD%93%E7%B1%BB%E5%9E%8B"><span class="toc-number">1.5.</span> <span class="toc-text">👀结构体类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%91%80%E6%95%B0%E7%BB%84%E7%B1%BB%E5%9E%8B"><span class="toc-number">1.6.</span> <span class="toc-text">👀数组类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%91%80%E5%8D%95%E5%85%83%E6%95%B0%E7%BB%84%E7%B1%BB%E5%9E%8B"><span class="toc-number">1.7.</span> <span class="toc-text">👀单元数组类型</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%F0%9F%91%81%E5%8D%95%E5%85%83%E6%95%B0%E7%BB%84%E7%9A%84%E5%88%9B%E5%BB%BA"><span class="toc-number">1.7.1.</span> <span class="toc-text">👁单元数组的创建</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%F0%9F%91%81%E5%8D%95%E5%85%83%E6%95%B0%E7%BB%84%E7%9A%84%E5%AF%BB%E8%AE%BF"><span class="toc-number">1.7.2.</span> <span class="toc-text">👁单元数组的寻访</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%F0%9F%91%81%E5%8D%95%E5%85%83%E6%95%B0%E7%BB%84%E7%9A%84%E6%93%8D%E4%BD%9C"><span class="toc-number">1.7.3.</span> <span class="toc-text">👁单元数组的操作</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%91%80map%E5%AE%B9%E5%99%A8%E7%B1%BB%E5%9E%8B"><span class="toc-number">1.8.</span> <span class="toc-text">👀map容器类型</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%F0%9F%91%81%E5%88%9B%E5%BB%BAmap%E5%AF%B9%E8%B1%A1"><span class="toc-number">1.8.1.</span> <span class="toc-text">👁创建map对象</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%F0%9F%91%81%E6%9F%A5%E7%9C%8B-x2F-%E8%AF%BB%E5%8F%96-map-%E5%AF%B9%E8%B1%A1"><span class="toc-number">1.8.2.</span> <span class="toc-text">👁查看&#x2F;读取 map 对象</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%F0%9F%91%81%E7%BC%96%E8%BE%91map%E5%AF%B9%E8%B1%A1"><span class="toc-number">1.8.3.</span> <span class="toc-text">👁编辑map对象</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E2%9B%84%E5%9F%BA%E6%9C%AC%E7%9F%A9%E9%98%B5%E6%93%8D%E4%BD%9C"><span class="toc-number">2.</span> <span class="toc-text">⛄基本矩阵操作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%91%80%E7%9F%A9%E9%98%B5%E7%9A%84%E6%9E%84%E9%80%A0"><span class="toc-number">2.1.</span> <span class="toc-text">👀矩阵的构造</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%91%80%E7%9F%A9%E9%98%B5%E5%A4%A7%E5%B0%8F%E5%8F%8A%E7%BB%93%E6%9E%84%E7%9A%84%E6%94%B9%E5%8F%98"><span class="toc-number">2.2.</span> <span class="toc-text">👀矩阵大小及结构的改变</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%91%80%E7%9F%A9%E9%98%B5%E4%B8%8B%E6%A0%87%E5%BC%95%E7%94%A8"><span class="toc-number">2.3.</span> <span class="toc-text">👀矩阵下标引用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%91%80%E7%9F%A9%E9%98%B5%E4%BF%A1%E6%81%AF%E7%9A%84%E8%8E%B7%E5%8F%96"><span class="toc-number">2.4.</span> <span class="toc-text">👀矩阵信息的获取</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%91%80%E7%9F%A9%E9%98%B5%E7%9A%84%E4%BF%9D%E5%AD%98%E5%92%8C%E5%8A%A0%E8%BD%BD"><span class="toc-number">2.5.</span> <span class="toc-text">👀矩阵的保存和加载</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%F0%9F%91%81%E7%9F%A9%E9%98%B5%E5%85%83%E7%B4%A0%E7%9A%84%E5%AF%BB%E5%9D%80"><span class="toc-number">2.5.1.</span> <span class="toc-text">👁矩阵元素的寻址</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%F0%9F%91%81%E7%9F%A9%E9%98%B5%E5%85%83%E7%B4%A0%E7%9A%84%E8%B5%8B%E5%80%BC%E5%8F%8A%E6%89%A9%E5%B1%95"><span class="toc-number">2.5.2.</span> <span class="toc-text">👁矩阵元素的赋值及扩展</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E2%9B%84%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-number">3.</span> <span class="toc-text">⛄运算符</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%91%80%E7%AE%97%E6%9C%AF%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-number">3.1.</span> <span class="toc-text">👀算术运算符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%91%80%E5%85%B3%E7%B3%BB%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-number">3.2.</span> <span class="toc-text">👀关系运算符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%91%80%E9%80%BB%E8%BE%91%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-number">3.3.</span> <span class="toc-text">👀逻辑运算符</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E2%9B%84%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%A4%84%E7%90%86%E5%87%BD%E6%95%B0"><span class="toc-number">4.</span> <span class="toc-text">⛄字符串处理函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%91%80%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E6%9E%84%E9%80%A0"><span class="toc-number">4.1.</span> <span class="toc-text">👀字符串的构造</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%91%80%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%AF%94%E8%BE%83%E5%87%BD%E6%95%B0"><span class="toc-number">4.2.</span> <span class="toc-text">👀字符串比较函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%91%80%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%9F%A5%E6%89%BE%E5%92%8C%E6%9B%BF%E6%8D%A2%E5%87%BD%E6%95%B0"><span class="toc-number">4.3.</span> <span class="toc-text">👀字符串查找和替换函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%91%80%E6%95%B0%E5%80%BC%E8%BD%AC%E6%8D%A2"><span class="toc-number">4.4.</span> <span class="toc-text">👀数值转换</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E2%9B%84%E6%95%B0%E7%BB%84%E4%B8%8E%E7%9F%A9%E9%98%B5"><span class="toc-number">5.</span> <span class="toc-text">⛄数组与矩阵</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%91%80%E6%95%B0%E7%BB%84%E8%BF%90%E7%AE%97"><span class="toc-number">5.1.</span> <span class="toc-text">👀数组运算</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%F0%9F%91%81%E6%95%B0%E7%BB%84%E7%9A%84%E5%88%9B%E5%BB%BA%E5%92%8C%E6%93%8D%E4%BD%9C"><span class="toc-number">5.1.1.</span> <span class="toc-text">👁数组的创建和操作</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%F0%9F%91%81%E6%95%B0%E7%BB%84%E7%9A%84%E5%B8%B8%E8%A7%81%E8%BF%90%E7%AE%97"><span class="toc-number">5.1.2.</span> <span class="toc-text">👁数组的常见运算</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%91%80%E7%9F%A9%E9%98%B5%E6%93%8D%E4%BD%9C"><span class="toc-number">5.2.</span> <span class="toc-text">👀矩阵操作</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%F0%9F%91%81%E5%88%9B%E5%BB%BA%E7%9F%A9%E9%98%B5"><span class="toc-number">5.2.1.</span> <span class="toc-text">👁创建矩阵</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%F0%9F%91%81%E6%94%B9%E5%8F%98%E7%9F%A9%E9%98%B5%E5%A4%A7%E5%B0%8F"><span class="toc-number">5.2.2.</span> <span class="toc-text">👁改变矩阵大小</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%F0%9F%91%81%E9%87%8D%E6%9E%84%E7%9F%A9%E9%98%B5"><span class="toc-number">5.2.3.</span> <span class="toc-text">👁重构矩阵</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%91%80%E7%9F%A9%E9%98%B5%E5%85%83%E7%B4%A0%E7%9A%84%E8%BF%90%E7%AE%97"><span class="toc-number">5.3.</span> <span class="toc-text">👀矩阵元素的运算</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%91%80%E7%9F%A9%E9%98%B5%E8%BF%90%E7%AE%97"><span class="toc-number">5.4.</span> <span class="toc-text">👀矩阵运算</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%91%80%E7%A8%80%E7%96%8F%E7%9F%A9%E9%98%B5"><span class="toc-number">5.5.</span> <span class="toc-text">👀稀疏矩阵</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%F0%9F%91%81%E7%A8%80%E7%96%8F%E7%9F%A9%E9%98%B5%E7%9A%84%E5%AD%98%E5%82%A8%E6%96%B9%E5%BC%8F"><span class="toc-number">5.5.1.</span> <span class="toc-text">👁稀疏矩阵的存储方式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%F0%9F%91%81%E7%A8%80%E7%96%8F%E7%9F%A9%E9%98%B5%E7%9A%84%E7%94%9F%E6%88%90"><span class="toc-number">5.5.2.</span> <span class="toc-text">👁稀疏矩阵的生成</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%F0%9F%91%81%E7%A8%80%E7%96%8F%E7%9F%A9%E9%98%B5%E7%9A%84%E8%BF%90%E7%AE%97"><span class="toc-number">5.5.3.</span> <span class="toc-text">👁稀疏矩阵的运算</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2022/12/17/Matlab-Basic01/" title="Matlab语法基础（01）"><img src="/img/loading1.gif" data-original="https://s2.loli.net/2022/12/17/2RZMExnlA8C6vHS.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Matlab语法基础（01）"/></a><div class="content"><a class="title" href="/2022/12/17/Matlab-Basic01/" title="Matlab语法基础（01）">Matlab语法基础（01）</a><time datetime="2022-12-17T05:42:49.000Z" title="发表于 2022-12-17 13:42:49">2022-12-17</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/10/30/IDL-Basic01/" title="IDL语法基础（01）"><img src="/img/loading1.gif" data-original="https://s2.loli.net/2022/12/11/C3AdepLFogSNkZJ.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="IDL语法基础（01）"/></a><div class="content"><a class="title" href="/2022/10/30/IDL-Basic01/" title="IDL语法基础（01）">IDL语法基础（01）</a><time datetime="2022-10-30T08:26:17.000Z" title="发表于 2022-10-30 16:26:17">2022-10-30</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/09/25/Ex-Model-File/" title="Python异常处理-模块Model/Package-文件处理"><img src="/img/loading1.gif" data-original="https://s2.loli.net/2022/09/25/uhL4TpOZeQr5Yqo.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Python异常处理-模块Model/Package-文件处理"/></a><div class="content"><a class="title" href="/2022/09/25/Ex-Model-File/" title="Python异常处理-模块Model/Package-文件处理">Python异常处理-模块Model/Package-文件处理</a><time datetime="2022-09-25T03:17:24.000Z" title="发表于 2022-09-25 11:17:24">2022-09-25</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/09/18/Python-OOP/" title="Python面向对象详解"><img src="/img/loading1.gif" data-original="https://s2.loli.net/2022/09/24/wtZsiq1j5SvKBx4.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Python面向对象详解"/></a><div class="content"><a class="title" href="/2022/09/18/Python-OOP/" title="Python面向对象详解">Python面向对象详解</a><time datetime="2022-09-18T05:51:58.000Z" title="发表于 2022-09-18 13:51:58">2022-09-18</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/09/17/Python-Add05/" title="Python小知识点"><img src="/img/loading1.gif" data-original="https://s2.loli.net/2022/07/09/Yi6SHEUkaCPcN1F.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Python小知识点"/></a><div class="content"><a class="title" href="/2022/09/17/Python-Add05/" title="Python小知识点">Python小知识点</a><time datetime="2022-09-17T03:41:38.000Z" title="发表于 2022-09-17 11:41:38">2022-09-17</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2021 - 2023 By Xiaotangsmiles</div><div class="framework-info"><span>地址 </span><a href="https://heartlovelife.github.io">HeartLoveLife</a><span class="footer-separator">|</span><span>邮箱 </span><a href="javascript:void(0);">xiaotangsmiles@163.com</a></div><div class="footer_custom_text">Hi, welcome to my <a href="https://heartlovelife.github.io/">blog</a>!</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script src="/js/search/local-search.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',preloader.endLoading())</script><div class="js-pjax"></div><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-nest.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = false;
+POWERMODE.mobile = true;
+document.body.addEventListener('input', POWERMODE);
+</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(n){n.imageLazyLoadSetting.processImages=o;var e=n.imageLazyLoadSetting.isSPA,i=n.imageLazyLoadSetting.preloadRatio||1,r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function o(){e&&(r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")));for(var t,a=0;a<r.length;a++)0<=(t=(t=r[a]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(n.innerHeight*i||document.documentElement.clientHeight*i)&&function(){var t,e,n,i,o=r[a];t=o,e=function(){r=r.filter(function(t){return o!==t})},n=new Image,i=t.getAttribute("data-original"),n.onload=function(){t.src=i,e&&e()},t.src!==i&&(n.src=i)}()}o(),n.addEventListener("scroll",function(){var t,e;t=o,e=n,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(e)},500)})}(this);</script></body></html>
