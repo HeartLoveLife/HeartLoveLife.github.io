@@ -11,6 +11,18 @@
         <content type="html"><![CDATA[]]></content>
       
       
+      <categories>
+          
+          <category> Matlab </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 读写文件 </tag>
+            
+        </tags>
       
     </entry>
     
@@ -75,9 +87,9 @@
             
             <tag> 科学计算 </tag>
             
-            <tag> Pandas </tag>
-            
             <tag> 数据分析 </tag>
+            
+            <tag> Pandas </tag>
             
         </tags>
       
@@ -104,9 +116,9 @@
             
             <tag> 科学计算 </tag>
             
-            <tag> Pandas </tag>
-            
             <tag> 数据分析 </tag>
+            
+            <tag> Pandas </tag>
             
         </tags>
       
@@ -133,9 +145,9 @@
             
             <tag> 科学计算 </tag>
             
-            <tag> 数据分析 </tag>
-            
             <tag> Numpy </tag>
+            
+            <tag> 数据分析 </tag>
             
         </tags>
       
