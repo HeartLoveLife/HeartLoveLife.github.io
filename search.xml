@@ -4,38 +4,25 @@
   
     
     <entry>
-      <title>Matlab-FilesReadWrite</title>
-      <link href="/2023/06/07/Matlab-FilesReadWrite/"/>
-      <url>/2023/06/07/Matlab-FilesReadWrite/</url>
+      <title>哨兵系列数据下载地址及流程更新【202310】</title>
+      <link href="/2023/10/28/Sentinel-Download/"/>
+      <url>/2023/10/28/Sentinel-Download/</url>
       
-        <content type="html"><![CDATA[]]></content>
+        <content type="html"><![CDATA[<p>﻿<strong>哨兵系列卫星</strong>作为哥白尼计划的一部分，主要目标便是对地球的观测任务。哥白尼计划由三部分组成：</p><ul><li>空间部分（<strong>哨兵系列</strong>太空任务与其他太空机构任务）</li><li>测量部分（提供海洋、大陆表面和大气信息的陆基和机载数据收集网络）</li><li>数据管理与全球共享</li></ul><table><thead><tr><th>卫星名</th><th>发射时间</th><th>终止时间</th><th>卫星定位</th></tr></thead><tbody><tr><td>Sentinel-1A</td><td>2014.04.03</td><td>在轨运行，预期寿命7年</td><td>雷达</td></tr><tr><td>Sentinel-1B</td><td>2016.04.25</td><td>在轨运行，预期寿命7年</td><td>雷达</td></tr><tr><td>Sentinel-2A</td><td>2015.06.23</td><td>在轨运行，预期寿命7年</td><td>高分辨率光学</td></tr><tr><td>Sentinel-2B</td><td>2017.03.07</td><td>在轨运行，预期寿命7年</td><td>高分辨率光学</td></tr><tr><td>Sentinel-3A</td><td>2016.02.16</td><td>在轨运行，预期寿命7年</td><td>包含雷达、光学、定位等7类传感器</td></tr><tr><td>Sentinel-3B</td><td>2018.04.25</td><td>在轨运行，预期寿命7年</td><td>包含雷达、光学、定位等7类传感器</td></tr><tr><td>Sentinel-5P</td><td>2017.10.13</td><td>在轨运行，预期寿命7年</td><td>大气污染观测</td></tr><tr><td>…</td><td>…</td><td>…</td><td>…</td></tr></tbody></table><h2 id="⛄Sentinel数据下载问题及新服务"><a href="#⛄Sentinel数据下载问题及新服务" class="headerlink" title="⛄Sentinel数据下载问题及新服务"></a>⛄Sentinel数据下载问题及新服务</h2><p>当前，在<a href="https://scihub.copernicus.eu/">欧空局官网</a>下载哨兵数据时，筛选合适的数据（包括<code>online</code>和<code>Offline</code>两种形式数据）添加到购物车，申请<code>offline</code>状态的数据再次上线，等待半天或者一天仍然申请失败。通过查询<a href="https://scihub.copernicus.eu/">欧空局官网</a>的<a href="https://scihub.copernicus.eu/news/News01242">最新消息</a>可知：</p><blockquote><p><strong>Copernicus Open Access Hub is closing at the end of October 2023. Copernicus Sentinel Data Access is now fully available in the Copernicus Data Space Ecosystem</strong></p><p>As previously announced in <a href="https://scihub.copernicus.eu/news/News01146">January</a> the Copernicus Open Access Hub service continued its full operations until the end of June 2023, followed up by a gradual ramp-down phase until September 2023. The Copernicus Open Access Hub will be exceptionally extended for another month and will cease operations at the end of October 2023. To continue accessing Copernicus Sentinel data users will need to <a href="https://documentation.dataspace.copernicus.eu/Registration.html">self-register</a> on the new <a href="https://dataspace.copernicus.eu/">Copernicus Data Space Ecosystem</a>. A guide for migration is available <a href="https://dataspace.copernicus.eu/news/2023-7-13-accessing-sentinel-mission-data-new-copernicus-data-space-ecosystem-apis">here</a>.</p><p>The new service offers access to a wide range of Earth observation data and services as well as new <a href="https://dataspace.copernicus.eu/analyse">tools</a>, <a href="https://dataspace.copernicus.eu/browser/">GUI</a> and <a href="https://documentation.dataspace.copernicus.eu/APIs.html">APIs</a> to help users explore and analyse satellite imagery. Discover more about the Copernicus Data Space Ecosystem at <a href="https://dataspace.copernicus.eu/">https://dataspace.copernicus.eu</a></p><p>17 Oct 2023 - 13:18 UTC</p></blockquote><p>哥白尼开放访问中心将于2023年10月底关闭，哥白尼哨兵数据访问现在在哥白尼数据空间生态系统中完全可用。</p><p>正如之前在1月份宣布的那样，哥白尼开放访问中心服务将继续全面运营至2023年6月底，随后逐步减少，直到2023年9月。哥白尼开放访问中心将特别延长一个月，并将于2023年10月底停止运营。为了继续访问哥白尼哨兵数据，用户需要在新的哥白尼数据空间生态系统上自我注册。</p><p>新服务提供广泛的地球观测数据和服务，以及新的工具、<code>GUI</code>和<code>api</code>，以帮助用户探索和分析卫星图像。了解更多关于哥白尼数据空间生态系统的信息，请访问<a href="https://dataspace.copernicus.eu/">https://dataspace.copernicus.eu</a></p><h2 id="⛄Sentinel数据下载流程"><a href="#⛄Sentinel数据下载流程" class="headerlink" title="⛄Sentinel数据下载流程"></a>⛄Sentinel数据下载流程</h2><p><a href="https://dataspace.copernicus.eu/">哥白尼数据空间生态系统</a>（<a href="https://dataspace.copernicus.eu/">https://dataspace.copernicus.eu/</a>）</p><h3 id="👀打开网址"><a href="#👀打开网址" class="headerlink" title="👀打开网址"></a>👀打开<a href="https://dataspace.copernicus.eu/">网址</a></h3><p><a href="https://imgse.com/i/pieQouD"><img src="https://z1.ax1x.com/2023/10/28/pieQouD.jpg" alt="pieQouD.jpg"></a></p><h3 id="👀登录账户（自行注册：教程）"><a href="#👀登录账户（自行注册：教程）" class="headerlink" title="👀登录账户（自行注册：教程）"></a>👀登录账户（自行注册：<a href="https://documentation.dataspace.copernicus.eu/Registration.html">教程</a>）</h3><p><a href="https://imgse.com/i/pieQ4gK"><img src="https://z1.ax1x.com/2023/10/28/pieQ4gK.jpg" alt="pieQ4gK.jpg"></a></p><h3 id="👀打开下载界面"><a href="#👀打开下载界面" class="headerlink" title="👀打开下载界面"></a>👀打开<a href="https://dataspace.copernicus.eu/browser/">下载界面</a></h3><blockquote><p>主界面：<code>EXPLORE DATA</code>→<code>Copernicus Browser</code></p></blockquote><p><a href="https://imgse.com/i/pieQR41"><img src="https://z1.ax1x.com/2023/10/28/pieQR41.jpg" alt="pieQR41.jpg"></a><br><a href="https://imgse.com/i/pieQ2NR"><img src="https://z1.ax1x.com/2023/10/28/pieQ2NR.jpg" alt="pieQ2NR.jpg"></a></p><h3 id="👀哨兵数据筛选和添加"><a href="#👀哨兵数据筛选和添加" class="headerlink" title="👀哨兵数据筛选和添加"></a>👀哨兵数据筛选和添加</h3><blockquote><p>（1）目前支持：<code>Sentinel-1</code>、<code>Sentinel-2</code>、<code>Sentinel-3</code>、<code>Sentinel-5P</code></p><p>（2）对于少量数据可以直接点击下载；对于大量数据可以添加至工作空间。</p></blockquote><ul><li>点击”<code>SEARCH</code>“一栏，选择对应数据源和区域，设置时间，点击”<code>Search</code>“</li></ul><p><a href="https://imgse.com/i/pieQf9x"><img src="https://z1.ax1x.com/2023/10/28/pieQf9x.jpg" alt="pieQf9x.jpg"></a></p><ul><li>查看数据属性，筛选符合要求的数据源，添加到工作空间”<code>Add to workspace</code>“</li></ul><p><a href="https://imgse.com/i/pieQTDe"><img src="https://z1.ax1x.com/2023/10/28/pieQTDe.jpg" alt="pieQTDe.jpg"></a></p><h3 id="👀下载数据"><a href="#👀下载数据" class="headerlink" title="👀下载数据"></a>👀下载数据</h3><ul><li>打开工作空间：界面上方账户名（下箭头）→”<code>Workspace</code>“</li></ul><p><a href="https://imgse.com/i/pieQ5jO"><img src="https://z1.ax1x.com/2023/10/28/pieQ5jO.jpg" alt="pieQ5jO.jpg"></a><br><a href="https://imgse.com/i/pie1Tkd"><img src="https://z1.ax1x.com/2023/10/28/pie1Tkd.jpg" alt="pie1Tkd.jpg"></a></p><ul><li>勾选需要下载的数据，点击”<code>Download</code>“</li></ul><p><a href="https://imgse.com/i/pie1ITH"><img src="https://z1.ax1x.com/2023/10/28/pie1ITH.jpg" alt="pie1ITH.jpg"></a><br><a href="https://imgse.com/i/pieQ7HH"><img src="https://z1.ax1x.com/2023/10/28/pieQ7HH.jpg" alt="pieQ7HH.jpg"></a><br>多谢！多谢！<br>笔者不才，请多交流！！！</p>]]></content>
       
       
       <categories>
           
-          <category> Matlab </category>
+          <category> 遥感数据 </category>
           
       </categories>
       
       
         <tags>
             
-            <tag> 读写文件 </tag>
+            <tag> Sentinel </tag>
             
         </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>Python-FilesReadWrite</title>
-      <link href="/2023/06/07/Python-FilesReadWrite/"/>
-      <url>/2023/06/07/Python-FilesReadWrite/</url>
-      
-        <content type="html"><![CDATA[]]></content>
-      
-      
       
     </entry>
     
