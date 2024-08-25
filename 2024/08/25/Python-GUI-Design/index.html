@@ -1,0 +1,1434 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>GUI编程之PyQt5入门详解（01） | 江湖是你画中亦是你</title><meta name="keywords" content="GUI"><meta name="author" content="Xiaotangsmiles"><meta name="copyright" content="Xiaotangsmiles"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="GUI是Graphical User Interface的英文简称，即图形用户界面，准确地说，GUI就是屏幕产品的视觉体验和互动操作部分。GUI是一种结合计算机科学、美学、心理学、行为学及各商业领域需求分析的人机系统工程，强调人一机一环境三者作为一个系统进行总体设计。 ⛄认识PyQt5 👀PyQt5框架简介 Python最初是作为一门脚本语言开发的，并不具备GUI功能，但由于其本身具有良好">
+<meta property="og:type" content="article">
+<meta property="og:title" content="GUI编程之PyQt5入门详解（01）">
+<meta property="og:url" content="https://heartlovelife.github.io/2024/08/25/Python-GUI-Design/index.html">
+<meta property="og:site_name" content="江湖是你画中亦是你">
+<meta property="og:description" content="GUI是Graphical User Interface的英文简称，即图形用户界面，准确地说，GUI就是屏幕产品的视觉体验和互动操作部分。GUI是一种结合计算机科学、美学、心理学、行为学及各商业领域需求分析的人机系统工程，强调人一机一环境三者作为一个系统进行总体设计。 ⛄认识PyQt5 👀PyQt5框架简介 Python最初是作为一门脚本语言开发的，并不具备GUI功能，但由于其本身具有良好">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s2.loli.net/2024/08/25/u7qX6PLeFUzxHvV.jpg">
+<meta property="article:published_time" content="2024-08-25T12:36:36.000Z">
+<meta property="article:modified_time" content="2024-08-25T08:53:08.300Z">
+<meta property="article:author" content="Xiaotangsmiles">
+<meta property="article:tag" content="GUI">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s2.loli.net/2024/08/25/u7qX6PLeFUzxHvV.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://heartlovelife.github.io/2024/08/25/Python-GUI-Design/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":250},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#1f1f1f","position":"bottom-left"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'GUI编程之PyQt5入门详解（01）',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-08-25 16:53:08'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const now = new Date()
+          const hour = now.getHours()
+          const isNight = hour <= 6 || hour >= 18
+          if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+          else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/loading1.gif" data-original="/img/touxiang.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">23</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">23</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">9</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><span> 主页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><span> 博文</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 生活</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/photos/"><span> 相册</span></a></li><li><a class="site-page child" href="/music/"><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><span> 影视</span></a></li><li><a class="site-page child" href="/shuoshuo/"><span> 分享</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/comment/"><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><span> 关于笔者</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://s2.loli.net/2024/08/25/u7qX6PLeFUzxHvV.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">江湖是你画中亦是你</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><span> 主页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><span> 博文</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 生活</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/photos/"><span> 相册</span></a></li><li><a class="site-page child" href="/music/"><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><span> 影视</span></a></li><li><a class="site-page child" href="/shuoshuo/"><span> 分享</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/comment/"><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><span> 关于笔者</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">GUI编程之PyQt5入门详解（01）</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-08-25T12:36:36.000Z" title="发表于 2024-08-25 20:36:36">2024-08-25</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-08-25T08:53:08.300Z" title="更新于 2024-08-25 16:53:08">2024-08-25</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Python/">Python</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">13.8k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>44分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="GUI编程之PyQt5入门详解（01）"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p>GUI是Graphical User Interface的英文简称，即图形用户界面，准确地说，GUI就是屏幕产品的视觉体验和互动操作部分。GUI是一种结合计算机科学、美学、心理学、行为学及各商业领域需求分析的人机系统工程，强调人一机一环境三者作为一个系统进行总体设计。</p>
+<h2 id="认识pyqt5">⛄认识PyQt5</h2>
+<h3 id="pyqt5框架简介">👀PyQt5框架简介</h3>
+<p>Python最初是作为一门脚本语言开发的，并不具备GUI功能，但由于其本身具有良好的可扩展性，能够不断地通过C/C++模块进行功能性扩展，因此目前已经有相当多的GUI控件集（Toolkit）可以在Python中使用了。Python中经常使用的GUI控件集有PyQt、Tkinter、wxPython、Kivy、PyGUI和Libavg，其中PyQt是Qt为Python专门提供的GUI扩展。</p>
+<p>Qt是挪威Trolltech（奇趣科技公司）开发的一个C++ GUI应用程序，其包括跨平台类库、集成开发工具和跨平台IDE，既可以用于开发GUI程序，也可以用于开发非GUI程序。使用Qt只需开发一次应用程序，便可跨不同桌面和嵌入式操作系统部署该应用程序，而无须重新编写源代码。和Python一样，Qt也具有相当优秀的跨平台特性，使用Qt开发的应用程序能够在Windows、Linux和Mac OS平台之间轻松移植。</p>
+<p>PyQt是一个用于创建GUI应用程序的跨平台的工具包，它将Python编程语言和Qt库成功融合在一起。Qt库是目前最强大的GUI库之一。PyQt是由Phil Thompson开发的，实现了一个Python模块集，拥有620多个类、将近6000个函数。PyQt可以运行在所有主流的操作系统上，包括UNIX、Windows和Mac OS。PyQt采用双许可证，开发人员可以选择GPL（GNU通用公共许可证）和商业许可。在此之前，GPL版本只能用在UNIX上；从PyQt4开始，GPL版本可用于所有支持的平台上。</p>
+<p>博客：<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_38463737/article/details/107605926">基础教程网站和书籍推荐</a></p>
+<ul>
+<li><p><a target="_blank" rel="noopener" href="https://www.riverbankcomputing.com/">PyQt5官方网站</a></p></li>
+<li><p><a target="_blank" rel="noopener" href="https://www.riverbankcomputing.com/static/Docs/PyQt5/module_index.html">PyQt5全部模块文档</a></p></li>
+<li><p><a target="_blank" rel="noopener" href="https://www.riverbankcomputing.com/static/Docs/PyQt5/api/qtwidgets/qtwidgets-module.html">PyQt5 QtWidgets控件文档</a></p></li>
+<li><p><a target="_blank" rel="noopener" href="https://www.qt.io/zh-cn/">Qt官方中文网站</a></p></li>
+<li><p><a target="_blank" rel="noopener" href="https://doc.qt.io/">Qt官方文档网站</a></p></li>
+<li><p><a target="_blank" rel="noopener" href="https://doc.qt.io/qt-5/qtmodules.html">Qt5全部模块文档</a></p></li>
+<li><p><a target="_blank" rel="noopener" href="https://doc.qt.io/qt-5/qtwidgets-module.html">Qt5 QtWidgets控件文档</a></p></li>
+</ul>
+<h3 id="pyqt5的特点">👀PyQt5的特点</h3>
+<p>PyQt5严格遵循Qt的发布许可，拥有双重协议，自由开发者可以选择使用免费的GPL版本，如果准备将PyQt用于商业活动，则必须为此交付商业许可费用。PyQt具有如下优秀的特性：</p>
+<ul>
+<li><p>基于高性能的Qt的GUI控件集；</p></li>
+<li><p>能够跨平台运行在Windows、Linux和Mac OS等系统上；</p></li>
+<li><p>使用信号/槽（signal/slot）机制进行通信；</p></li>
+<li><p>对Qt库的完全封装；</p></li>
+<li><p>可以使用Qt成熟的IDE（如Qt Designer）进行图形界面设计，并自动生成可执行的Python代码；</p></li>
+<li><p>提供了一整套种类繁多的窗口控件。</p></li>
+</ul>
+<h3 id="qt与pyqt的关系">👀Qt与PyQt的关系</h3>
+<p>首先，PyQt是Qt框架的Python语言实现。PyQt提供了一个设计良好的窗口控件集合，每一个PyQt控件都有其对应的Qt控件。所以PyQt与Qt的类库和API非常详细，而且PyQt不再使用qmake系统和Q_OBJECT宏，使得PyQt再也没有编译链接错误，PyQt的代码也更加友好。</p>
+<p>其次，在开发速度上，由于PyQt的核心就是Qt库，也是用C++编写的，所以即使逻辑代码运行速度慢一点，也不会成为性能瓶颈。在使用方式上，PyQt也没有失去Python的优雅语法、快速开发的能力。Python相对于C++的优点是在编程效率上，可以看到标准的Qt例子移植到PyQt后的代码具有相同的功能，使用相同的应用程序接口，Python版本的代码只有原来的50%~60%，而且更容易阅读。在开发效率上，由于Python是一种面向对象的语言，语法简单、高效，相对于C++而言，使用Python编写程序可以提高开发效率，减少开发成本。</p>
+<p>最后，PyQt向Python程序员提供了使用完整的Qt应用程序接口的函数，几乎可以用Python做任何Qt能做的事。Qt和PyQt的设计都是完全面向对象的。Qt使用一种称为信号/槽的机制在窗口控件之间传递事件和消息。这种机制完全不同于其他图形界面开发库所采用的回调（callback）机制，使用信号/槽可以使程序更加安全和简洁。所开发的应用程序越大，Qt/PyQt的这个优势就越明显。</p>
+<h3 id="图形界面开发库介绍">👀图形界面开发库介绍</h3>
+<p>从Python语言的诞生之日起，有许多优秀的GUI工具集被整合到Python当中，使得Python也可以在图形界面编程领域大展身手。</p>
+<p><strong>（1）Tkinter</strong></p>
+<p>Tkinter是绑定了Python的Tk GUI工具集，就是Python包装的Tcl代码，通过内嵌在Python解释器内部的Tcl解释器实现。将Tkinter的调用转换成Tcl命令，然后交给Tcl解释器进行解释，实现Python的GUI。Tk和其他语言的绑定，比如PerlTk，是直接由Tk中的C库实现的。</p>
+<p>Tkinter是Python事实上的标准GUI，在Python中使用Tk GUI工具集的标准接口，已经包含在Python Windows安装程序中，著名的IDLE就是使用Tkinter实现GUI的。</p>
+<p><strong>（2）wxPython</strong></p>
+<p>wxPython是Python对跨平台的GUI工具集wxWidgets（用 C++编写）的包装，作为Python的一个扩展模块来实现。wxPython是比较流行的Tkinter的一个替代品，在各种平台上都表现良好。</p>
+<p><strong>（3）PyGTK</strong></p>
+<p>PyGTK是Python对GTK+GUI库的一系列包装。PyGTK是比较流行的Tkinter的一个替代品，Gnome下许多著名应用程序的GUI都是使用PyGTK实现的，比如BitTorrent、GIMP等。PyGTK和Gedit都有可选的实现，在Windows平台上似乎表现不太好，这一点也无可厚非，毕竟使用的是GTK的GUI库。</p>
+<p><strong>（4）PySide</strong></p>
+<p>PySide由Qt官方维护，是Python对跨平台的GUI工具集Qt的另一个包装，捆绑在Python当中。PySide是比较流行的Tkinter的一个替代品，拥有LGPL 2.1授权许可，允许进行免费的开源软件和私有的商业软件的开发。</p>
+<p>在以上图形界面开发库中，前三个没有类似于Qt Designer（UI制作工具，它可以通过可视化操作创建UI文件，然后通过工具快速编译成Python文件，因此也可以把它视为一个代码生成器）的工具，所有的代码都需要手动输入，学习曲线非常陡峭；而第四个PySide本质上也是Qt的Python封装，只是支持Qt的版本比较老，而且官方已经停止维护这个库。所以，对于Python使用者来说，使用PyQt进行GUI开发是最好的选择。</p>
+<h2 id="qt-designer的使用">⛄Qt Designer的使用</h2>
+<p>制作程序UI界面，一般可以通过UI制作工具和纯代码编写两种方式来实现。在PyQt5中，也可以采用这两种方式。本入门教程通过Qt Designer工具来制作UI界面。</p>
+<h3 id="qt-designer快速入门">👀Qt Designer快速入门</h3>
+<p>Qt Designer，即Qt设计师，是一个强大、灵活的可视化GUI设计工具，可以帮助我们加快开发PyQt程序的速度。它是专门用来制作PyQt程序中UI界面的工具，它生成的UI界面是一个后缀为.ui的文件，可以通过命令将.ui文件转换成.py格式的文件，并被其他Python文件引用。Qt Designer符合MVC（模型一视图一控制器）设计模式，做到了显示和业务逻辑的分离。Qt Designer具有以下优点。</p>
+<ul>
+<li><p>使用简单，通过拖曳和点击就可以完成复杂的界面设计，而且还可以随时预览查看效果图。</p></li>
+<li><p>转换Python文件方便。Qt Designer可以将设计好的用户界面保存为<code>.ui</code>文件，其实是XML 格式的文本文件。为了在PyQt中使用<code>.ui</code>文件，可以通过 pyuic5命令将<code>.ui</code>文件转换为<code>.py</code>文件件，然后将<code>.py</code>文件引入到自定义的Python代码中。</p></li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 笔者机器上Qt Designer的安装路径</span></span><br><span class="line">D:\Anaconda3\Lib\site-packages\pyqt5_tools\Qt\<span class="built_in">bin</span>\designer.exe</span><br></pre></td></tr></table></figure>
+<p><strong>（1）新建主窗口</strong></p>
+<p>打开PyQt5的Qt Designer，会自动弹出“新建窗体”对话框。在模板选项中，最常用的就是Widget（通用窗口）和 Main Window（主窗口）。在PyQt5中Widget被分离出来，用来替代Dialog，并将Widget放入了QtWidget 模块库中。</p>
+<p><strong>（2）窗口主要区域</strong></p>
+<ul>
+<li><p>Widget Box（工具箱），提供了很多控件，包括常用的按钮、单选按钮、文本框等，可以直接拖放到主窗口中。在菜单栏中选择”窗体“→”预览“，或者按”Ctrl+R“快捷键，查看预览效果。</p></li>
+<li><p>主窗口：即新建的窗口，界面设计的主窗口；</p></li>
+<li><p>对象查看器：可以查看主窗口中放置的对象列表；</p></li>
+<li><p>属性编辑器：提供了对窗口、控件、布局的属性编辑功能；</p></li>
+<li><p>信号/槽编辑器、动作编辑器和资源浏览器：在信号/槽编辑器中，可以为控件添加自定义的信号和槽函数，编辑控件的信号和槽函数；在资源浏览器中，可以为控件添加图片，比如Label、Button的背景图片。</p></li>
+</ul>
+<p><strong>（3）查看UI文件</strong></p>
+<p>采用Qt Designer工具设计的界面文件默认为<code>.ui</code>文件，描述了窗口中控件的属性列表和布局显示。<code>.ui</code>文件里面包含的内容是按照XML（可扩展标记语言）格式处理的，文件中包含的参数信息与使用Qt Designer打开<code>.ui</code>文件时显示的信息是一致的。</p>
+<p><strong>（4）将<code>.ui</code>文件转换为<code>.py</code>文件</strong></p>
+<p>使用Qt Designer设计的用户界面默认保存为<code>.ui</code>文件，其内容结构类似于XML，但这种文件并不是我们想要的，我们想要的是<code>.py</code>文件，所以还需要使用其他方法将<code>.ui</code>文件转换为<code>.py</code>文件。<a target="_blank" rel="noopener" href="https://www.riverbankcomputing.com/static/Docs/PyQt5/designer.html#pyuic5">pyuic5官方网站</a></p>
+<ul>
+<li><p>第一种方法：通过编译器将<code>.ui</code>文件转换为<code>.py</code>;</p></li>
+<li><p>第二种方法：通过命令行将<code>.ui</code>文件转换为<code>.py</code>。PyQt5安装成功后，<code>pyuic5</code>命令行工具默认安装在<code>Scripts</code>文件夹下。</p></li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 笔者机器上pyuic5命令行工具的路径</span></span><br><span class="line">D:\Anaconda3\Scripts</span><br><span class="line"><span class="comment"># 输入以下命令将将.ui文件转换为.py</span></span><br><span class="line">pyuic5 -o ******.py ******.ui</span><br></pre></td></tr></table></figure>
+<ul>
+<li>第三种方法：通过Python脚本<code>.ui</code>文件转换为<code>.py</code>。该脚本本质上是用Python代码把上述命令行操作封装起来，只要把该Python文件放在需要转换界面文件的目录下，直接运行即可，其执行效果和直接执行转换命令是一样的。其完整代码如下：</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> os.path</span><br><span class="line"></span><br><span class="line"><span class="comment"># UI文件所在的路径</span></span><br><span class="line"><span class="built_in">dir</span> = <span class="string">&#x27;./&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 列出目录下的所有UI文件</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">listUiFile</span>():</span><br><span class="line">    <span class="built_in">list</span> = []</span><br><span class="line">    <span class="comment"># os.listdir()方法用于返回指定的文件夹包含的文件或文件夹的名字的列表</span></span><br><span class="line">    files = os.listdir(<span class="built_in">dir</span>)</span><br><span class="line">    <span class="keyword">for</span> filename <span class="keyword">in</span> files:</span><br><span class="line">        <span class="comment"># os.path.splitext()方法用于分割路径，返回路径名和文件扩展名的元组。</span></span><br><span class="line">        <span class="keyword">if</span> os.path.splitext(filename)[<span class="number">1</span>] == <span class="string">&quot;.ui&quot;</span>:</span><br><span class="line">            <span class="built_in">list</span>.append(filename)</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">list</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 把扩展名为.ui的文件改成扩展名为.py的文件</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">transPyFile</span>(<span class="params">filename</span>):</span><br><span class="line">    <span class="keyword">return</span> os.path.splitext(filename)[<span class="number">0</span>] + <span class="string">&quot;.py&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 调用系统命令把UI文件转换成Python文件</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">runMain</span>():</span><br><span class="line">    <span class="built_in">list</span> = listUiFile()</span><br><span class="line">    <span class="keyword">for</span> uifile <span class="keyword">in</span> <span class="built_in">list</span>:</span><br><span class="line">        pyfile = transPyFile(uifile)</span><br><span class="line">        cmd = <span class="string">&quot;pyuic5 -o &#123;pyfile&#125; &#123;uifile&#125;&quot;</span>.<span class="built_in">format</span>(pyfile=pyfile, uifile=uifile)</span><br><span class="line">        <span class="comment"># print(cmd)</span></span><br><span class="line">        os.system(cmd)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 程序入口</span></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    runMain()   </span><br></pre></td></tr></table></figure>
+<p><strong>（5）界面与逻辑分离</strong></p>
+<p>由<code>.ui</code>文件编译而来的<code>.py</code>文件称为界面文件，由于界面文件每次编译时都会初始化，所以需要新建一个<code>.py</code>文件调用界面文件，这个新建的<code>.py</code>文件被称为逻辑文件，也可以称为业务文件。界面文件和逻辑文件是两个相对独立的文件，通过上述方法就实现了界面与逻辑的分离（也就是我们之前所说的“显示和业务逻辑的分离”）。实现界面与逻辑的分离方法很简单，只需要新建一个<code>.py</code>文件，并继承界面文件的主窗口类即可。其完整代码如下：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">from</span> PyQt5.QtWidgets <span class="keyword">import</span> QApplication, QMainWindow</span><br><span class="line"><span class="comment"># FistWindow为由.ui文件编译形成的.py界面文件</span></span><br><span class="line"><span class="keyword">from</span> FistWindow <span class="keyword">import</span> Ui_MainWindow</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MyMainWindow</span>(QMainWindow, Ui_MainWindow):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, parent = <span class="literal">None</span></span>):</span><br><span class="line">        <span class="built_in">super</span>(MyMainWindow, self).__init__(parent)</span><br><span class="line">        self.setupUi(self)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    app = QApplication(sys.argv)</span><br><span class="line">    mywin = MyMainWindow()</span><br><span class="line">    mywin.show()</span><br><span class="line">    sys.exit(app.exec_())</span><br></pre></td></tr></table></figure>
+<p>上面的代码实现了业务逻辑，代码结构也比较清晰。如果以后想要更新界面，只需要对<code>.ui</code>文件进行更新，然后再编译成对应的<code>.py</code>文件即可；而逻辑文件则视情况做一些调整，一般情况下不需要调整太多。</p>
+<h3 id="布局管理入门">👀布局管理入门</h3>
+<p><strong>（1）布局类型</strong></p>
+<p>Qt Designer提供了4种窗口布局方式，它们位于Qt Designer主窗口左侧区域的Widget Box（工具箱）里的Layouts（布局）栏中，分别是：</p>
+<ul>
+<li><p>Vertical Layout（垂直布局）：控件默认按照从上到下的顺序进行纵向添加。</p></li>
+<li><p>Horizontal Layout（水平布局）：控件默认按照从左到右的顺序进行横向添加。</p></li>
+<li><p>Grid Layout（柵格布局）：将窗口控件放入一个网格之中，然后将它们合理地划分成若干行（row）和列（column），并把其中的每个窗口控件放置在合适的单元（cell）中，这里的单元即是指由行和列交叉所划分出来的空间。</p></li>
+<li><p>Form Layout（表单布局）：控件以两列的形式布局在表单中，其中左列包含标签，右列包含输入控件。</p></li>
+</ul>
+<p>一般进行布局有两种方式：一是通过布局管理器进行布局；二是通过容器控件进行布局。所谓容器控件，就是指能够容纳子控件的控件。使用容器控件，目的是将容器控件中的控件归为一类，以有别于其他控件。<strong>使用容器进行控件布局本质上还是调用布局管理器进行的</strong>。</p>
+<p><strong>（2）Qt Designer布局的顺序</strong></p>
+<p>使用Qt Designer开发一个完整的GUI程序流程如下：</p>
+<ul>
+<li><p>将一个窗口控件拖入窗口中并放置在大致正确的位置上。除了容器（container）窗口，一般不需要调整窗口的尺寸大小。</p></li>
+<li><p>对于要用代码引用的窗口控件，应指定一个名字：对于需要微调的窗口控件，可以设置其对应的属性。</p></li>
+<li><p>重复步骤1和2，直到所需要的全部窗口控件都放到了窗口中。</p></li>
+<li><p>如有需要，在窗口控件之间可以用Vertical Spacer、Horizontal Spacer、Horizontal Line、Vertical Line隔开（实际上前两步就可以包含这部分内容）。</p></li>
+<li><p>选择需要布局的窗口控件，使用布局管理器或者切分窗口（splitter）对它们进行布局。</p></li>
+<li><p>重复步骤5，直到所有的窗口控件和分隔符都布局好为止。</p></li>
+<li><p>单击窗口，并使用布局管理器对其进行布局。</p></li>
+<li><p>为窗口的标签设置伙伴关系。</p></li>
+<li><p>如果按键次序有问题，则需要设置窗口的Tab键次序。</p></li>
+<li><p>在适当的地方为内置的信号和槽建立信号与槽连接。</p></li>
+<li><p>预览窗口（Ctrl+R），并检查所有的内容能否按照设想进行工作。</p></li>
+<li><p>设置窗口的对象名（在类中会用到这个名字）、窗口的标题并进行保存。</p></li>
+<li><p>编译窗口（命令行中使用pyuic5），根据需要生成对话框代码。</p></li>
+<li><p>编写代码，即业务逻辑文件。</p></li>
+</ul>
+<p><strong>设置伙伴关系</strong>：即是控件之间的相互关联，使得可以通过一个控件控制另一个控件；</p>
+<p><strong>设置Tab键次序</strong>：程序中，在一个控件上使用Tab键会跳到另一个控件上，其跳转的规则或顺序即为Tab顺序。</p>
+<blockquote>
+<p>伙伴关系设置是单方向的，即设置后只是单方向的控制。伙伴关系一般包含两个控件，暂且称为控制控件A和被控制控件B，即可以由控件A来控制控件B，一般情况下控件A（即控制控件）只能是Label控件。其他的不能设置伙伴关系，控件B（即被控制控件）没有要求。由于伙伴关系中的控制控件只能是Label控件，而Label控件在程序中无法选中或单击，故而通常给Label设置热键。</p>
+<p>快捷键：在全局可以直接使用的键及组合，例如：选中控件使用（ctrl+1）即可完成水平布局，其为快捷键。</p>
+<p>热键：相对于快捷键有所区别。热键是只有在打开了某个窗口时，出现了下拉菜单，只有在这个菜单展开的时候才可使用“快捷键”调用相应功能。</p>
+</blockquote>
+<h3 id="信号和槽关联">👀信号和槽关联</h3>
+<p>信号（signal）和槽（slot）是Qt的核心机制。在创建事件循环之后，通过建立信号和槽的连接就可以实现对象之间的通信。当信号发射（emit）时，连接的槽函数将会自动执行。</p>
+<blockquote>
+<p>在PyQt5中，信号和槽通过QObject.signal.connect()连接。</p>
+<p>注意：使用QObject.signal.connect()连接的槽函数不要加括号，否则会出错。</p>
+</blockquote>
+<p>所有从QObject 类或其子类（如QWidget）派生的类都能够包含信号和槽。当对象改变其状态时，信号就由该对象发射出去。槽用于接收信号，但它们是普通的对象成员函数。多个信号可以与单个槽进行连接，单个信号也可以与多个槽进行连接。总之，信号和槽构建了一种强大的控件编程机制。</p>
+<p>在Qt编程中，通过Qt信号槽机制对鼠标或键盘在界面上的操作进行响应处理，例如对鼠标单击按钮的处理。Qt中的控件能够发射什么信号，以及在什么情况下发射信号，在Qt的文档中有说明，不同的控件能够发射的信号种类和触发时机也是不同的。那么如何为控件发射的信号指定对应的处理槽函数呢？一般有三种方法：</p>
+<ul>
+<li><p>第一种是在窗口的UI设计中操作添加信号和槽;</p></li>
+<li><p>第二种是通过代码连接信号和槽；</p></li>
+<li><p>第三种是通过集成开发环境IDE和编译器产生信号和槽。</p></li>
+</ul>
+<h3 id="菜单栏和工具栏">👀菜单栏和工具栏</h3>
+<p>MainWindow即主窗口，主要包含菜单栏、工具栏、任务栏等。双击菜单栏上的”在这里输入“，然后输入文字，最后按回车键即可生成菜单。</p>
+<ul>
+<li><p>子菜单可以通过动作编辑器或者属性编辑器中的Shortcut来添加快捷键。</p></li>
+<li><p>动作编辑器中，双击需要编辑的动作，可以对其进行设置并添加图标、快捷键等。</p></li>
+<li><p>默认生成的主窗口是不显示工具栏的，可以通过单击鼠标右键来添加工具栏；工具栏上的图标，可以通过<strong>动作编辑器</strong>建立并<strong>拖入</strong>工具栏中。</p></li>
+<li><p>加载其他窗口，在当前窗口中嵌套另一个窗口。①首先创建第二个窗口，完成窗口设计，将<code>.ui</code>文件转换为<code>.py</code>文件；②在主窗口的业务逻辑<code>.py</code>中，创建类，集成子界面文件的主窗口类；③在主窗口的主界面类中生成子窗口实例，创建触发事件（信号→槽函数）；④定义槽函数，添加子窗口。</p></li>
+</ul>
+<h3 id="资源文件打包">👀资源文件打包</h3>
+<p>使用PyQt5生成的应用程序引用图片资源主要有两种方法，第一种方法是将资源文件转换为Python文件，然后引用Python文件；第二种方法是在程序中通过相对路径引用外部图片资源。这里以第一种方法为例：</p>
+<p><strong>（1）新建资源文件apprcc.qrc</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;RCC&gt;</span><br><span class="line">  &lt;qresource&gt;</span><br><span class="line">  &lt;/qresource&gt;</span><br><span class="line">&lt;/RCC&gt;</span><br></pre></td></tr></table></figure>
+<p>打开Qt Designer，进入<strong>资源浏览器</strong>界面，然后打开资源文件<code>apprcc.qrc</code>，设置图片资源的前缀为pic，最后添加或删除图片资源。（它是以XML格式存储的）</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;RCC&gt;</span><br><span class="line">  &lt;qresource prefix=&quot;pic&quot;&gt;</span><br><span class="line">    &lt;file&gt;image/001.jpg&lt;/file&gt;</span><br><span class="line">    &lt;file&gt;image/002.jpg&lt;/file&gt;</span><br><span class="line">  &lt;/qresource&gt;</span><br><span class="line">&lt;/RCC&gt;</span><br></pre></td></tr></table></figure>
+<p><strong>（2）在窗体中放置控件</strong></p>
+<p>在窗体中放置控件，并使用图片资源。将<code>.ui</code>文件转化为<code>.py</code>文件，运行<code>.py</code>文件，会抛出如下异常信息，提示找不到<code>apprcc_rc</code>。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">ModuleNotFoundError: No module named <span class="string">&#x27;apprcc_rc&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 这说明在脚本中使用以下代码导入的模块异常</span></span><br><span class="line"><span class="keyword">import</span> apprcc_rc</span><br></pre></td></tr></table></figure>
+<p><strong>（3）转换资源文件</strong></p>
+<p>使用<code>pyrcc5</code>命令将<code>apprcc.qrc</code>文件转换为<code>apprcc_rc.py</code>文件（之所以添加<code>_rc</code>，是因为Qt Designer导入资源文件时默认是加<code>_rc</code>的）</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">pyrcc5 apprcc.qrc -o apprcc_rc.py</span><br></pre></td></tr></table></figure>
+<p>转换完成后，在同级目录下会多出一个与<code>*.qrc</code>文件同名的<code>*_rc.py</code></p>
+<p><strong>（4）导入<code>.py</code>资源文件</strong></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> apprcc_rc</span><br></pre></td></tr></table></figure>
+<p>在Qt Designer中使用图片资源时，图片资源的引入路径是冒号<code>:</code>加图片的路径，示例代码如下：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">:/pic/image/<span class="number">002.j</span>pg</span><br><span class="line">    </span><br><span class="line"><span class="comment"># 注意到上面的路径与qrc文件的路径稍微有些不同，多了一个前缀&quot;pic&quot;，原因是Qt Designer会自动根据qrc中的qresource标签来调整这个路径。在qresource标签中有一个&quot;pic&quot;属性，Qt Designer会自动把&quot;pic&quot;添加到图片路径images/002.jpg中。</span></span><br></pre></td></tr></table></figure>
+<h2 id="pyqt5基本窗口控件">⛄PyQt5基本窗口控件</h2>
+<h3 id="创建窗口类">👀创建窗口类</h3>
+<p>QMainWindow、QWidget和QDialog三个类都是用来创建窗口的，可以直接使用，也可继承后再使用。</p>
+<p>QMainWindow主窗口为用户提供一个应用程序框架，该窗口可以包含菜单栏、工具栏、状态栏、标题栏等，是最常见的窗口形式，是GUI程序的主窗口。</p>
+<p>QWidget是所有用户界面对象的基类，所有的窗口和控件都直接或间接继承自QWidget类。QWidget是在PyQt中建立界面的主要元素，在PyQt中把没有嵌入到其他控件中的控件称为窗口，一般窗口都有边框、标题栏。窗口是指程序的整体界面，可以包含标题栏、菜单栏、工具栏、关闭按钮、最小化按钮、最大化按钮；控件是指按钮、复选框、文本框、表格、进度条等这些组成程序的基本元素。一个程序可以有多个窗口，一个窗口也可以有多个控件。</p>
+<p>QDialog是对话框窗口的基类。对话框主要用来执行短期任务，或者与用户进行互动，它可以是模态的，也可以是非模态的。QDialog窗口没有菜单栏、工具栏、状态栏。</p>
+<p>如果是主窗口，就使用QMainWindow类；如果是对话框，就使用QDialog类；如果不确定，或者有可能作为顶层窗口，也有可能嵌入到其他窗口中，那么就使用QWidget类。</p>
+<h3 id="qwidget">👀QWidget</h3>
+<p>PyQt使用统一的坐标系统来定位窗口控件的位置和大小。以屏幕的左上角为原点，即（0, 0）点，从左向右为x轴正向，从上向下为y轴正向，整个屏幕的坐标系统就用来定位顶层窗口的。此外，在窗口内部也有自己的坐标系统，该坐标系统仍然以左上角作为原点，从左向右为x轴正向，从上向下为y轴正向，原点、x轴、y轴围成的区域叫作 Client Area（客户区），在客户区的周围则是标题栏（Window Title）和边框（Frame）。</p>
+<ul>
+<li>QWidget直接提供的成员函数：x()、y()获得窗口左上角的坐标，width()、height()获得客户区的宽度和高度。</li>
+<li>QWidget的geometry()提供的成员函数：x()、y()获得客户区左上角的坐标，width()、height()获得客户区的宽度和高度。</li>
+<li>QWidget的frameGeometry()提供的成员函数：x()、y()获得窗口左上角的坐标，width()、height()获得包含客户区、标题栏和边框在内的整个窗口的宽度和高度。</li>
+</ul>
+<h3 id="qlabel">👀QLabel</h3>
+<p>QLabel对象作为一个占位符可以显示不可编辑的文本或图片，也可以放置一个GIF动画，还可以被用作提示标记为其他控件。纯文本、链接或富文本可以显示在标签上。其设置属性的方法和常用信号可以参考Qt Designer的属性编辑器和信号/槽编辑器。</p>
+<h3 id="文本框类控件">👀文本框类控件</h3>
+<p><strong>（1）QLineEdit类</strong></p>
+<p>QLineEdit类是一个单行文本框控件，可以输入单行字符串。如果需要输入多行宇符串，则使用QTextEdit类。其设置属性的方法和常用信号可以参考Qt Designer的属性编辑器和信号/槽编辑器，下面以几个为例：</p>
+<ul>
+<li><p>setAlignment()：按固定值方式对齐文本。</p></li>
+<li><p>setPlaceholderText()：设置文本框浮显文字。</p></li>
+<li><p>setEchoMode()：设置文本框显示格式（正常显示、密码类型输入、密码掩码字符等等）。</p></li>
+<li><p>setValidator()：设置文本框的验证器（验证规则），将限制任意可能输入的文本。比如整数、浮点数、正则表达式。</p></li>
+</ul>
+<p><strong>（2）QTextEdit类</strong></p>
+<p>QTextEdit类是一个多行文本框控件，可以显示多行文本内容，当文本内容超出显示范围时，可以显示水平垂直滚动条。QTextEdit不仅可以显示文本还可以显示HTML文档。其设置属性的方法和常用信号可以参考Qt Designer的属性编辑器和信号/槽编辑器。</p>
+<p>setPlainText()：设置多行文本框的文本内容；</p>
+<p>toPlainText()：返回多行文本框的文本内容；</p>
+<p>setHtml()：设置多行文本框的内容为HTML文档，HTML文档是描述网页的；</p>
+<p>toHtml()：返回多行文本框的HTML文档内容；</p>
+<p>clear()：清除多行文本框的内容。</p>
+<h3 id="按钮类控件">👀按钮类控件</h3>
+<p><strong>（1）QAbstractButton</strong></p>
+<p>在任何GUI设计中，按钮都是最重要的和常用的触发动作请求的方式，用来与用户进行交互操作。在PyQt中根据不同使用场景将按钮划分为不同表现形式。按钮的基类是QAbstractButton，提供了按钮的通用性功能。该基类为抽象类，不能实例化，必须由其它按钮类继承QAbstractButton类，来实现不同的功能、不同的表现形式。常见的按钮类包括：QPushButton、QToolButton、QRadioButton和QCheckBox。这些按钮类均继承自QAbstractButton类，根据各自的使用场景通过图形展现出来。QAbstractButton提供的状态如下：</p>
+<table>
+<thead>
+<tr class="header">
+<th>状态</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>isDown()</td>
+<td>提示按钮是否被按下</td>
+</tr>
+<tr class="even">
+<td>isChecked()</td>
+<td>提示按钮是否已经标记</td>
+</tr>
+<tr class="odd">
+<td>isEnable()</td>
+<td>提示按钮是否可以被用户点击</td>
+</tr>
+<tr class="even">
+<td>isCheckAble()</td>
+<td>提示按钮是否为可标记的</td>
+</tr>
+<tr class="odd">
+<td>setAutoRepeat()</td>
+<td>设置按钮是否在用户长按时可以自动重复执行</td>
+</tr>
+</tbody>
+</table>
+<p>QAbstractButton提供的信号如下：</p>
+<table>
+<thead>
+<tr class="header">
+<th>信号</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Pressed</td>
+<td>当鼠标指针在按钮上并按下左键时触发该信号</td>
+</tr>
+<tr class="even">
+<td>Released</td>
+<td>当鼠标左键被释放时触发该信号</td>
+</tr>
+<tr class="odd">
+<td>Clicked</td>
+<td>当鼠标左键被按下然后释放时，或者快捷键被释放时触发该信号</td>
+</tr>
+<tr class="even">
+<td>Toggled</td>
+<td>当按钮的标记状态发生改变时触发该信号</td>
+</tr>
+</tbody>
+</table>
+<p><strong>（2）QPushButton</strong></p>
+<p>QPushButton类继承QAbstractButton类，形状是长方形，文本标题或图标可以显示在长方形上。它是一种命令按钮，可以单击该按钮执行一些命令，或响应一些事件。常见的有"确认"/"申请"/"取消"/"关闭"/"是"/"否"等按钮。命令按钮通常通过文本来描述执行的动作，有时候也会通过快捷键来执行对应按钮的命令。QPushButton类中的常用方法：</p>
+<table>
+<thead>
+<tr class="header">
+<th>方法</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>setCheckable()</td>
+<td>设置按钮是否已经被选中，如果设置为True，则表示按钮将保持已点击和释放状态</td>
+</tr>
+<tr class="even">
+<td>toggle()</td>
+<td>在按钮状态之间进行切换</td>
+</tr>
+<tr class="odd">
+<td>setIcon()</td>
+<td>设置按钮上的图标</td>
+</tr>
+<tr class="even">
+<td>setEnabled()</td>
+<td>设置按钮是否可以使用，当设置为False时，按钮变成不可用状态，点击不会发射信号</td>
+</tr>
+<tr class="odd">
+<td>isChecked()</td>
+<td>返回按钮的状态。返回值为True或False</td>
+</tr>
+<tr class="even">
+<td>setDefault()</td>
+<td>设置按钮的默认状态</td>
+</tr>
+<tr class="odd">
+<td>setText()</td>
+<td>设置按钮的显示文本</td>
+</tr>
+<tr class="even">
+<td>text()</td>
+<td>返回按钮的显示文本</td>
+</tr>
+</tbody>
+</table>
+<p><strong>（3）QRadioButton</strong></p>
+<p>QRadioButton类继承QAbstractButton类，它提供一组可供选择的按钮和文本标签，用户可以选择其中一个选项，标签用于显示对应文本信息。单选钮是一种开关按钮，可以切换为on或者off，即checked或者unchecked，主要是为用户提供"多选一"的选择。</p>
+<p>QRadioButton是单选钮控件默认是独占的（Exclusive）。对于继承自同一个父类Widget的多个单选钮，它们属于同一个按钮组合，在单选钮组里，一次只能选择一个单选钮。如果需要多个独占的按钮组合，则需要将它们放在 QGroupBox或QButtonGroup中。</p>
+<p>当将单选钮切换到on或off时，会发送toggled信号，绑定这个信号，在按钮状态发生改变时，触发相应的行为。在QRadioButton中，toggled信号是在切换单选钮状态（开、关）时发射的，而clicked信号则在每次点击单选钮时都会发射。在实际中，一般只有状态改变时才有必要去响应，因此toggled信号更适合状态监控。QRadioButton类中的常用方法如下：</p>
+<table>
+<thead>
+<tr class="header">
+<th>方法</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>setCheckable()</td>
+<td>设置按钮是否已经被选中，可以改变单选钮的选中状态，如果设置为True，则表示单选钮将保持已点击和释放状态</td>
+</tr>
+<tr class="even">
+<td>isChecked()</td>
+<td>返回单选钮的状态。返回值为True或False</td>
+</tr>
+<tr class="odd">
+<td>setText()</td>
+<td>设置单选钮的显示文本</td>
+</tr>
+<tr class="even">
+<td>text()</td>
+<td>返回单选钮的显示文本</td>
+</tr>
+</tbody>
+</table>
+<p><strong>（4）QCheckBox</strong></p>
+<p>QCheckBox类继承QAbstractButton类，提供一组带文本标签的复选框，用户可选择多个选项。和QPushButton一样，复选框可以显示文本或者图标，其中文本可以通过构造函数或者setText()来设置；图标可以通过setIcon()来设置。在视觉上，QButtonGroup可以把许多复选框组织在一起。</p>
+<p>QCheckBox（复选框）和QRadioButton（单选钮）都是选项按钮，因为它们都可以在开（选中）或者关（未选中）之间切换。它们的区别是对用户选择的限制：单选钮提供了"多选一"的选择；而复选框提供的是"多选多"的选择。QCheckBox通常被应用在需要用户选择一个或多个可用的选项的场景中。</p>
+<p>只要复选框被选中或取消选中，都会发射stateChanged信号。如果想在复选框状态改变时触发相应的行为，请连接这个信号，可以使用isChecked()来查询复选框是否被选中。除了常用的选中和未选中两种状态，QCheckBox还提供了第三种状态（半选中）来表明"没有变化"。当需要为用户提供一个选中或者未选中复选框的选择时，这种状态是很有用的。如果需要第三种状态，则可以通过setTristate()来使它生效，并使用checkState()来查询当前的切换状态。QCheckBox类中的常用方法如下：</p>
+<table>
+<thead>
+<tr class="header">
+<th>方法</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>setChecked()</td>
+<td>设置复选框的状态，设置为True时表示选中复选框，设置为False时表示取消选中复选框</td>
+</tr>
+<tr class="even">
+<td>setText()</td>
+<td>设置复选框的显示文本</td>
+</tr>
+<tr class="odd">
+<td>text()</td>
+<td>返回复选框的显示文本</td>
+</tr>
+<tr class="even">
+<td>isChecked()</td>
+<td>检查复选框是否被选中</td>
+</tr>
+<tr class="odd">
+<td>setTristate()</td>
+<td>设置复选框为一个三态复选框</td>
+</tr>
+</tbody>
+</table>
+<p>三态复选框有三种状态：</p>
+<table>
+<thead>
+<tr class="header">
+<th>名称</th>
+<th>值</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Qt.Checked</td>
+<td>2</td>
+<td>组件没有被选中（默认值）</td>
+</tr>
+<tr class="even">
+<td>Qt.PartiallyChecked</td>
+<td>1</td>
+<td>组件被半选中</td>
+</tr>
+<tr class="odd">
+<td>Qt.Unchecked</td>
+<td>0</td>
+<td>组件被选中</td>
+</tr>
+</tbody>
+</table>
+<h3 id="qcombobox下拉列表框">👀QComboBox(下拉列表框)</h3>
+<p>QComboBox是一个集按钮和下拉选项于一体的控件，也被称为下拉列表框。QComboBox类中的常用方法如下：</p>
+<table>
+<thead>
+<tr class="header">
+<th>方法</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>addItem()</td>
+<td>添加一个下拉选项</td>
+</tr>
+<tr class="even">
+<td>addItems()</td>
+<td>从列表中添加下拉选项</td>
+</tr>
+<tr class="odd">
+<td>Clear()</td>
+<td>删除下拉选项集合中的所有选项</td>
+</tr>
+<tr class="even">
+<td>count()</td>
+<td>返回下拉选项集合中的数目</td>
+</tr>
+<tr class="odd">
+<td>currentText()</td>
+<td>返回选中选项的文本</td>
+</tr>
+<tr class="even">
+<td>itemText(i)</td>
+<td>获取索引为i的item的选项文本</td>
+</tr>
+<tr class="odd">
+<td>currentIndex()</td>
+<td>返回选中项的索引</td>
+</tr>
+<tr class="even">
+<td>setItemText(int index, text)</td>
+<td>改变序号为index项的文本</td>
+</tr>
+</tbody>
+</table>
+<p>QComboBox类中的常用信号如下：</p>
+<table>
+<thead>
+<tr class="header">
+<th>信号</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Activated</td>
+<td>当用户选中一个下拉选项时发射该信号</td>
+</tr>
+<tr class="even">
+<td>currentIndexChanged</td>
+<td>当下拉选项的索引发生改变时发射该信号</td>
+</tr>
+<tr class="odd">
+<td>highlighted</td>
+<td>当选中一个已经选中的下拉选项时，发射该信号</td>
+</tr>
+</tbody>
+</table>
+<h3 id="qspinbox计数器">👀QSpinBox(计数器)</h3>
+<p>QSpinBox是一个计数器控件，允许用户选择一个整数值，通过单击向上/向下按钮或按键盘上的上/下箭头来增加/减少当前显示的值，当然用户也可以输入值。</p>
+<p>在默认情况下，QSpinBox的取值范围是0~99，每次改变的步长值为1。QSpinBox类和QDoubleSpinBox类均派生自QAbstractSpinBox类。QSpinBox用于处理整数值，QDoubleSpinBox用于处理浮点值，它们之间的区别就是处理数据的类型不同，其他功能都基本相同。QDoubleSpinBox的默认精度是两位小数，但可以通过setDecimals()来改变。QSpinBox类中的常用方法如下：</p>
+<table>
+<thead>
+<tr class="header">
+<th>方法</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>setMinimum()</td>
+<td>设置计数器的下界</td>
+</tr>
+<tr class="even">
+<td>setMaximum()</td>
+<td>设置计数器的上界</td>
+</tr>
+<tr class="odd">
+<td>setRange()</td>
+<td>设置计算器的最大值、最小值和步长值</td>
+</tr>
+<tr class="even">
+<td>setValue()</td>
+<td>设置计算器的当前值</td>
+</tr>
+<tr class="odd">
+<td>Value()</td>
+<td>返回计数器的当前值</td>
+</tr>
+<tr class="even">
+<td>setSingleStep()</td>
+<td>设置计数器的步长值</td>
+</tr>
+</tbody>
+</table>
+<p>每次单击向上/向下按钮时，QSpinBox计数器都会发射valueChanged信号，可以从相应的槽函数中通过value()函数获得计数器的当前值。</p>
+<h3 id="qslider滑动条">👀QSlider(滑动条)</h3>
+<p>QSlider控件提供了一个垂直或水平的滑动条，滑动条是一个用于控制有界值的典型控件，它允许用户沿水平或垂直方向在某一范围内移动滑块，并将滑块所在的位置转换成一个合法范围内的整数值。有时候这种方式比输入数字或者使用SpinBox（计数器）更加自然。在槽函数中对滑块所在位置的处理相当于从整数之间的最小值和最高值进行取值。一个滑块条控件可以以水平或垂直的方式显示，在构造函数中进行设置。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">self.sp = QSlider(Qt.Horizontal)</span><br><span class="line">self.sp = QSlider(Qt.Vertical)</span><br></pre></td></tr></table></figure>
+<p>QSlider类中的常用方法如下：</p>
+<table>
+<colgroup>
+<col style="width: 22%" />
+<col style="width: 77%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>方法</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>setMinimum()</td>
+<td>设置滑动条控件的最小值</td>
+</tr>
+<tr class="even">
+<td>setMaximum()</td>
+<td>设置滑动条控件的最大值</td>
+</tr>
+<tr class="odd">
+<td>setSingleStep()</td>
+<td>设置滑动条控件递增/递减的步长值</td>
+</tr>
+<tr class="even">
+<td>setValue()</td>
+<td>设置滑动条控件的值</td>
+</tr>
+<tr class="odd">
+<td>value()</td>
+<td>获取滑动条控件的值</td>
+</tr>
+<tr class="even">
+<td>setTickInterval()</td>
+<td>设置刻度间隔</td>
+</tr>
+<tr class="odd">
+<td>setTickPosition()</td>
+<td>设置刻度标记的位置，可以输入一个枚举值，这个枚举值指定刻度线相对于滑块和用户操作的位置。以下是可以输入的枚举值：<br />①QSlider.NoTicks，不绘制任何刻度线；<br />②QSlider.TicksBothSides，在滑块的两侧绘制刻度线；<br />③QSlider.TicksAbove，在（水平）滑块上方绘制刻度线；<br />④QSlider.TicksBelow，在（水平）滑块下方绘制刻度线；<br />⑤QSlider.TicksLeft，在（垂直）滑块左侧绘制刻度线；<br />⑥QSlider.TicksRight，在（垂直）滑块右侧绘制刻度线。</td>
+</tr>
+</tbody>
+</table>
+<p>QSlider类中的常用信号如下：</p>
+<table>
+<thead>
+<tr class="header">
+<th>信号</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>valueChanged</td>
+<td>当滑块的值发生改变时发射此信号，此信号时最常用的</td>
+</tr>
+<tr class="even">
+<td>sliderPressed</td>
+<td>当用户按下滑块时发射此信号</td>
+</tr>
+<tr class="odd">
+<td>sliderMoved</td>
+<td>当用户拖动滑块时发射此信号</td>
+</tr>
+<tr class="even">
+<td>sliderReleased</td>
+<td>当用户释放滑块时发射此信号</td>
+</tr>
+</tbody>
+</table>
+<h3 id="对话框类控件">👀对话框类控件</h3>
+<p><strong>（1）QDialog</strong></p>
+<p>为了更好地实现人机交互，比如Windows及Linux等系统均会提供一系列的标准对话框来完成特定场景下的功能，如选择字号大小、字体颜色等。在PyQt5中定义了一系列的标准对话框类，让使用者能够方便和快捷地通过各个类完成字号大小、字体颜色以及文件的选择等。</p>
+<p>QDialog类的子类主要有<strong>QMessageBox</strong>、<strong>QInputDialog</strong>、<strong>QFontDialog</strong>、<strong>QFileDialog</strong>等。QDialog类中的常用方法如下：</p>
+<table>
+<colgroup>
+<col style="width: 24%" />
+<col style="width: 75%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>方法</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>setWindowTitle()</td>
+<td>设置对话框标题</td>
+</tr>
+<tr class="even">
+<td>setWindowModality()</td>
+<td>设置窗口模态。取值如下：<br />①Qt.NonModal，非模态，可以和程序的其它窗口交互；<br />②Qt.WindowModal，窗口模态，程序在未处理完当前对话框时，将阻止和对话框的父窗口进行交互；<br />③Qt.ApplicationModal，应用程序模态，阻止和任何其他窗口进行交互。</td>
+</tr>
+</tbody>
+</table>
+<p>当用户按下Esc键时，对话框窗口将会默认调用QDialog.reject()方法，然后关闭对话框窗口。</p>
+<p><strong>（2）QMessageBox</strong></p>
+<p>QMessageBox是一种通用的弹出式对话框，用于显示消息，允许用户通过单击不同的标准按钮对消息进行反馈。每个标准按钮都有一个预定义的文本、角色和十六进制数。QMessageBox类提供了许多常用的弹出式对话框，如提示、警告、错误、询问、关于等对话框。这些不同类型的QMessageBox对话框只是显示时的图标不同，其他功能是一样的。QMessageBox类中的常用方法如下：</p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>方法</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>information(QWidget parent, title, text, buttons, defaultButton)</td>
+<td>弹出消息对话框，用来告诉用户关于提示信息，各参数解释如下：<br />①parent，指定的父窗口控件；<br />②title，对话框标题；<br />③text，对话框文本；<br />④buttons，多个标准按钮，默认OK按钮；<br />⑤defaultButton，默认选中的标准按钮，默认是第一个标准按钮。</td>
+</tr>
+<tr class="even">
+<td>question(QWidget parent, title, text, buttons, defaultButton)</td>
+<td>弹出问答/提问对话框（各参数解释同上），用来告诉用户关于提问信息。</td>
+</tr>
+<tr class="odd">
+<td>warning(QWidget parent, title, text, buttons, defaultButton)</td>
+<td>弹出警告对话框（各参数解释同上），用来告诉用户关于不寻常的错误消息。</td>
+</tr>
+<tr class="even">
+<td>critical(QWidget parent, title, text, buttons, defaultButton)</td>
+<td>弹出严重错误对话框（各参数解释同上），用来告诉用户关于严重的错误信息。</td>
+</tr>
+<tr class="odd">
+<td>about(QWidget parent, title, text)</td>
+<td>弹出关于对话框（各参数解释同上）</td>
+</tr>
+<tr class="even">
+<td>setTitle()</td>
+<td>设置标题</td>
+</tr>
+<tr class="odd">
+<td>setText()</td>
+<td>设置消息正文</td>
+</tr>
+<tr class="even">
+<td>setIcon()</td>
+<td>设置弹出对话框的图片</td>
+</tr>
+</tbody>
+</table>
+<p>QMessageBox的标准按钮类型如下：</p>
+<table>
+<thead>
+<tr class="header">
+<th>类型</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>QMessage.Ok</td>
+<td>同意操作</td>
+</tr>
+<tr class="even">
+<td>QMessage.Cancel</td>
+<td>取消操作</td>
+</tr>
+<tr class="odd">
+<td>QMessage.Yes</td>
+<td>同意操作</td>
+</tr>
+<tr class="even">
+<td>QMessage.No</td>
+<td>取消操作</td>
+</tr>
+<tr class="odd">
+<td>QMessage.Abort</td>
+<td>终止操作</td>
+</tr>
+<tr class="even">
+<td>QMessage.Retry</td>
+<td>重试操作</td>
+</tr>
+<tr class="odd">
+<td>QMessage.Ignore</td>
+<td>忽略操作</td>
+</tr>
+</tbody>
+</table>
+<p><strong>（3）QInputDialog</strong></p>
+<p>QInputDialog控件是一个标准对话框，由一个文本框和两个按钮（OK按钮和Cancel按钮）组成。当用户单击OK或Enter键后，在父窗口可以收集通过QInputDialog控件输入的信息。QInputDialog控件是QDialog标准对话框的一部分。在QInputDialog控件中可以输入数字、字符串或列表中的选项，用于提示必要的信息。QInputDialog类中的常用方法如下：</p>
+<table>
+<thead>
+<tr class="header">
+<th>方法</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>getInt()</td>
+<td>从控件中获得标准整数输入</td>
+</tr>
+<tr class="even">
+<td>getDouble()</td>
+<td>从控件中获得标准浮点数输入</td>
+</tr>
+<tr class="odd">
+<td>getText()</td>
+<td>从控件中获得标准字符串输入</td>
+</tr>
+<tr class="even">
+<td>getItem()</td>
+<td>从控件中获得列表里的选项输入</td>
+</tr>
+</tbody>
+</table>
+<p><strong>（4）QFontDialog</strong></p>
+<p>QFontDialog控件是一个常用的字体选择对话框，可以让用户选择所显示文本的字号大小、样式和格式。此控件是QDialog标准对话框的一部分。使用QFontDialog类的静态方法getFont()，可以从字体选择对话框中选择文本的显示字号大小、样式和格式。</p>
+<p><strong>（5）QFileDialog</strong></p>
+<p>QFileDialog是用于打开和保存文件的标准对话框。QFileDialog类继承自QDialog类。QFileDialog在打开文件时使用了文件过滤器，用于显示指定扩展名的文件。也可以设置使用QFileDialog打开文件时的起始目录和指定扩展名的文件。QFileDialog类中的常用方法如下：</p>
+<table>
+<colgroup>
+<col style="width: 22%" />
+<col style="width: 77%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>方法</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>getOpenFileName()</td>
+<td>返回用户所选择文件的名称，并打开该文件</td>
+</tr>
+<tr class="even">
+<td>getSaveFileName()</td>
+<td>使用用户选择的文件名并保存文件</td>
+</tr>
+<tr class="odd">
+<td>setFileMode()</td>
+<td>可以选择的文件类型，枚举常量是：<br />①QFileDialog.AnyFile，任何文件；<br />②QFileDialog.ExistingFile，已存在的文件<br />③QFileDialog.Directory，文件目录；<br />④QFileDialog.ExistingFiles，已经存在的多个文件</td>
+</tr>
+<tr class="even">
+<td>setFilter()</td>
+<td>设置过滤器，只显示过滤器允许的文件类型</td>
+</tr>
+</tbody>
+</table>
+<h3 id="窗口绘图类控件">👀窗口绘图类控件</h3>
+<p>在PyQt5中，一般可以通过QPainter、QPen和QBrush这三个类来实现绘图功能。此外，QPixmap的作用是加载并呈现本地图像，而图像的呈现本质上也是通过绘图方式实现的，所以QPixmap也可以被视为绘图的一个类。</p>
+<p><strong>（1）QPainter</strong></p>
+<p>QPainter类在QWidget（控件）上执行绘图操作，它是一个绘制工具，为大部分图形界面提供了高度优化的函数，使QPainter类可以绘制从简单的直线到复杂的饼图等。绘制操作在QWidget.paintEvent()中完成。绘制方法必须放在QtGui.QPainter对象的begin()和end()之间。QPainter类在控件或其他绘图设备上执行较低级别的图形绘制功能，并通过如下方法进行绘制。</p>
+<table>
+<colgroup>
+<col style="width: 40%" />
+<col style="width: 60%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>方法</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>begin()</td>
+<td>开始在目标设备上绘制</td>
+</tr>
+<tr class="even">
+<td>drawArc()</td>
+<td>在起始角度和最终角度之间画弧</td>
+</tr>
+<tr class="odd">
+<td>drawEllipse()</td>
+<td>在一个矩形内画一个椭圆</td>
+</tr>
+<tr class="even">
+<td>drawLine(int x1, int y1, int x2, int y2)</td>
+<td>绘制一条指定了端点坐标的线，绘制从(x1,y1)到(x2,y2)的直线并且</td>
+</tr>
+<tr class="odd">
+<td>drawPixmap()</td>
+<td>从图像文件中提取Pixmap并将其显示在指定的位置</td>
+</tr>
+<tr class="even">
+<td>drawPolygon()</td>
+<td>使用坐标数组绘制多边形</td>
+</tr>
+<tr class="odd">
+<td>drawRect(int x, int y, int w, int h)</td>
+<td>以给定的宽度w和高度h从左上角坐标(x,y)绘制一个矩形</td>
+</tr>
+<tr class="even">
+<td>drawText()</td>
+<td>显示给定坐标处的文字</td>
+</tr>
+<tr class="odd">
+<td>fillRect()</td>
+<td>使用QColor参数填充矩形</td>
+</tr>
+<tr class="even">
+<td>setBrush()</td>
+<td>设置画笔风格</td>
+</tr>
+<tr class="odd">
+<td>setPen()</td>
+<td>设置用于绘制的笔的颜色、大小和样式</td>
+</tr>
+</tbody>
+</table>
+<p>还可以设置画笔风格（PenStyle），这是一个枚举类，可以由QPainter类绘制。画笔风格如表下所示：</p>
+<table>
+<thead>
+<tr class="header">
+<th>枚举类型</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Qt.NoPen</td>
+<td>没有线。比如QPainter.drawRect()填充，但没有绘制任何边界线</td>
+</tr>
+<tr class="even">
+<td>Qt.SolidLine</td>
+<td>一条简单的线</td>
+</tr>
+<tr class="odd">
+<td>Qt.DashLine</td>
+<td>由一些像素分隔的短线</td>
+</tr>
+<tr class="even">
+<td>Qt.DotLine</td>
+<td>由一些像素分隔的点</td>
+</tr>
+<tr class="odd">
+<td>Qt.DashDotLine</td>
+<td>轮流交替的点和短线</td>
+</tr>
+<tr class="even">
+<td>Qt.DashDotDotLine</td>
+<td>一条短线、两个点</td>
+</tr>
+<tr class="odd">
+<td>Qt.MPenStyle</td>
+<td>画笔风格的掩码</td>
+</tr>
+</tbody>
+</table>
+<p><strong>（2）QPen</strong></p>
+<p>QPen（钢笔）是一个基本的图形对象，用于绘制直线、曲线或者给轮廓画出矩形、椭圆形、多边形及其他形状等。</p>
+<p><strong>（3）QBrush</strong></p>
+<p>QBrush（画刷）是一个基本的图形对象，用于填充如矩形、椭圆形或多边形等形状。QBrush有三种类型：预定义、过渡和纹理图案。</p>
+<p><strong>（4）QPixmap</strong></p>
+<p>QPixmap类用于绘图设备的图像显示，它可以作为一个QPaintDevice对象，也可以加载到一个控件中，通常是标签或按钮，用于在标签或按钮上显示图像。QPixmap可以读取的图像文件类型有BMP、GIF、JPG、JPEG、PNG、PBM、PGM、PPM、XBM、XPM等。QPixmap类中的常用方法如下：</p>
+<table>
+<thead>
+<tr class="header">
+<th>方法</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>copy()</td>
+<td>从QRect对象复制到QPixmap对象</td>
+</tr>
+<tr class="even">
+<td>fromImage()</td>
+<td>将QImage对象转换为QPixmap对象</td>
+</tr>
+<tr class="odd">
+<td>grabWidget()</td>
+<td>从给定的窗口小控件创建一个像素图</td>
+</tr>
+<tr class="even">
+<td>grabWindow()</td>
+<td>从窗口中创建数据的像素图</td>
+</tr>
+<tr class="odd">
+<td>load()</td>
+<td>加载图像文件作为QPixmap对象</td>
+</tr>
+<tr class="even">
+<td>save()</td>
+<td>将QPixmap对象保存为文件</td>
+</tr>
+<tr class="odd">
+<td>toImage()</td>
+<td>将QPixmap对象转换为QImage对象</td>
+</tr>
+</tbody>
+</table>
+<h3 id="拖曳与剪贴板">👀拖曳与剪贴板</h3>
+<p><strong>（1）Drag与Drop</strong></p>
+<p>为用户提供的拖曳功能很直观，在很多桌面应用程序中，复制或移动对象都可以通过拖曳来完成。基于MIME类型的拖曳数据传输是基于QDrag类的。QMimeData对象将关联的数据与其对应的MIME类型相关联。MIME类型的数据可以简单理解为互联网上的各种资源，比如文本、音频和视频资源等，互联网上的每一种资源都属于一种MIME类型的数据。MimeData类函数允许检测和使用方便的MIME类型如下：</p>
+<table>
+<thead>
+<tr class="header">
+<th>判断函数</th>
+<th>设置函数</th>
+<th>获取函数</th>
+<th>MIME类型</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>hasText()</td>
+<td>text()</td>
+<td>setText()</td>
+<td>text/plain</td>
+</tr>
+<tr class="even">
+<td>hasHtml()</td>
+<td>html()</td>
+<td>setHtml()</td>
+<td>text/html</td>
+</tr>
+<tr class="odd">
+<td>hasUrls()</td>
+<td>urls()</td>
+<td>setUrls()</td>
+<td>text/uri-list</td>
+</tr>
+<tr class="even">
+<td>hasImage()</td>
+<td>imageData()</td>
+<td>setImageData()</td>
+<td>image/*</td>
+</tr>
+<tr class="odd">
+<td>hasColor()</td>
+<td>colorData()</td>
+<td>setColorData()</td>
+<td>application/x-color</td>
+</tr>
+</tbody>
+</table>
+<p>许多QWidget对象都支持拖曳动作，允许拖曳数据的控件必须设置QWidget.setDragEnabled()为True。另外，控件应该响应拖曳事件，以便存储所拖曳的数据。常用的拖曳事件如下：</p>
+<table>
+<colgroup>
+<col style="width: 18%" />
+<col style="width: 81%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>事件</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>DragEnterEvent</td>
+<td>当执行一个拖曳控件操作，并且鼠标指针进入该控件时，这个事件将被触发。在这个事件中可以获得被操作的窗口控件，还可以有条件地接受或拒绝该拖曳操作</td>
+</tr>
+<tr class="even">
+<td>DragMoveEvent</td>
+<td>在拖曳操作进行时会触发该事件</td>
+</tr>
+<tr class="odd">
+<td>DragLeaveEvent</td>
+<td>当执行一个拖曳控件操作，并且鼠标指针离开该控件时，这个事件将被触发</td>
+</tr>
+<tr class="even">
+<td>DropEvent</td>
+<td>当拖曳操作在目标控件上被释放时，这个事件将被触发</td>
+</tr>
+</tbody>
+</table>
+<p><strong>（2）QClipboard</strong></p>
+<p>QClipboard类提供了对系统剪贴板的访问，可以在应用程序之间复制和粘贴数据。它的操作类似于QDrag类，并使用类似的数据类型。QApplication类有一个静态方法clipboard()，它返回对剪贴板对象的引用。任何类型的MimeData都可以从剪贴板复制或粘贴。QClipboard类中的常用方法如下：</p>
+<table>
+<thead>
+<tr class="header">
+<th>方法</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>clear()</td>
+<td>清除剪贴板的内容</td>
+</tr>
+<tr class="even">
+<td>setImage()</td>
+<td>将QImage对象复制到剪贴板中</td>
+</tr>
+<tr class="odd">
+<td>setMimeData()</td>
+<td>将MIME数据设置为剪贴板</td>
+</tr>
+<tr class="even">
+<td>setPixmap()</td>
+<td>从剪贴板中复制Pixmap对象</td>
+</tr>
+<tr class="odd">
+<td>setText()</td>
+<td>从剪贴板中复制文本</td>
+</tr>
+<tr class="even">
+<td>text()</td>
+<td>从剪贴板中检索文本</td>
+</tr>
+</tbody>
+</table>
+<p>QClipboard类中的常用信号如下：</p>
+<table>
+<thead>
+<tr class="header">
+<th>信号</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>dataChanged</td>
+<td>当剪贴板内容发生变化时，这个信号被发射</td>
+</tr>
+</tbody>
+</table>
+<h3 id="日历与时间">👀日历与时间</h3>
+<p><strong>（1）QCalendar</strong></p>
+<p>QCalendar是一个日历控件，它提供了一个基于月份的视图，允许用户通过鼠标或键盘选择日期，默认选中的是今天的日期。也可以对日历的日期范围进行规定。QCalendar类中的常用方法如下：</p>
+<table>
+<colgroup>
+<col style="width: 24%" />
+<col style="width: 75%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>方法</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>setDateRange()</td>
+<td>设置日期范围供选择</td>
+</tr>
+<tr class="even">
+<td>setFirstDayOfWeek()</td>
+<td>重新设置星期的第一天，默认是星期日。参数枚举(<code>Qt.Monday</code>,<code>Qt.Tuesday</code>, <code>Qt.Wednesday</code>,<code>Qt.Thursday</code>,<code>Qt.Friday</code>,<code>Qt.Saturday</code>,<code>Qt.Sunday</code>)</td>
+</tr>
+<tr class="odd">
+<td>setMaximumDate()</td>
+<td>设置最大日期</td>
+</tr>
+<tr class="even">
+<td>setMinimumDate()</td>
+<td>设置最小日期</td>
+</tr>
+<tr class="odd">
+<td>setSelectedDate()</td>
+<td>设置一个QDate对象，作为日期控件所选定的日期</td>
+</tr>
+<tr class="even">
+<td>MaximumDate()</td>
+<td>获取日历控件的最大日期</td>
+</tr>
+<tr class="odd">
+<td>MinimumDate()</td>
+<td>获取日历控件的最小日期</td>
+</tr>
+<tr class="even">
+<td>SelectedDate()</td>
+<td>返回当前选定的日期</td>
+</tr>
+<tr class="odd">
+<td>setGridvisible()</td>
+<td>设置日历控件是否显示网格</td>
+</tr>
+</tbody>
+</table>
+<p><strong>（2）QDateTimeEdit</strong></p>
+<p>QDateTimeEdit是一个允许用户编辑日期时间的控件，可以使用键盘和上、下箭头按钮来增加或减少日期时间值。如当使用鼠标选中QDateTimeEdit中的年份时，可以使用键盘上的上、下键来改变数值。QDateTimeEdit通过setDisplayFormat()函数来设置显示的日期时间格式。QDateTimeEdit类中的常用方法如下：</p>
+<table>
+<colgroup>
+<col style="width: 23%" />
+<col style="width: 76%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>方法</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>setDisplayFormat()</td>
+<td>设置日期时间格式。<br />①yyyy，代表年份，用4位数表示<br/>②MM，代表月份，取值范围为01-12<br/>③dd，代表日，取值范围为01-31<br/>④HH，代表小时，取值范围为00-23<br/>⑤mm，代表分钟，取值范围为00-59<br/>⑥ss，代表秒，取值范围位00-59</td>
+</tr>
+<tr class="even">
+<td>setMaximumDate()</td>
+<td>设置控件的最大日期</td>
+</tr>
+<tr class="odd">
+<td>setMinimumDate()</td>
+<td>设置控件的最小日期</td>
+</tr>
+<tr class="even">
+<td>time()</td>
+<td>返回编辑的时间</td>
+</tr>
+<tr class="odd">
+<td>date()</td>
+<td>返回编辑的日期</td>
+</tr>
+</tbody>
+</table>
+<p>QDateTimeEdit类中的常用信号如下：</p>
+<table>
+<thead>
+<tr class="header">
+<th>信号</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>dateChanged</td>
+<td>当日期改变时发射此信号</td>
+</tr>
+<tr class="even">
+<td>dataTimeChanged</td>
+<td>当日期时间改变时发射此信号</td>
+</tr>
+<tr class="odd">
+<td>timeChanged</td>
+<td>当时间改变时发射此信号</td>
+</tr>
+</tbody>
+</table>
+<p>QDateEdit和QTimeEdit类均继承自QDateTimeEdit类，它们的许多特性和功能都由QDateTimeEdit类提供。</p>
+<p><strong>设置显示格式时要注意：</strong>QDateEdit用来编辑控件的日期，仅包括年、月和日；QTimeEdit用来编辑控件的时间，仅包括小时、分钟和秒。不要用QDateEdit来设置或获取时间，也不要用QTimeEdit来设置或获取日期。如果要同时操作日期时间，请使用QDateTimeEdit。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">dateEdit = QDateEdit(self)</span><br><span class="line">timeEdit = QTimeEdit(self)</span><br><span class="line">dạteEdit.setDisplayFormat(<span class="string">&quot;yyyy-MM-dd&quot;</span>)</span><br><span class="line">timeEdit.setDisplayFormat(<span class="string">&quot;HH:mm:ss&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p><strong>设置弹出日历时要注意：</strong>用来弹出日历的类只有QDateTimeEdit和QDateEdit，而QTimeEdit类虽然在语法上可以设置弹出日历，但不起作用。使用它们弹出日历的正确方法如下。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">dateTimeEdit = QDateTimeEdit(self)</span><br><span class="line">dateEdit = QDatesdit(self)</span><br><span class="line">dateTimeEdit.setCalendarPopup(<span class="literal">True</span>)</span><br><span class="line">dateEdit.setCalendarPopup(<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+<p>在默认情况下，如果QDateTimeEdit类构造时不指定日期时间，那么系统会为其设置一个和本地相同的日期时间格式，并且值为2000年1月1日0时0分0秒。也可以手动指定控件显示的日期时间。除通过构造函数指定所显示的日期时间外，也可以根据QDateTimeEdit提供的槽函数来设置，比如setDateTime()、setDate()、setTime()函数。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># （1）初始化QDateTimeEdit类</span></span><br><span class="line">dateTimeEdit = QDateTimeEdit(self)</span><br><span class="line">dateTimeEdit2 = QDateTimeEdit(QDateTime.currentDateTime(), self)</span><br><span class="line">dateEdit = QDateTimeEdit(QDate.currentDate(), self)</span><br><span class="line">timeEdit = QDateTimeEdit(QTime.currentTime(), self)</span><br><span class="line"></span><br><span class="line"><span class="comment"># （2）设置日期时间格式</span></span><br><span class="line"><span class="comment"># 如果不想使用系统默认的格式，则可以通过setDisplayFormat()来自定义日期时间格式</span></span><br><span class="line">dateTimeEdit.setDisplayFormat(<span class="string">&quot;yyyy-MM-dd HH:mm:ss&quot;</span>)</span><br><span class="line">dateTimeEdit2.setDisplayFormat(<span class="string">&quot;yyyy/MM/dd HH-mm-ss&quot;</span>)</span><br><span class="line">dateEdit.setDisplayFormat(<span class="string">&quot;yyyy.MM.dd&quot;</span>)</span><br><span class="line">timeEdit.setDisplayFormat(<span class="string">&quot;HH:mm:ss&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># （3）设置日期时间范围。设置日期时间为今天(currentDate)，同时限制有效日期的范围为：距离今天±365天。</span></span><br><span class="line">dateTimeEdit2.setbisplayFormat (<span class="string">&quot;yyyy-MM-dd HH:mm:ss&quot;</span>)</span><br><span class="line"><span class="comment"># 设置最小日期</span></span><br><span class="line">dateTimeEdit2.setMinimumDate(QDate.currentDate().addDays(-<span class="number">365</span>))</span><br><span class="line"><span class="comment"># 设置最大日期</span></span><br><span class="line">dateTimeEdit2.setMaximumDate(QDate.currentDate().addDays(<span class="number">365</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># （4）弹出日历</span></span><br><span class="line"><span class="comment"># 在默认情况下，只能通过上下箭头来改变日期时间。如果要弹出日历控件，只需调用setCalendarPopup(True)</span></span><br><span class="line">dateTimeEdit2.setCalendarPopup(<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># （5）获取日期时间</span></span><br><span class="line"><span class="comment"># 可以通过date()、dateTime()等方法来获取日期时间对象，如果要获取年、月、日等信息，则可以调用QDate的 year()、month()、day()等函数。</span></span><br><span class="line">dateTime = self.dateTimeEdit2.dateTime()</span><br><span class="line"><span class="comment"># 最大日期</span></span><br><span class="line">maxDate = self.dateTimeEdit2.maximumDate()</span><br><span class="line"><span class="comment"># 最大日期时间</span></span><br><span class="line">maxDateTime = self.dateTimeEdit2.maximumDateTime()</span><br><span class="line"><span class="comment"># 最大时间</span></span><br><span class="line">maxTime = self.dateTimeEdit2.maximumTime()</span><br><span class="line"><span class="comment"># 最小日期</span></span><br><span class="line">minDate = self.dateTimeEdit2.minimumDate()</span><br><span class="line"><span class="comment"># 最小日期时间</span></span><br><span class="line">minDateTime-self.dateTimeEdit2.minimumDateTime()</span><br><span class="line"><span class="comment"># 最小时间</span></span><br><span class="line">minTime-self.dateTimeEdit2.minimumTime()</span><br><span class="line"></span><br><span class="line"><span class="comment"># （6）信号和槽函数</span></span><br><span class="line"><span class="comment"># QDateTimeEdit控件常用的信号是dateChanged、dateTimeChanged和timeChanged，分别在改变日期、日期时间、时间时发射。</span></span><br><span class="line">dateTimeEdit2.dateChanged.connect(self.onDateChanged)</span><br><span class="line">dateTimeEdit2.dateTimeChanged.connect(self.onDateTimeChanged)</span><br><span class="line">dateTimeEdit2.timeChanged.connect(self.onTimeChanged)</span><br><span class="line"><span class="comment"># 日期发生改变时执行</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">onDateChanged</span>(<span class="params">self，date</span>):</span><br><span class="line">	<span class="built_in">print</span>(date)</span><br><span class="line"><span class="comment"># 无论是日期还是时间发生改变时都会执行</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">onDateTimeChanged</span>(<span class="params">self，dateTime</span>):</span><br><span class="line">	<span class="built_in">print</span>(dateTime)</span><br><span class="line"><span class="comment"># 时间发生改变时执行</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">onTimeChanged</span>(<span class="params">self，time</span>):</span><br><span class="line">	<span class="built_in">print</span>(time)</span><br></pre></td></tr></table></figure>
+<h3 id="菜单栏工具栏与状态栏">👀菜单栏、工具栏与状态栏</h3>
+<p><strong>（1）菜单栏</strong></p>
+<p>在QMainWindow对象的标题栏下方，水平的QMenuBar被保留显示QMenu对象。QMenu类提供了一个可以添加到菜单栏的小控件，也用于创建上下文菜单和弹出菜单。每个QMenu对象都可以包含一个或多个QAction对象或级联的QMenu对象。要创建一个弹出菜单，PyQt API提供了createPopupMenu()函数；menuBar()函数用于返回主窗口的QMenuBar对象；addMenu()函数可以将菜单添加到菜单栏中；通过addAction()函数可以在菜单中进行添加操作。在设计菜单系统时使用的一些重要方法如下：</p>
+<table>
+<thead>
+<tr class="header">
+<th>方法</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>menuBar()</td>
+<td>返回主窗口的QMenuBar对象</td>
+</tr>
+<tr class="even">
+<td>addMenu()</td>
+<td>在菜单栏中添加一个新的QMenu对象</td>
+</tr>
+<tr class="odd">
+<td>addAction()</td>
+<td>向QMenu小控件中添加一个操作按钮，其中包含文本或图标</td>
+</tr>
+<tr class="even">
+<td>setEnabled()</td>
+<td>将操作按钮状态设置为启用/禁用</td>
+</tr>
+<tr class="odd">
+<td>addSeparator()</td>
+<td>在菜单中添加一条分隔线</td>
+</tr>
+<tr class="even">
+<td>clear()</td>
+<td>删除菜单/菜单栏的内容</td>
+</tr>
+<tr class="odd">
+<td>setShortcut()</td>
+<td>将快捷键关联到操作按钮</td>
+</tr>
+<tr class="even">
+<td>setText()</td>
+<td>设置菜单项的文本</td>
+</tr>
+<tr class="odd">
+<td>setTitle()</td>
+<td>设置QMenu小控件的标题</td>
+</tr>
+<tr class="even">
+<td>text()</td>
+<td>返回与QAction对象关联的文本</td>
+</tr>
+<tr class="odd">
+<td>title()</td>
+<td>返回QMenu小控件的标题</td>
+</tr>
+</tbody>
+</table>
+<p>单击任何QAction按钮时，QMenu对象都会发射triggered信号。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 菜单中的操作按钮可以是字符串或QAction对象</span></span><br><span class="line">file = bar.addMenu(<span class="string">&quot;File&quot;</span>)</span><br><span class="line">file.addAction(<span class="string">&quot;New&quot;</span>)</span><br><span class="line">save = QAction(<span class="string">&quot;Save&quot;</span>, self)</span><br><span class="line">save.setShortcut(<span class="string">&quot;Ctrl+S&quot;</span>)</span><br><span class="line">file.addAction(save)</span><br><span class="line"><span class="comment"># 菜单发射triggered信号，将该信号连接到槽函数proecesstrigger()，该函数接收信号的QAction对象。</span></span><br><span class="line">file.triggered[QAction].connect(self.processtrigger)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">processtrigger</span>(<span class="params">self, q</span>):</span><br><span class="line">	<span class="built_in">print</span>(q.text() + <span class="string">&quot; is triggered&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p><strong>（2）QToolBar</strong></p>
+<p>QToolBar控件是由文本按钮、图标或其他小控件按钮组成的可移动面板，通常位于菜单栏下方。QToolBar类中的常用方法如下：</p>
+<table>
+<thead>
+<tr class="header">
+<th>方法</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>addAction()</td>
+<td>添加具有文本或图标的工具按钮</td>
+</tr>
+<tr class="even">
+<td>addSeparator()</td>
+<td>分组显示工具按钮</td>
+</tr>
+<tr class="odd">
+<td>addWidget()</td>
+<td>在工具栏中添加按钮以外的控件</td>
+</tr>
+<tr class="even">
+<td>addToolBar()</td>
+<td>使用QMainWindow类的方法添加一个新的工具栏</td>
+</tr>
+<tr class="odd">
+<td>setMovable()</td>
+<td>工具栏变得可移动</td>
+</tr>
+<tr class="even">
+<td>setOrientation()</td>
+<td>工具栏的方向可以设置为Qt.Horizontal或Qt.vertical</td>
+</tr>
+</tbody>
+</table>
+<p>每当单击工具栏中的按钮时，都将发射actionTriggered信号。另外，这个信号将关联的QAction对象的引用发送到连接的槽函数上。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 调用addToolBar()方法在工具栏区域添加文件工具栏</span></span><br><span class="line">tb = self.addToolBar(<span class="string">&quot;File&quot;</span>)</span><br><span class="line"><span class="comment"># 添加具有文本标题的工具按钮，工具栏通常包含图形按钮。具有图标和名称的QAction对象将被添加到工具栏中。</span></span><br><span class="line">new = QAction(QIcon(<span class="string">&quot;./images/new. png&quot;</span>), <span class="string">&quot;new&quot;</span>, self)</span><br><span class="line">tb.addAction(new)</span><br><span class="line">openf = QAction(QIcon(<span class="string">&quot;./images/open. png&quot;</span>), <span class="string">&quot;open&quot;</span>, self)</span><br><span class="line">tb.addAction(openf)</span><br><span class="line">save = QAction(QIcon(<span class="string">&quot;./images/save. png&quot;</span>), <span class="string">&quot;save&quot;</span>, self)</span><br><span class="line">tb.addAction(save)</span><br><span class="line"><span class="comment"># 将actionTriggered信号连接到槽函数toolbtnpressed()</span></span><br><span class="line">tb.actionTriggered[QAction].connect(self.toolbtnpressed)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">toolbtnpressed</span>(<span class="params">self, a</span>):</span><br><span class="line">	<span class="built_in">print</span>(<span class="string">&quot;pressed tool button is&quot;</span>, a.text())</span><br></pre></td></tr></table></figure>
+<p><strong>（3）QStatusBar</strong></p>
+<p>MainWindow对象在底部保留有一个水平条，作为状态栏（QStatusBar），用于显示永久的或临时的状态信息。 通过主窗口的QMainWindow的setStatusBar()函数设置状态栏，核心代码如下：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">self.statusBar = QStatusBar()</span><br><span class="line">self.setStatusBar(self.statusBar)</span><br></pre></td></tr></table></figure>
+<p>QStatusBar类中的常用方法如下：</p>
+<table>
+<thead>
+<tr class="header">
+<th>方法</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>addWidget()</td>
+<td>在状态栏中添加给定的窗口小控件对象</td>
+</tr>
+<tr class="even">
+<td>addPermanentWidget()</td>
+<td>在状态栏中永久添加给定的窗口小控件对象</td>
+</tr>
+<tr class="odd">
+<td>showMessage()</td>
+<td>在状态栏中显示一条临时信息指定时间间隔</td>
+</tr>
+<tr class="even">
+<td>clearMessage()</td>
+<td>删除正在显示的临时信息</td>
+</tr>
+<tr class="odd">
+<td>removeWidget()</td>
+<td>从状态栏中删除指定的小控件</td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">bar = self.menuBar()</span><br><span class="line">file = bar.addMenu(<span class="string">&quot;File&quot;</span>)</span><br><span class="line">file.addAction(<span class="string">&quot;show&quot;</span>)</span><br><span class="line"><span class="comment"># 当单击MenuBar的菜单时，将triggered信号与槽函数processTrigger()进行绑定。</span></span><br><span class="line">file.triggered[QAction].connect(self.processTrigger)</span><br><span class="line">self.statusBar = QStatusBar()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 当单击&quot;show&quot;菜单选项时，会在状态栏显示提示信息，并在5秒后消失。</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">processTrigger</span>(<span class="params">self, q</span>):</span><br><span class="line">	<span class="keyword">if</span>(q.text()==<span class="string">&quot;show&quot;</span>):</span><br><span class="line">		self.statusBar.showMessage(q.text() + <span class="string">&quot;菜单选项被点击了&quot;</span>, <span class="number">5000</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="qprinter">👀QPrinter</h3>
+<p>打印图像是图像处理软件中的一个常用功能。打印图像实际上是在QPaintDevice中画图，与平常在QWidget、QPixmap和QImage中画图一样，都是创建一个QPainter对象进行画图的，只是打印使用的是QPrinter，它本质上也是一个QPaintDevice（绘图设备）。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://heartlovelife.github.io">Xiaotangsmiles</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://heartlovelife.github.io/2024/08/25/Python-GUI-Design/">https://heartlovelife.github.io/2024/08/25/Python-GUI-Design/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://heartlovelife.github.io" target="_blank">江湖是你画中亦是你</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/GUI/">GUI</a></div><div class="post_share"><div class="social-share" data-image="https://s2.loli.net/2024/08/25/u7qX6PLeFUzxHvV.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/gh/overtrue/share.js@master/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i> 打赏</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/wechat.jpg" target="_blank"><img class="post-qr-code-img" src="/img/loading1.gif" data-original="/img/wechat.jpg" alt="wechat(微信)"/></a><div class="post-qr-code-desc">wechat(微信)</div></li><li class="reward-item"><a href="/img/alipay.jpg" target="_blank"><img class="post-qr-code-img" src="/img/loading1.gif" data-original="/img/alipay.jpg" alt="alipay(支付宝)"/></a><div class="post-qr-code-desc">alipay(支付宝)</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2024/06/10/DL-PyTorch-Basic/"><img class="next-cover" src="/img/loading1.gif" data-original="https://s2.loli.net/2024/06/10/KdBQXSmlCgFOWR1.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Python深度学习之PyTorch基础教程</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/loading1.gif" data-original="/img/touxiang.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Xiaotangsmiles</div><div class="author-info__description">我们总以为来日方长，却忘了世事无常</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">23</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">23</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">9</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/HeartLoveLife"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/HeartLoveLife" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="https://blog.csdn.net/twg666" target="_blank" title="CSDN"><i class="fa fa-book-open"></i></a><a class="social-icon" href="tencent://AddContact/?fromId=45&amp;fromSubId=1&amp;subcmd=all&amp;uin=491037927&amp;website=www.oicqzone.com" target="_blank" title="QQ"><i class="fab fa-qq"></i></a><a class="social-icon" href="mailto:xiaotangsmiles@163.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">我有我自己的太阳、月亮和星星，我有一个完全属于我自己的小世界。</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%A4%E8%AF%86pyqt5"><span class="toc-number">1.</span> <span class="toc-text">⛄认识PyQt5</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#pyqt5%E6%A1%86%E6%9E%B6%E7%AE%80%E4%BB%8B"><span class="toc-number">1.1.</span> <span class="toc-text">👀PyQt5框架简介</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#pyqt5%E7%9A%84%E7%89%B9%E7%82%B9"><span class="toc-number">1.2.</span> <span class="toc-text">👀PyQt5的特点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#qt%E4%B8%8Epyqt%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="toc-number">1.3.</span> <span class="toc-text">👀Qt与PyQt的关系</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%BE%E5%BD%A2%E7%95%8C%E9%9D%A2%E5%BC%80%E5%8F%91%E5%BA%93%E4%BB%8B%E7%BB%8D"><span class="toc-number">1.4.</span> <span class="toc-text">👀图形界面开发库介绍</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#qt-designer%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="toc-number">2.</span> <span class="toc-text">⛄Qt Designer的使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#qt-designer%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8"><span class="toc-number">2.1.</span> <span class="toc-text">👀Qt Designer快速入门</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%83%E5%B1%80%E7%AE%A1%E7%90%86%E5%85%A5%E9%97%A8"><span class="toc-number">2.2.</span> <span class="toc-text">👀布局管理入门</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BF%A1%E5%8F%B7%E5%92%8C%E6%A7%BD%E5%85%B3%E8%81%94"><span class="toc-number">2.3.</span> <span class="toc-text">👀信号和槽关联</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%8F%9C%E5%8D%95%E6%A0%8F%E5%92%8C%E5%B7%A5%E5%85%B7%E6%A0%8F"><span class="toc-number">2.4.</span> <span class="toc-text">👀菜单栏和工具栏</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B5%84%E6%BA%90%E6%96%87%E4%BB%B6%E6%89%93%E5%8C%85"><span class="toc-number">2.5.</span> <span class="toc-text">👀资源文件打包</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#pyqt5%E5%9F%BA%E6%9C%AC%E7%AA%97%E5%8F%A3%E6%8E%A7%E4%BB%B6"><span class="toc-number">3.</span> <span class="toc-text">⛄PyQt5基本窗口控件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E7%AA%97%E5%8F%A3%E7%B1%BB"><span class="toc-number">3.1.</span> <span class="toc-text">👀创建窗口类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#qwidget"><span class="toc-number">3.2.</span> <span class="toc-text">👀QWidget</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#qlabel"><span class="toc-number">3.3.</span> <span class="toc-text">👀QLabel</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%87%E6%9C%AC%E6%A1%86%E7%B1%BB%E6%8E%A7%E4%BB%B6"><span class="toc-number">3.4.</span> <span class="toc-text">👀文本框类控件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8C%89%E9%92%AE%E7%B1%BB%E6%8E%A7%E4%BB%B6"><span class="toc-number">3.5.</span> <span class="toc-text">👀按钮类控件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#qcombobox%E4%B8%8B%E6%8B%89%E5%88%97%E8%A1%A8%E6%A1%86"><span class="toc-number">3.6.</span> <span class="toc-text">👀QComboBox(下拉列表框)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#qspinbox%E8%AE%A1%E6%95%B0%E5%99%A8"><span class="toc-number">3.7.</span> <span class="toc-text">👀QSpinBox(计数器)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#qslider%E6%BB%91%E5%8A%A8%E6%9D%A1"><span class="toc-number">3.8.</span> <span class="toc-text">👀QSlider(滑动条)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%B9%E8%AF%9D%E6%A1%86%E7%B1%BB%E6%8E%A7%E4%BB%B6"><span class="toc-number">3.9.</span> <span class="toc-text">👀对话框类控件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AA%97%E5%8F%A3%E7%BB%98%E5%9B%BE%E7%B1%BB%E6%8E%A7%E4%BB%B6"><span class="toc-number">3.10.</span> <span class="toc-text">👀窗口绘图类控件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8B%96%E6%9B%B3%E4%B8%8E%E5%89%AA%E8%B4%B4%E6%9D%BF"><span class="toc-number">3.11.</span> <span class="toc-text">👀拖曳与剪贴板</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%A5%E5%8E%86%E4%B8%8E%E6%97%B6%E9%97%B4"><span class="toc-number">3.12.</span> <span class="toc-text">👀日历与时间</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%8F%9C%E5%8D%95%E6%A0%8F%E5%B7%A5%E5%85%B7%E6%A0%8F%E4%B8%8E%E7%8A%B6%E6%80%81%E6%A0%8F"><span class="toc-number">3.13.</span> <span class="toc-text">👀菜单栏、工具栏与状态栏</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#qprinter"><span class="toc-number">3.14.</span> <span class="toc-text">👀QPrinter</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2024/08/25/Python-GUI-Design/" title="GUI编程之PyQt5入门详解（01）"><img src="/img/loading1.gif" data-original="https://s2.loli.net/2024/08/25/u7qX6PLeFUzxHvV.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="GUI编程之PyQt5入门详解（01）"/></a><div class="content"><a class="title" href="/2024/08/25/Python-GUI-Design/" title="GUI编程之PyQt5入门详解（01）">GUI编程之PyQt5入门详解（01）</a><time datetime="2024-08-25T12:36:36.000Z" title="发表于 2024-08-25 20:36:36">2024-08-25</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/06/10/DL-PyTorch-Basic/" title="Python深度学习之PyTorch基础教程"><img src="/img/loading1.gif" data-original="https://s2.loli.net/2024/06/10/KdBQXSmlCgFOWR1.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Python深度学习之PyTorch基础教程"/></a><div class="content"><a class="title" href="/2024/06/10/DL-PyTorch-Basic/" title="Python深度学习之PyTorch基础教程">Python深度学习之PyTorch基础教程</a><time datetime="2024-06-10T14:00:05.000Z" title="发表于 2024-06-10 22:00:05">2024-06-10</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/01/20/RS-LST-Method/" title="辐射传输基础理论详解与LST反演方法"><img src="/img/loading1.gif" data-original="https://s2.loli.net/2024/05/05/SHmUYgArEMzfLph.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="辐射传输基础理论详解与LST反演方法"/></a><div class="content"><a class="title" href="/2024/01/20/RS-LST-Method/" title="辐射传输基础理论详解与LST反演方法">辐射传输基础理论详解与LST反演方法</a><time datetime="2024-01-20T14:16:05.000Z" title="发表于 2024-01-20 22:16:05">2024-01-20</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/11/28/Files-ReadWrite/" title="Python/Matlab/IDL之文件读写操作【CSV/Excel/JSON/XML/TXT】"><img src="/img/loading1.gif" data-original="https://s2.loli.net/2024/01/17/5fyvO89JhpKPiz4.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Python/Matlab/IDL之文件读写操作【CSV/Excel/JSON/XML/TXT】"/></a><div class="content"><a class="title" href="/2023/11/28/Files-ReadWrite/" title="Python/Matlab/IDL之文件读写操作【CSV/Excel/JSON/XML/TXT】">Python/Matlab/IDL之文件读写操作【CSV/Excel/JSON/XML/TXT】</a><time datetime="2023-11-28T12:45:55.000Z" title="发表于 2023-11-28 20:45:55">2023-11-28</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/10/28/Sentinel-Download/" title="哨兵系列数据下载地址及流程更新【202310】"><img src="/img/loading1.gif" data-original="https://s2.loli.net/2023/10/28/Ure9cF4EkpH8QZJ.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="哨兵系列数据下载地址及流程更新【202310】"/></a><div class="content"><a class="title" href="/2023/10/28/Sentinel-Download/" title="哨兵系列数据下载地址及流程更新【202310】">哨兵系列数据下载地址及流程更新【202310】</a><time datetime="2023-10-28T03:45:20.000Z" title="发表于 2023-10-28 11:45:20">2023-10-28</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2021 - 2024 By Xiaotangsmiles</div><div class="framework-info"><span>地址 </span><a href="https://heartlovelife.github.io">HeartLoveLife</a><span class="footer-separator">|</span><span>邮箱 </span><a href="javascript:void(0);">xiaotangsmiles@163.com</a></div><div class="footer_custom_text">Hi, welcome to my <a href="https://heartlovelife.github.io/">blog</a>!</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script src="/js/search/local-search.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',preloader.endLoading())</script><div class="js-pjax"></div><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-nest.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = false;
+POWERMODE.mobile = true;
+document.body.addEventListener('input', POWERMODE);
+</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div>
+        <style>
+            [bg-lazy] {
+                background-image: none !important;
+                background-color: #eee !important;
+            }
+        </style>
+        <script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(r){r.imageLazyLoadSetting.processImages=t;var e=r.imageLazyLoadSetting.isSPA,n=r.imageLazyLoadSetting.preloadRatio||1,c=a();function a(){var t=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")),e=Array.prototype.slice.call(document.querySelectorAll("[bg-lazy]"));return t.concat(e)}function t(){e&&(c=a());for(var t,o=0;o<c.length;o++)0<=(t=(t=c[o]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(r.innerHeight*n||document.documentElement.clientHeight*n)&&function(){var t,e,n,a,i=c[o];e=function(){c=c.filter(function(t){return i!==t}),r.imageLazyLoadSetting.onImageLoaded&&r.imageLazyLoadSetting.onImageLoaded(i)},(t=i).hasAttribute("bg-lazy")?(t.removeAttribute("bg-lazy"),e&&e()):(n=new Image,a=t.getAttribute("data-original"),n.onload=function(){t.src=a,t.removeAttribute("data-original"),e&&e()},t.src!==a&&(n.src=a))}()}function i(){clearTimeout(t.tId),t.tId=setTimeout(t,500)}t(),document.addEventListener("scroll",i),r.addEventListener("resize",i),r.addEventListener("orientationchange",i)}(this);</script></body></html>
