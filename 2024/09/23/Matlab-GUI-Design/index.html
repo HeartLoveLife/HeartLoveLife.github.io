@@ -1,0 +1,1246 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>GUI编程之MATLAB入门详解（01） | 江湖是你画中亦是你</title><meta name="keywords" content="GUI"><meta name="author" content="Xiaotangsmiles"><meta name="copyright" content="Xiaotangsmiles"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="⛄前言 图形用户界面的设计是MATLAB的核心应用之一。当用户与计算机之间或用户与计算机程序之间进行交互操作时，舒服高效的用户接口功能则会对用户产生极大的吸引力。图形用户界面（GUI）则通过窗口、图标、按钮、菜单、文本等图形对象构成用户界面。 MATLAB为用户构建应用程序提供了两个平台——GUIDE和App Designer。 GUIDE是一个较老的平台，MATLAB用户已经使用了很多年。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="GUI编程之MATLAB入门详解（01）">
+<meta property="og:url" content="https://heartlovelife.github.io/2024/09/23/Matlab-GUI-Design/index.html">
+<meta property="og:site_name" content="江湖是你画中亦是你">
+<meta property="og:description" content="⛄前言 图形用户界面的设计是MATLAB的核心应用之一。当用户与计算机之间或用户与计算机程序之间进行交互操作时，舒服高效的用户接口功能则会对用户产生极大的吸引力。图形用户界面（GUI）则通过窗口、图标、按钮、菜单、文本等图形对象构成用户界面。 MATLAB为用户构建应用程序提供了两个平台——GUIDE和App Designer。 GUIDE是一个较老的平台，MATLAB用户已经使用了很多年。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s2.loli.net/2024/08/25/u7qX6PLeFUzxHvV.jpg">
+<meta property="article:published_time" content="2024-09-23T14:22:08.000Z">
+<meta property="article:modified_time" content="2024-09-23T14:44:41.724Z">
+<meta property="article:author" content="Xiaotangsmiles">
+<meta property="article:tag" content="GUI">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s2.loli.net/2024/08/25/u7qX6PLeFUzxHvV.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://heartlovelife.github.io/2024/09/23/Matlab-GUI-Design/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":250},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#1f1f1f","position":"bottom-left"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'GUI编程之MATLAB入门详解（01）',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-09-23 22:44:41'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const now = new Date()
+          const hour = now.getHours()
+          const isNight = hour <= 6 || hour >= 18
+          if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+          else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/loading1.gif" data-original="/img/touxiang.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">25</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">25</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">9</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><span> 主页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><span> 博文</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 生活</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/photos/"><span> 相册</span></a></li><li><a class="site-page child" href="/music/"><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><span> 影视</span></a></li><li><a class="site-page child" href="/shuoshuo/"><span> 分享</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/comment/"><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><span> 关于笔者</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://s2.loli.net/2024/08/25/u7qX6PLeFUzxHvV.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">江湖是你画中亦是你</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><span> 主页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><span> 博文</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 生活</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/photos/"><span> 相册</span></a></li><li><a class="site-page child" href="/music/"><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><span> 影视</span></a></li><li><a class="site-page child" href="/shuoshuo/"><span> 分享</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/comment/"><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><span> 关于笔者</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">GUI编程之MATLAB入门详解（01）</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-09-23T14:22:08.000Z" title="发表于 2024-09-23 22:22:08">2024-09-23</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-09-23T14:44:41.724Z" title="更新于 2024-09-23 22:44:41">2024-09-23</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Matlab/">Matlab</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">12.6k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>39分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="GUI编程之MATLAB入门详解（01）"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="前言">⛄前言</h2>
+<p>图形用户界面的设计是MATLAB的核心应用之一。当用户与计算机之间或用户与计算机程序之间进行交互操作时，舒服高效的用户接口功能则会对用户产生极大的吸引力。图形用户界面（GUI）则通过窗口、图标、按钮、菜单、文本等图形对象构成用户界面。</p>
+<p>MATLAB为用户构建应用程序提供了两个平台——<strong>GUIDE</strong>和<strong>App Designer</strong>。</p>
+<p><strong>GUIDE</strong>是一个较老的平台，MATLAB用户已经使用了很多年。尽管用户已经能够使用GUIDE构建不同复杂程度的应用程序，但是它一直存在用户希望解决的工作流程和可用性问题。类似地，它所支持的组件集（主要是uicontrol集）也非常有限，并且基于一些遗留的技术。</p>
+<p><strong>App Designer</strong>作为新的应用程序构建平台，在R2016a中引入。它集成了构建应用程序的两个任务——设置视觉组件和编程行为。它具有一个新的设计画布，更容易添加组件，并使用标签和面板进行有效组织。它包括一个内置的编辑器，用于管理只读部分中组件的生成代码，并为用户编写的回调代码提供可编辑的部分。它还支持一系列新的标准组件，如编辑字段、按钮和旋转器，以及用于创建仪表面板的仪表盘、旋钮、开关和灯。</p>
+<p><strong>GUIDE</strong>和<strong>App Designer</strong>之间的主要区别在于所使用的技术。GUIDE的基础是Java Swing，甲骨文已经不再对其投入开发。虽然该平台可以获得一些短期的胜利，但从长远来看，不会得到新的扩展，也不允许我们为用户提供基于网络的工作流。AppDesigner建立在现代的基于web技术上，比如JavaScript、HTML和CSS，它给我们提供了一个平台，可以灵活地跟上用户的需求，并允许应用程序在web上运行。用户可以保持他们现有的基于Java的应用程序运行，并在合适的时候选择新的平台。</p>
+<blockquote>
+<p>Swing 是一个为Java设计的GUI工具包。</p>
+<p>Swing是JAVA基础类的一部分。</p>
+<p>Swing包括了图形用户界面（GUI）器件如：文本框，按钮，分隔窗格和表。</p>
+</blockquote>
+<p><strong><em>本博客以GUIDE的相关教程为例子进行阐述，App Designer相关教程待后续更新。</em></strong></p>
+<h2 id="matlab图形用户界面">⛄Matlab图形用户界面</h2>
+<p>句柄图形（Handle Graphics）系统是MATLAB中一种面向对象的绘图系统，该系统提供创建计算机图形所必需的各种功能，包括创建线、文字、网格、面及<strong>图形用户界面</strong>等。图形用户对象包括了众多的GUI对象，其中基本的图形用户界面对象分为3类：</p>
+<ul>
+<li><p>用户界面控件对象（<code>uicontrol</code>）</p></li>
+<li><p>下拉式菜单对象（<code>uimenu</code>）</p></li>
+<li><p>内容式菜单对象（<code>uicontextmenu</code>）</p></li>
+</ul>
+<p>在图形用户对象中，包括多个图形用户对象及多个图形用户接口容器对象，这些容器对象可以成为图形用户对象或其他容器的接口容器。利用上述对象进行周密的组织、设计，就可以设计出一个界面良好、操作方便、功能强大的图形用户界面。 GUI图形对象之间的层次树表如下图所示：</p>
+<p><a target="_blank" rel="noopener" href="https://imgse.com/i/pAMGBV0"><img src="/img/loading1.gif" data-original="https://s21.ax1x.com/2024/09/21/pAMGBV0.jpg" alt="pAMGBV0.jpg" /></a></p>
+<h2 id="图形用户界面控件">⛄图形用户界面控件</h2>
+<p>在绝大多数的图形用户界面下，都包含控件。控件是图形对象，它与菜单一起用于创建图形用户界面。通过使用各种类型的控件，可以建立操作简便、功能强大的图形用户界面。MATLAB R2018a的控件对象如下表所示：</p>
+<table>
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 80%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">控件对象类型</th>
+<th style="text-align: left;">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Push Button</td>
+<td style="text-align: left;">按钮：在按钮上通常显示文本标签。当用户在按钮上单击时，可以使系统MATLAB R2018a的回调函数执行某个操作，但不能用于属性或状态的选择。按钮按下后，可以恢复到原来的弹起状态。</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">slider</td>
+<td style="text-align: left;">滑动框：和其他编程语言中的滑动条一样，由滑杆、指示器等部分对象组成。滑动框通常用于从一个数据范围中选择一个数据值。滑动框通常和其他的文本对象一起使用，用来表示滑动框的标题、当前值及滑动框的范围等。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Radio Button</td>
+<td style="text-align: left;">单选按钮：通常通过一个文本标签和一个圆圈或菱形构成组件，当选中时，该圆圈或菱形会处于填充状态；而取消选中时，圆圈和菱形则会恢复到无填充状态。单选按钮选择时，通常只能从一组选择对象中选择单个对象。</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Check Box</td>
+<td style="text-align: left;">复选框：每个复选框对象由复选项和相应的标签对象构成。当复选项选择激活后，复选框中会出现“×”；取消复选后，则会消失。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Edit Text</td>
+<td style="text-align: left;">文本编辑框：用户可以动态地修改或替换文本框中的内容。对于文本框对象，用户可以在属性中设置单行或多行文本输入属性。如果设置为单行文本输入，用户只能输入一行文本，按Enter键后表明输入结束；如果设置为多行文本输入，用户可以输入多行文本，换行时需按Ctrl+Enter组合键。</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Static Text</td>
+<td style="text-align: left;">静态文本：用于显示文本字符串，通常用于显示标题、标签、用户信息和当前值。此时，用户不能对显示的文本进行修改和编辑。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Pop-up Menu</td>
+<td style="text-align: left;">弹出式菜单：用户可以从弹出式菜单的多个选项中选择一个选项。当关闭菜单选项时，将会成为一个包含用户选择项的矩形或按钮，位于一定的矩形区域内。有些菜单项中还有其他子菜单选项，同样的方式可以用鼠标完成选择过程。</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Listbox</td>
+<td style="text-align: left;">列表框：产生的文本条目可以用于选择，但不能进行编辑。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Toggle Button</td>
+<td style="text-align: left;">开关按钮：创建切换。和普通按钮不同，开关按钮通常会交替呈现两种不同的状态（弹起或按下）。而普通按钮将会在按下后立即弹起。开关按钮和普通按钮一样，每次单击都会产生相应的操作。</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Table</td>
+<td style="text-align: left;">表格按钮：创建表格组件。具体使用可参见uitable函数。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Axes</td>
+<td style="text-align: left;">坐标系：用于在GUI中添加图形或图像。</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Panel</td>
+<td style="text-align: left;">面板：用于将GUI中的控件分组管理和显示。使用面板将相关控件分组显示可以使软件更易于理解。面板可以包含各种控件，包括按钮、坐标系及其他面板等。面板包含标题和边框等用户显示面板的属性和边界。面板中的控件与面板之间的位置为相对位置，当移动面板时，这些控件在面板中的位置不改变。</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Button Group</td>
+<td style="text-align: left;">按钮组：按钮组类似于面板，但是按钮组的控件只包括单选按钮或者开关按钮。按钮中的所有控件，其控制代码必须写在按钮组的SelectionChangeFcn响应函数中，而不是用户接口控制响应函数中。按钮组会忽略其中控件的原有属性。</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">ActiveX Control</td>
+<td style="text-align: left;">ActiveX控件：用于在GUI中显示控件。该功能只有在Windows操作系统下可用。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="图形用户界面控件的创建">👀图形用户界面控件的创建</h3>
+<p>MATLAB R2018a提供了命令行和GUI设计工具两种方式来创建图形用户界面控件。</p>
+<p><strong>（1）命令行方式</strong></p>
+<p>在命令行方式下，可以通过函数uicontrol来建立控件对象。ucontrol函数有如下几种调用格式：</p>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">Handle = uicontrol(parent)</span><br><span class="line">Handle = uicontrol(..., <span class="string">&#x27;PropertyName&#x27;</span>, PropertyValue, ...)。</span><br></pre></td></tr></table></figure>
+<p>其中，Handle是创建的控件对象的句柄值；parent是控件所在的图形窗口的句柄值；PropertyName是空间的某个属性的属性名；PropertyValue 是与属性名相对应的属性值。第一种调用方式，采用uicontrol的Style属性的默认属性值，在图形窗口的左下角创建一个命令按钮。第二种调用方式，省略控件所在图形窗口的句柄值，表示在当前图形窗口创建控件对象。如果此时无图形窗口，MATLAB会自动创建一个图形窗口，然后在其中创建控件对象。</p>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line"><span class="comment">% 创建一个命令按钮，其位置在[0.5 0.5 0.2 0.1]，单位是 normalized。当单击该命令按钮时，按钮的位置会随机变动。</span></span><br><span class="line">&gt;&gt;h = uicontrol(<span class="string">&#x27;style&#x27;</span>, <span class="string">&#x27;pushbutton&#x27;</span>, <span class="string">&#x27;Units&#x27;</span>, <span class="string">&#x27;normalized&#x27;</span>, <span class="string">&#x27;Position&#x27;</span>, [<span class="number">.5</span> <span class="number">.5</span> <span class="number">.2</span> <span class="number">.1</span>], <span class="string">&#x27;String&#x27;</span>, <span class="string">&#x27;单击此处&#x27;</span>, <span class="string">&#x27;Callback&#x27;</span>, <span class="string">&#x27;set(h,&#x27;&#x27;Position&#x27;&#x27;, [.8*rand .9*rand .2 .1])&#x27;</span>); </span><br></pre></td></tr></table></figure>
+<p><strong>（2）GUI设计工具</strong></p>
+<p>在命令行方式下创建控件对象时，需要记住用于创建控件对象的函数。而且要设置控件的属性，必须记住控件的大量属性的属性名，这对于修改控件的属性非常不便。在MATLAB R2018a中利用GUI设计工具中的对象设计编辑器(Layout Editor)，可以很容易地创建MATLAB支持的各种控件，而且通过对象属性检查器(Property Inspector)可以方便地修改、设置创建的控件的属性值。利用GUIDE创建GUI的流程包括：</p>
+<ul>
+<li><p>在命令行中输入<code>guide</code>打开<code>GUIDE</code>；</p></li>
+<li><p>在弹出"GUIDE快速入门"窗口中，选择新建GUI（如果要修改已经做好的GUI界面，选择打开现有GUI），将保存路径前面的勾打上，然后点击浏览，选择想要保存的路径以及修改文件名，最后点击确定即可；</p>
+<blockquote>
+<p>MATLAB为GUI设计提供了4种模板，分别是：Blank GUI（空白模板，默认）、GUI with Uicontrols（带控件对象的GUI模板）、GUI with Axes and Menu（带坐标轴和菜单的GUI模板）、Modal Question Dialog（带模式问题对话框的GUI模板），可以根据需要选择创建。</p>
+</blockquote></li>
+<li><p>弹出"GUI设计窗口"，同时会生成两个相同文件名的文件，后缀分别为"<code>.fig</code>"和"<code>.m</code>"；</p></li>
+<li><p>在"GUI设计窗口"中，左半部分为设计工具区，提供了设计GUI过程中所用的用户控件；中间网格形式是用户设计GUI的操作区域；</p>
+<blockquote>
+<p>GUI设计窗口中，选择"文件"——"预设"，在弹出的"预设项"设置对话框中选择"在组件选项板中显示名称"，点击"确认"，则GUIDE界面中的交互控件面板将会显示各控件的名称。</p>
+</blockquote></li>
+<li><p>在"GUI设计窗口"创建控件对象后，可以通过<strong>双击</strong>该控件对象来显示该对象的属性编辑器；</p></li>
+<li><p>编辑GUI对应的ｍ文件，右击某个控件对象，选择查看回调，再选择callback；进入ｍ文件的编辑界面，找到对应控件对象的callback函数，对其进行编辑；</p></li>
+<li><p>在"GUI设计窗口"的<code>.fig</code>中，点击运行，即可执行新建的GUI界面。</p></li>
+</ul>
+<h3 id="鼠标动作执行">👀鼠标动作执行</h3>
+<p>在GUI方式下的应用程序最主要的输入设备就是鼠标，利用鼠标做出判断和交互动作。事实上，如今任何图形界面应用程序与操作系统都提供了对鼠标操作的支持。MATLAB也提供了对图形用户界面下应用程序鼠标操作的支持。</p>
+<p>在MATLAB中，所有句柄图形对象都拥有一个ButtonDownFcn属性，大部分UI对象也都拥有Callback属性，对于uicontrol对象还拥有KeyPressFcn属性。图形对象则拥有如WindowButtonDownFcn、 WindowButtonUpFcn、 WindowButtonMotionFcn、KeyPressFcn、CloseRequestFcn及ResizeFcn属性。此外，所有的图形对象还拥有CreateFcn和DeleteFcn属性。这些属性值都是一个回调字符串，当这些属性激活时，鼠标光标的位置将会决定事件发生时的回调和执行函数。鼠标光标位于不同的对象时，所能触发该对象的回调函数及响应结果如下表：</p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>鼠标光标位置及其它条件</th>
+<th>响应事件</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>鼠标光标位于uimenu菜单项上，菜单项的Enable属性设置为on</td>
+<td>改变uimenu对象的外观并为鼠标释放事件做好准备</td>
+</tr>
+<tr class="even">
+<td>鼠标光标位于uicontrol对象上，且该对象的Enable属性设置为on</td>
+<td>改变uicontrol对象的外观并为鼠标释放事件做好准备</td>
+</tr>
+<tr class="odd">
+<td>鼠标光标位于uimenu菜单项上，菜单项的Enable属性设置为off</td>
+<td>忽略鼠标键按下事件</td>
+</tr>
+<tr class="even">
+<td>鼠标光标位于uicontrol对象上，该对象的Enable属性设置为off或inactive</td>
+<td>首先执行WindowButtonDownFcn回调函数，然后执行uicontrol对象的ButtonDownFcn回调代码</td>
+</tr>
+<tr class="odd">
+<td>鼠标光标位于除uimenu和uicontrol对象之外的其他图形对象上或附近</td>
+<td>首先执行图形对象WindowButtonDownFcn回调函数代码，然后执行鼠标所指对象的ButtonDownFcn回调函数代码</td>
+</tr>
+<tr class="even">
+<td>鼠标光标位于图形对象的内部，但不在其他对象上或附近</td>
+<td>首先执行图形对象WindowButtonDocn回调函数代码，然后执行该对象的ButtonDownFcn回调函数代码</td>
+</tr>
+</tbody>
+</table>
+<p>在选择执行回调函数时，MATLAB R2018a通常会根据图形中的区域来决定回调函数的执行和选择。</p>
+<ul>
+<li>在选择时，通常根据3个区域来进行选择；</li>
+<li>当鼠标光标位于句柄图形对象的Position属性确定的范围内时，即可认为鼠标光标位于该对象上；</li>
+<li>如果鼠标光标没有位于对象之上，但位于对象的有效选择区域之内，那么可以认为鼠标光标位于该对象附近；</li>
+<li>如果鼠标光标既不在一个对象上，也不在一个对象附近，那么鼠标光标远离该对象；</li>
+<li>当对象或选择区域出现重叠时，通常会利用对象的叠放次序来确定哪一个对象被鼠标选中。</li>
+</ul>
+<p>如果在鼠标光标附近的uimenu、uicontextmenu、uicontrol对象的Enable属性被设置为on，那么鼠标单击过程将会触发对象的Callback属性字符串的执行。</p>
+<p>当按下鼠标时，uicontrol对象将会做好被触发的准备，通常会改变uicontrol对象或uimenu的外观，释放鼠标，则会触发相应的回调函数执行过程。如果鼠标光标不在一个uicontrol对象或uimenu对象上，那么将会按照鼠标按下和鼠标释放过程来执行。</p>
+<p>当鼠标释放时，系统将会产生一个鼠标释放事件。当该事件发生时，图形对象的CurrentPoint属性首先更新，同时图形对象的WindowButtonUpFcn回调函数代码被触发执行。</p>
+<p>如果鼠标光标在图形对象的内部移动，将会产生鼠标光标的移动事件。当该事件发生时，图形的CurrentPoint属性将会被更新，同时图形的WindowButtonMotionFcn回调函数将会被触发执行。</p>
+<h3 id="事件队列的执行顺序">👀事件队列的执行顺序</h3>
+<p>创建图形用户界面后，用户可以通过任意方式与该图形用户界面产生交互操作。在进行交互操作的过程中，每次交互都会产生一个事件，这些事件将会形成一系列的事件序列。同时，图形窗口的输入和输出事件也将会作为图形用户界面对象的事件被列入事件队列中。列入事件队列中的事件包括鼠标光标的移动和触发回调执行的鼠标按键按下或释放操作，以及waitforbuttonpress、waitfor、drawnow、figure、getframe、pause等事件，这些事件在需要处理的事件队列中会按照顺序依次执行和操作。一般情况，终止回调函数代码的执行过程是不允许的，但在优先级较高的命令如waitforbuttonpress、waitfor、drawnow、getframe、pause或figure等执行时，系统将会把执行过程中的回调函数代码挂起，并检测事件队列中未完成的每个事件。</p>
+<p>如果将回调函数相应对象的Interruptible属性设置为on，那么在系统处理完所有未完成事件后，将会恢复被挂起的回调过程，并执行完毕。如果将该属性设置为off，那么系统将会只处理没有完成的屏幕刷新事件。</p>
+<p>如果对象的BusyAction属性设置为cancel，那么中断回调执行的事件将会被忽略。如果将该属性设置为queue，那么中断回调执行的事件将会被保存在队列中，直到被中断的回调函数执行完毕后再响应该事件。</p>
+<h3 id="回调函数的编写">👀回调函数的编写</h3>
+<p>在图形用户界面编写的过程中，使用句柄图形和图形用户界面函数可以充分利用回调函数的代码编写来扩展用户选择的任务执行过程。在执行回调函数的过程中，可以将回调函数设置为回调函数字符串，然后将这些回调字符串传递给eval函数来完成执行过程。</p>
+<p>当图形用户对象运行执行回调函数代码时，将会根据该函数来进行函数代码的回调执行过程。如果有多个回调函数需要执行，则可以把这些回调过程编写为switch切换结构来完成回调执行过程。但通过这种方法来编写回调函数代码时，数据的获取和传递将是需要解决的一个重要问题。如可以使用persistent声明来限定数据。通过persistent函数进行限定时，工作区中所存储的该数据将会在函数执行过程中被使用。但如果有多个图形用户界面对象存在，那么多个图形用户界面对象将共享该persistent数据。</p>
+<p>传递数据也可通过句柄图形对象的tag属性来进行。由于句柄图形对象的tag属性是句柄图形对象的唯一标识字符串，用户可以使用findobj函数来寻找指定tag字符串的图形用户对象。当找到该对象后，可以通过getappdata、setappdata、rmappdata和isappdata函数来对所得到的对象数据进行处理。</p>
+<table>
+<thead>
+<tr class="header">
+<th>数据函数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Value=getappdata(h, name)</td>
+<td>获得应用程序中定义的数值</td>
+</tr>
+<tr class="even">
+<td>setappdata(h, name, value)</td>
+<td>设置应用程序中的数值</td>
+</tr>
+<tr class="odd">
+<td>rmappdata(h, name)</td>
+<td>删除应用程序中的数值</td>
+</tr>
+<tr class="even">
+<td>isappdata(h, name)</td>
+<td>判断是否为句柄函数值</td>
+</tr>
+</tbody>
+</table>
+<h2 id="对话框对象">⛄对话框对象</h2>
+<p>在GUI程序设计中，对话框是最重要的显示信息和取得用户数据的用户界面对象。对话框一般包含一个或多个按钮以供用户输入或者弹出显示的信息，由用户决定要采取的措施。在绝大部分的程序设计软件中，如Visual Basic、Delphi、Visual C++，都可以方便地进行对话框设计。MATLAB也提供了一些进行对话框设计的有用函数。使用对话框，可以使图形用户界面更加友好，易于为用户理解。总的来说，MATLAB R2018a中的对话框分为两大类，第一类是公共对话框，第二类是一般对话框。</p>
+<h3 id="公共对话框">👀公共对话框</h3>
+<p>常用的公共对话框函数如下表所示：</p>
+<table>
+<thead>
+<tr class="header">
+<th>对话框函数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>uigetfile</td>
+<td>标准的打开对话框</td>
+</tr>
+<tr class="even">
+<td>uiputfile</td>
+<td>保存文件对话框</td>
+</tr>
+<tr class="odd">
+<td>uisetfont</td>
+<td>生成字体和字体属性选择对话框</td>
+</tr>
+<tr class="even">
+<td>uisetcolor</td>
+<td>颜色设置对话框</td>
+</tr>
+<tr class="odd">
+<td>pagesetupdlg</td>
+<td>页面设置对话框</td>
+</tr>
+<tr class="even">
+<td>printpreview</td>
+<td>打印预览对话框</td>
+</tr>
+<tr class="odd">
+<td>printdlg</td>
+<td>打印对话框</td>
+</tr>
+</tbody>
+</table>
+<p><strong>（1）文件打开对话框</strong></p>
+<p>文件打开对话框用于打开某个文件。在Windows系统中，几乎所有应用软件都提供文件打开对话框。在MATLAB中，调用文件打开对话框的函数为uigetfile。该函数的调用格式如下表所示：</p>
+<table>
+<colgroup>
+<col style="width: 42%" />
+<col style="width: 57%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>格式</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>uigetfile</td>
+<td>在显示的文件打开对话框中，列出当前目录下MATLAB能识别的所有文件</td>
+</tr>
+<tr class="even">
+<td>uigetfile('FilterSpec')</td>
+<td>在显示的文件打开对话框中，列出当前目录下由参数FilterSpec指定的类型文件。参数FilterSpec是一个文件类型过滤字符串，用于指定要显示的文件类型。例如，'*.m'显示当前目录下MATLAB中的所有M文件</td>
+</tr>
+<tr class="odd">
+<td>uigetfile('FilterSpec', 'DialogTitle')</td>
+<td>与第二种调用格式基本相同，只是该调用格式设定了文件打开对话框的标题名，默认标题为字符串Select file to open</td>
+</tr>
+<tr class="even">
+<td>uigetfile('FilterSpec', 'DialogTitle', x, y)</td>
+<td>与第三种调用格式基本相同，只是该调用格式还指定了对话框显示时的位置。显示位置由参数x与y决定。x、y是从屏幕左上角算起的水平与垂直距离。距离单位是像素</td>
+</tr>
+<tr class="odd">
+<td>[fname,pname]=uigetfile(…)</td>
+<td>返回打开文件的文件名与路径。其中，输入参数fname存放的是打开的文件名，pname包含文件的路径</td>
+</tr>
+</tbody>
+</table>
+<p><strong>（2）文件保存对话框</strong></p>
+<p>文件保存对话框用于保存某个文件。在MATLAB中，调用文件保存对话框的函数为uiputfile。该函数的调用格式如下表所示：</p>
+<table>
+<colgroup>
+<col style="width: 41%" />
+<col style="width: 58%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>格式</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>uiputfile</td>
+<td>显示用于保存文件的对话框，列出当前目录下MATLAB能识别的所有文件</td>
+</tr>
+<tr class="even">
+<td>uiputfile('InitFile')</td>
+<td>在显示的文件保存对话框中，列出当前目录下由参数InitFile指定的类型文件。参数InitFile是一个文件类型过滤字符串，用于指定要保存的文件类型。例如，'*.m'显示当前目录下 MATLAB 中的所有 M 文件</td>
+</tr>
+<tr class="odd">
+<td>uiputfile('InitFile', 'DialogTitle')</td>
+<td>与第二种调用格式基本相同，只是该调用格式设定了文件保存对话框的标题名，默认标题为字符串 Select file to write</td>
+</tr>
+<tr class="even">
+<td>uiputfile('InitFile', 'DialogTitle', x, y)</td>
+<td>与第三种调用格式基本相同，只是该调用格式还指定了对话框显示时的位置。显示位置由参数x与y决定。x、y是从屏幕左上角算起的水平与垂直距离。距离单位是像素</td>
+</tr>
+<tr class="odd">
+<td>[fname,pname]=uiputfile(…)</td>
+<td>返回保存的文件的文件名与路径。其中，输入参数fname存放的是保存的文件名，pname 包含文件的路径</td>
+</tr>
+</tbody>
+</table>
+<p><strong>（3）颜色设置对话框</strong></p>
+<p>颜色设置对话框可用于交互式设置某个图形对象的前景色或背景色。在绝大部分的程序设计软件中，都提供了这个公共对话框。在MATLAB中，调用颜色设置对话框的函数为uisetcolor。该函数的调用格式如下表所示：</p>
+<table>
+<colgroup>
+<col style="width: 36%" />
+<col style="width: 63%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>格式</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>c=uisetcolor(h_or_c, 'DialogTitle')</td>
+<td>输入参数中的h_or_c可以是一个图形对象的句柄，也可以是一个三色RGB向量。若是图形对象的句柄，那么该图形对象必须有一个颜色属性；若是三色RGB向量，那么输入的必须是一个有效的RGB向量，此时输入的颜色初始化颜色对话框。对于输入的参数是图形对象句柄，颜色对话框被初始化为黑色。输入参数中的DialogTitle字符串用于标明颜色对话框的标题名。输出参数c返回用户选择的RGB向量值</td>
+</tr>
+</tbody>
+</table>
+<p><strong>（4）字体设置对话框</strong></p>
+<p>字体设置对话框可用于交互式修改文本字符串、坐标轴或控件对象的字体属性。修改的字体属性包括FontName、FontUnits、FontSize、FontWeight、FontAngle等。在MATLAB中，调用字体设置对话框的函数为 uisetfont。该函数的调用格式如下表所示：</p>
+<table>
+<colgroup>
+<col style="width: 31%" />
+<col style="width: 68%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>格式</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>uisetfont</td>
+<td>显示用于进行字体设置的对话框，对话框中列出了字体、字形、字体大小等字段。返回的是选择的字体的属性值</td>
+</tr>
+<tr class="even">
+<td>uisetfont('DialogTitle')</td>
+<td>与第一种调用格式基本相同，只是该调用格式设定了字体设置对话框的标题名，默认标题为字符串Font</td>
+</tr>
+<tr class="odd">
+<td>uisetfont(h)</td>
+<td>输入参数h是一个对象句柄。该调用格式用对象句柄中的字体属性值初始化字体设置对话框中的属性值，用户可以利用字体设置对话框重新设置对象的字体属性值。返回重新设置后的字体的属性值</td>
+</tr>
+<tr class="even">
+<td>uisetfont(h, 'DialogTitle')</td>
+<td>与第三种即uisetfont(h)的调用格式基本相同，只是该调用格式还设定了字体设置对话框的标题名，默认标题为字符串Font</td>
+</tr>
+<tr class="odd">
+<td>uisetfont(S)</td>
+<td>输入参数S是一个字体属性结构，是一个或多个下列属性的合法值：FontName、FontUnits、FontSize、FontWeight、FontAngle，否则输入值会被忽略。该调用格式用字体属性结构S中的成员值来初始化字体设置对话框中的属性值。用户可以利用字体设置对话框重新设置对象的字体属性值。返回重新设置后的字体的属性值</td>
+</tr>
+<tr class="even">
+<td>uisetfont(S, 'DialogTitle')</td>
+<td>与第五种即uisetfont(S)的调用格式基本相同，只是该调用格式还设定了字体设置对话框的标题名，默认标题为字符串Font</td>
+</tr>
+<tr class="odd">
+<td>S = uisetfont(…)</td>
+<td>返回字体属性（FontName、FontUnits、FontSize、FontWeight、FontAngle）的属性值，被保存在结构S中</td>
+</tr>
+</tbody>
+</table>
+<p><strong>（5）打印页面设置对话框</strong></p>
+<p>打印页面设置对话框可用于对打印输出时的页面进行设置。在许多应用软件中，都提供了进行打印页面设置的对话框。在MATLAB中，调用打印页面设置对话框的函数为pagesetupdlg。该函数的调用格式如下表所示：</p>
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 74%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>格式</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>dlg=pagesetupdlg(fig)</td>
+<td>用默认的页面设置属性为图形窗口创建一个打印页面设置对话框。输入参数fig必须是单个图形窗口的句柄，而不是一个图形窗口向量。若省略参数fig，那么默认的图形窗口对象是当前窗口对象。输出参数返回已设置了的打印页面属性值</td>
+</tr>
+</tbody>
+</table>
+<p>在MTALAB R2018a中，pagesetupdlg函数被打印预览对话框函数printprview合并。</p>
+<p><strong>（6）打印预览对话框</strong></p>
+<p>打印预览对话框用于对打印输出的页面进行预览。在许多应用软件中，都提供了打印预览的对话框。在MATLAB中，调用打印预览对话框的函数为printpreview。该函数的调用格式如下表所示：</p>
+<table>
+<thead>
+<tr class="header">
+<th>格式</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>printprview</td>
+<td>显示当前图形窗口对象的打印预览对话框</td>
+</tr>
+<tr class="even">
+<td>printprview(fig)</td>
+<td>显示指定的图形窗口对象fig的打印预览对话框</td>
+</tr>
+</tbody>
+</table>
+<p>在打印预览对话框的上面有相应的分组按钮控件，用户可以进行相应的编辑控制操作。</p>
+<p><strong>（7）打印对话框</strong></p>
+<p>打印对话框是专门进行打印的对话框，这是任何图形用户界面的应用软件都会提供的对话框。在MATLAB中，调用打印对话框的函数为printdlg。该函数的调用格式如下表所示：</p>
+<table>
+<colgroup>
+<col style="width: 34%" />
+<col style="width: 65%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>格式</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>printdlg</td>
+<td>显示出标准的Windows打印对话框（在Windows系统中）。它打印当前图形窗口内的图形对象</td>
+</tr>
+<tr class="even">
+<td>printdlg(fig)</td>
+<td>显示出标准的Windows打印对话框（在Windows系统中），但它打印由输入参数fig指定的图形窗口内的对象。输入参数fig是将要打印的图形窗口的句柄</td>
+</tr>
+<tr class="odd">
+<td>printdlg('-crossplatform', fig)</td>
+<td>显示标准的crossplatform模式的MATLAB打印对话框。输入参数fig是将要打印的图形窗口的句柄</td>
+</tr>
+<tr class="even">
+<td>printdlg('-setup', fig)</td>
+<td>显示打印对话框的开始模式。在这里有可以不进行打印而设置的默认选项</td>
+</tr>
+</tbody>
+</table>
+<h3 id="一般对话框">👀一般对话框</h3>
+<p>除了提供大量标准的公共对话框，MATLAB R2018a还提供了大量的一般对话框函数：</p>
+<table>
+<thead>
+<tr class="header">
+<th>对话框函数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>helpdlg</td>
+<td>帮助对话框</td>
+</tr>
+<tr class="even">
+<td>errordlg</td>
+<td>错误消息对话框</td>
+</tr>
+<tr class="odd">
+<td>msgbox</td>
+<td>信息提示对话框</td>
+</tr>
+<tr class="even">
+<td>questdlg</td>
+<td>询问对话框</td>
+</tr>
+<tr class="odd">
+<td>warndlg</td>
+<td>警告消息显示对话框</td>
+</tr>
+<tr class="even">
+<td>inputdlg</td>
+<td>变量输入对话框</td>
+</tr>
+<tr class="odd">
+<td>listdlg</td>
+<td>列表选择对话框</td>
+</tr>
+<tr class="even">
+<td>axlimdlg</td>
+<td>生成坐标轴范围设置对话框</td>
+</tr>
+<tr class="odd">
+<td>dialog</td>
+<td>创建对话框或图形用户对象类型的图形窗口</td>
+</tr>
+<tr class="even">
+<td>menu</td>
+<td>菜单类型的选择对话框</td>
+</tr>
+<tr class="odd">
+<td>waitbar</td>
+<td>显示等待进度条</td>
+</tr>
+</tbody>
+</table>
+<p><strong>（1）帮助对话框</strong></p>
+<p>在操作应用软件时，当用户不知道该如何操作时，帮助信息将会帮助用户进行正确操作，显示帮助信息的对话框就是帮助对话框。MATLAB提供的创建帮助对话框的函数是helpdlg。该函数的调用格式如下表所示：</p>
+<table>
+<colgroup>
+<col style="width: 34%" />
+<col style="width: 65%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>格式</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>helpdlg</td>
+<td>创建一个默认的帮助对话框。默认的对话框名为"Help Dialog"，在对话框内包含一个名为"This is the default help string"的字符串</td>
+</tr>
+<tr class="even">
+<td>helpdlg('helpstring'）</td>
+<td>创建一个帮助对话框。该对话框仍然叫作"Help Dialog"，但对话框内显示的帮助信息由输入参数helpstring决定</td>
+</tr>
+<tr class="odd">
+<td>helpdlg('helpstring', 'dlgname')</td>
+<td>创建一个帮助对话框。该对话框的名称由输入参数dlgname决定，对话框内显示的帮助信息由输入参数helpstring决定</td>
+</tr>
+<tr class="even">
+<td>h = helpdlg(…)</td>
+<td>返回创建的帮助对话框的句柄，句柄存放在输入参数h中，输入参数与前面的调用格式的输入参数相同</td>
+</tr>
+</tbody>
+</table>
+<p>MATLAB会自动设置帮助对话框的宽度，使其能够显示出helpstring字符串的全部帮助信息。</p>
+<p><strong>（2）错误消息对话框</strong></p>
+<p>在开发的应用软件中，当用户进行了错误的操作后，应该显示错误消息对话框，使用户知道错误的原因，以便采取正确的操作。此时，就要用到错误消息对话框。MATLAB提供的创建错误消息对话框的函数是errordlg，该函数的调用格式如下表所示：</p>
+<table>
+<colgroup>
+<col style="width: 40%" />
+<col style="width: 60%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>格式</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>errordlg</td>
+<td>创建一个默认的错误消息对话框。默认的对话框名为"Error Dialog"，在对话框内包含一个名为"This is the default error string"的字符串</td>
+</tr>
+<tr class="even">
+<td>errordlg('errorstring')</td>
+<td>创建一个错误消息对话框。该对话框仍然叫作"Error Dialog"，但对话框内显示的错误消息由输入参数errorstring决定</td>
+</tr>
+<tr class="odd">
+<td>errordlg('errorstring', 'dlgname')</td>
+<td>创建一个错误消息对话框。该对话框的名称由输入参数dlgname决定，对话框内显示的帮助信息由输入参数errorstring决定</td>
+</tr>
+<tr class="even">
+<td>errordlg('errorstring', 'dlgname', 'on')</td>
+<td>创建一个错误消息对话框。当要创建的对话框已经存在时，输入参数on把已经存在的对话框显示在屏幕的最前端，而不再创建同名的新对话框</td>
+</tr>
+<tr class="odd">
+<td>h = errordlg(…)</td>
+<td>返回创建的错误消息对话框的句柄，句柄存放在输入参数h中。输入参数与前面的调用格式的输入参数相同</td>
+</tr>
+</tbody>
+</table>
+<p>MATLAB会自动设置错误消息对话框的宽度，使其能够显示出errorstring字符串的全部错误信息。显示的错误消息对话框的外观依赖于不同的操作系统。</p>
+<p><strong>（3）信息提示对话框</strong></p>
+<p>在面临多种选择或应该显示某种提示情况时，一般就会显示信息提示，此时就要借助于信息提示对话框。MATLAB提供的创建信息提示对话框的函数是msgbox。该函数的调用格式如下表所示：</p>
+<table>
+<colgroup>
+<col style="width: 45%" />
+<col style="width: 54%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>格式</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>msgbox(message)</td>
+<td>创建一个信息提示对话框。创建的对话框会自动设置对话框的宽度，使其能够显示出全部提示信息。输入参数message存储的是要显示的提示信息。该参数取值可以是一个字符串向量或字符串矩阵</td>
+</tr>
+<tr class="even">
+<td>msgbox(message, title)</td>
+<td>创建的信息提示对话框与第一种格式即msgbox(message)创建的对话框基本相同，只是该对话框有一个标题名，标题名由输入参数title决定。参数title是一个字符串</td>
+</tr>
+<tr class="odd">
+<td>msgbox(message, title, 'icon')</td>
+<td>创建的信息提示对话框除了包含提示信息与标题名，对话框上还有一些图标。图标由参数icon决定，icon可选的值有none、error、help、warn、custom，默认值是none</td>
+</tr>
+<tr class="even">
+<td>msgbox(message,title, 'custom', iconData, iconCmap)</td>
+<td>创建的信息提示对话框中的图标是用户自定义的图标。定义图标的图像数据存放在参数iconData中，定义图像的颜色数据存放在参数iconCmap中</td>
+</tr>
+<tr class="odd">
+<td>Msgbox = (…, 'createMode')</td>
+<td>参数createMode用于决定创建的信息提示对话框是模式对话框还是无模式对话框。参数createMode的可选值有modal、non-modal和replace。其中，replace 值用标题名相同的对话框代替另外一个已经打开的对话框</td>
+</tr>
+<tr class="even">
+<td>H = msgbox(…)</td>
+<td>返回创建的信息提示对话框的句柄，句柄存放在输入参数h中。输入参数与前面的调用格式的输入参数相同</td>
+</tr>
+</tbody>
+</table>
+<p><strong>（4）询问对话框</strong></p>
+<p>当对问题的解决可能存在多种选择时，会显示询问对话框，由用户决定应该采取的步骤。例如，保存文件的文件名与当前目录中存在的某个文件名相同时，会显示询问对话框。MATLAB提供的创建询问对话框的函数是questdlg。该函数的调用格式如下表所示：</p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>格式</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>button = questdlg('qstring')</td>
+<td>创建一个问题显示的模式对话框。该对话框中有3个命令按钮，分别为Yes、No、Cancel。显示的问题由输入参数qstring（字符串类型）决定。输出参数button返回的是用户按下的命令按钮的名字</td>
+</tr>
+<tr class="even">
+<td>button = questdlg('qstring', 'title')</td>
+<td>创建的询问对话框的标题由参数title决定。该标题显示在对话框的标题栏中</td>
+</tr>
+<tr class="odd">
+<td>button = questdlg('qstring', 'title', 'default')</td>
+<td>创建的询问对话框，当按下Enter键时，返回参数button中的值是参数default设置的值。default 必须是Yes、No、Cancel中的一个</td>
+</tr>
+<tr class="even">
+<td>button = questdlg('qstring', 'title', 'str1', 'str2', 'default')</td>
+<td>创建的询问对话框有两个命令按钮，按钮上显示的字符由参数str1与str2决定。default设置当用户按下Enter键时返回的参数值。default必须是str1、str2中的一个</td>
+</tr>
+<tr class="odd">
+<td>button = questdlg('qstring', 'title', 'str1', 'str2', 'str3', 'default')</td>
+<td>创建的询问对话框中有3个命令按钮，按钮上显示的字符由参数str1、str2与 str3决定。default设置当用户按下Enter键时返回的参数值。default必须是str1、str2或str3中的一个</td>
+</tr>
+</tbody>
+</table>
+<p>MATLAB会自动设置询问对话框的宽度，使其能够显示出qstring字符串的全部信息。</p>
+<p><strong>（5）警告消息显示对话框</strong></p>
+<p>在操作应用软件时，当用户进行了不恰当的操作后，应该显示警告消息显示对话框，使用户知道该操作可能导致错误，以便采取正确的操作。此时，就要用到警告消息显示对话框。MATLAB提供的创建警告消息显示对话框的函数是warndlg。该函数的调用格式如下表所示：</p>
+<table>
+<colgroup>
+<col style="width: 38%" />
+<col style="width: 61%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>格式</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>warndlg</td>
+<td>创建一个默认的警告消息显示对话框。默认的对话框名为"warning Dialog"，在对话框内包含一个名为"This is the default warning string"的字符串</td>
+</tr>
+<tr class="even">
+<td>warndlg('warnstring')</td>
+<td>创建一个警告消息显示对话框。该对话框仍然叫作"warning Dialog"，警告信息由输入参数warnstring决定</td>
+</tr>
+<tr class="odd">
+<td>warndlg('warnstring', 'dlgname')</td>
+<td>创建一个警告消息显示对话框。该对话框的名称由输入参数dlgname决定，对话框内显示的警告信息由输入参数warnstring决定</td>
+</tr>
+<tr class="even">
+<td>warndlg('warnstring', 'dlgname', 'on')</td>
+<td>创建一个警告消息显示对话框。当要创建的对话框已经存在时，输入参数on把已经存在的对话框显示在屏幕的最前端，而不再创建同名的新对话框</td>
+</tr>
+<tr class="odd">
+<td>H = warndlg(…)</td>
+<td>返回创建的警告消息显示对话框的句柄，句柄存放在输入参数h中。输入参数与前面的调用格式的输入参数相同</td>
+</tr>
+</tbody>
+</table>
+<p>MATLAB会自动设置警告消息显示对话框的宽度，使其能够显示出warnstring字符串的全部警告信息。显示的警告消息对话框的外观依赖于不同的操作系统。</p>
+<p><strong>（6）变量输入对话框</strong></p>
+<p>在许多应用软件中，当需要用户输入变量时，就会显示一个输入对话框。MATLAB提供的创建变量输入对话框的函数是inputdlg。该函数的调用格式如下表所示：</p>
+<table>
+<colgroup>
+<col style="width: 48%" />
+<col style="width: 51%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>格式</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>answer = inputdlg(prompt)</td>
+<td>创建一个模式变量输入对话框。输入参数是提示输入信息的字符串。返回值answer存储用户输入的变量值</td>
+</tr>
+<tr class="even">
+<td>answer = inputdlg(prompt, title)</td>
+<td>创建的模式变量输入对话框的标题名由参数title决定。该参数是一个字符串</td>
+</tr>
+<tr class="odd">
+<td>answer = inputdlg(prompt, title, lineNo)</td>
+<td>创建的模式变量输入对话框中用于输入变量的可编辑文本框的行数由lineNo决定。该参数可以是标量、列向量或矩阵。lineNo的默认值是1。有多个可编辑文本框时，用户输入的值都存储在参数answer中，只是此时要求answer是一个向量值</td>
+</tr>
+<tr class="even">
+<td>answer = inputdlg(prompt, title, lineNo, defAns)</td>
+<td>创建的变量输入对话框的每个可编辑文本框中的默认值由参数defAns决定。defAns的值就显示在每个可编辑文本中。参数defAns是一个字符向量，其元素的个数必须与参数prompt中元素的个数相等</td>
+</tr>
+<tr class="odd">
+<td>answer = inputdlg(prompt, title, lineNo, defAns, Resize)</td>
+<td>输入参数用于决定创建的变量输入对话框的大小能否被调整。若取值是字符串on，那么创建的对话框的大小可以被调整；若取值是字符串off，那么创建的对话框的大小不能被调整</td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line"><span class="comment">% 创建一个变量输入对话框，可以输入一个整数与一个颜色名。第一个可编辑文本框的行数为2行，其默认值为20；第二个可编辑文本框的行数是4行，其默认值是HSV。</span></span><br><span class="line">prompt = &#123;<span class="string">&#x27;输入矩阵大小:&#x27;</span>,<span class="string">&#x27;输入色彩模型名:&#x27;</span>&#125;; </span><br><span class="line">title = <span class="string">&#x27;输入标题&#x27;</span>; </span><br><span class="line">lines = [<span class="number">2</span> <span class="number">4</span>]; </span><br><span class="line">def = &#123;<span class="string">&#x27;20&#x27;</span>,<span class="string">&#x27;HSV&#x27;</span>&#125;; </span><br><span class="line">answer = inputdlg(prompt,title,lines,def); </span><br></pre></td></tr></table></figure>
+<p><strong>（7）列表选择对话框</strong></p>
+<p>当存在多个选项时，最好提供给用户一个列表框，把所有可能的选项都列出来，使用户能从中选择一个需要的值。在这种情况下就要用到列表选择对话框。MATLAB提供的创建列表选择对话框的函数是listdlg。该函数的调用格式如下表所示：</p>
+<table>
+<colgroup>
+<col style="width: 42%" />
+<col style="width: 57%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>格式</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>[Selection, ok] = listdlg('ListString', S, …)</td>
+<td>创建一个列表选择模式对话框。从列表框中可以选择一个或多个列表项。输出变量是一个向量，存储的是选择的列表项的索引号。在单模式选择状态下，它的长度是1。当输出变量OK是0时，变量Selection是空向量[]。若用户单击列表选择对话框中的OK按钮，则输出变量OK值是1；若单击该对话框中的Cancel按钮或关闭列表选择对话框，则输出变量OK值是0。双击选择的列表项或选中列表项，然后单击对话框中的OK按钮，其效果一样。在多模式选择状态下，单击对话框中的Select all按钮，可以选择所有的列表项</td>
+</tr>
+</tbody>
+</table>
+<p>列表选择对话框中的输入参数可以选取下表中所列的值：</p>
+<table>
+<thead>
+<tr class="header">
+<th>参数</th>
+<th>参数功能简介</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>'ListString'</td>
+<td>该参数用于设置列表框中的列表项，是一个字符向量</td>
+</tr>
+<tr class="even">
+<td>'SelectionMode'</td>
+<td>该参数用于设置是单模式还是多模式选择，默认是多模式选择。参数取值是一个字符串，可以取single或multiple</td>
+</tr>
+<tr class="odd">
+<td>'LiseSize'</td>
+<td>该参数用于设置列表框的大小，是一个两元素向量[width height]，默认值是[160 300]，单位是像素</td>
+</tr>
+<tr class="even">
+<td>'InitialValue'</td>
+<td>该参数用于说明初始选择的列表项的索引，默认是1，即第一项。参数的取值是一个向量</td>
+</tr>
+<tr class="odd">
+<td>'Name'</td>
+<td>该参数用于设置列表选择对话框的标题名。默认是空字符串</td>
+</tr>
+<tr class="even">
+<td>'PromptString'</td>
+<td>该参数是一个字符矩阵或字符向量，用于标明在列表框上面的说明性文本。默认是空</td>
+</tr>
+<tr class="odd">
+<td>'OKString'</td>
+<td>该参数用于设置OK按钮上的文本。默认是字符串OK</td>
+</tr>
+<tr class="even">
+<td>'CancelString'</td>
+<td>该参数用于设置Cancel按钮上的文本。默认是字符串Cancel</td>
+</tr>
+<tr class="odd">
+<td>'uh'</td>
+<td>该参数用于设置控件按钮的高度。默认是18，单位是像素</td>
+</tr>
+<tr class="even">
+<td>'fus'</td>
+<td>该参数用于设置框架与控件对象之间的距离。默认是8，单位是像素</td>
+</tr>
+<tr class="odd">
+<td>'ffs'</td>
+<td>该参数用于设置框架与图形窗口对象之间的距离。默认是8，单位是像素</td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">d = dir; </span><br><span class="line">str = &#123;d.name&#125;; </span><br><span class="line">[s,v] = listdlg(<span class="string">&#x27;Promptstring&#x27;</span>,<span class="string">&#x27;选择文件:&#x27;</span>,<span class="string">&#x27;selectionmode&#x27;</span>,<span class="string">&#x27;single&#x27;</span>, <span class="string">&#x27;listsize&#x27;</span>, [<span class="number">300</span> <span class="number">400</span>],<span class="string">&#x27;liststring&#x27;</span>,str); </span><br></pre></td></tr></table></figure>
+<p>除了前面介绍的对话框函数，MATLAB R2018a还提供了一些其他的对话框函数，例如用于创建对话框或图形用户对象类型的图形窗口的dialog函数、菜单类型的选择对话框menu函数及显示等待进度条的waitbar函数等。关于它们的创建方法，可以参考MATLAB帮助文件。</p>
+<h2 id="界面菜单">⛄界面菜单</h2>
+<p>大多数的图形用户界面（GUI）通过选择各级菜单，可以执行相应的命令，实现相应的功能。一般地，从菜单的标题或名字可以大概了解该菜单的功能。在使用MATLAB创建图形用户界面时，也常常需要产生界面菜单；在编辑其他编辑对象时，需要产生弹出菜单，即上下文菜单。这两种菜单在MATLAB中可以通过uimenu或uicontextmenu来产生。</p>
+<h3 id="菜单建立">👀菜单建立</h3>
+<p>在MATLAB R2018a中，可以通过命令行和GUI设计工具的菜单编辑器Menu Editor两种方式来建立界面菜单。</p>
+<p><strong>（1）命令行方式</strong></p>
+<p>在命令行方式下，可以通过函数uimenu来建立下拉式菜单对象。uimenu函数常见的命令格式如下表所示：</p>
+<table>
+<colgroup>
+<col style="width: 48%" />
+<col style="width: 51%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>格式</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>uimenu('PropertyName', PropertyValue, …）</td>
+<td>使用指定的属性值在当前图形窗口产生菜单，可以产生的属性值后面将做介绍</td>
+</tr>
+<tr class="even">
+<td>uimenu(parent, 'PropertyName', PrpertyValue, …)</td>
+<td>在父菜单中产生子菜单，或在由父窗口指定的上下文菜单中产生菜单项。如果父句柄指向另一个uimenu对象或uicontextmenu对象的图形，那么将会产生新的菜单栏</td>
+</tr>
+<tr class="odd">
+<td>handle = uimenu('PropertyName', PropertyValue, …）</td>
+<td>可以返回菜单句柄，其余的设置同上</td>
+</tr>
+<tr class="even">
+<td>handle = uimenu(parent, 'PropertyName', PropertyVaLue, …)</td>
+<td>可以返回菜单句柄</td>
+</tr>
+</tbody>
+</table>
+<p>在命令行方式下，可以通过函数uicontextmenu来创建内容式菜单对象。uicontextmenu函数常见的命令格式如下表所示：</p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>格式</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Hm_contextmenu = uicontextmenu('PropertyName', PropertyValue, …）</td>
+<td>Hm_contextmenu是创建的菜单项的句柄值；PropertyName是菜单的某个属性的属性名；PropertyValue是与菜单属性名相对应的属性值</td>
+</tr>
+</tbody>
+</table>
+<p>利用uicontextmenu函数生成内容式菜单后，再通过函数uimenu可在以往创建的内容式菜单中添加子菜单。然后可以通过set把创建的内容式菜单与某个对象相联系，通过设置对象的uicontextmenu属性，使内容式菜单依附于该对象。</p>
+<p><strong>（2）GUI设计工具菜单编辑器</strong></p>
+<p>在命令行方式下创建菜单时，需要记住用于创建的函数，而且要记住大量菜单属性的属性名，这对于创建菜单非常不方便。在MATLAB中利用GUI设计工具中的菜单编辑器（Menu Editor），可以很方便地创建下拉式菜单与内容式菜单。</p>
+<h3 id="菜单属性">👀菜单属性</h3>
+<p>利用函数uimenu 或 uicontextmenu 建立菜单时，可以定义菜单属性的属性值。利用函数set，可以设置、改变属性的属性值；利用函数get，可以获得菜单属性的属性值，也可以通过Property Inspector GUI设计工具来设置、改变菜单的属性值。</p>
+<p><strong>（1）uimenu菜单的属性</strong></p>
+<p>在菜单中，uimenu函数的属性名称和属性值的常用设置如下表所示：</p>
+<p>①外观及风格控制属性</p>
+<table>
+<thead>
+<tr class="header">
+<th>属性名称（PropertyName）</th>
+<th>属性值（PropertyValue）</th>
+<th>说 明</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Checked</td>
+<td>Value：on，off <br/>Default：off</td>
+<td>菜单项前是否添加核选标记"√"</td>
+</tr>
+<tr class="even">
+<td>Label</td>
+<td>Value：String</td>
+<td>设置菜单的标题名称</td>
+</tr>
+<tr class="odd">
+<td>Separator</td>
+<td>Value：on，off <br/>Default：off</td>
+<td>分隔条</td>
+</tr>
+<tr class="even">
+<td>Foregroundcolor</td>
+<td>Value：ColorSpec <br/>Default：[0 0 0]</td>
+<td>文本颜色</td>
+</tr>
+<tr class="odd">
+<td>Visible</td>
+<td>Value：on，off <br/>Default：on</td>
+<td>控制uimenu菜单的可见状态</td>
+</tr>
+</tbody>
+</table>
+<p>②基本信息属性</p>
+<table>
+<thead>
+<tr class="header">
+<th>属性名称（PropertyName）</th>
+<th>属性值（PropertyValue）</th>
+<th>说 明</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Accelerator</td>
+<td>Value：character</td>
+<td>键盘加速键</td>
+</tr>
+<tr class="even">
+<td>Children</td>
+<td>Value：Vectorofhandles</td>
+<td>子菜单句柄</td>
+</tr>
+<tr class="odd">
+<td>Enable</td>
+<td>Value：cancel，queue <br/>Default：queue</td>
+<td>禁止或使用uimenu</td>
+</tr>
+<tr class="even">
+<td>Parent</td>
+<td>Value：handle</td>
+<td>菜单对象的父对象</td>
+</tr>
+<tr class="odd">
+<td>Tag</td>
+<td>Value：String</td>
+<td>用户指定的对象标识符</td>
+</tr>
+<tr class="even">
+<td>Type</td>
+<td>Value：String(read-only) <br/>Default：uimenu</td>
+<td>图形对象的类</td>
+</tr>
+<tr class="odd">
+<td>UserData</td>
+<td>Value：matrix</td>
+<td>用户指定的数据</td>
+</tr>
+</tbody>
+</table>
+<p>③位置信息属性</p>
+<table>
+<thead>
+<tr class="header">
+<th>属性名称（PropertyName）</th>
+<th>属性值（PropertyValue）</th>
+<th>说 明</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Position</td>
+<td>Value：scalar <br/>Default：[1]</td>
+<td>相对的uimenu的位置</td>
+</tr>
+</tbody>
+</table>
+<p>④回调函数执行控制属性</p>
+<table>
+<thead>
+<tr class="header">
+<th>属性名称（PropertyName）</th>
+<th>属性值（PropertyValue）</th>
+<th>说 明</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>BusyAction</td>
+<td>Value：cancel，queue <br/>Default：queue</td>
+<td>回调函数中断</td>
+</tr>
+<tr class="even">
+<td>Callback</td>
+<td>Value：string</td>
+<td>控制动作</td>
+</tr>
+<tr class="odd">
+<td>CreateFcn</td>
+<td>Value：string</td>
+<td>在对象生成过程中执行回调</td>
+</tr>
+<tr class="even">
+<td>DeleteFcn</td>
+<td>Value：string</td>
+<td>在对象删除过程中执行回调</td>
+</tr>
+<tr class="odd">
+<td>Interruptible</td>
+<td>Value：on，off <br/>Default：on</td>
+<td>回调函数的中断方式</td>
+</tr>
+</tbody>
+</table>
+<p>⑤控制操作属性</p>
+<table>
+<thead>
+<tr class="header">
+<th>属性名称（PropertyName）</th>
+<th>属性值（PropertyValue）</th>
+<th>说 明</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Handle Visibility</td>
+<td>Value：on，callback，off <br/>Default：on</td>
+<td>在命令行或GUI中是否可见</td>
+</tr>
+</tbody>
+</table>
+<p><strong>（2）uicontextmenu菜单的属性</strong></p>
+<p>参见uimenu菜单的属性。在命令行方式或者GUI设计方式下，可以方便地对uimenu菜单与uicontextmenu菜单的属性进行设置、修改。</p>
+<h2 id="图形界面创建工具guide">⛄图形界面创建工具GUIDE</h2>
+<p>如果只在MATLAB命令行窗口中输入命令来编写GUI界面，那么编程的效率实在是太低了。MATLAB提供了功能强大的GUIDE模板，用于创建各种用户图形对象。通过该GUIDE模板的使用，可以自动生成相应的M文件框架，简化了用户编写图形界面程序的工作。如果需要更改相关的内容，则可以直接打开M文件进行修改或编写自己的代码。图形界面创建工具GUIDE大大增强了图形界面创建的能力。</p>
+<p><strong>（1）利用创建工具GUIDE进行GUI设计</strong></p>
+<p>利用创建工具 GUIDE 进行 GUI 设计的步骤和方法：</p>
+<ul>
+<li><strong>GUIDE的启动</strong></li>
+</ul>
+<p>在MATLAB的命令行中输入guide，启动图形界面创建工具GUIDE，系统弹出GUIDE快速入门对话框。该对话框中主要包括两个选项卡：①创建GUI选项卡，包含了4种类型的GUI模板：默认的空白GUI模板、带有Uicontrol控件的GUI模板、带有坐标轴和菜单的GUI模板及模态对话框模板；②打开现有GUI选项卡，打开已有的GUI对象或者单击该选项卡中的浏览按钮来浏览选择已经存在的GUI对象。</p>
+<p><a target="_blank" rel="noopener" href="https://imgse.com/i/pAMGwbq"><img src="/img/loading1.gif" data-original="https://s21.ax1x.com/2024/09/21/pAMGwbq.jpg" alt="pAMGwbq.jpg" /></a></p>
+<p>如果需要对GUI编辑界面的显示属性进行修改或重新设置，则可以选择"文件"→"预设选项"命令进行设置。可以设置的属性包括在组件选项板中显示名称、在窗口标题中显示文件扩展名、在窗口标题中显示文件路径及为新生成的回调函数添加注释等。</p>
+<ul>
+<li><p><strong>创建图形用户界面对象</strong>：在打开的图形用户界面上添加控件来完成这个图形界面的布局和控制。</p></li>
+<li><p><strong>设置组件的属性</strong>：从工具栏中选择"属性检查器"，设置属性。</p></li>
+<li><p><strong>编写回调函数</strong>：完成图形用户界面的编辑后，添加回调函数执行代码，才能完成图形函数的处理过程。</p></li>
+<li><p><strong>图形用户界面的执行</strong>：在图形用户编辑界面中单击"运行"按钮 来运行编辑过的图形用户界面（GUI）。</p></li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://imgse.com/i/pAMIqNq"><img src="/img/loading1.gif" data-original="https://s21.ax1x.com/2024/09/22/pAMIqNq.jpg" alt="pAMIqNq.jpg" /></a></p>
+<p><strong>（2）GUIDE创建的工具</strong></p>
+<p>在使用GUIDE创建图形用户界面时，有些比较常用的功能，能够更好地帮助用户完成图形用户界面的绘制过程。</p>
+<ul>
+<li>位置调整工具："工具"→"对齐对象"
+<ul>
+<li>排列组件对象以完成界面的布局和排布。</li>
+</ul></li>
+<li>网格和标尺："工具"→"网格和标尺"
+<ul>
+<li>调整改变网格线的间距或显示标尺。</li>
+</ul></li>
+<li>对象浏览器："视图"→"对象浏览器"或选择工具栏中的“对象浏览器”图标，
+<ul>
+<li>查看放置在图形界面中对象的名称及相互之间的继承关系等。</li>
+</ul></li>
+<li>GUI组件选项："工具"→"GUI选项"，
+<ul>
+<li>①调整大小的方式（不可调整大小/成比例/其他）；</li>
+<li>②命令行的可访问性（回调/禁用/启用/其他），在创建图形对象的过程中，选择是否通过命令行方式来访问各种对象；</li>
+<li>③生成FIG文件和MALTAB文件，此项可以设置用户在创建GUI对象时，是否生成FIG文件和M文件；</li>
+<li>④仅生成FIG文件，此时仅仅创建FIG文件，可以使用open或hgload来显示该文件，一般在用户希望创建一个与M文件完全不同的实例时，可以选择此选项。</li>
+</ul></li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://heartlovelife.github.io">Xiaotangsmiles</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://heartlovelife.github.io/2024/09/23/Matlab-GUI-Design/">https://heartlovelife.github.io/2024/09/23/Matlab-GUI-Design/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://heartlovelife.github.io" target="_blank">江湖是你画中亦是你</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/GUI/">GUI</a></div><div class="post_share"><div class="social-share" data-image="https://s2.loli.net/2024/08/25/u7qX6PLeFUzxHvV.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/gh/overtrue/share.js@master/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i> 打赏</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/wechat.jpg" target="_blank"><img class="post-qr-code-img" src="/img/loading1.gif" data-original="/img/wechat.jpg" alt="wechat(微信)"/></a><div class="post-qr-code-desc">wechat(微信)</div></li><li class="reward-item"><a href="/img/alipay.jpg" target="_blank"><img class="post-qr-code-img" src="/img/loading1.gif" data-original="/img/alipay.jpg" alt="alipay(支付宝)"/></a><div class="post-qr-code-desc">alipay(支付宝)</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2024/09/15/RS-data-dowmload/"><img class="next-cover" src="/img/loading1.gif" data-original="https://s2.loli.net/2024/09/15/xhwoIklLQq2mFp8.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">MODIS/Landsat/Sentinel下载教程详解【常用网站及方法枚举】</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2024/08/25/Python-GUI-Design/" title="GUI编程之PyQt5入门详解（01）"><img class="cover" src="/img/loading1.gif" data-original="https://s2.loli.net/2024/08/25/u7qX6PLeFUzxHvV.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-08-25</div><div class="title">GUI编程之PyQt5入门详解（01）</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/loading1.gif" data-original="/img/touxiang.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Xiaotangsmiles</div><div class="author-info__description">我们总以为来日方长，却忘了世事无常</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">25</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">25</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">9</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/HeartLoveLife"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/HeartLoveLife" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="https://blog.csdn.net/twg666" target="_blank" title="CSDN"><i class="fa fa-book-open"></i></a><a class="social-icon" href="tencent://AddContact/?fromId=45&amp;fromSubId=1&amp;subcmd=all&amp;uin=491037927&amp;website=www.oicqzone.com" target="_blank" title="QQ"><i class="fab fa-qq"></i></a><a class="social-icon" href="mailto:xiaotangsmiles@163.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">我有我自己的太阳、月亮和星星，我有一个完全属于我自己的小世界。</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">⛄前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#matlab%E5%9B%BE%E5%BD%A2%E7%94%A8%E6%88%B7%E7%95%8C%E9%9D%A2"><span class="toc-number">2.</span> <span class="toc-text">⛄Matlab图形用户界面</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%BE%E5%BD%A2%E7%94%A8%E6%88%B7%E7%95%8C%E9%9D%A2%E6%8E%A7%E4%BB%B6"><span class="toc-number">3.</span> <span class="toc-text">⛄图形用户界面控件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%BE%E5%BD%A2%E7%94%A8%E6%88%B7%E7%95%8C%E9%9D%A2%E6%8E%A7%E4%BB%B6%E7%9A%84%E5%88%9B%E5%BB%BA"><span class="toc-number">3.1.</span> <span class="toc-text">👀图形用户界面控件的创建</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%BC%A0%E6%A0%87%E5%8A%A8%E4%BD%9C%E6%89%A7%E8%A1%8C"><span class="toc-number">3.2.</span> <span class="toc-text">👀鼠标动作执行</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8B%E4%BB%B6%E9%98%9F%E5%88%97%E7%9A%84%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F"><span class="toc-number">3.3.</span> <span class="toc-text">👀事件队列的执行顺序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0%E7%9A%84%E7%BC%96%E5%86%99"><span class="toc-number">3.4.</span> <span class="toc-text">👀回调函数的编写</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AF%B9%E8%AF%9D%E6%A1%86%E5%AF%B9%E8%B1%A1"><span class="toc-number">4.</span> <span class="toc-text">⛄对话框对象</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%AC%E5%85%B1%E5%AF%B9%E8%AF%9D%E6%A1%86"><span class="toc-number">4.1.</span> <span class="toc-text">👀公共对话框</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E8%88%AC%E5%AF%B9%E8%AF%9D%E6%A1%86"><span class="toc-number">4.2.</span> <span class="toc-text">👀一般对话框</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%95%8C%E9%9D%A2%E8%8F%9C%E5%8D%95"><span class="toc-number">5.</span> <span class="toc-text">⛄界面菜单</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%8F%9C%E5%8D%95%E5%BB%BA%E7%AB%8B"><span class="toc-number">5.1.</span> <span class="toc-text">👀菜单建立</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%8F%9C%E5%8D%95%E5%B1%9E%E6%80%A7"><span class="toc-number">5.2.</span> <span class="toc-text">👀菜单属性</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%BE%E5%BD%A2%E7%95%8C%E9%9D%A2%E5%88%9B%E5%BB%BA%E5%B7%A5%E5%85%B7guide"><span class="toc-number">6.</span> <span class="toc-text">⛄图形界面创建工具GUIDE</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2024/09/23/Matlab-GUI-Design/" title="GUI编程之MATLAB入门详解（01）"><img src="/img/loading1.gif" data-original="https://s2.loli.net/2024/08/25/u7qX6PLeFUzxHvV.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="GUI编程之MATLAB入门详解（01）"/></a><div class="content"><a class="title" href="/2024/09/23/Matlab-GUI-Design/" title="GUI编程之MATLAB入门详解（01）">GUI编程之MATLAB入门详解（01）</a><time datetime="2024-09-23T14:22:08.000Z" title="发表于 2024-09-23 22:22:08">2024-09-23</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/09/15/RS-data-dowmload/" title="MODIS/Landsat/Sentinel下载教程详解【常用网站及方法枚举】"><img src="/img/loading1.gif" data-original="https://s2.loli.net/2024/09/15/xhwoIklLQq2mFp8.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="MODIS/Landsat/Sentinel下载教程详解【常用网站及方法枚举】"/></a><div class="content"><a class="title" href="/2024/09/15/RS-data-dowmload/" title="MODIS/Landsat/Sentinel下载教程详解【常用网站及方法枚举】">MODIS/Landsat/Sentinel下载教程详解【常用网站及方法枚举】</a><time datetime="2024-09-15T03:24:52.000Z" title="发表于 2024-09-15 11:24:52">2024-09-15</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/08/25/Python-GUI-Design/" title="GUI编程之PyQt5入门详解（01）"><img src="/img/loading1.gif" data-original="https://s2.loli.net/2024/08/25/u7qX6PLeFUzxHvV.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="GUI编程之PyQt5入门详解（01）"/></a><div class="content"><a class="title" href="/2024/08/25/Python-GUI-Design/" title="GUI编程之PyQt5入门详解（01）">GUI编程之PyQt5入门详解（01）</a><time datetime="2024-08-25T12:36:36.000Z" title="发表于 2024-08-25 20:36:36">2024-08-25</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/06/10/DL-PyTorch-Basic/" title="Python深度学习之PyTorch基础教程"><img src="/img/loading1.gif" data-original="https://s2.loli.net/2024/06/10/KdBQXSmlCgFOWR1.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Python深度学习之PyTorch基础教程"/></a><div class="content"><a class="title" href="/2024/06/10/DL-PyTorch-Basic/" title="Python深度学习之PyTorch基础教程">Python深度学习之PyTorch基础教程</a><time datetime="2024-06-10T14:00:05.000Z" title="发表于 2024-06-10 22:00:05">2024-06-10</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/01/20/RS-LST-Method/" title="辐射传输基础理论详解与LST反演方法"><img src="/img/loading1.gif" data-original="https://s2.loli.net/2024/05/05/SHmUYgArEMzfLph.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="辐射传输基础理论详解与LST反演方法"/></a><div class="content"><a class="title" href="/2024/01/20/RS-LST-Method/" title="辐射传输基础理论详解与LST反演方法">辐射传输基础理论详解与LST反演方法</a><time datetime="2024-01-20T14:16:05.000Z" title="发表于 2024-01-20 22:16:05">2024-01-20</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2021 - 2024 By Xiaotangsmiles</div><div class="framework-info"><span>地址 </span><a href="https://heartlovelife.github.io">HeartLoveLife</a><span class="footer-separator">|</span><span>邮箱 </span><a href="javascript:void(0);">xiaotangsmiles@163.com</a></div><div class="footer_custom_text">Hi, welcome to my <a href="https://heartlovelife.github.io/">blog</a>!</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script src="/js/search/local-search.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',preloader.endLoading())</script><div class="js-pjax"></div><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-nest.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = false;
+POWERMODE.mobile = true;
+document.body.addEventListener('input', POWERMODE);
+</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div>
+        <style>
+            [bg-lazy] {
+                background-image: none !important;
+                background-color: #eee !important;
+            }
+        </style>
+        <script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(r){r.imageLazyLoadSetting.processImages=t;var e=r.imageLazyLoadSetting.isSPA,n=r.imageLazyLoadSetting.preloadRatio||1,c=a();function a(){var t=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")),e=Array.prototype.slice.call(document.querySelectorAll("[bg-lazy]"));return t.concat(e)}function t(){e&&(c=a());for(var t,o=0;o<c.length;o++)0<=(t=(t=c[o]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(r.innerHeight*n||document.documentElement.clientHeight*n)&&function(){var t,e,n,a,i=c[o];e=function(){c=c.filter(function(t){return i!==t}),r.imageLazyLoadSetting.onImageLoaded&&r.imageLazyLoadSetting.onImageLoaded(i)},(t=i).hasAttribute("bg-lazy")?(t.removeAttribute("bg-lazy"),e&&e()):(n=new Image,a=t.getAttribute("data-original"),n.onload=function(){t.src=a,t.removeAttribute("data-original"),e&&e()},t.src!==a&&(n.src=a))}()}function i(){clearTimeout(t.tId),t.tId=setTimeout(t,500)}t(),document.addEventListener("scroll",i),r.addEventListener("resize",i),r.addEventListener("orientationchange",i)}(this);</script></body></html>
